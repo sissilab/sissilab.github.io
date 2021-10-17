@@ -160,6 +160,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/dual-system-installation-guide-of-arch-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/dual-system-installation-guide-of-arch-linux/" class="post-title-link" itemprop="url">Arch Linux 双系统安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-17 23:27:07 / 修改时间：23:35:37" itemprop="dateCreated datePublished" datetime="2021-10-17T23:27:07+08:00">2021-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Arch-Linux/" itemprop="url" rel="index"><span itemprop="name">Arch Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>磁盘空间划分：</p>
+<table>
+<thead>
+<tr>
+<th>磁盘类型</th>
+<th>Windows 10</th>
+<th>Arch Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>500G HD</td>
+<td>140G 应用数据存储</td>
+<td>剩余(约325.76G) 用户主目录 /home</td>
+</tr>
+<tr>
+<td>250G SSD</td>
+<td>500M EFI, 50M MSR, 100G 系统</td>
+<td>剩余(约137.94G) 根目录 /</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/dual-system-installation-guide-of-arch-linux/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/arch-Linux-software-recommendation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/arch-Linux-software-recommendation/" class="post-title-link" itemprop="url">Arch Linux 常用软件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-17 23:33:00 / 修改时间：23:35:30" itemprop="dateCreated datePublished" datetime="2021-10-17T23:33:00+08:00">2021-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Arch-Linux/" itemprop="url" rel="index"><span itemprop="name">Arch Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><p><strong>输入法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color</span></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.配置环境变量</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.pam_environment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.重启，生效</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5.添加输入法</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>KDE 应用</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kdeconnect</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>字体</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装字体</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ttf-dejavu wqy-microhei</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>浏览器</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 谷歌浏览器 chrome</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S google-chrome</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 微软 Edge 浏览器</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S microsoft-edge-dev-bin</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 谷歌开元浏览器 chromium</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S chromium</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 火狐浏览器 firefox</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S firefox</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>系统工具</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S dialog</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh 工具</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S openssh</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> latte dock</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S latte-dock</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统绝大部分硬件信息，包括较难得到的内存频率，主板 BIOS 等等。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -Ss dmidecode</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux下电源管理，可为笔记本节省电量</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TLP Wiki: https://wiki.archlinux.org/title/TLP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S tlp</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">enable</span> --now tlp</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 主题配合 Kvantum Manager 可以达到更好的效果</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kvantum-qt5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 软件降级</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S downgrade</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>墙外的世界</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ssr</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yay -S electron-ssr</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> proxychains</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S proxychains</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo vim /etc/proxychains.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑 /etc/proxychains.conf，将最后一行改成:</span> </span><br><span class="line">socks5 127.0.0.1 1080</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>聊天沟通软件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> telegram</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S telegram-desktop</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 团队协作工具 slack</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S slack-desktop</span> </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>笔记软件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Obsidian 笔记软件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S obsidian</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Joplin 笔记软件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cli</span></span><br><span class="line">yay -S joplin</span><br><span class="line"><span class="meta">#</span><span class="bash"> desktop</span></span><br><span class="line">yay -S joplin-desktop</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Trilium 开源的 electron 笔记软件</span></span><br><span class="line">yay -S trilium-bin</span><br><span class="line">yay -S trilium-server-bin</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>解压缩软件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ark 属于 kde-utilities 软件包组</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ark</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> unar, lsar</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> audo pacman -S unarchiver</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>图片查看软件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> gwenview 属于 kde-graphics 软件组</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S gwenview</span> </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 火焰截图</span></span><br><span class="line">sudo pacman -S flameshot</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>视频播放</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 跨平台视频资源播放器，整合全网视频资源</span></span><br><span class="line">yay -S zy-player</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><strong>办公软件</strong><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> libreoffice 稳定版</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S libreoffice-still</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>oh-my-zsh: <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eeb3104384a1">https://www.jianshu.com/p/eeb3104384a1</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 小部件</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Netspeed Widget：依赖 ksysguard，不然不显示</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ksysguard</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 支持识别 ntfs 格式的硬盘</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ntfs-3g</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>开发工具</strong><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vscode</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S visual-studio-code-bin</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nodejs npm</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S nodejs npm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> prefix <span class="string">&quot;/home/wxr/.nodejs&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> cache <span class="string">&quot;/home/wxr/.nodejs/cache&quot;</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ol>
+<li>文件夹单击打开改成双击打开？<blockquote>
+<p>系统设置 / 工作区行为 / 常规行为：在 “点击文件或文件夹时” 选中 “选中它们（双击打开文件/文件夹）”。</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern-overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -805,174 +1007,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/03/25/one-zookeeper-deploy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/25/one-zookeeper-deploy/" class="post-title-link" itemprop="url">Zookeeper简介、三种搭建模式和配置文件详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-25 21:52:22" itemprop="dateCreated datePublished" datetime="2019-03-25T21:52:22+08:00">2019-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:47:46" itemprop="dateModified" datetime="2021-10-17T20:47:46+08:00">2021-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">zookeeper系列</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 100px;
-}
-</style>
-
-<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>Zookeeper缘起于非开源的Google的Chubby，雅虎模仿Chubby开发了ZooKeeper，实现了类似的分布式锁管理，并捐给了Apache，作为是Hadoop和Hbase的重要组件。<br>ZooKeeper是一种用于分布式应用程序的分布式开源协调服务，它主要是用来解决分布式应用中经常遇到的一些数据一致性问题。它的一致性、可靠性和容错性保证了其能够在大型分布式系统中稳定的表现，并不会因为某一个节点服务宕机而导致整个集群崩溃。它可提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/25/one-zookeeper-deploy/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/05/23/qrcode-scan-login/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/23/qrcode-scan-login/" class="post-title-link" itemprop="url">三种方式实现扫码登录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-23 17:05:15" itemprop="dateCreated datePublished" datetime="2019-05-23T17:05:15+08:00">2019-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:47:14" itemprop="dateModified" datetime="2021-10-17T20:47:14+08:00">2021-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B0%8F%E5%8A%9F%E8%83%BDDemo%E5%AE%9E%E7%8E%B0%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">小功能Demo实现系列</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-需求描述"><a href="#1-需求描述" class="headerlink" title="1. 需求描述"></a>1. 需求描述</h1><p>目前大多网站都提供扫码登录功能，无需在网页端输入任何账号和密码信息，只需通过手机上的app，如微信、淘宝等，通过使用app上的扫码功能去扫面页面登录提供的二维码图片，即可完成登录。这不仅提高了安全性，也增加了用户的使用方便性。关于二维码与手机是如何绑定、网页端如何识别出手机端进行了扫码操作、以及网页端在扫码成功后如何获取到用户信息等问题，这些都会在接下来的篇幅中娓娓道来。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/23/qrcode-scan-login/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1044,20 +1078,20 @@ table th:first-of-type {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
