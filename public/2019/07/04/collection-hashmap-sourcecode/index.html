@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sissilab.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content=".example tbody td {     text-align: center;     } .example thead th {     text-align: center;     }   1. 简介 HashMap为键值对（key -&gt; value）结构存储，其中key是唯一、不重复的、无序的，key和value都允许为null，只允许一条记录的key为null，允许多条记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java.util集合（collection）之HashMap源码分析（jdk1.8）">
+<meta property="og:url" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/index.html">
+<meta property="og:site_name" content="羊驼之野望">
+<meta property="og:description" content=".example tbody td {     text-align: center;     } .example thead th {     text-align: center;     }   1. 简介 HashMap为键值对（key -&gt; value）结构存储，其中key是唯一、不重复的、无序的，key和value都允许为null，只允许一条记录的key为null，允许多条记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_class_diagram.png">
+<meta property="og:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_jdk1.8_datastructure.png">
+<meta property="og:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_put.png">
+<meta property="og:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_resize.png">
+<meta property="og:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_split_linkedlist.png">
+<meta property="article:published_time" content="2019-07-04T14:30:35.000Z">
+<meta property="article:modified_time" content="2021-10-17T12:57:21.646Z">
+<meta property="article:author" content="Roy">
+<meta property="article:tag" content="java集合">
+<meta property="article:tag" content="java.util.List">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/hashmap_class_diagram.png">
+
+<link rel="canonical" href="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java.util集合（collection）之HashMap源码分析（jdk1.8） | 羊驼之野望</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">羊驼之野望</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java.util集合（collection）之HashMap源码分析（jdk1.8）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-04 22:30:35" itemprop="dateCreated datePublished" datetime="2019-07-04T22:30:35+08:00">2019-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-17 20:57:21" itemprop="dateModified" datetime="2021-10-17T20:57:21+08:00">2021-10-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E9%9B%86%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%88java-util%E5%8C%85%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">java集合系列（java.util包）</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <style>
+.example tbody td {
+    text-align: center;
+    }
+.example thead th {
+    text-align: center;
+    }
+</style>
+
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><ul>
+<li>HashMap为键值对（key -&gt; value）结构存储，其中<font color="green">key是唯一、不重复的、无序的，key和value都允许为null</font>，只允许一条记录的key为null，允许多条记录的value为null。HashMap一般通过key来定位value，当put操作时，传入相同key会覆盖value。</li>
+<li>HashMap<font color="green">默认初始容量为16</font>；<font color="green">默认负载因子为0.75</font>；<font color="green">位桶数组table的大小总是为2的n次方</font>。</li>
+<li>当位桶上的<font color="green">结点数大于8时会转为红黑树</font>，当位桶上的<font color="green">结点数小于6时红黑树转为链表</font>。</li>
+<li>当map中<font color="green">键值对数量超过临界阈值thread（容量 * 装载因子）时，将会进行扩容（位桶数组扩容）</font>。</li>
+<li>位桶数组扩容是一个比较耗性能的操作，故而在初始化HashMap的时候可以给一个大致的数值（估算map大小），避免频繁的扩容。</li>
+<li>HashMap是<font color="green">线程不安全</font>的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：<span id="more"></span>
+<br/>①使用Map m = Collections.synchronizedMap(new HashMap(…))返回一个同步的Map，内部通过synchronized来保证同步；<br>②使用java.util.concurrent.ConcurrentHashMap，建议优先使用；<br>③使用java.util.Hashtable，效率低，不建议使用。</li>
+</ul>
+<p>从下图可以得知，HashMap继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable这些接口。</p>
+<ul>
+<li>继承AbstractMap抽象类，提供了多数已经实现的通用处理方法，其中存在一个未实现的方法entrySet()。</li>
+<li>实现Map接口，提供了List接口的所有方法实现。</li>
+<li>实现Cloneable接口，支持可拷贝，即覆盖了函数clone()。</li>
+<li>实现java.io.Serializable接口，支持序列化。<img src="/2019/07/04/collection-hashmap-sourcecode/hashmap_class_diagram.png" class="" title="HashMap类图"></li>
+</ul>
+<p><strong>本文的涉及注解整理于此</strong>：</p>
+<ul>
+<li><a href="#note1">注[1]：HashMap的tableSizeFor(int cap)方法分析</a></li>
+<li><a href="#note2">注[2]：HashMap中的hash算法。</a></li>
+<li><a href="#note3">注[3]：HashMap中为何位桶数组table的大小必须为2的n次方？</a></li>
+<li><a href="#note4">注[4]：HashMap的put(K key, V value)方法操作流程分析。</a></li>
+<li><a href="#note5">注[5]：HashMap的扩容resize()方法详解。</a></li>
+<li><a href="#note6">注[6]：HashMap扩容resize时位桶为单向链表情况，链表进行拆分并复制到新table的流程分析。</a></li>
+</ul>
+<h1 id="2-基本结构"><a href="#2-基本结构" class="headerlink" title="2. 基本结构"></a>2. 基本结构</h1><ul>
+<li><p><strong>jdk1.6/jdk1.7：采用位桶+链表实现</strong><br>使用一个<font color="green">Entry数组</font>来存储数据，用key的hashcode取模来决定key会被放到数组里的位置，如果hashcode相同，或者hashcode取模后的结果相同（哈希冲突），那么这些key会被定位到Entry数组的同一个格子里，这些key会形成一个链表。在哈希冲突严重时，位桶中的链表可能会很长，会导致put/get操作都可能需要遍历这个链表，即时间复杂度在最差情况下会退化到O(n)。</p>
+</li>
+<li><p><strong>jdk1.8：采用位桶+链表+红黑树实现</strong><br>使用一个<font color="green">Node数组</font>来存储数据，但这个Node可能是链表结构，也可能是红黑树结构。当同一位桶中的节点数不超过8个时，使用单向链表存储；若超过8个时，会将链表转为红黑树，以提升查询效率，put/get的操作的时间复杂度最差只有O(log n)。当位桶中节点结构为红黑树时，若节点数降低以致不足6个时，将转为链表结构。</p>
+<img src="/2019/07/04/collection-hashmap-sourcecode/hashmap_jdk1.8_datastructure.png" class="" title="HashMap（jdk1.8）数据结构"></li>
+</ul>
+<h1 id="3-属性及存储模型"><a href="#3-属性及存储模型" class="headerlink" title="3. 属性及存储模型"></a>3. 属性及存储模型</h1><h2 id="3-1-静态常量属性"><a href="#3-1-静态常量属性" class="headerlink" title="3.1. 静态常量属性"></a>3.1. 静态常量属性</h2><h3 id="DEFAULT-INITIAL-CAPACITY"><a href="#DEFAULT-INITIAL-CAPACITY" class="headerlink" title="DEFAULT_INITIAL_CAPACITY"></a>DEFAULT_INITIAL_CAPACITY</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br></pre></td></tr></table></figure>
+<p>默认初始容量，规定必须为2的幂。1&lt;&lt;4相当于1 * 2^4 = 16。</p>
+<h3 id="MAXIMUM-CAPACITY"><a href="#MAXIMUM-CAPACITY" class="headerlink" title="MAXIMUM_CAPACITY"></a>MAXIMUM_CAPACITY</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+<p>规定最大容量，当构造函数中指定的容量值比MAXIMUM_CAPACITY大，将会限定为该值大小。1 &lt;&lt; 30相当于1 * 2^30。</p>
+<h3 id="DEFAULT-LOAD-FACTOR"><a href="#DEFAULT-LOAD-FACTOR" class="headerlink" title="DEFAULT_LOAD_FACTOR"></a>DEFAULT_LOAD_FACTOR</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br></pre></td></tr></table></figure>
+<p>默认装载因子为0.75，当构造函数未指定装载因子时会使用。若该值太高，虽会提高空间利用率，但会加大查找开销。</p>
+<h3 id="TREEIFY-THRESHOLD"><a href="#TREEIFY-THRESHOLD" class="headerlink" title="TREEIFY_THRESHOLD"></a>TREEIFY_THRESHOLD</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+<p>树化阈值，当一个桶中的节点数超过该值时，桶中链表将转化为红黑树。默认指定为8，以免频繁转换。</p>
+<h3 id="UNTREEIFY-THRESHOLD"><a href="#UNTREEIFY-THRESHOLD" class="headerlink" title="UNTREEIFY_THRESHOLD"></a>UNTREEIFY_THRESHOLD</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<p>树还原链表阈值，默认指定为6，当一个桶中的节点数小于等于这个值时，桶中红黑树将转化为链表。默认指定为6，该值应比TREEIFY_THRESHOLD小，以免频繁转换。</p>
+<h3 id="MIN-TREEIFY-CAPACITY"><a href="#MIN-TREEIFY-CAPACITY" class="headerlink" title="MIN_TREEIFY_CAPACITY"></a>MIN_TREEIFY_CAPACITY</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</span><br></pre></td></tr></table></figure>
+<p>树化时最小桶数组大小，默认指定为64。在桶中链表转为红黑树前，会先判断当桶数组大小超过该值时才会进行转换操作，否则优先进行扩容。避免哈希表建立初期哈希冲突较多情况导致桶中节点数过多，从而引发频繁树化情况。为了避免进行扩容和树化之间选择的冲突，这个值不能小于 4 * TREEIFY_THRESHOLD。</p>
+<h2 id="3-2-私有属性"><a href="#3-2-私有属性" class="headerlink" title="3.2. 私有属性"></a>3.2. 私有属性</h2><h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br></pre></td></tr></table></figure>
+<p>存储元素的位桶数组，Node类型数组，其大小总是为2的幂。</p>
+<h3 id="entrySet"><a href="#entrySet" class="headerlink" title="entrySet"></a>entrySet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br></pre></td></tr></table></figure>
+<p>存储具体元素的Set集，用于迭代。而Set<K> keySet和Collection<V> values定义在java.util.AbstractMap中。</p>
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br></pre></td></tr></table></figure>
+<p>map中实际存储的键值对的数量，需要注意的是这个并非为位桶数组的大小。</p>
+<h3 id="modCount"><a href="#modCount" class="headerlink" title="modCount"></a>modCount</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> modCount;</span><br></pre></td></tr></table></figure>
+<p>操作数，map发生结构性变化时都会增加。用于迭代操作时检查fail-fast，若迭代过程中发现modCount变化了，则会抛出ConcurrentModificationException异常。</p>
+<h3 id="threshold"><a href="#threshold" class="headerlink" title="threshold"></a>threshold</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> threshold;</span><br></pre></td></tr></table></figure>
+<p>临界阈值（容量 * 装载因子），当map中键值对数量超过该值时，将会进行扩容（位桶数组扩容）。</p>
+<h3 id="loadFactor"><a href="#loadFactor" class="headerlink" title="loadFactor"></a>loadFactor</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor;</span><br></pre></td></tr></table></figure>
+<p>装载因子。</p>
+<h2 id="3-3-存储模型"><a href="#3-3-存储模型" class="headerlink" title="3.3. 存储模型"></a>3.3. 存储模型</h2><ul>
+<li><p><strong>Node节点（单向链表结构）：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">final</span> K key;</span><br><span class="line">    V value;</span><br><span class="line">    Node&lt;K,V&gt; next; <span class="comment">// 链表结构，存储下一个元素</span></span><br><span class="line">    Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.hash = hash;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span>        </span>&#123; <span class="keyword">return</span> key; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span>      </span>&#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> key + <span class="string">&quot;=&quot;</span> + value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123;</span><br><span class="line">        V oldValue = value;</span><br><span class="line">        value = newValue;</span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 判断两个节点是否相等，若key和value都相等，返回true。当与自身比较时为为true</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">this</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>TreeNode节点（红黑树）：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    TreeNode&lt;K,V&gt; parent; <span class="comment">// red-black tree links // 父节点</span></span><br><span class="line">    TreeNode&lt;K,V&gt; left; <span class="comment">// 左子树</span></span><br><span class="line">    TreeNode&lt;K,V&gt; right; <span class="comment">// 右子树</span></span><br><span class="line">    TreeNode&lt;K,V&gt; prev; <span class="comment">//  needed to unlink next upon deletion // 上一个同级节点</span></span><br><span class="line">    <span class="keyword">boolean</span> red; <span class="comment">// 颜色属性，true 红色</span></span><br><span class="line">    TreeNode(<span class="keyword">int</span> hash, K key, V val, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        <span class="keyword">super</span>(hash, key, val, next);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回当前节点的根节点</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> TreeNode&lt;K,V&gt; <span class="title">root</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (TreeNode&lt;K,V&gt; r = <span class="keyword">this</span>, p;;) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((p = r.parent) == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> r;</span><br><span class="line">            r = p;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="4-构造方法"><a href="#4-构造方法" class="headerlink" title="4. 构造方法"></a>4. 构造方法</h1><p>HashMap的构造方法有4种，主要涉及到的参数有：初始容量、装载因子和用来初始化的map。</p>
+<h2 id="HashMap-int-initialCapacity-float-loadFactor"><a href="#HashMap-int-initialCapacity-float-loadFactor" class="headerlink" title="HashMap(int initialCapacity, float loadFactor)"></a>HashMap(int initialCapacity, float loadFactor)</h2><p>构造一个指定初始容量和装载因子的构造方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 若指定初始容量小于0，则抛出IllegalArgumentException异常</span></span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal initial capacity: &quot;</span> +</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    <span class="comment">// 若指定初始容量大于规定最大容量（2^30），则限定初始容量为规定最大容量值</span></span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">        initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">    <span class="comment">// 若指定装载因子小于等于0或者非数字，则抛出IllegalArgumentException异常</span></span><br><span class="line">    <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal load factor: &quot;</span> +</span><br><span class="line">                                           loadFactor);</span><br><span class="line">    <span class="comment">// 初始化装载因子</span></span><br><span class="line">    <span class="keyword">this</span>.loadFactor = loadFactor;</span><br><span class="line">    <span class="comment">// 初始化临界阈值大小</span></span><br><span class="line">    <span class="comment">// 之所以threshold不是等于tableSizeFor(initialCapacity) * this.loadFactor，是因为table的初始化被推迟到了put方法中，put方法中会对threshold重新计算</span></span><br><span class="line">    <span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回大于等于initialCapacity的最小的2次幂</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = cap - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// &gt;&gt;&gt; 操作符表示无符号右移，高位取0</span></span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">2</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">4</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">8</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark id="note1">**注[1]**：HashMap的tableSizeFor(int cap)方法分析。</mark><br>该方法是<font color="green">返回一个大于等于参数cap的最小的2的整数次幂</font>，如参数为7，则返回8（2^3）。<br><code>&gt;&gt;&gt;</code>为无符号右移，高位补0（如 1010&gt;&gt;&gt;1=0101）。<br><code>|</code>为位或操作，参加位运算的两个数只要有一个为1，其值为1（如 0|0=0，0|1=1，1|0 =1，1|1=1）。   </p>
+<p>具体分析如下：<br>1）<code>int n = cap - 1;</code><br>之所以让cap-1，是为了防止cap为2的幂次倍情况。若cap为2的幂次倍且没有cap-1操作，则计算完后的值会是我们所需值的2倍，如cap为8且无cap-1操作情况，结果会为16，应为8。<br>2）<code>n |= n &gt;&gt;&gt; 1;</code><br>右移1位后位或：由于n大于0，则其二进制形式中必有一位为1。通过无符号右移1位后，其最高位的1右移1位，然后位或操作，会使得n的二进制形式中最高位1右侧1位的数也变成1。如n为01xx xxxx，操作后为011x xxxx。<br>3）<code>n |= n &gt;&gt;&gt; 2;</code><br>右移2位后位或：通过无符号右移2位后，其最高位的连续两个1右移了2位，然后与原来的n位或，会使得n的二进制形式中最高位连续两个1右侧2位数也变成1，此时高位共有4个1。如n为011x xxxx，操作后为0111 1xxx。<br>4）<code>n |= n &gt;&gt;&gt; 4;</code><br>右移4位后位或：此时会将n中最高位连续的4个1右移4位，然后位或，此时n中二进制形式的最高位会有8个连续的1。<br>5）<code>n |= n &gt;&gt;&gt; 8;</code><br>右移8位后位或：此时会将n中最高位连续的8个1右移8位，然后位或，此时n中二进制形式的最高位会有16个连续的1。<br>6）<code>n |= n &gt;&gt;&gt; 16;</code><br>右移16位后位或：此时会将n中最高位连续的16个1右移16位，然后位或，此时n中二进制形式的最高位会有32个连续的1。这时，已经大于了MAXIMUM_CAPACITY（2^30），故到此为止。<br>7）<code>return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;</code><br>若计算后的n小于0，则返回1；否则，当n大于等于MAXIMUM_CAPACITY则返回MAXIMUM_CAPACITY，当n小于MAXIMUM_CAPACITY则返回n+1。<br>当n大于0且小于MAXIMUM_CAPACITY时，让n加1是为了得到2的幂次倍。</p>
+<p>具体示例：<br>如cap为129，其二进制形式为0000 0000 1000 0001。</p>
+<table> <tr> <td>n = cap-1 = 128</td> <td>0000 0000 <mark>1</mark>000 0000（n1）</td> </tr> <tr> <td>n |= n >>> 1</td> <td>0000 0000 0100 0000（n2：n1无符号右移1位）<br/>0000 0000 <mark>11</mark>00 0000（n3：n1 位或 n2）</td> </tr> <tr> <td>n |= n >>> 2</td> <td>0000 0000 0011 0000（n4：n3无符号右移2位）<br/>0000 0000 <mark>1111</mark> 0000（n5：n3 位或 n4）</td> </tr> <tr> <td>n |= n >>> 4 </td> <td>0000 0000 0000 1111（n6：n5无符号右移4位）<br/>0000 0000 <mark>1111 1111</mark>（n7：n5 位或 n6）</td> </tr> <tr> <td>n |= n >>> 8</td> <td>0000 0000 0000 0000（n8：n7无符号右移8位）<br/>0000 0000 <mark>1111 1111</mark>（n9：n7 位或 n8）</td> </tr> <tr> <td>n |= n >>> 16</td> <td>0000 0000 0000 0000（n10：n9无符号右移16位）<br/>0000 0000 <mark>1111 1111</mark>（n11：n9 位或 n10）</td> </tr> <tr> <td>n = n + 1</td> <td>0000 0001 0000 0000（n12：n11加1后为256，aka 2^8）</td> </tr> </table>
+
+<h2 id="HashMap-int-initialCapacity"><a href="#HashMap-int-initialCapacity" class="headerlink" title="HashMap(int initialCapacity)"></a>HashMap(int initialCapacity)</h2><p>构造一个指定初始容量的构造方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用指定初始容量和默认装载因子，调用HashMap(int initialCapacity, float loadFactor)来初始化</span></span><br><span class="line">    <span class="keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap()"></a>HashMap()</h2><p>构造一个使用默认装载因子且未设置初始容量的构造函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用默认装载因子初始化loadFactor</span></span><br><span class="line">    <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR; <span class="comment">// all other fields defaulted</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HashMap-Map-lt-extends-K-extends-V-gt-m"><a href="#HashMap-Map-lt-extends-K-extends-V-gt-m" class="headerlink" title="HashMap(Map&lt;? extends K, ? extends V&gt; m)"></a>HashMap(Map&lt;? extends K, ? extends V&gt; m)</h2><p>将传入的map集合转为HashMap。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用默认装载因子初始化loadFactor</span></span><br><span class="line">    <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">    putMapEntries(m, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">putMapEntries</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m, <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取参数map的实际大小</span></span><br><span class="line">    <span class="keyword">int</span> s = m.size();</span><br><span class="line">    <span class="keyword">if</span> (s &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 判断当前map中的table是否已初始化，若没有</span></span><br><span class="line">        <span class="keyword">if</span> (table == <span class="keyword">null</span>) &#123; <span class="comment">// pre-size</span></span><br><span class="line">            <span class="comment">/*获取所需容量：</span></span><br><span class="line"><span class="comment">            由于实际大小=容量*loadFactor，故通过s/loadFactor获取所需容量。</span></span><br><span class="line"><span class="comment">            最后+1.0F是因为除后一般都为小数，加1后会int强转丢失小数位，即使除后为整数多加1也无伤大雅。</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            <span class="keyword">float</span> ft = ((<span class="keyword">float</span>)s / loadFactor) + <span class="number">1.0F</span>;</span><br><span class="line">            <span class="comment">// 若所需容量小于MAXIMUM_CAPACITY，则转为int型；否则，取MAXIMUM_CAPACITY</span></span><br><span class="line">            <span class="keyword">int</span> t = ((ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY) ?</span><br><span class="line">                     (<span class="keyword">int</span>)ft : MAXIMUM_CAPACITY);</span><br><span class="line">            <span class="comment">// 判断得到的t是否大于临界阈值，若大于，则调用tableSizeFor()对threshold重新初始化</span></span><br><span class="line">            <span class="keyword">if</span> (t &gt; threshold)</span><br><span class="line">                threshold = tableSizeFor(t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 若table非空（已初始化），参数map的实际大小大于threshold时，会进行扩容操作</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (s &gt; threshold)</span><br><span class="line">            resize(); <span class="comment">// 具体扩容方法，后续会详解</span></span><br><span class="line">        <span class="comment">// 遍历参数map，将其所有key和value添加至当前map中</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;? extends K, ? extends V&gt; e : m.entrySet()) &#123;</span><br><span class="line">            K key = e.getKey();</span><br><span class="line">            V value = e.getValue();</span><br><span class="line">            putVal(hash(key), key, value, <span class="keyword">false</span>, evict); <span class="comment">// 添加key和value方法，后续会详解</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-常用方法"><a href="#5-常用方法" class="headerlink" title="5. 常用方法"></a>5. 常用方法</h1><h2 id="V-put-K-key-V-value"><a href="#V-put-K-key-V-value" class="headerlink" title="V put(K key, V value)"></a>V put(K key, V value)</h2><ul>
+<li><code>public V put(K key, V value)：将键值对key-value添加到map中，若key存在，则用新值覆盖旧值并返回旧值，否则，直接添加新值并返回null。</code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取key的哈希值</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="comment">// 获取key的hashCode：</span></span><br><span class="line">    <span class="comment">// 若key为null，则直接返回0；</span></span><br><span class="line">    <span class="comment">// 若key非空，则先取key的hashCode()给h，再将h与h右移16位后的数做异或，目的为减少hash冲突</span></span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体向map中添加元素的实现方法</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> hash key的hash值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> key 待存储的键</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> value 待存储的值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> onlyIfAbsent 决定待存储的key在已存在的情况下，是否用新值覆盖原有的旧值。true则保留旧值；false则覆盖旧值。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> evict true则代表map创建后才调用该方法；false则代表说明table处于creation mode，在map创建时调用了该方法，如构造函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 若key存在，返回旧值；否则，返回null</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent, <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab;  <span class="comment">// 记录当前元素待放的位桶数组（正常指向table；扩容后则指向扩容后的新table）</span></span><br><span class="line">    Node&lt;K,V&gt; p; <span class="comment">// 记录当前元素待放节点位置（初始为目标位桶的首节点；后续用于遍历位桶中的链表中节点）</span></span><br><span class="line">    <span class="keyword">int</span> n, i; <span class="comment">// n：位桶数组长度；i：当前元素在位桶数组的索引位置</span></span><br><span class="line">    <span class="comment">// 1.若table为空（未初始化）或其长度为0，则进行扩容（table不会在构造函数中初始化，而是延迟到put操作中）</span></span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        n = (tab = resize()).length; <span class="comment">// 扩容并返回扩容后的大小</span></span><br><span class="line">    <span class="comment">// 2.计算当前元素所属位桶的索引位置，若该索引上节点为空，则创建一个新节点</span></span><br><span class="line">    <span class="comment">// (n - 1) &amp; hash 是为了将hash映射到位桶索引范围内（0~n-1），确定当前元素要放到哪个位桶中去</span></span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        <span class="comment">// 创建一个新节点，将当前元素放进来，其中next指向null</span></span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 3.执行至此，说明元素要放的目标位桶中非空</span></span><br><span class="line">        Node&lt;K,V&gt; e;  <span class="comment">// 记录了当前元素待放的节点位置</span></span><br><span class="line">        K k;</span><br><span class="line">        <span class="comment">// 3.1.若目标位桶中第一个节点的hash值和key值与待放节点（参数中的hash和key）均相等，则令节点e记录下该节点</span></span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            e = p;</span><br><span class="line">        <span class="comment">// 3.2.若目标位桶中节点结构为红黑树，则将元素放入树中</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="comment">// 3.3.若目标位桶中节点结构为链表，顺序遍历链表中节点，直至将元素放入合适的位置（链表末尾或覆盖hash和key相同的节点）</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 顺序遍历链表中所有节点：</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="comment">// 3.3.1.若直至遍历到链表尾节点，仍未发现目标key，则在链表末尾新建一个节点并将当前元素放入</span></span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="comment">// 在链表末尾创建新节点后，判断若节点数量超过树化阈值（8个），则将当前位桶中链表转为红黑树结构</span></span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 3.3.2.若在遍历过程中找到了目标key，则退出循环，其中节点e指向的就是目标key所属节点位置</span></span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 执行至此，要么：</span></span><br><span class="line">        <span class="comment">// 1）待存储元素的key不存在，即节点e为空，直接插入链表末尾或添加到红黑树中</span></span><br><span class="line">        <span class="comment">// 2）待存储元素的key已存在，即节点e记录了待放入节点的位置，需等待后续操作来覆盖所记录节点中的值</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 若节点e非空，即待存储元素的key已存在：</span></span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">// existing mapping for key</span></span><br><span class="line">            V oldValue = e.value; <span class="comment">// 记录旧值</span></span><br><span class="line">            <span class="comment">// 若参数onlyIfAbsent为false或旧值为null，则用新值覆盖旧值</span></span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                e.value = value;</span><br><span class="line">            afterNodeAccess(e); <span class="comment">// 该方法为空方法，会于LinkedHashMap中使用到，用于后处理操作</span></span><br><span class="line">            <span class="keyword">return</span> oldValue; <span class="comment">// 返回旧值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 执行至此，说明处于待存储元素的key不存在情况</span></span><br><span class="line">    </span><br><span class="line">    ++modCount; <span class="comment">// modCount加1</span></span><br><span class="line">    <span class="comment">// map的实际大小加1，并判断若超过阈值，则扩容</span></span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">        resize();</span><br><span class="line">    afterNodeInsertion(evict); <span class="comment">// 空方法</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// 待存储元素的key不存在情况，返回null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 位桶扩容方法</span></span><br><span class="line"><span class="comment"> * 扩容时机：table初始化时；table大小超过threshold</span></span><br><span class="line"><span class="comment"> * 每次扩容都会新建一个table，新table的大小是原table的2倍</span></span><br><span class="line"><span class="comment"> * 扩容时，会将原table中的节点会重新哈希到新table中：索引位置相同 或 与原位置相差一个原table大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">final</span> Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] oldTab = table; <span class="comment">// 令oldTab指向当前map中的位桶数组table</span></span><br><span class="line">    <span class="keyword">int</span> oldCap = (oldTab == <span class="keyword">null</span>) ? <span class="number">0</span> : oldTab.length;</span><br><span class="line">    <span class="keyword">int</span> oldThr = threshold;</span><br><span class="line">    <span class="keyword">int</span> newCap, newThr = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 若原容量大于0，即位桶数组非空</span></span><br><span class="line">    <span class="keyword">if</span> (oldCap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 若原容量大于等于MAXIMUM_CAPACITY，则更新threshold为Integer最大值，不再扩容，直接返回oldTab</span></span><br><span class="line">        <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">            threshold = Integer.MAX_VALUE;</span><br><span class="line">            <span class="keyword">return</span> oldTab;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 先将原容量左移1位（即扩容2倍），若扩容后容量小于MAXIMUM_CAPACITY且扩容前容量大于等于默认初始容量（16），则临界阈值也扩容2倍</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">            <span class="comment">// 执行到此，说明当前map是扩容而非初始化</span></span><br><span class="line">            newThr = oldThr &lt;&lt; <span class="number">1</span>; <span class="comment">// double threshold 扩容临界阈值为原来的2倍</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 若原容量小于等于0且原临界阈值大于0，则将新容量newCap设置为原临界阈值大小</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; <span class="number">0</span>) <span class="comment">// initial capacity was placed in threshold</span></span><br><span class="line">        <span class="comment">// 通过带参构造方法（HashMap(int initialCapacity, float loadFactor)和HashMap(int initialCapacity)）会满足此if条件，这2个方法会调用tableSizeFor()对指定初始容量进行处理返回一个大于等于指定初始容量最小的2次幂，然后赋给临界阈值threshold，故这里将oldThr还给newCap</span></span><br><span class="line">        newCap = oldThr;</span><br><span class="line">    <span class="comment">// 若原容量小于等于0且原临界阈值小于等于0，即首次初始化，设置容量和临界阈值的默认值</span></span><br><span class="line">    <span class="keyword">else</span> &#123;               <span class="comment">// zero initial threshold signifies using defaults</span></span><br><span class="line">        <span class="comment">// 通过无参构造方法（HashMap()）会满足此if条件</span></span><br><span class="line">        newCap = DEFAULT_INITIAL_CAPACITY; <span class="comment">// newCap为16</span></span><br><span class="line">        newThr = (<span class="keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY); <span class="comment">// newThr为12</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 若newThr为0，满足该if条件有以下可能：</span></span><br><span class="line">    <span class="comment">// 1）原容量oldCap大于0且小于默认初始容量（16），初始化时指定的容量小于默认值16</span></span><br><span class="line">    <span class="comment">// 2）使用带参构造方法初始化，第一次使用put</span></span><br><span class="line">    <span class="keyword">if</span> (newThr == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">float</span> ft = (<span class="keyword">float</span>)newCap * loadFactor; <span class="comment">// 计算新的临界阈值：新得到的容量*装载因子</span></span><br><span class="line">        <span class="comment">// 获取新的临界阈值newThr：若新的容量newCap和ft都小于MAXIMUM_CAPACITY，则将ft转为int型，否则取Integer.MAX_VALUE</span></span><br><span class="line">        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY ?</span><br><span class="line">                  (<span class="keyword">int</span>)ft : Integer.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将临界阈值threshold设置为新临界阈值newThr</span></span><br><span class="line">    threshold = newThr;</span><br><span class="line">    <span class="comment">// 以上操作，计算出了新的table容量newCap和临界阈值newThr</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span></span><br><span class="line">    <span class="comment">// 创建一个大小为newCap的位桶数组newTab</span></span><br><span class="line">    Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> Node[newCap];</span><br><span class="line">    table = newTab; <span class="comment">// 更新table指向新创建的位桶数组newTab</span></span><br><span class="line">    <span class="keyword">if</span> (oldTab != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 遍历旧map（oldTap）中数据，复制到新map（newTab）中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; oldCap; ++j) &#123;</span><br><span class="line">            Node&lt;K,V&gt; e;</span><br><span class="line">            <span class="comment">// 获旧map位桶数组中j位置上的节点给e，若非空，则开始数据复制</span></span><br><span class="line">            <span class="keyword">if</span> ((e = oldTab[j]) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                oldTab[j] = <span class="keyword">null</span>; <span class="comment">// 先将旧map位桶数组中j位置节点置空，方便GC</span></span><br><span class="line">                <span class="comment">// 判断旧位桶数组上的每一个节点情况，分类处理：</span></span><br><span class="line">                <span class="comment">// 1.若节点e的next指向null，说明当前位桶中只有一个节点，直接将节点e放入新位桶数组中，新索引位置为e.hash &amp; (newCap - 1)</span></span><br><span class="line">                <span class="keyword">if</span> (e.next == <span class="keyword">null</span>)</span><br><span class="line">                    <span class="comment">// 让e的hash值位与新位桶容量减1的值，即可得到要放入新位桶数组的索引位置</span></span><br><span class="line">                    newTab[e.hash &amp; (newCap - <span class="number">1</span>)] = e;</span><br><span class="line">                <span class="comment">// 2.若节点e为红黑树节点TreeNode，则调用TreeNode的split()方法从根节点出发进行</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                    ((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</span><br><span class="line">                <span class="comment">// 3.若节点e为大于1的单向链表，则进行链表复制操作</span></span><br><span class="line">                <span class="keyword">else</span> &#123; <span class="comment">// preserve order</span></span><br><span class="line">                    <span class="comment">// lo链表：存储e.hash&amp;oldCap为0情况的节点</span></span><br><span class="line">                    Node&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">                    <span class="comment">// hi链表：存储e.hash&amp;oldCap为非0情况的节点</span></span><br><span class="line">                    Node&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br><span class="line">                    Node&lt;K,V&gt; next;</span><br><span class="line">                    <span class="comment">// 遍历位桶中在同一索引处的节点，根据e.hash&amp;oldCap是否为0，分别存储到lo链表和hi链表中</span></span><br><span class="line">                    <span class="keyword">do</span> &#123;</span><br><span class="line">                        next = e.next; <span class="comment">// 记录节点e的next指向</span></span><br><span class="line">                        <span class="comment">// 若节点e的hash值位与旧位桶容量后得到的值为0，则将节点e采用尾插法存储到lo链表中</span></span><br><span class="line">                        <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (loTail == <span class="keyword">null</span>) <span class="comment">// 若loTail为空，令loHead指向节点e</span></span><br><span class="line">                                loHead = e;</span><br><span class="line">                            <span class="keyword">else</span> <span class="comment">// 否则，loTail的next指向节点e</span></span><br><span class="line">                                loTail.next = e;</span><br><span class="line">                            loTail = e; <span class="comment">// loTail指向节点e</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// 若节点e的hash值位与旧位桶容量后得到的值非0，则将节点e采用尾插法存储到hi链表中</span></span><br><span class="line">                        <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)</span><br><span class="line">                                hiHead = e;</span><br><span class="line">                            <span class="keyword">else</span></span><br><span class="line">                                hiTail.next = e;</span><br><span class="line">                            hiTail = e;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);</span><br><span class="line">                    <span class="comment">// 置lo链表尾部指向null，并将lo链表的所有节点都挂到新位桶数组的j处</span></span><br><span class="line">                    <span class="comment">// （j：即旧位桶索引位置）</span></span><br><span class="line">                    <span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        loTail.next = <span class="keyword">null</span>;</span><br><span class="line">                        newTab[j] = loHead;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 置hi链表尾部指向null，并将hi链表的所有节点都挂到新位桶数组的j+oldCap处</span></span><br><span class="line">                    <span class="comment">// （j+oldCap：即旧位桶索引位置+旧位桶数组长度）</span></span><br><span class="line">                    <span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        hiTail.next = <span class="keyword">null</span>;</span><br><span class="line">                        newTab[j + oldCap] = hiHead;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newTab; <span class="comment">// 返回新位桶数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<mark id="note2">【<strong>注2</strong>】：HashMap中的hash算法。</mark><br>在JDK1.8的HashMap中，hash算法为：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+首先获取key的hashCode()值，然后将获取的hashCode值无符号右移16位（不论正负，高位均补0），再将右移后的值与原hashCode值做异或运算，计算出该key的hash值。</li>
+</ul>
+<p>在putVal()方法中，通过(n - 1) &amp; hash来计算当前对象在位桶数组中的位置，这里hash值为上面计算得到值，n为位桶数组的大小（固定为2的幂次方），(n - 1) &amp; hash等价于hash % n，通过这么计算以确保索引置落在位桶数组范围内0 ~ n-1。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent, <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体示例如下（key=-100）：</p>
+<table> <tr> <td>h=key.hashCode()<br/>h>>>16<br/>(h=key.hashCode())^(h>>>16) </td> <td><font color="#ED9C00">1111 1111 1111 1111</font> <font color="#367DF2">1111 1111 1001 1100</font>（n1：key的hashCode()值）<br/>0000 0000 0000 0000 <font color="#ED9C00">1111 1111 1111 1111</font>（n2：n1无符号右移16位）<br/><font color="#ED9C00">1111 1111 1111 1111</font> <font color="#75CE1D">0000 0000 0110 0011</font>（n3：n1异或n2，即key的hash值）</td> </tr> <tr> <td>n=16<br/>n-1<br/>(n-1)&hash</td> <td>0000 0000 0000 0000 0000 0000 0001 0000（n4：若map容量为16）<br/>0000 0000 0000 0000 0000 0000 0000 <font color="#FF0000">1111</font>（n5：n4 - 1）<br/>0000 0000 0000 0000 0000 0000 0000 0011（n6：n5 & n3，即3）</td> </tr> </table>这里的hash算法计算过程中，右移16位，刚好是32位（hash值为int型）的一半，利用自身高半位与低半位做异或，以混合原hash值高位和地位，增大低位随机性，使得高位也参与哈希运算，从很大程度上减少碰撞率。这种方式称为“扰动函数”，减少哈希冲突，具体可参读Peter Lawley的文章《An introduction to optimising a hashing strategy》。
+
+<p><mark id="note3">【<strong>注3</strong>】：HashMap中为何位桶数组table的大小必须为2的n次方？</mark><br>主要是为了在<strong>取模</strong>和<strong>扩容</strong>时做优化。<br>由【注2】可知，通过(n - 1) &amp; hash来计算索引值，相对于hash % n来说，&amp;操作的效率要高于%操作。<br>若长度为2的n次方，则减1后的二进制形式必为…1111，在与hash值与操作后，结果区间为位桶数组范围内，运算效率更高。<br>倘若位桶数组大小非2的n次方，假设为15，减1后为14（1110），最后一位为0，在做与操作后，最后一位会始终为0，使得存放元素的位置减少，造成空间浪费，自然也就会增大碰撞几率。<br>扩容操作则是利用位桶数组大小与hash值做与操作，判断结果是否为0，以区分扩容后的位置。</p>
+<p><mark id="note4">【<strong>注4</strong>】：HashMap的put(K key, V value)方法操作流程分析。</mark><br>put方法实际上是通过putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict)方法来实现插入key-value，具体流程为：<br>1.<font color="green">判断table是否为null（table未初始化）或其长度是否为0</font>，若是，则进行扩容；<br>2.计算当前元素待插入位桶数组的索引值，i = (n - 1) &amp; hash；<br>3.<font color="green">判断table[i]（待插目标位桶的首节点）是否为null</font>，若为null，则在该位置新建一个节点并直接添加待插元素，然后转向6，否则，转向4；<br>4.<font color="green">判断目标位桶首节点元素与待插元素的key是否相同</font>，若key相同，则令节点e记录该节点，后续执行覆盖操作，然后转向7，否则转向5；<br>5.<font color="green">判断目标位桶中节点结构是否为红黑树</font>，若是，则调用putTreeVal()方法来处理并用节点e记录返回值（若是新建节点则返回null，否则会返回匹配到的节点），然后转向7，否则转向6；<br>6.<font color="green">遍历目标位桶中链表的所有节点</font>：<br>&emsp;6.1.若直至链表尾节点也未发现key相同的节点，则在链表尾部新建一个节点并添加待插元素，然后会判断若当前节点数超过指定树化阈值，则会转为红黑树结构，以提升查询速度，再跳出循环；<br>&emsp;6.2.若找到了key相同的节点，则跳出循环，其中节点e对应的就是该待覆盖节点；<br>&emsp;跳出循环后，转向7；<br>7.<font color="green">判断节点e是否为null</font>，若非null，则说明待插元素的key已存在，节点e就记录了待覆盖节点，此时<font color="green">若参数onlyIfAbsent为false或旧值为null</font>，则用新值覆盖旧值（这里onlyIfAbsent传递过来为false，执行覆盖操作），最后返回旧值，结束流程。<br>8.插入成功（待存插元素的key不存在情况），增加modCount和size，然后<font color="green">判断size是否大于临界阈值threshold</font>，若是则扩容，最后返回null，结束流程。</p>
+<p>具体put方法流程图如下：</p>
+<img src="/2019/07/04/collection-hashmap-sourcecode/hashmap_put.png" class="" title="HashMap的put方法流程图">
+
+<p><mark id="note5">【<strong>注5</strong>】：HashMap的扩容resize()方法详解。</mark><br><strong>扩容时机</strong>：<br>①<font color="green">table初始化时</font>，构造函数中并没有对table进行初始化，而是延迟到了第一次put操作中。<br>②<font color="green">table大小超过临界阈值threshold（装载因子*位桶容量）时</font>，如向map中添加元素，当size大于threshold，则将进行扩容。</p>
+<p><strong>扩容结果</strong>：<br>①每次扩容操作都会新建一个table，且<font color="green">新table大小是原来的2倍</font>。<br>②扩容时，针对位桶中节点结构的不同会有不同的处理方式：若位桶中仅有一个节点，则直接重哈希到新table中；若位桶中结构为红黑树，则调用TreeNode的split()方法对树进行修剪，将元素复制到新table中；若位桶中结构为单向链表，则会将原table中的节点会重新哈希到新table中，相对于原节点位置：<font color="green">索引位置相同</font> 或 <font color="green">与原位置相差一个原table大小</font>。</p>
+<p><strong>扩容流程</strong>：<br>1.获取原table容量oldCap和原临界阈值oldThr；<br>2.<font color="green">判断原容量是否大于0</font>，若是，则转向3，否则转向5；<br>3.<font color="green">判断原容量是否大于最大容量</font>，若是，则设置临界阈值threshold为Integer最大值，并返回原table，结束流程，否则，转向4；<br>4.计算新容量newCap为oldCap的2倍，然后判断newCap是否小于最大容量且oldCap是否大于等于默认初始容量16，若是，则设置新临界阈值newThr为oldThr的2倍，然后转向7，否则，也转向7；<br>5.<font color="green">判断oldThr是否大于0</font>，若是，则设置newCap为oldThr，然后转向7，否则，转向6；<br>6.设置newCap为默认初始值16、newThr为默认装载因子<em>默认初始值=12；<br>7.<font color="green">判断newThr是否等于0</font>，若是，则计算新的临界阈值（ft=newCap</em>loadFactor），判断newCap是否小于最大容量且ft是否小于最大容量，若是，则设置newThr为新临界阈值ft，否则为Integer的最大值；<br>8.设置临界阈值threshold为newThr，并创建新table（newTab），其大小为newCap；<br>9.<font color="green">判断oldTab是否为非null</font>，若是，则转向10，否则转向11；<br>10.遍历oldTab，将原数据复制到newTab中：<br>&emsp;10.1.<font color="green">判断当前位桶中是否为非null</font>，若是则转向10.2，否则结束本次循环；<br>&emsp;10.2.<font color="green">判断当前位桶中首节点是否为单节点</font>，若是，则计算新索引位置（e.hash&amp;(newCap-1)），并复制到newTab中，然后结束本次循环，否则，转向10.3；<br>&emsp;10.3.<font color="green">判断当前位桶中结构是否为红黑树</font>，若是，则调用TreeNode的split()方法进行树修剪，并复制到newTab中，然后结束本次循环，否则，转向10.4；<br>&emsp;10.4.<font color="green">此种情况，当前位桶为单向链表结构</font>，遍历该链表，并使用尾插法分别得到lo链表和hi链表，然后分别将lo链表复制到newTab中在原索引的位置，将hi链表复制到newTab中在原索引加oldCap的位置，结束本次循环；<br>&emsp;跳出循环，然后转向11；<br>11.返回newTab，结束流程。</p>
+<p>具体resize方法流程图如下：</p>
+<img src="/2019/07/04/collection-hashmap-sourcecode/hashmap_resize.png" class="" title="HashMap的resize方法流程图">
+
+<p><mark id="note6">【<strong>注6</strong>】：HashMap扩容resize时位桶为单向链表情况，链表进行拆分并复制到新table的流程分析。</mark><br>扩容操作时的链表拆分主要代码分为三大部分，其中<strong>第一部分</strong>为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">Node&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+<p>这里定义了4个Node的引用，从命名上分为lo链表和hi链表，主要用于记录链表拆分成2个链表的引用，其中loHead和loTail对应lo链表的头节点和尾节点，hiHead和hiTail对应hi链表的头节点和尾节点。</p>
+<p><strong>第二部分</strong>为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;K,V&gt; next;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    next = e.next;</span><br><span class="line">    <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// lo链表</span></span><br><span class="line">        <span class="keyword">if</span> (loTail == <span class="keyword">null</span>)</span><br><span class="line">            loHead = e;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            loTail.next = e;</span><br><span class="line">        loTail = e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// hi链表</span></span><br><span class="line">        <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)</span><br><span class="line">            hiHead = e;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            hiTail.next = e;</span><br><span class="line">        hiTail = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<p>这里为一个循环，遍历当前位桶上的所有节点，判断节点应该插到lo链表还是hi链表，这里使用的是<font color="green">尾插法</font>。<br>如何判断节点所属链表，是通过<code>(e.hash &amp; oldCap) == 0</code>条件来决定，这里oldCap为原位桶数组大小（2的n次方），利用oldCap和hash值做位与操作，看结果若为0，则将节点插入lo链表，否则，插入hi链表。<br>这里，由于oldCap必为2的n次方，例如其二进制形式一般为10000，只有高位为1，其余都为0。故而e.hash &amp; oldCap的结果是否为0，<font color="green">取决于oldCap高位为1的位置对应于hash值的那个位置是否为1还是0</font>。<br>我们知道会有多个节点（形成单链表）存在于一个位桶中，是由于位桶数组大小减1后位与hash值（(n - 1) &amp; hash）计算得到的索引值一致所导致的。如下面一组数据：</p>
+<table class="example"> <thead> <tr> <th>key</th> <th>hash</th> <th>二进制形式</th> <th>(n - 1) & hash，若n=16</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>1</td> <td>000<font color="red">0</font> 0001</td> <td>0000 1111<br/>0000 0001<br/>—————<br/>0000 0001</td> </tr> <tr> <td>17</td> <td>17</td> <td>000<font color="red">1</font> 0001</td> <td>0000 1111<br/>0001 0001<br/>—————<br/>0000 0001</td> </tr> <tr> <td>33</td> <td>33</td> <td>001<font color="red">0</font> 0001</td> <td>0000 1111<br/>0010 0001<br/>—————<br/>0000 0001</td> </tr> <tr> <td>49</td> <td>49</td> <td>001<font color="red">1</font> 0001</td> <td>0000 1111<br/>0011 0001<br/>—————<br/>0000 0001</td> </tr> <tr> <td>65</td> <td>65</td> <td>010<font color="red">0</font> 0001</td> <td>0000 1111<br/>0100 0001<br/>—————<br/>0000 0001</td> </tr> </tbody> </table>
+
+<p>由上面一组key得知，1、17、33、49和65计算得到索引值都为1，故而都置于一个位桶中形成单链表。由此可知，同一位桶中的所有节点对应oldCap的高位为1的位置（即oldCap为16，高位从右往左数第5位）是按0101…的顺序排列，即上表中二进制形式一列中红色标注的位置，再做链表拆分操作时（判定条件(e.hash &amp; oldCap) == 0），第一个判定条件为0，插入lo链表，第二个判定条件为1，插入hi链表，第三个插入lo链表，第四个插入hi链表，以此类推，均匀拆分成了2个链表。</p>
+<p><strong>第三部分为</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">    loTail.next = <span class="keyword">null</span>;</span><br><span class="line">    newTab[j] = loHead;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">    hiTail.next = <span class="keyword">null</span>;</span><br><span class="line">    newTab[j + oldCap] = hiHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一部分主要是将处理好的lo链表和hi链表插入到新位桶数组中，<br><font color="green"><br>若lo链表非空，则将整个lo链表放到新位桶数组中索引为j的位置（即原索引位置）；<br>若hi链表非空，则将整个hi链表放到新位桶数组中索引为j+oldCap的位置（即原索引位置+原位桶数组大小的位置）。<br></font></p>
+<p>整个操作的图示为：</p>
+<img src="/2019/07/04/collection-hashmap-sourcecode/hashmap_split_linkedlist.png" class="" title="HashMap扩容时链表拆分图示">
+
+
+<p>To be continued…</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><span style="font-size:small">
+[1] JDK1.8 HashMap源码分析.  https://www.cnblogs.com/xiaoxi/p/7233201.html.<br>
+[2] HashMap源码注解 之 静态工具方法hash()、tableSizeFor()（四）.  https://blog.csdn.net/fan2012huan/article/details/51097331.<br>
+[3] 深入理解HashMap(四): 关键源码逐行分析之resize扩容.  https://segmentfault.com/a/1190000015812438.<br>
+[4] JDK 源码中 HashMap 的 hash 方法原理是什么？.  https://www.zhihu.com/question/20733617.
+</span>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java%E9%9B%86%E5%90%88/" rel="tag"># java集合</a>
+              <a href="/tags/java-util-List/" rel="tag"># java.util.List</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/23/qrcode-scan-login/" rel="prev" title="三种方式实现扫码登录">
+      <i class="fa fa-chevron-left"></i> 三种方式实现扫码登录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">2. 基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%B1%9E%E6%80%A7%E5%8F%8A%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 属性及存储模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%9D%99%E6%80%81%E5%B8%B8%E9%87%8F%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 静态常量属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DEFAULT-INITIAL-CAPACITY"><span class="nav-number">3.1.1.</span> <span class="nav-text">DEFAULT_INITIAL_CAPACITY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAXIMUM-CAPACITY"><span class="nav-number">3.1.2.</span> <span class="nav-text">MAXIMUM_CAPACITY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEFAULT-LOAD-FACTOR"><span class="nav-number">3.1.3.</span> <span class="nav-text">DEFAULT_LOAD_FACTOR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TREEIFY-THRESHOLD"><span class="nav-number">3.1.4.</span> <span class="nav-text">TREEIFY_THRESHOLD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNTREEIFY-THRESHOLD"><span class="nav-number">3.1.5.</span> <span class="nav-text">UNTREEIFY_THRESHOLD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIN-TREEIFY-CAPACITY"><span class="nav-number">3.1.6.</span> <span class="nav-text">MIN_TREEIFY_CAPACITY</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. 私有属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#table"><span class="nav-number">3.2.1.</span> <span class="nav-text">table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entrySet"><span class="nav-number">3.2.2.</span> <span class="nav-text">entrySet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size"><span class="nav-number">3.2.3.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modCount"><span class="nav-number">3.2.4.</span> <span class="nav-text">modCount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#threshold"><span class="nav-number">3.2.5.</span> <span class="nav-text">threshold</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loadFactor"><span class="nav-number">3.2.6.</span> <span class="nav-text">loadFactor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. 存储模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">4. 构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-int-initialCapacity-float-loadFactor"><span class="nav-number">4.1.</span> <span class="nav-text">HashMap(int initialCapacity, float loadFactor)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-int-initialCapacity"><span class="nav-number">4.2.</span> <span class="nav-text">HashMap(int initialCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">4.3.</span> <span class="nav-text">HashMap()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-Map-lt-extends-K-extends-V-gt-m"><span class="nav-number">4.4.</span> <span class="nav-text">HashMap(Map&lt;? extends K, ? extends V&gt; m)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">5. 常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#V-put-K-key-V-value"><span class="nav-number">5.1.</span> <span class="nav-text">V put(K key, V value)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Roy"
+      src="/images/dinosaur.jpeg">
+  <p class="site-author-name" itemprop="name">Roy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
