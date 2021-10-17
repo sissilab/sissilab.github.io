@@ -566,7 +566,7 @@ $ sudo pacman -S kde-system
 
 # 参考资料
 
-[1] [Installation guide (简体中文) - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-[2] [Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/)
-[3] [2021 Archlinux双系统安装教程（超详细） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/138951848)
+[1] [Installation guide (简体中文) - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))   
+[2] [Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/)   
+[3] [2021 Archlinux双系统安装教程（超详细） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/138951848)   
 [4] [Arch Linux + KDE安装教程 - 简书 (jianshu.com)](https://www.jianshu.com/p/7c2ab582e13d)

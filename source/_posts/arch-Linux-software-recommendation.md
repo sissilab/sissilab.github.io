@@ -13,7 +13,7 @@ categories:
 
 # 1.安装fcitx5相关包
 $ sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color
-<!-- more -->
+
 # 2.配置环境变量
 $ vim ~/.pam_environment
 # set fcitx5
@@ -30,6 +30,7 @@ System Settings / Startup and shutdown / Autostart：点击 Add / Add Applicatio
 # 5.添加输入法
 # System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。
 ```
+<!-- more -->
 
 - **KDE 应用**
 ```shell
