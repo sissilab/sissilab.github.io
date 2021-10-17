@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sissilab.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0. 简介工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。 工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工厂方法模式">
+<meta property="og:url" content="https://sissilab.github.io/2021/10/17/factory-method-pattern/index.html">
+<meta property="og:site_name" content="羊驼之野望">
+<meta property="og:description" content="0. 简介工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。 工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sissilab.github.io/2021/10/17/factory-method-pattern/URLStreamHandler_subclasses.png">
+<meta property="article:published_time" content="2021-10-17T15:12:28.000Z">
+<meta property="article:modified_time" content="2021-10-17T15:17:41.216Z">
+<meta property="article:author" content="Roy">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sissilab.github.io/2021/10/17/factory-method-pattern/URLStreamHandler_subclasses.png">
+
+<link rel="canonical" href="https://sissilab.github.io/2021/10/17/factory-method-pattern/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>工厂方法模式 | 羊驼之野望</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">羊驼之野望</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/factory-method-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          工厂方法模式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-17 23:12:28 / 修改时间：23:17:41" itemprop="dateCreated datePublished" datetime="2021-10-17T23:12:28+08:00">2021-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。</p>
+<p>工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。</p>
+<span id="more"></span>
+<h1 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1. 简单工厂模式"></a>1. 简单工厂模式</h1><p><strong>简单工厂模式</strong>，又称为<strong>静态工厂模式</strong>（Static Factory Method Pattern），由一个工厂对象决定创建出哪一种产品类的实例，简单工厂模式的实质是由一个工厂类根据传入的参数（如产品类型），动态决定应该创建哪一个产品类。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>由一个工厂类来获取所有不同的产品，结构简单，实现简单，易于理解；</li>
+<li>使用方无需知晓所创建具体产品的类名，只需要传入一个正确的参数（如产品类型），就可以获取你所需要的对象，而无需知道其创建细节。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>工厂类单一、且职责相对过重，当增加新产品时，需修改工厂类的判断逻辑（扩展困难），违背了开闭原则；</li>
+<li>工厂类使用了 static 工厂方法来创建产品，造成工厂角色无法形成基于继承的等级结构。</li>
+</ol>
+<p><strong>适用场景：</strong></p>
+<ol>
+<li>工程类负责创建的产品对象较少；</li>
+<li>使用方（客户端）只需要知道传入工厂类的参数，无需知晓创建对象的逻辑和细节。</li>
+</ol>
+<h2 id="1-1-结构与实现"><a href="#1-1-结构与实现" class="headerlink" title="1.1. 结构与实现"></a>1.1. 结构与实现</h2><p>简单工厂模式的主要角色如下：</p>
+<ul>
+<li><strong>简单工厂</strong>（SimpleFactory）：是简单工厂模式的核心，负责创建所有产品的内部逻辑。工厂类的创建产品的方法为公有静态方法， 可被外界直接调用，根据产品类型参数来创建所需的产品对象。</li>
+<li><strong>抽象产品</strong>（IProduct）：是简单工厂创建所有产品对象的父级接口，负责描述所有产品实例的公共接口。</li>
+<li><strong>具体产品</strong>（Phone、Laptop、Earphone）：是简单工厂模式的创建目标，实现了产品公共接口。</li>
+</ul>
+<p>其类图如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x27;https://plantuml.com/class-diagram</span><br><span class="line"></span><br><span class="line">package Product &lt;&lt;Rectangle&gt;&gt; &#123;</span><br><span class="line">    interface IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Phone implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Laptop implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Earphone implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class SimpleFactory &#123;</span><br><span class="line">    + enum PRODUCT_TYPE</span><br><span class="line">    + &#123;static&#125; IProduct createProduct(PRODUCT_TYPE productType)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class SimpleFactoryMain &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SimpleFactory ..&gt; Product : create by PRODUCT_TYPE</span><br><span class="line">SimpleFactoryMain ..&gt; SimpleFactory : use</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-代码示例"><a href="#1-2-代码示例" class="headerlink" title="1.2. 代码示例"></a>1.2. 代码示例</h2><p>产品接口、及具体实现后的产品类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 描述产品内容</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a phone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Laptop</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a laptop.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Earphone</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a earphone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>简单工厂模式的工厂类，负责各种产品的创建，并提供返回统一的公有产品接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 产品类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">PRODUCT_TYPE</span> </span>&#123;</span><br><span class="line">        PHONE,</span><br><span class="line">        LAPTOP,</span><br><span class="line">        EARPHONE</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据类型，创建不同的产品</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> productType</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IProduct <span class="title">createProduct</span><span class="params">(PRODUCT_TYPE productType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != productType) &#123;</span><br><span class="line">            <span class="keyword">switch</span> (productType) &#123;</span><br><span class="line">                <span class="keyword">case</span> PHONE:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Phone();</span><br><span class="line">                <span class="keyword">case</span> LAPTOP:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Laptop();</span><br><span class="line">                <span class="keyword">case</span> EARPHONE:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Earphone();</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单工厂的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleFactoryMain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IProduct phone = SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.PHONE);</span><br><span class="line">        phone.desc();</span><br><span class="line"></span><br><span class="line">        IProduct laptop = SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.LAPTOP);</span><br><span class="line">        laptop.desc();</span><br><span class="line"></span><br><span class="line">        IProduct earphone = SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.EARPHONE);</span><br><span class="line">        earphone.desc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I am a phone.</span><br><span class="line">I am a laptop.</span><br><span class="line">I am a earphone.</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-工厂方法模式"><a href="#2-工厂方法模式" class="headerlink" title="2. 工厂方法模式"></a>2. 工厂方法模式</h1><p><strong>工厂方法模式</strong>（Factory Method Pattern），又称为<strong>多态性工厂模式</strong>，属于设计模式三大分类中的创建型模式。<br>它==定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个，即工厂方法模式将实例化推迟到了子类==。<br>与简单工厂模式相比，它的核心工厂类不再负责所有产品的创建，而是将具体的工作（如创建产品）交由具体子类去做。其中，该核心工厂类成为一个抽象工厂角色，仅负责定义具体工厂子类必须实现的公有接口，而不再负责具体某一产品的工作细节。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>用户只需关心所需产品对应的工厂就可获得所需产品，无需关注产品的具体创建逻辑；</li>
+<li>当增加新产品时，只需增加对应工厂类即可，扩展性较好，符合开闭原则。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>当产品增加时，易造成类的个数过多，增加了复杂度和对系统的理解难度；</li>
+<li>抽象产品只能生产一种产品，此问题可使用抽象工厂模式来解决。</li>
+</ol>
+<p><strong>适用场景：</strong></p>
+<ol>
+<li>使用方（客户）只知道产品对应的工厂名，而不知道具体的产品名，如 手机工厂、笔记本工厂等；</li>
+<li>创建对象的任务由多个具体子工厂中的某一个完成，而抽象工厂只提供创建产品的接口。</li>
+<li>使用方（客户）不关心创建产品的细节，只关心产品的生产工厂。</li>
+<li>当您需要一台笔记本，可以直接从生产笔记本的工厂去拿货，而不用管这台笔记本是如何制造出来的，以及这台笔记本的具体实现。</li>
+</ol>
+<h2 id="2-1-结构与实现"><a href="#2-1-结构与实现" class="headerlink" title="2.1. 结构与实现"></a>2.1. 结构与实现</h2><p>工厂方法模式的主要角色如下：</p>
+<ul>
+<li><strong>抽象工厂</strong>（IFactory）：提供了创建产品的接口，调用者通过它访问具体工厂的工厂方法 <code>createProduct()</code> 来创建产品。</li>
+<li><strong>具体工厂</strong>（PhoneFactory、LaptopFactory、EarphoneFactory）：主要是实现抽象工厂中的方法，完成具体产品的创建。</li>
+<li><strong>抽象产品</strong>（IProduct）：定义了产品的规范，描述了产品的主要特性和功能。</li>
+<li><strong>具体产品</strong>（Phone、Laptop、Earphone）：实现了抽象产品角色所定义的接口，由具体工厂来创建，它同具体工厂之间一一对应。</li>
+</ul>
+<p>其类图如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#x27;https://plantuml.com/class-diagram</span><br><span class="line"></span><br><span class="line">package Product &lt;&lt;Rectangle&gt;&gt; &#123;</span><br><span class="line">    interface IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Phone implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Laptop implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">    class Earphone implements IProduct &#123;</span><br><span class="line">        + void desc()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">package Factory &lt;&lt;Rectangle&gt;&gt; &#123;</span><br><span class="line">    interface IFactory &#123;</span><br><span class="line">        + IProduct createProduct()</span><br><span class="line">    &#125;</span><br><span class="line">    class PhoneFactory implements IFactory &#123;</span><br><span class="line">        + IProduct createProduct()</span><br><span class="line">    &#125;</span><br><span class="line">    class LaptopFactory implements IFactory &#123;</span><br><span class="line">        + IProduct createProduct()</span><br><span class="line">    &#125;</span><br><span class="line">    class EarphoneFactory implements IFactory &#123;</span><br><span class="line">        + IProduct createProduct()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class FactoryMethodMain &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PhoneFactory ..&gt; Phone : create</span><br><span class="line">LaptopFactory ..&gt; Laptop : create</span><br><span class="line">EarphoneFactory ..&gt; Earphone : create</span><br><span class="line"></span><br><span class="line">FactoryMethodMain ..&gt; Factory : use</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-代码示例"><a href="#2-2-代码示例" class="headerlink" title="2.2. 代码示例"></a>2.2. 代码示例</h2><p>产品接口、及具体实现后的产品类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 描述产品内容</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a phone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Laptop</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a laptop.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Earphone</span> <span class="keyword">implements</span> <span class="title">IProduct</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">desc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a earphone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>抽象工厂接口、及其具体工厂：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建产品</span></span><br><span class="line">    <span class="function">IProduct <span class="title">createProduct</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 手机工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IProduct <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Phone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 笔记本工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LaptopFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IProduct <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Laptop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 耳机工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EarphoneFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IProduct <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Earphone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>工厂方法模式的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryMethodMain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IProduct phone = <span class="keyword">new</span> PhoneFactory().createProduct();</span><br><span class="line">        phone.desc();</span><br><span class="line"></span><br><span class="line">        IProduct laptop = <span class="keyword">new</span> LaptopFactory().createProduct();</span><br><span class="line">        laptop.desc();</span><br><span class="line"></span><br><span class="line">        IProduct earphone = <span class="keyword">new</span> EarphoneFactory().createProduct();</span><br><span class="line">        earphone.desc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I am a phone.</span><br><span class="line">I am a laptop.</span><br><span class="line">I am a earphone.</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-在源码中的应用"><a href="#3-在源码中的应用" class="headerlink" title="3. 在源码中的应用"></a>3. 在源码中的应用</h1><h2 id="3-1-JDK源码-java-util-Calendar（简单工厂模式）"><a href="#3-1-JDK源码-java-util-Calendar（简单工厂模式）" class="headerlink" title="3.1. JDK源码-java.util.Calendar（简单工厂模式）"></a>3.1. JDK源码-java.util.Calendar（简单工厂模式）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java.util.Calendar</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Calendar</span> <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">Cloneable</span>, <span class="title">Comparable</span>&lt;<span class="title">Calendar</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Calendar <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> createCalendar(TimeZone.getDefault(), Locale.getDefault(Locale.Category.FORMAT));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Calendar <span class="title">createCalendar</span><span class="params">(TimeZone zone, Locale aLocale)</span> </span>&#123;</span><br><span class="line">        CalendarProvider provider = LocaleProviderAdapter.getAdapter(CalendarProvider.class, aLocale).getCalendarProvider();</span><br><span class="line">        <span class="keyword">if</span> (provider != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> provider.getInstance(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalArgumentException iae) &#123;</span><br><span class="line">                <span class="comment">// fall back to the default instantiation</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Calendar cal = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (aLocale.hasExtensions()) &#123;</span><br><span class="line">            String caltype = aLocale.getUnicodeLocaleType(<span class="string">&quot;ca&quot;</span>);</span><br><span class="line">            <span class="comment">// 根据不同的 caltype，生成 Calendar 不同的子类实例</span></span><br><span class="line">            <span class="keyword">if</span> (caltype != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">switch</span> (caltype) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;buddhist&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> BuddhistCalendar(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;japanese&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> JapaneseImperialCalendar(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;gregory&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> GregorianCalendar(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cal == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 根据判断条件，来决定生成 Calendar 不同的子类实例</span></span><br><span class="line">            <span class="keyword">if</span> (aLocale.getLanguage() == <span class="string">&quot;th&quot;</span> &amp;&amp; aLocale.getCountry() == <span class="string">&quot;TH&quot;</span>) &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> BuddhistCalendar(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (aLocale.getVariant() == <span class="string">&quot;JP&quot;</span> &amp;&amp; aLocale.getLanguage() == <span class="string">&quot;ja&quot;</span> &amp;&amp; aLocale.getCountry() == <span class="string">&quot;JP&quot;</span>) &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> JapaneseImperialCalendar(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> GregorianCalendar(zone, aLocale);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cal;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Calendar 在 <code>createCalendar()</code> 静态方法中根据判断条件返回不同 Calendar 的子类实例，涉及具体子类有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x27;https://plantuml.com/class-diagram</span><br><span class="line"></span><br><span class="line">abstract class Calendar &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class JapaneseImperialCalendar extends Calendar &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class GregorianCalendar extends Calendar &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class BuddhistCalendar extends GregorianCalendar &#123; </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-JDK源码-java-text-NumberFormat（简单工厂模式）"><a href="#3-2-JDK源码-java-text-NumberFormat（简单工厂模式）" class="headerlink" title="3.2. JDK源码-java.text.NumberFormat（简单工厂模式）"></a>3.2. JDK源码-java.text.NumberFormat（简单工厂模式）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java.text.NumberFormat</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">NumberFormat</span> <span class="keyword">extends</span> <span class="title">Format</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constants used by factory methods to specify a style of format.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUMBERSTYLE = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CURRENCYSTYLE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PERCENTSTYLE = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SCIENTIFICSTYLE = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INTEGERSTYLE = <span class="number">4</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> NumberFormat <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getInstance(Locale.getDefault(Locale.Category.FORMAT), NUMBERSTYLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> NumberFormat <span class="title">getInstance</span><span class="params">(Locale desiredLocale, <span class="keyword">int</span> choice)</span> </span>&#123;</span><br><span class="line">        LocaleProviderAdapter adapter;</span><br><span class="line">        adapter = LocaleProviderAdapter.getAdapter(NumberFormatProvider.class, desiredLocale);</span><br><span class="line">        NumberFormat numberFormat = getInstance(adapter, desiredLocale, choice);</span><br><span class="line">        <span class="keyword">if</span> (numberFormat == <span class="keyword">null</span>) &#123;</span><br><span class="line">            numberFormat = getInstance(LocaleProviderAdapter.forJRE(), desiredLocale, choice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numberFormat;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据 choice，获取不同用途的 NumberFormat 实例</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> NumberFormat <span class="title">getInstance</span><span class="params">(LocaleProviderAdapter adapter, Locale locale, <span class="keyword">int</span> choice)</span> </span>&#123;</span><br><span class="line">        NumberFormatProvider provider = adapter.getNumberFormatProvider();</span><br><span class="line">        NumberFormat numberFormat = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">            <span class="keyword">case</span> NUMBERSTYLE:</span><br><span class="line">                numberFormat = provider.getNumberInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> PERCENTSTYLE:</span><br><span class="line">                numberFormat = provider.getPercentInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CURRENCYSTYLE:</span><br><span class="line">                numberFormat = provider.getCurrencyInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> INTEGERSTYLE:</span><br><span class="line">                numberFormat = provider.getIntegerInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numberFormat;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>NumberFormat 的 <code>getInstance()</code> 静态方法根据不同的 locale 参数来决定生成不同的 NumberFormat 子类实例。默认，都会进入 <code>sun.util.locale.provider.NumberFormatProviderImpl#getInstance</code> 来生成新的 java.text.DecimalFormat 实例，并按需求进行不同的格式化设置，如 货币格式、百分比格式等。</p>
+<h2 id="3-3-JDK源码-java-net-URLStreamHandlerFactory（工厂方法模式）"><a href="#3-3-JDK源码-java-net-URLStreamHandlerFactory（工厂方法模式）" class="headerlink" title="3.3. JDK源码-java.net.URLStreamHandlerFactory（工厂方法模式）"></a>3.3. JDK源码-java.net.URLStreamHandlerFactory（工厂方法模式）</h2><p>URLStreamHandlerFactory 接口（抽象工厂）为 URL 流协议处理程序定义一个工厂，是所有流协议处理程序的通用基类。流协议处理程序知道如何为特定协议类型建立连接，例如 http 或 https  。  </p>
+<p>URLStreamHandler 抽象类作为抽象产品，其子类（即具体产品）的实例不是由应用程序直接创建的，而是由实现 URLStreamHandlerFactory 工厂类接口的类（即具体工厂）去进行管理创建的。</p>
+<p>抽象工厂、及其子类（具体工厂）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">URLStreamHandlerFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建具有指定协议的新 URLStreamHandler 实例</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> protocol 协议（&quot;ftp&quot;、&quot;http&quot; 和 &quot;nntp&quot; 等）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">URLStreamHandler <span class="title">createURLStreamHandler</span><span class="params">(String protocol)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Launcher</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 具体工厂</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> <span class="keyword">implements</span> <span class="title">URLStreamHandlerFactory</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> String PREFIX = <span class="string">&quot;sun.net.www.protocol&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Factory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// var1: 为 protocol 协议，根据不同协议进行实例创建</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> URLStreamHandler <span class="title">createURLStreamHandler</span><span class="params">(String protocol)</span> </span>&#123;</span><br><span class="line">            String var2 = PREFIX + <span class="string">&quot;.&quot;</span> + protocol + <span class="string">&quot;.Handler&quot;</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Class var3 = Class.forName(var2);</span><br><span class="line">                <span class="keyword">return</span> (URLStreamHandler)var3.newInstance();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ReflectiveOperationException var4) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(<span class="string">&quot;could not load &quot;</span> + protocol + <span class="string">&quot;system protocol handler&quot;</span>, var4);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽象产品、及其子类（具体产品）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">URLStreamHandler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">protected</span> URLConnection <span class="title">openConnection</span><span class="params">(URL u)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品：如 sun.net.www.protocol.http.Handler</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">extends</span> <span class="title">sun</span>.<span class="title">net</span>.<span class="title">www</span>.<span class="title">protocol</span>.<span class="title">http</span>.<span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Handler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> URLConnection <span class="title">openConnection</span><span class="params">(URL var1)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        URLConnection var2 = <span class="keyword">super</span>.openConnection(var1);</span><br><span class="line">        URLUtil.setTimeouts(var2);</span><br><span class="line">        <span class="keyword">return</span> var2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，URLStreamHandler 抽象产品的具体子类产品如下图红框如下：</p>
+<img src="/2021/10/17/factory-method-pattern/URLStreamHandler_subclasses.png" class="" title="URLStreamHandler_subclasses">
+
+<h2 id="3-4-slf4j源码-org-slf4j-ILoggerFactory（工厂方法模式）"><a href="#3-4-slf4j源码-org-slf4j-ILoggerFactory（工厂方法模式）" class="headerlink" title="3.4. slf4j源码-org.slf4j.ILoggerFactory（工厂方法模式）"></a>3.4. slf4j源码-org.slf4j.ILoggerFactory（工厂方法模式）</h2><p>抽象工厂、及其具体工厂如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ILoggerFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 用于创建Logger对象</span></span><br><span class="line">    <span class="function">Logger <span class="title">getLogger</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂：NOPLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NOPLoggerFactory</span> <span class="keyword">implements</span> <span class="title">ILoggerFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NOPLoggerFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Logger <span class="title">getLogger</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> NOPLogger.NOP_LOGGER;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂: log4j的日志工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Log4jLoggerFactory</span> <span class="keyword">implements</span> <span class="title">ILoggerFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Logger <span class="title">getLogger</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        Logger slf4jLogger = (Logger)<span class="keyword">this</span>.loggerMap.get(name);</span><br><span class="line">        <span class="keyword">if</span> (slf4jLogger != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> slf4jLogger;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            org.apache.log4j.Logger log4jLogger;</span><br><span class="line">            <span class="keyword">if</span> (name.equalsIgnoreCase(<span class="string">&quot;ROOT&quot;</span>)) &#123;</span><br><span class="line">                log4jLogger = LogManager.getRootLogger();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                log4jLogger = LogManager.getLogger(name);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Logger newInstance = <span class="keyword">new</span> Log4jLoggerAdapter(log4jLogger);</span><br><span class="line">            Logger oldInstance = (Logger)<span class="keyword">this</span>.loggerMap.putIfAbsent(name, newInstance);</span><br><span class="line">            <span class="keyword">return</span> (Logger)(oldInstance == <span class="keyword">null</span> ? newInstance : oldInstance);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽象产品、及其具体产品如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品：NOPLogger，对应工厂 NOPLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NOPLogger</span> <span class="keyword">extends</span> <span class="title">MarkerIgnoringBase</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品: log4j的Logger子类，对应工厂 Log4jLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Log4jLoggerAdapter</span> <span class="keyword">extends</span> <span class="title">MarkerIgnoringBase</span> <span class="keyword">implements</span> <span class="title">LocationAwareLogger</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">MarkerIgnoringBase</span> <span class="keyword">extends</span> <span class="title">NamedLoggerBase</span> <span class="keyword">implements</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-JDK源码-javax-xml-bind-JAXBContext（工厂方法模式）"><a href="#3-5-JDK源码-javax-xml-bind-JAXBContext（工厂方法模式）" class="headerlink" title="3.5. JDK源码-javax.xml.bind.JAXBContext（工厂方法模式）"></a>3.5. JDK源码-javax.xml.bind.JAXBContext（工厂方法模式）</h2><p>抽象工厂、及其具体工厂如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">JAXBContext</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Marshaller <span class="title">createMarshaller</span><span class="params">()</span> <span class="keyword">throws</span> JAXBException</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JAXBContextImpl</span> <span class="keyword">extends</span> <span class="title">JAXBRIContext</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MarshallerImpl <span class="title">createMarshaller</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MarshallerImpl(<span class="keyword">this</span>, (AssociationMap)<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">JAXBRIContext</span> <span class="keyword">extends</span> <span class="title">JAXBContext</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽象产品、及其具体产品如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Marshaller</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品，对应工厂JAXBContextImpl.createMarshaller()</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">MarshallerImpl</span> <span class="keyword">extends</span> <span class="title">AbstractMarshallerImpl</span> <span class="keyword">implements</span> <span class="title">ValidationEventHandler</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractMarshallerImpl</span> <span class="keyword">implements</span> <span class="title">Marshaller</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>[1] <a target="_blank" rel="noopener" href="http://c.biancheng.net/view/8385.html">C语言中文网-简单工厂模式</a><br>[2] <a target="_blank" rel="noopener" href="http://c.biancheng.net/view/1348.html">C语言中文网-工厂模式</a><br>[3] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/jing99/p/12595494.html">设计模式之工厂模式(3种)详解及代码示例</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/17/singleton-pattern/" rel="prev" title="单例模式">
+      <i class="fa fa-chevron-left"></i> 单例模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/17/abstract-factory-pattern/" rel="next" title="抽象工厂模式">
+      抽象工厂模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E7%AE%80%E4%BB%8B"><span class="nav-text">0. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-text">1. 简单工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">1.1. 结构与实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">1.2. 代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-text">2. 工厂方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">2.1. 结构与实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">2.2. 代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%9C%A8%E6%BA%90%E7%A0%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">3. 在源码中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-JDK%E6%BA%90%E7%A0%81-java-util-Calendar%EF%BC%88%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">3.1. JDK源码-java.util.Calendar（简单工厂模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-JDK%E6%BA%90%E7%A0%81-java-text-NumberFormat%EF%BC%88%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">3.2. JDK源码-java.text.NumberFormat（简单工厂模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-JDK%E6%BA%90%E7%A0%81-java-net-URLStreamHandlerFactory%EF%BC%88%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">3.3. JDK源码-java.net.URLStreamHandlerFactory（工厂方法模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-slf4j%E6%BA%90%E7%A0%81-org-slf4j-ILoggerFactory%EF%BC%88%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">3.4. slf4j源码-org.slf4j.ILoggerFactory（工厂方法模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-JDK%E6%BA%90%E7%A0%81-javax-xml-bind-JAXBContext%EF%BC%88%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-text">3.5. JDK源码-javax.xml.bind.JAXBContext（工厂方法模式）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Roy"
+      src="/images/dinosaur.jpeg">
+  <p class="site-author-name" itemprop="name">Roy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
