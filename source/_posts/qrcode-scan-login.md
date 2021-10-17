@@ -1,7 +1,7 @@
 ---
 title: 三种方式实现扫码登录
 title-en: qrcode-scan-login
-date: 2021-10-17 17:40:29
+date: 2019-05-23 17:05:15
 tags: [功能实现]
 categories:
 - 小功能Demo实现系列
@@ -425,6 +425,6 @@ function checkByWebsocket() {
 
 # 参考资料
 <font size=2>
-[1] 实现扫码登陆的最简单方案与原理. https://mp.weixin.qq.com/s/UAZrnacesveJpEHf9VZL3Q.
+[1] 实现扫码登陆的最简单方案与原理. https://mp.weixin.qq.com/s/UAZrnacesveJpEHf9VZL3Q.<br>
 [2] java实现简单扫码登录功能(模仿微信网页版扫码). https://blog.csdn.net/gentlu/article/details/78592571.
 </font>

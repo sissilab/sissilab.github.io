@@ -1,7 +1,7 @@
 ---
 title: Zookeeper简介、三种搭建模式和配置文件详解
 title-en: one-zookeeper-deploy
-date: 2021-10-17 17:30:05
+date: 2019-03-25 21:52:22
 tags: [zookeeper]
 categories: 
 - zookeeper系列
@@ -16,8 +16,9 @@ table th:first-of-type {
 # 1. 简介
 Zookeeper缘起于非开源的Google的Chubby，雅虎模仿Chubby开发了ZooKeeper，实现了类似的分布式锁管理，并捐给了Apache，作为是Hadoop和Hbase的重要组件。   
 ZooKeeper是一种用于分布式应用程序的分布式开源协调服务，它主要是用来解决分布式应用中经常遇到的一些数据一致性问题。它的一致性、可靠性和容错性保证了其能够在大型分布式系统中稳定的表现，并不会因为某一个节点服务宕机而导致整个集群崩溃。它可提供的功能包括：配置维护、域名服务、分布式同步、组服务等。
-![ZooKeeper Service](one-zookeeper-deploy/zkservice.jpg)
 <!-- more -->
+![ZooKeeper Service](one-zookeeper-deploy/zkservice.jpg)
+
 Zookeeper集群中的角色主要有：
 * **Leader**：为zk集群的核心，负责集群内部的调度、投票的发起和决策和系统状态更新登。
 * **Follower**：接收Client请求、转发请求给Leader和参与投票等。
@@ -283,11 +284,12 @@ Netty是一个基于NIO的客户机/服务器通信框架，它简化了(通过�
 在版本3.4之前，ZooKeeper一直都是直接使用NIO，但是在版本3.4及以后的版本中，Netty作为NIO(替换)的选项得到了支持。NIO仍然是默认值，但是基于Netty的通信可以通过将环境变量“zookeeper.serverCnxnFactory”设置为“org.apache.zookeeper.server.NettyServerCnxnFactory”来代替NIO。您可以在客户端或服务器上设置此项，或者两者都设置。
 
 # 参考资料
+
 <font size=2>
-[1] Zookeeper Overview. http://zookeeper.apache.org/doc/r3.4.10/zookeeperOver.html.
-[2] ZooKeeper Administrator's Guide. http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration.
-[3] zookeeper调优(遇到就添加）. https://my.oschina.net/u/3049601/blog/1809785.
-[4] zookeeper日志各类日志简介. https://www.cnblogs.com/jxwch/p/6526271.html.
-[5] ZooKeeper: 简介, 配置及运维指南. https://www.cnblogs.com/neooelric/p/9230967.html.
+[1] Zookeeper Overview. http://zookeeper.apache.org/doc/r3.4.10/zookeeperOver.html.<br>
+[2] ZooKeeper Administrator's Guide. http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration.<br>
+[3] zookeeper调优(遇到就添加）. https://my.oschina.net/u/3049601/blog/1809785.<br>
+[4] zookeeper日志各类日志简介. https://www.cnblogs.com/jxwch/p/6526271.html.<br>
+[5] ZooKeeper: 简介, 配置及运维指南. https://www.cnblogs.com/neooelric/p/9230967.html.<br>
 [6] ZooKeeper学习第二期--ZooKeeper安装配置. https://www.cnblogs.com/sunddenly/p/4018459.html.
 </font>
