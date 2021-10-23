@@ -160,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/arch-Linux-software-recommendation/">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/04/29/spring/spring-transaction-use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/dinosaur.jpeg">
@@ -174,7 +174,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/17/arch-Linux-software-recommendation/" class="post-title-link" itemprop="url">Arch Linux 常用软件</a>
+            <a href="/2019/04/29/spring/spring-transaction-use/" class="post-title-link" itemprop="url">Spring事务用法详解</a>
         </h2>
 
         <div class="post-meta">
@@ -183,17 +183,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-17 23:33:00 / 修改时间：23:38:45" itemprop="dateCreated datePublished" datetime="2021-10-17T23:33:00+08:00">2021-10-17</time>
+              <time title="创建时间：2019-04-29 22:24:16" itemprop="dateCreated datePublished" datetime="2019-04-29T22:24:16+08:00">2019-04-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:48:53" itemprop="dateModified" datetime="2021-10-23T22:48:53+08:00">2021-10-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Arch-Linux/" itemprop="url" rel="index"><span itemprop="name">Arch Linux</span></a>
+                  <a href="/categories/Spring%E6%A1%86%E6%9E%B6%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">Spring框架系列</span></a>
                 </span>
             </span>
 
@@ -208,49 +214,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-<ul>
-<li><p><strong>输入法</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.配置环境变量</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.pam_environment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.重启，生效</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5.添加输入法</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>KDE 应用</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kdeconnect</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>字体</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装字体</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ttf-dejavu wqy-microhei</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>浏览器</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 谷歌浏览器 chrome</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S google-chrome</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 微软 Edge 浏览器</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S microsoft-edge-dev-bin</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 谷歌开元浏览器 chromium</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S chromium</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 火狐浏览器 firefox</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S firefox</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>系统工具</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S dialog</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh 工具</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S openssh</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> latte dock</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S latte-dock</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统绝大部分硬件信息，包括较难得到的内存频率，主板 BIOS 等等。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -Ss dmidecode</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux下电源管理，可为笔记本节省电量</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TLP Wiki: https://wiki.archlinux.org/title/TLP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S tlp</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">enable</span> --now tlp</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 主题配合 Kvantum Manager 可以达到更好的效果</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kvantum-qt5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 软件降级</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S downgrade</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>墙外的世界</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ssr</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yay -S electron-ssr</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> proxychains</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S proxychains</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo vim /etc/proxychains.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑 /etc/proxychains.conf，将最后一行改成:</span> </span><br><span class="line">socks5 127.0.0.1 1080</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>聊天沟通软件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> telegram</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S telegram-desktop</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 团队协作工具 slack</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S slack-desktop</span> </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>笔记软件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Obsidian 笔记软件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S obsidian</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Joplin 笔记软件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cli</span></span><br><span class="line">yay -S joplin</span><br><span class="line"><span class="meta">#</span><span class="bash"> desktop</span></span><br><span class="line">yay -S joplin-desktop</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Trilium 开源的 electron 笔记软件</span></span><br><span class="line">yay -S trilium-bin</span><br><span class="line">yay -S trilium-server-bin</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>解压缩软件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ark 属于 kde-utilities 软件包组</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ark</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> unar, lsar</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> audo pacman -S unarchiver</span></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>图片查看软件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> gwenview 属于 kde-graphics 软件组</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S gwenview</span> </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 火焰截图</span></span><br><span class="line">sudo pacman -S flameshot</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>视频播放</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 跨平台视频资源播放器，整合全网视频资源</span></span><br><span class="line">yay -S zy-player</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><strong>办公软件</strong><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> libreoffice 稳定版</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S libreoffice-still</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>oh-my-zsh: <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eeb3104384a1">https://www.jianshu.com/p/eeb3104384a1</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 小部件</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Netspeed Widget：依赖 ksysguard，不然不显示</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ksysguard</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 支持识别 ntfs 格式的硬盘</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ntfs-3g</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>开发工具</strong><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vscode</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> yay -S visual-studio-code-bin</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nodejs npm</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S nodejs npm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> prefix <span class="string">&quot;/home/wxr/.nodejs&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> cache <span class="string">&quot;/home/wxr/.nodejs/cache&quot;</span></span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ol>
-<li>文件夹单击打开改成双击打开？<blockquote>
-<p>系统设置 / 工作区行为 / 常规行为：在 “点击文件或文件夹时” 选中 “选中它们（双击打开文件/文件夹）”。</p>
-</blockquote>
-</li>
-</ol>
-
+          <h1 id="1-数据库事务基础知识"><a href="#1-数据库事务基础知识" class="headerlink" title="1. 数据库事务基础知识"></a>1. 数据库事务基础知识</h1><p>在使用Spring开发过程中，我们常会使用到Spring事务管理，它提供了灵活方便的事务管理功能，但这些功能都是基于底层数据库本身的事务处理机制功工作的。因此欲深入了解Spring事务的管理和配置，有必要先了解下数据库基本的事务知识。</p>
+<h2 id="1-1-事务特性（ACID）"><a href="#1-1-事务特性（ACID）" class="headerlink" title="1.1. 事务特性（ACID）"></a>1.1. 事务特性（ACID）</h2><p>Spring事务中存在四种特性：原子性、一致性、隔离性和持久性。在这些事务特性中，数据“一致性”为最终目标，其他特性都是为实现这个目标方法和手段。数据库一般采用重执行日志保证原子性、一致性和持久性，采用数据库锁机制保证事务的隔离性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/29/spring/spring-transaction-use/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -269,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/dual-system-installation-guide-of-arch-linux/">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern/design-pattern-overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/dinosaur.jpeg">
@@ -283,7 +256,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/17/dual-system-installation-guide-of-arch-linux/" class="post-title-link" itemprop="url">Arch Linux 双系统安装</a>
+            <a href="/2021/10/17/design-pattern/design-pattern-overview/" class="post-title-link" itemprop="url">设计模式概览</a>
         </h2>
 
         <div class="post-meta">
@@ -292,10 +265,435 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-17 23:27:07 / 修改时间：23:35:37" itemprop="dateCreated datePublished" datetime="2021-10-17T23:27:07+08:00">2021-10-17</time>
+              <time title="创建时间：2021-10-17 22:58:01" itemprop="dateCreated datePublished" datetime="2021-10-17T22:58:01+08:00">2021-10-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:48:34" itemprop="dateModified" datetime="2021-10-23T22:48:34+08:00">2021-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">23种设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>设计模式一般共分为三大类：</p>
+<p><strong>1. 创建型模式：</strong><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/singleton-pattern">1.1.单例模式</a><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/factory-method-pattern">1.2.工厂方法模式</a><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/abstract-factory-pattern">1.3.抽象工厂模式</a><br>    - <a href="#">1.4.建造者模式</a><br>    - <a href="#">1.5.原型模式</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/design-pattern/design-pattern-overview/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/03/25/zookeeper/one-zookeeper-deploy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/25/zookeeper/one-zookeeper-deploy/" class="post-title-link" itemprop="url">Zookeeper简介、三种搭建模式和配置文件详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-25 21:52:22" itemprop="dateCreated datePublished" datetime="2019-03-25T21:52:22+08:00">2019-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:48:14" itemprop="dateModified" datetime="2021-10-23T22:48:14+08:00">2021-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">zookeeper系列</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <style>
+table th:first-of-type {
+    width: 100px;
+}
+</style>
+
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>Zookeeper缘起于非开源的Google的Chubby，雅虎模仿Chubby开发了ZooKeeper，实现了类似的分布式锁管理，并捐给了Apache，作为是Hadoop和Hbase的重要组件。<br>ZooKeeper是一种用于分布式应用程序的分布式开源协调服务，它主要是用来解决分布式应用中经常遇到的一些数据一致性问题。它的一致性、可靠性和容错性保证了其能够在大型分布式系统中稳定的表现，并不会因为某一个节点服务宕机而导致整个集群崩溃。它可提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/25/zookeeper/one-zookeeper-deploy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern/abstract-factory-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/design-pattern/abstract-factory-pattern/" class="post-title-link" itemprop="url">抽象工厂模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 23:14:26" itemprop="dateCreated datePublished" datetime="2021-10-17T23:14:26+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:47:45" itemprop="dateModified" datetime="2021-10-23T22:47:45+08:00">2021-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p><strong>抽象工厂模式</strong>（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。</p>
+<p>抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，<u>工厂方法模式针对的是一个产品等级结构</u>，而<u>抽象工厂模式则需要面对多个产品等级结构</u>。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/design-pattern/abstract-factory-pattern/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern/factory-method-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/design-pattern/factory-method-pattern/" class="post-title-link" itemprop="url">工厂方法模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 23:12:28" itemprop="dateCreated datePublished" datetime="2021-10-17T23:12:28+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:47:45" itemprop="dateModified" datetime="2021-10-23T22:47:45+08:00">2021-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。</p>
+<p>工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/design-pattern/factory-method-pattern/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern/singleton-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/design-pattern/singleton-pattern/" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 22:59:50" itemprop="dateCreated datePublished" datetime="2021-10-17T22:59:50+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:47:45" itemprop="dateModified" datetime="2021-10-23T22:47:45+08:00">2021-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<p><strong>核心步骤：</strong></p>
+<ol>
+<li>构造方法私有化；</li>
+<li>在本类中创建本类的实例；</li>
+<li>在本类中提供给外部获取实例的方式。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/design-pattern/singleton-pattern/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/linux/dual-system-installation-guide-of-arch-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/dinosaur.jpeg">
+      <meta itemprop="name" content="Roy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="羊驼之野望">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/17/linux/dual-system-installation-guide-of-arch-linux/" class="post-title-link" itemprop="url">Arch Linux 双系统安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 23:27:07" itemprop="dateCreated datePublished" datetime="2021-10-17T23:27:07+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 22:46:26" itemprop="dateModified" datetime="2021-10-23T22:46:26+08:00">2021-10-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -339,7 +737,7 @@
 </tbody></table>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/10/17/dual-system-installation-guide-of-arch-linux/#more" rel="contents">
+              <a class="btn" href="/2021/10/17/linux/dual-system-installation-guide-of-arch-linux/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -363,7 +761,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/design-pattern-overview/">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/07/04/java/collections/collection-hashmap-sourcecode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/dinosaur.jpeg">
@@ -377,396 +775,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/17/design-pattern-overview/" class="post-title-link" itemprop="url">设计模式概览</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-17 22:58:01 / 修改时间：23:24:57" itemprop="dateCreated datePublished" datetime="2021-10-17T22:58:01+08:00">2021-10-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">23种设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>设计模式一般共分为三大类：</p>
-<p><strong>1. 创建型模式：</strong><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/singleton-pattern">1.1.单例模式</a><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/factory-method-pattern">1.2.工厂方法模式</a><br>    - <a target="_self" href="https://sissilab.top/2021/10/17/abstract-factory-pattern">1.3.抽象工厂模式</a><br>    - <a href="#">1.4.建造者模式</a><br>    - <a href="#">1.5.原型模式</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/17/design-pattern-overview/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/factory-method-pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/17/factory-method-pattern/" class="post-title-link" itemprop="url">工厂方法模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-17 23:12:28 / 修改时间：23:17:41" itemprop="dateCreated datePublished" datetime="2021-10-17T23:12:28+08:00">2021-10-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。</p>
-<p>工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/17/factory-method-pattern/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/abstract-factory-pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/17/abstract-factory-pattern/" class="post-title-link" itemprop="url">抽象工厂模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-17 23:14:26 / 修改时间：23:17:33" itemprop="dateCreated datePublished" datetime="2021-10-17T23:14:26+08:00">2021-10-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p><strong>抽象工厂模式</strong>（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。</p>
-<p>抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，<u>工厂方法模式针对的是一个产品等级结构</u>，而<u>抽象工厂模式则需要面对多个产品等级结构</u>。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/17/abstract-factory-pattern/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2021/10/17/singleton-pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/17/singleton-pattern/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-17 22:59:50 / 修改时间：23:15:13" itemprop="dateCreated datePublished" datetime="2021-10-17T22:59:50+08:00">2021-10-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证个类仅有一个实例，并提供一个访问它的全局访问点。</p>
-<p><strong>核心步骤：</strong></p>
-<ol>
-<li>构造方法私有化；</li>
-<li>在本类中创建本类的实例；</li>
-<li>在本类中提供给外部获取实例的方式。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/17/singleton-pattern/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/04/02/collection-arraylist-sourcecode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/02/collection-arraylist-sourcecode/" class="post-title-link" itemprop="url">java.util集合（collection）之ArrayList源码分析（jdk1.8）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-02 20:19:37" itemprop="dateCreated datePublished" datetime="2019-04-02T20:19:37+08:00">2019-04-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:58:54" itemprop="dateModified" datetime="2021-10-17T20:58:54+08:00">2021-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E9%9B%86%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%88java-util%E5%8C%85%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">java集合系列（java.util包）</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>ArrayList是<font color="green">基于数组</font>实现，是一个可变大小的<font color="green">动态数组</font>。<br>ArrayList是<font color="green">线程不安全</font>的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：<br>① 通过Collections.synchronizedList(List<T> list)方法返回一个线程安全的ArrayList类；<br>② 使用java.util.concurrent.CopyOnWriteArrayList；<br>③ 使用synchronized关键字。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/02/collection-arraylist-sourcecode/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/07/04/collection-hashmap-sourcecode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/dinosaur.jpeg">
-      <meta itemprop="name" content="Roy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="羊驼之野望">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/04/collection-hashmap-sourcecode/" class="post-title-link" itemprop="url">java.util集合（collection）之HashMap源码分析（jdk1.8）</a>
+            <a href="/2019/07/04/java/collections/collection-hashmap-sourcecode/" class="post-title-link" itemprop="url">Java 集合之 HashMap 源码分析（jdk1.8）</a>
         </h2>
 
         <div class="post-meta">
@@ -783,7 +792,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:57:21" itemprop="dateModified" datetime="2021-10-17T20:57:21+08:00">2021-10-17</time>
+                <time title="修改时间：2021-10-23 22:45:35" itemprop="dateModified" datetime="2021-10-23T22:45:35+08:00">2021-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -791,7 +800,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E9%9B%86%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%88java-util%E5%8C%85%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">java集合系列（java.util包）</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Java 集合框架</span></a>
                 </span>
             </span>
 
@@ -824,7 +837,7 @@
 <li>HashMap是<font color="green">线程不安全</font>的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/07/04/collection-hashmap-sourcecode/#more" rel="contents">
+              <a class="btn" href="/2019/07/04/java/collections/collection-hashmap-sourcecode/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -848,7 +861,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/04/18/collection-linkedlist-sourcecode/">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/04/18/java/collections/LinkedList-sourcecode-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/dinosaur.jpeg">
@@ -862,7 +875,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/18/collection-linkedlist-sourcecode/" class="post-title-link" itemprop="url">java.util集合（collection）之LinkedList源码分析（jdk1.8）</a>
+            <a href="/2019/04/18/java/collections/LinkedList-sourcecode-analysis/" class="post-title-link" itemprop="url">Java 集合之 LinkedList 源码分析（jdk1.8）</a>
         </h2>
 
         <div class="post-meta">
@@ -879,7 +892,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:55:58" itemprop="dateModified" datetime="2021-10-17T20:55:58+08:00">2021-10-17</time>
+                <time title="修改时间：2021-10-23 22:43:41" itemprop="dateModified" datetime="2021-10-23T22:43:41+08:00">2021-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -887,7 +900,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E9%9B%86%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%88java-util%E5%8C%85%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">java集合系列（java.util包）</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Java 集合框架</span></a>
                 </span>
             </span>
 
@@ -905,7 +922,7 @@
           <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>LinkedList是基于<font color="green">双向链表</font>实现。它是一种可以在任意位置进行高效地插入和移除操作的有序序列。<br>LinkedList是<font color="green">线程不安全</font>的，若需在多线程环境使用，主要方法有：<br>① 使用List list = Collections.synchronizedList(new LinkedList(…))；<br>② 使用ConcurrentLinkedQueue；<br>③ 使用synchronized关键字。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/18/collection-linkedlist-sourcecode/#more" rel="contents">
+              <a class="btn" href="/2019/04/18/java/collections/LinkedList-sourcecode-analysis/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -929,7 +946,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/03/28/collection-frame-diagram/">
+    <link itemprop="mainEntityOfPage" href="https://sissilab.github.io/2019/04/02/java/collections/ArrayList-sourcecode-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/dinosaur.jpeg">
@@ -943,7 +960,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/28/collection-frame-diagram/" class="post-title-link" itemprop="url">Java集合框架总述（java.util包）</a>
+            <a href="/2019/04/02/java/collections/ArrayList-sourcecode-analysis/" class="post-title-link" itemprop="url">Java 集合之 ArrayList 源码分析（jdk1.8）</a>
         </h2>
 
         <div class="post-meta">
@@ -953,14 +970,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-28 16:27:04" itemprop="dateCreated datePublished" datetime="2019-03-28T16:27:04+08:00">2019-03-28</time>
+              <time title="创建时间：2019-04-02 20:19:37" itemprop="dateCreated datePublished" datetime="2019-04-02T20:19:37+08:00">2019-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 20:54:49" itemprop="dateModified" datetime="2021-10-17T20:54:49+08:00">2021-10-17</time>
+                <time title="修改时间：2021-10-23 22:43:38" itemprop="dateModified" datetime="2021-10-23T22:43:38+08:00">2021-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -968,7 +985,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E9%9B%86%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%88java-util%E5%8C%85%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">java集合系列（java.util包）</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Java 集合框架</span></a>
                 </span>
             </span>
 
@@ -983,12 +1004,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-java-util中collection集合"><a href="#1-java-util中collection集合" class="headerlink" title="1. java.util中collection集合"></a>1. java.util中collection集合</h1><p>java.util下的集合框架主要基于Collection接口，它是最基本的集合接口，定义了集合的基本操作。Collection接口继承了Iterable接口，说明Collection的子类都可以实现遍历操作，通过Iterable接口中的 Iterator&lt;T&gt; iterator() 方法可返回一个Iterator（迭代器）进行遍历，通常用法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator it = collection.iterator(); <span class="comment">// 获取集合的迭代器</span></span><br><span class="line"><span class="keyword">while</span>(it.hasNext()) &#123; <span class="comment">// 集合中是否还有元素</span></span><br><span class="line">    Object obj = it.next(); <span class="comment">// 返回下一个元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此外，java 8新增了forEach方法，也可实现遍历操作。</p>
+          <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>ArrayList是<font color="green">基于数组</font>实现，是一个可变大小的<font color="green">动态数组</font>。<br>ArrayList是<font color="green">线程不安全</font>的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：<br>① 通过Collections.synchronizedList(List<T> list)方法返回一个线程安全的ArrayList类；<br>② 使用java.util.concurrent.CopyOnWriteArrayList；<br>③ 使用synchronized关键字。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/28/collection-frame-diagram/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/java/collections/ArrayList-sourcecode-analysis/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1086,13 +1105,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
