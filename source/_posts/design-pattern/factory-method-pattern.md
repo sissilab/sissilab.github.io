@@ -1,10 +1,11 @@
 ---
 title: 工厂方法模式
-title-en: Factory method pattern
+title-en: factory-method-pattern
 date: 2021-10-17 23:12:28
 tags: [设计模式]
 categories:
-- 设计模式
+- 23种设计模式
+- 创建型模式
 ---
 
 # 0. 简介
@@ -38,9 +39,7 @@ categories:
 
 其类图如下所示：
 
-```plantuml
-'https://plantuml.com/class-diagram
-
+{% plantuml %}
 package Product <<Rectangle>> {
     interface IProduct {
         + void desc()
@@ -66,7 +65,7 @@ class SimpleFactoryMain {
 
 SimpleFactory ..> Product : create by PRODUCT_TYPE
 SimpleFactoryMain ..> SimpleFactory : use
-```
+{% endplantuml %}
 
 ## 1.2. 代码示例
 
@@ -190,9 +189,7 @@ I am a earphone.
 
 其类图如下所示：
 
-```plantuml
-'https://plantuml.com/class-diagram
-
+{% plantuml %}
 package Product <<Rectangle>> {
     interface IProduct {
         + void desc()
@@ -231,7 +228,7 @@ LaptopFactory ..> Laptop : create
 EarphoneFactory ..> Earphone : create
 
 FactoryMethodMain ..> Factory : use
-```
+{% endplantuml %}
 
 ## 2.2. 代码示例
 
@@ -380,9 +377,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
 
 Calendar 在 `createCalendar()` 静态方法中根据判断条件返回不同 Calendar 的子类实例，涉及具体子类有：
 
-```plantuml
-'https://plantuml.com/class-diagram
-
+{% plantuml %}
 abstract class Calendar {
 }
 
@@ -394,8 +389,7 @@ class GregorianCalendar extends Calendar {
 
 class BuddhistCalendar extends GregorianCalendar { 
 }
-
-```
+{% endplantuml %}
 
 ## 3.2. JDK源码-java.text.NumberFormat（简单工厂模式）
 

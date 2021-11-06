@@ -1,10 +1,11 @@
 ---
 title: 抽象工厂模式
-title-en: Abstract factory pattern
+title-en: abstract-factory-pattern
 date: 2021-10-17 23:14:26
 tags: [设计模式]
 categories:
-- 设计模式
+- 23种设计模式
+- 创建型模式
 ---
 
 # 0. 简介
@@ -34,9 +35,7 @@ categories:
 
 其类图如下所示：
 
-```plantuml
-'https://plantuml.com/class-diagram
-
+{% plantuml %}
 package Product <<Rectangle>> {
     interface IProduct {
         + void desc()
@@ -101,7 +100,7 @@ class AbstractFactoryMain {
 HuaweiFactory ..> Huawei : create
 AppleFactory ..> Apple : create
 AbstractFactoryMain ..> Factory : use
-```
+{% endplantuml %}
 
 # 2. 代码示例
 

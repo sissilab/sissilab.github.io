@@ -1,6 +1,6 @@
 ---
 title: 设计模式概览
-title-en: Design pattern overview
+title-en: design-pattern-overview
 date: 2021-10-17 22:58:01
 tags: [设计模式]
 categories:

@@ -1,14 +1,30 @@
 ---
-title: 单例模式
-title-en: Singleton pattern
+title: 设计模式 -- 单例模式
+title-en: singleton-pattern
 date: 2021-10-17 22:59:50
 tags: [设计模式]
 categories:
-- 设计模式
+- 23种设计模式
+- 创建型设计模式
 ---
 
+<style>
+    table th:nth-of-type(1) {
+        width: 20%;
+    }
+    table th:nth-of-type(2) {
+        width: 40%;
+    }
+    table th:nth-of-type(3) {
+        width: 30%;
+    }
+    table th:nth-of-type(4) {
+        width: 10%;
+    }
+</style>
+
 # 0. 简介
-单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证个类仅有一个实例，并提供一个访问它的全局访问点。
+单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证这个类仅有一个实例，并提供一个访问它的全局访问点。
 
 **核心步骤：**
 1. 构造方法私有化；
@@ -25,7 +41,7 @@ categories:
 2. 避免对共享资源的多重占用。
 
 **缺点：**
-1. 扩展问题，单例模式一般没有接口和抽象层，；
+1. 扩展问题，单例模式一般没有接口和抽象层；
 2. 不适用于变化的对象，若同一类型对象要在不同用例场景发生变化，易引起数据错误；
 3. 单例模式的功能一般写在一个类中，若功能设计不合理，易违背单一职责原则。
 
@@ -37,7 +53,7 @@ categories:
 **几种单例模式的对比：**
 
 | 类型                | 优点                                                                   | 缺点                                                     | 可用性 |
-| --------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
+| :---------------------------: | :----------------------------------------------------------------------: | :--------------------------------------------------------: | :------: |
 | 懒汉式-线程不安全           | 具有懒加载特性                                                         | 不支持多线程，只支持单线程环境                           | 不可用 |
 | 懒汉式-synchronized方法     | 解决了“懒汉式-线程不安全”的线程不安全问题                              | 效率低，每个线程想获取类实例时，都需要进行同步           | 不推荐 |
 | 懒汉式-延迟加锁             | 意图解决“懒汉式-synchronized方法”低效问题                              | 未能完全达到线程同步效果                                 | 不可用 |
@@ -51,29 +67,29 @@ categories:
 懒汉式（懒加载）指单例实例在第一次被使用时才创建和初始化，延迟加载。
 
 ## 1.1. 懒汉式 - 线程不安全（不可用）
-此种懒汉式单例类在单线程下正常，但在多线程在就会破坏单例，产生不能实例。
+此种懒汉式单例类在单线程下正常，但在多线程在就会破坏单例，产生不同实例。
 
 ```java
 public class LazySingleton {  
   
     private static LazySingleton instance = null;
   
- 	// 私有构造函数，限制用户自己创建实例
- 	private LazySingleton() { 
+    // 私有构造函数，限制用户自己创建实例
+    private LazySingleton() { 
     }  
   
     public static LazySingleton getInstance() {
         if (null == instance) {
             try {
                 // 模拟多线程下获取单例非都同一实例情况，增加模拟复现概率
- 				TimeUnit.MILLISECONDS.sleep(200);
- 			} catch (InterruptedException e) {
+                 TimeUnit.MILLISECONDS.sleep(200);
+             } catch (InterruptedException e) {
                 e.printStackTrace();
- 			}
+             }
             instance = new LazySingleton();
- 		}
+         }
         return instance;
- 	}
+     }
 }
 ```
 
@@ -92,11 +108,11 @@ System.out.println(lazySingleton1 == lazySingleton2); // true
 // 多线程：lazySingleton1 和 lazySingleton2 有几率非同一个实例
 new Thread(() -> {
     LazySingleton lazySingleton1 = LazySingleton.getInstance();
- System.out.println(lazySingleton1);
+    System.out.println(lazySingleton1);
 }).start(); // com.xixi.design_pattern.singleton.LazySingleton@1c015d7a
 new Thread(() -> {
     LazySingleton lazySingleton2 = LazySingleton.getInstance();
- System.out.println(lazySingleton2);
+    System.out.println(lazySingleton2);
 }).start(); // com.xixi.design_pattern.singleton.LazySingleton@75461a67
 ```
 
@@ -108,22 +124,22 @@ public class LazySingleton {
   
     private static LazySingleton instance = null;
   
- 	// 私有构造函数，限制用户自己创建实例
- 	private LazySingleton() { 
+    // 私有构造函数，限制用户自己创建实例
+    private LazySingleton() { 
     }  
   
     public synchronized static LazySingleton getInstance() {
         if (null == instance) {
             try {
                 // 模拟多线程下获取单例非都同一实例情况，增加模拟复现概率
- 				TimeUnit.MILLISECONDS.sleep(200);
- 			} catch (InterruptedException e) {
+                TimeUnit.MILLISECONDS.sleep(200);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
- 			}
+            }
             instance = new LazySingleton();
- 		}
+        }
         return instance;
- 	}
+    }
 }
 ```
 
@@ -138,20 +154,20 @@ public class LazySingleton {
   
     private static LazySingleton instance = null;
   
- 	// 私有构造函数，限制用户自己创建实例
- 	private LazySingleton() { 
+    // 私有构造函数，限制用户自己创建实例
+    private LazySingleton() { 
     }  
   
-    public synchronized static LazySingleton getInstance() {
+    public static LazySingleton getInstance() {
         if (null == instance) {
-			// T2：由于T1还未实例化，此时 instance 为空，还会进来
-			synchronized (LazySingleton.class) {
-				// T1：刚进临界区，还没完成实例化
-            	instance = new LazySingleton();
-			}
- 		}
+            // T2：由于T1还未实例化，此时 instance 为空，还会进来
+            synchronized (LazySingleton.class) {
+                // T1：刚进临界区，还没完成实例化
+                instance = new LazySingleton();
+            }
+         }
         return instance;
- 	}
+     }
 }
 ```
 
@@ -166,24 +182,24 @@ T1：进入临界区，准备 new --> T1：开辟空间 --> T1：引用赋值（
 ```java
 public class LazySingleton {  
   
-	private static LazySingleton instance = null;
+    private static LazySingleton instance = null;
   
- 	// 私有构造函数，限制用户自己创建实例
- 	private LazySingleton() { 
+     // 私有构造函数，限制用户自己创建实例
+     private LazySingleton() { 
     }  
   
-    public synchronized static LazySingleton getInstance() {
+    public static LazySingleton getInstance() {
         if (null == instance) { // T2：直接返回，而实际 T1 还没完成初始化，返回可导致空指针  
- 			synchronized (LazySingleton.class) {  
-        		if (null == instance) {  
-            		instance = new LazySingleton();
- 					// 字节码层：1、开辟空间 2、初始化 3、引用赋值  
- 					// ==> 实际 JIT / CPU，可能发生指定重排：1、开辟空间 3、引用赋值（T1） 2、初始化  
- 				}  
-    		}  
-		}
+             synchronized (LazySingleton.class) {  
+                if (null == instance) {  
+                    instance = new LazySingleton();
+                     // 字节码层：1、开辟空间 2、初始化 3、引用赋值  
+                     // ==> 实际 JIT / CPU，可能发生指定重排：1、开辟空间 3、引用赋值（T1） 2、初始化  
+                 }  
+            }  
+        }
         return instance;
- 	}
+     }
 }
 ```
 
@@ -194,7 +210,7 @@ public class LazySingleton {
 public class Test {  
     public static void main(String[] args) {  
         Test test = new Test();  
- 	} 
+     } 
 }
 ```
 
@@ -288,7 +304,7 @@ SourceFile: "Test.java"
 
 具体过程如下图所示：
 ![new_bytecode.excalidraw](singleton-pattern/new_bytecode.excalidraw.png)
-其中，为什么需要 dup 指令来辅助栈顶元素，是因为下一步 invokespecial 需要执行默认构造函数，会从栈顶弹出引用。若无 dup 来复制栈顶，则会导致 invokespecial 后，栈顶为空，就会丢失刚创建的对象了。
+其中，为什么需要 dup 指令来复制栈顶元素，是因为下一步 invokespecial 需要执行默认构造函数，会从栈顶弹出引用。若无 dup 来复制栈顶，则会导致 invokespecial 后，栈顶为空，就会丢失刚创建的对象了。
 
 这些也就是 new 不是原子操作的解释，new 在 Java 代码层面虽然只是一句代码，但反映到字节码层面却是4句指令操作。由于指定重排的存在，会导致 new 内部的3个步骤发生重排，在多线程环境下，上面单例模式代即会存在问题。故而，给 instance 属性加上 volatile，以防止重排。
 
@@ -301,22 +317,22 @@ SourceFile: "Test.java"
 public class LazySingleton {  
   
     // volatile: 防止重排
-	private static volatile LazySingleton instance = null;
+    private static volatile LazySingleton instance = null;
   
- 	// 私有构造函数，限制用户自己创建实例
- 	private LazySingleton() { 
+    // 私有构造函数，限制用户自己创建实例
+    private LazySingleton() { 
     }  
   
-    public synchronized static LazySingleton getInstance() {
+    public static LazySingleton getInstance() {
         if (null == instance) {
- 			synchronized (LazySingleton.class) {  
-        		if (null == instance) {  
-            		instance = new LazySingleton();  
- 				}  
-    		}  
-		}
+             synchronized (LazySingleton.class) {  
+                if (null == instance) {  
+                    instance = new LazySingleton();  
+                 }  
+            }  
+        }
         return instance;
- 	}
+     }
 }
 ```
 
@@ -365,7 +381,7 @@ public class StaticInnerClassSingleton {
 ```
 
 ## 3.1. 反射攻击静态内部类
-当通过反射来获取类对象时，与通过静态方法 `getInstance()` 获取对象对比，可以发现非同意对象，从而破坏单例。
+当通过反射来获取类对象时，与通过静态方法 `getInstance()` 获取对象对比，可以发现非同一对象，从而破坏单例。
 
 针对该情况，可在私有构造函数中判断 instance  是否为空，若非空情况，则抛出异常，防止反射攻击。
 
@@ -583,7 +599,7 @@ private ObjectStreamClass(final Class<?> cl) {
 ```
 
 # 4. 枚举型
-枚举型可说是实现单例模式中最佳方式，它不仅可利用类加载机制保证线程安全，还能防止反序列化重建对象，同时能避免反射攻击。
+枚举型可说是实现单例模式中最佳方式，它不仅可<span style="color:green">利用类加载机制保证线程安全</span>，还能<span style="color:green">防止反序列化重建对象</span>，同时<span style="color:green">能避免反射攻击</span>。
 
 ```java
 public enum EnumSingleton {  
@@ -990,7 +1006,7 @@ protected <T> T doGetBean(final String name, final Class<T> requiredType, final 
 ```java
 @Override
 public Object getSingleton(String beanName) {
-	return getSingleton(beanName, true);
+    return getSingleton(beanName, true);
 }
 
 // 双重检查锁实现的单例模式
@@ -1112,7 +1128,7 @@ public class ReactiveAdapterRegistry {
 
 ```java
 public class ProxyFactoryBean extends ProxyCreatorSupport
-		implements FactoryBean<Object>, BeanClassLoaderAware, BeanFactoryAware {
+        implements FactoryBean<Object>, BeanClassLoaderAware, BeanFactoryAware {
     
     private Object singletonInstance;
 
