@@ -10,6 +10,7 @@
 override: false
 
 # Console reminder if new version released.
+# 控制台是否提醒新版本的更新
 reminder: false
 
 # Allow to cache content generation. Introduced in NexT v6.0.0.
@@ -17,6 +18,7 @@ cache:
   enable: true
 
 # Remove unnecessary files after hexo generate.
+# 是否在 hexo 生成之后删除不必要的文件
 minify: false
 
 # Define custom file paths.
@@ -40,10 +42,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small: /images/dinosaur-16x16.png #/images/favicon-16x16-next.png
+  medium: /images/dinosaur-32x32.png #/images/favicon-32x32-next.png
+  apple_touch_icon: #/images/dinosaur.png #/images/apple-touch-icon-next.png
+  safari_pinned_tab: #/images/dinosaur.png #/images/logo.svg
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -52,9 +54,11 @@ language_switcher: false
 
 footer:
   # Specify the date when the site was setup. If not defined, current year will be used.
+  # 网站的建站时间，如果不写就是你自己建站的时间
   #since: 2015
 
   # Icon between year and copyright info.
+  # 这里的icon是页脚建站时间和网站名字之间的图标，默认是 `user`图标
   icon:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
     name: fa fa-heart
@@ -67,9 +71,10 @@ footer:
   copyright:
 
   # Powered by Hexo & NexT
-  powered: true
+  powered: false
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, http://www.beian.gov.cn
+  # 设置网站备案
   beian:
     enable: false
     icp:
@@ -85,10 +90,11 @@ footer:
 # Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
 # You can set a language value if you prefer a translated version of CC license, e.g. deed.zh
 # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
+# 文章版权说明
 creative_commons:
   license: by-nc-sa
   sidebar: false
-  post: false
+  post: true
   language:
 
 
@@ -161,15 +167,17 @@ sidebar:
   onmobile: false
 
 # Sidebar Avatar
+# 个人头像设置
 avatar:
   # Replace the default image and set the url here.
-  url: /images/dinosaur.jpeg
+  url: /images/dinosaur.png
   # If true, the avatar will be dispalyed in circle.
-  rounded: false
+  rounded: true
   # If true, the avatar will be rotated with the cursor.
-  rotated: false
+  rotated: true
 
 # Posts / Categories / Tags in sidebar.
+# 侧边栏头像下是否显示文章、分类和标签设置
 site_state: true
 
 # Social Links
@@ -205,15 +213,19 @@ links:
 
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
+ # 文章标题(目录)设置
 toc:
   enable: true
   # Automatically add list number to toc.
   number: false
   # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
+  # 如果题目过长，是否换行
+  wrap: true
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
+  # 是否显示所有等级的标题
   expand_all: false
   # Maximum heading depth of generated toc.
+  # 接受生成的标题的最大深度
   max_depth: 6
 
 # A button to open designated chat widget in sidebar.
@@ -232,10 +244,12 @@ chat:
 # ---------------------------------------------------------------
 
 # Automatically excerpt description in homepage as preamble text.
+ # 在主页显示预览文本
 excerpt_description: true
 
 # Read more button
 # If true, the read more button will be displayed in excerpt section.
+# 是否显示 阅读更多 按钮
 read_more_btn: true
 
 # Post meta display settings
@@ -255,10 +269,12 @@ symbols_count_time:
   item_text_total: false
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
-tag_icon: false
+# 文章底部默认的标签是 # 号，建议改为 true
+tag_icon: true
 
 # Reward (Donate)
 # Front-matter variable (unsupport animation).
+# 打赏设置
 reward_settings:
   # If true, reward will be displayed in every article by default.
   enable: false
@@ -281,6 +297,7 @@ follow_me:
 
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
+# 是否开启相关文章推荐，不建议开启
 related_posts:
   enable: false
   title: # Custom header, leave empty to use the default one
@@ -310,6 +327,7 @@ post_navigation: left
 # ---------------------------------------------------------------
 
 # TagCloud settings for tags page.
+# 标签云界面
 tagcloud:
   # All values below are same as default, change them by yourself.
   min: 12 # Minimun font size in px
@@ -320,6 +338,7 @@ tagcloud:
 
 # Google Calendar
 # Share your recent schedule to others via calendar page.
+# 日程表界面
 calendar:
   calendar_id: <required> # Your Google account E-Mail
   api_key: <required>
@@ -336,6 +355,7 @@ calendar:
 # ---------------------------------------------------------------
 
 # Set the text alignment in posts / pages.
+# 文本对齐方式
 text_align:
   # Available values: start | end | left | right | center | justify | justify-all | match-parent
   desktop: justify
@@ -350,6 +370,7 @@ android_chrome_color: "#222"
 # Custom Logo (Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
 
+# 代码块设置
 codeblock:
   # Code Highlight theme
   # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
@@ -366,9 +387,9 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: false
+  sidebar: true
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
@@ -379,6 +400,7 @@ reading_progress:
   height: 3px
 
 # Bookmark Support
+# 书签，如果开启，则下一次使用的时候就会从你上次浏览的地方显示，改为 true 即可
 bookmark:
   enable: false
   # Customize the color of the bookmark.
@@ -492,6 +514,7 @@ baidu_push: false
 # ---------------------------------------------------------------
 
 # Math Formulas Render Support
+ # 数学公式插件，显示数学公式的插件，仅设置为 true 还不行，需要下载依赖插件, 可以选择两个引擎 mathjax / katex
 math:
   # Default (true) will load mathjax / katex script on demand.
   # That is it only render those page which has `mathjax: true` in Front-matter.
@@ -514,9 +537,10 @@ math:
 # Dependencies: https://github.com/theme-next/theme-next-pjax
 pjax: false
 
+# FancyBox: 放大图像
 # FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.
 # For more information: https://fancyapps.com/fancybox
-fancybox: false
+fancybox: true
 
 # A JavaScript library for zooming images like Medium.
 # Do not enable both `fancybox` and `mediumzoom`.
@@ -711,7 +735,7 @@ firestore:
 # Show Views / Visitors of the website / page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
 busuanzi_count:
-  enable: false
+  enable: true
   total_visitors: true
   total_visitors_icon: fa fa-user
   total_views: true
@@ -739,7 +763,7 @@ algolia_search:
 # Local Search
 # Dependencies: https://github.com/theme-next/hexo-generator-searchdb
 local_search:
-  enable: false
+  enable: true
   # If auto, trigger search by changing input.
   # If manual, trigger search by pressing enter key or search button.
   trigger: auto
@@ -843,6 +867,7 @@ motion:
 # Progress bar in the top during page loading.
 # Dependencies: https://github.com/theme-next/theme-next-pace
 # For more information: https://github.com/HubSpot/pace
+# 文章加载时候显示的进度条，需要添加依赖(个人认为没有必要)
 pace:
   enable: false
   # Themes list:
@@ -917,7 +942,7 @@ vendors:
 
   # Medium-zoom
   # mediumzoom: //cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js
-  mediumzoom:
+  mediumzoom: 
 
   # Lazyload
   # lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js

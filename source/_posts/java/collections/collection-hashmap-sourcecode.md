@@ -10,10 +10,10 @@ categories:
 <style>
 .example tbody td {
     text-align: center;
-    }
+}
 .example thead th {
     text-align: center;
-    }
+}
 </style>
 
 # 1. 简介

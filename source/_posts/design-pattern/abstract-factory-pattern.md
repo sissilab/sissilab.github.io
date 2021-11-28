@@ -1,11 +1,11 @@
 ---
-title: 抽象工厂模式
+title: 设计模式之抽象工厂模式
 title-en: abstract-factory-pattern
 date: 2021-10-17 23:14:26
 tags: [设计模式]
 categories:
 - 23种设计模式
-- 创建型模式
+- 1. 创建型模式
 ---
 
 # 0. 简介

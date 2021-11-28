@@ -1,11 +1,11 @@
 ---
-title: 工厂方法模式
+title: 设计模式之工厂方法模式
 title-en: factory-method-pattern
 date: 2021-10-17 23:12:28
 tags: [设计模式]
 categories:
 - 23种设计模式
-- 创建型模式
+- 1. 创建型模式
 ---
 
 # 0. 简介

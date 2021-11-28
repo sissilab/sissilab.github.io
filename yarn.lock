@@ -1440,6 +1440,13 @@
     "hexo-pagination" "1.0.0"
     "timsort" "^0.3.0"
 
+"hexo-generator-searchdb@^1.4.0":
+  "integrity" "sha512-TkwxlqxptRIXHwYeI/V32O2TxXkfqWa37Rrmg347Q+YT1eqk7vQ31vR4zLudBAcSr85ST0VUedYd1/gLBSJl9Q=="
+  "resolved" "https://registry.npmjs.org/hexo-generator-searchdb/-/hexo-generator-searchdb-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "nunjucks" "^3.2.2"
+
 "hexo-generator-tag@^1.0.0":
   "integrity" "sha1-VOwj3pQJx1WE6oHjYFelkDGwIvE="
   "resolved" "https://registry.npm.taobao.org/hexo-generator-tag/download/hexo-generator-tag-1.0.0.tgz"
@@ -2457,7 +2464,7 @@
   "resolved" "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz"
   "version" "1.0.1"
 
-"nunjucks@^3.2.1":
+"nunjucks@^3.2.1", "nunjucks@^3.2.2":
   "integrity" "sha1-GzNhUkcpDpTigmO12FXs52VkijE="
   "resolved" "https://registry.npm.taobao.org/nunjucks/download/nunjucks-3.2.3.tgz"
   "version" "3.2.3"

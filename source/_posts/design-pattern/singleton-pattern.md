@@ -1,11 +1,11 @@
 ---
-title: 设计模式 -- 单例模式
-title-en: singleton-pattern
+title: 设计模式之单例模式
+title-en: Singleton pattern
 date: 2021-10-17 22:59:50
 tags: [设计模式]
 categories:
 - 23种设计模式
-- 创建型设计模式
+- 1. 创建型模式
 ---
 
 <style>
@@ -915,8 +915,8 @@ public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {
 
 通过上面分析可知，枚举型单例无需担心序列换和反序列化，可放心食用。
 
-# 7. 在源码中的应用
-## 7.1. java.lang.Runtime（饿汉式）
+# 5. 在源码中的应用
+## 5.1. java.lang.Runtime（饿汉式）
 
 ```java
 public class Runtime {
@@ -929,7 +929,7 @@ public class Runtime {
 }
 ```
 
-## 7.2. org.quartz.impl.SchedulerRepository（懒汉式-synchronized方法）
+## 5.2. org.quartz.impl.SchedulerRepository（懒汉式-synchronized方法）
 
 ```java
 // Scheduler scheduler = new StdSchedulerFactory().getScheduler(); --> SchedulerRepository schedRep = SchedulerRepository.getInstance();
@@ -946,7 +946,7 @@ public class SchedulerRepository {
 }
 ```
 
-## 7.3. Spring源码-org.springframework.beans.factory.support.DefaultSingletonBeanRegistry （懒汉式-双重检查）
+## 5.3. Spring源码-org.springframework.beans.factory.support.DefaultSingletonBeanRegistry （懒汉式-双重检查）
 
 Spring 中的单例：只有一个共享的实例存在，所有对这个 bean 的请求都会返回唯一的实例。  
   
@@ -1098,7 +1098,7 @@ public Object getSingleton(String beanName, ObjectFactory<?> singletonFactory) {
 }
 ```
 
-## 7.4. Spring源码-org.springframework.core.ReactiveAdapterRegistry（懒汉式-volatile双重检查）
+## 5.4. Spring源码-org.springframework.core.ReactiveAdapterRegistry（懒汉式-volatile双重检查）
 
 ```java
 // since Spring 5.x
@@ -1124,7 +1124,7 @@ public class ReactiveAdapterRegistry {
 }
 ```
 
-## 7.5. Spring源码-org.springframework.aop.framework.ProxyFactoryBean（懒汉式-synchronized方法）
+## 5.5. Spring源码-org.springframework.aop.framework.ProxyFactoryBean（懒汉式-synchronized方法）
 
 ```java
 public class ProxyFactoryBean extends ProxyCreatorSupport
@@ -1155,7 +1155,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 }
 ```
 
-## 7.6. Tomcat源码-org.apache.catalina.webresources.TomcatURLStreamHandlerFactory（懒汉式-双重检查）
+## 5.6. Tomcat源码-org.apache.catalina.webresources.TomcatURLStreamHandlerFactory（懒汉式-双重检查）
 
 ```java
 public class TomcatURLStreamHandlerFactory implements URLStreamHandlerFactory {

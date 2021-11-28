@@ -1,18 +1,19 @@
 ---
 title: 设计模式概览
-title-en: design-pattern-overview
+title-en: The overview of design pattern
 date: 2021-10-17 22:58:01
-tags: [设计模式]
+tags: [设计模式, 概览]
 categories:
 - 23种设计模式
+- 0. 概览
 ---
 
 设计模式一般共分为三大类：
 
 **1. 创建型模式：**
-	- <a target="_self" href="https://sissilab.top/2021/10/17/singleton-pattern">1.1.单例模式</a>
-	- <a target="_self" href="https://sissilab.top/2021/10/17/factory-method-pattern">1.2.工厂方法模式</a>
-	- <a target="_self" href="https://sissilab.top/2021/10/17/abstract-factory-pattern">1.3.抽象工厂模式</a>
+	- [1.1.单例模式](/design-pattern/singleton-pattern)
+	- [1.2.工厂方法模式](/design-pattern/factory-method-pattern)
+	- [1.3.抽象工厂模式](/design-pattern/abstract-factory-pattern)
 	- [1.4.建造者模式](#)
 	- [1.5.原型模式](#)
 <!-- more -->
