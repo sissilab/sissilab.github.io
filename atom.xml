@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SissiLab</title>
+  
+  <subtitle>focus on technology</subtitle>
+  <link href="https://sissilab.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://sissilab.github.io/"/>
+  <updated>2021-12-07T04:03:17.253Z</updated>
+  <id>https://sissilab.github.io/</id>
+  
+  <author>
+    <name>Roy</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Arch Linux 常用软件</title>
+    <link href="https://sissilab.github.io/linux/arch-Linux-software-recommendation/"/>
+    <id>https://sissilab.github.io/linux/arch-Linux-software-recommendation/</id>
+    <published>2021-10-17T15:33:00.000Z</published>
+    <updated>2021-12-07T04:03:17.253Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;输入法&lt;/strong&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 安装拼音输入法 fcitx5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 1.安装fcitx5相关包&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 2.配置环境变量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; vim ~/.pam_environment&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; &lt;span class=&quot;built_in&quot;&gt;set&lt;/span&gt; fcitx5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;INPUT_METHOD  DEFAULT=fcitx5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;GTK_IM_MODULE DEFAULT=fcitx5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;QT_IM_MODULE  DEFAULT=fcitx5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;XMODIFIERS    DEFAULT=@im=fcitx5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 3.添加自启&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 4.重启，生效&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; 5.添加输入法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Arch Linux" scheme="https://sissilab.github.io/categories/Arch-Linux/"/>
+    
+    
+    <category term="Arch Linux" scheme="https://sissilab.github.io/tags/Arch-Linux/"/>
+    
+    <category term="Linux" scheme="https://sissilab.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Arch Linux 双系统安装</title>
+    <link href="https://sissilab.github.io/linux/dual-system-installation-guide-of-arch-linux/"/>
+    <id>https://sissilab.github.io/linux/dual-system-installation-guide-of-arch-linux/</id>
+    <published>2021-10-17T15:27:07.000Z</published>
+    <updated>2021-12-07T04:03:17.254Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0. 前言&quot;&gt;&lt;/a&gt;0. 前言&lt;/h1&gt;&lt;p&gt;磁盘空间划分：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;磁盘类型&lt;/th&gt;
+&lt;th&gt;Windows 10&lt;/th&gt;
+&lt;th&gt;Arch Linux&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;500G HD&lt;/td&gt;
+&lt;td&gt;140G 应用数据存储&lt;/td&gt;
+&lt;td&gt;剩余(约325.76G) 用户主目录 /home&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;250G SSD&lt;/td&gt;
+&lt;td&gt;500M EFI, 50M MSR, 100G 系统&lt;/td&gt;
+&lt;td&gt;剩余(约137.94G) 根目录 /&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="Arch Linux" scheme="https://sissilab.github.io/categories/Arch-Linux/"/>
+    
+    
+    <category term="Arch Linux" scheme="https://sissilab.github.io/tags/Arch-Linux/"/>
+    
+    <category term="Linux" scheme="https://sissilab.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之抽象工厂模式</title>
+    <link href="https://sissilab.github.io/design-pattern/abstract-factory-pattern/"/>
+    <id>https://sissilab.github.io/design-pattern/abstract-factory-pattern/</id>
+    <published>2021-10-17T15:14:26.000Z</published>
+    <updated>2021-12-07T04:03:17.222Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;抽象工厂模式&lt;/strong&gt;（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。&lt;/p&gt;
+&lt;p&gt;抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，&lt;u&gt;工厂方法模式针对的是一个产品等级结构&lt;/u&gt;，而&lt;u&gt;抽象工厂模式则需要面对多个产品等级结构&lt;/u&gt;。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之工厂方法模式</title>
+    <link href="https://sissilab.github.io/design-pattern/factory-method-pattern/"/>
+    <id>https://sissilab.github.io/design-pattern/factory-method-pattern/</id>
+    <published>2021-10-17T15:12:28.000Z</published>
+    <updated>2021-12-07T04:03:17.224Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。&lt;/p&gt;
+&lt;p&gt;工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之单例模式</title>
+    <link href="https://sissilab.github.io/design-pattern/singleton-pattern/"/>
+    <id>https://sissilab.github.io/design-pattern/singleton-pattern/</id>
+    <published>2021-10-17T14:59:50.000Z</published>
+    <updated>2021-12-07T04:03:17.227Z</updated>
+    
+    
+    <summary type="html">&lt;style&gt;
+    table th:nth-of-type(1) {
+        width: 20%;
+    }
+    table th:nth-of-type(2) {
+        width: 40%;
+    }
+    table th:nth-of-type(3) {
+        width: 30%;
+    }
+    table th:nth-of-type(4) {
+        width: 10%;
+    }
+&lt;/style&gt;
+
+&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证这个类仅有一个实例，并提供一个访问它的全局访问点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;构造方法私有化；&lt;/li&gt;
+&lt;li&gt;在本类中创建本类的实例；&lt;/li&gt;
+&lt;li&gt;在本类中提供给外部获取实例的方式。</summary>
+    
+    
+    
+    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式概览</title>
+    <link href="https://sissilab.github.io/design-pattern/design-pattern-overview/"/>
+    <id>https://sissilab.github.io/design-pattern/design-pattern-overview/</id>
+    <published>2021-10-17T14:58:01.000Z</published>
+    <updated>2021-12-07T04:03:17.224Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;设计模式一般共分为三大类：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 创建型模式：&lt;/strong&gt;&lt;br&gt;    - &lt;a href=&quot;/design-pattern/singleton-pattern&quot;&gt;1.1.单例模式&lt;/a&gt;&lt;br&gt;    - &lt;a href=&quot;/design-pattern/factory-method-pattern&quot;&gt;1.2.工厂方法模式&lt;/a&gt;&lt;br&gt;    - &lt;a href=&quot;/design-pattern/abstract-factory-pattern&quot;&gt;1.3.抽象工厂模式&lt;/a&gt;&lt;br&gt;    - &lt;a href=&quot;#&quot;&gt;1.4.建造者模式&lt;/a&gt;&lt;br&gt;    - &lt;a href=&quot;#&quot;&gt;1.5.原型模式&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="0. 概览" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-%E6%A6%82%E8%A7%88/"/>
+    
+    
+    <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="概览" scheme="https://sissilab.github.io/tags/%E6%A6%82%E8%A7%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 集合之 HashMap 源码分析（jdk1.8）</title>
+    <link href="https://sissilab.github.io/java/collections/HashMap-sourcecode-analysis/"/>
+    <id>https://sissilab.github.io/java/collections/HashMap-sourcecode-analysis/</id>
+    <published>2019-07-04T14:30:35.000Z</published>
+    <updated>2021-12-07T04:03:17.234Z</updated>
+    
+    
+    <summary type="html">&lt;style&gt;
+.example tbody td {
+    text-align: center;
+}
+.example thead th {
+    text-align: center;
+}
+&lt;/style&gt;
+
+&lt;h1 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1. 简介&quot;&gt;&lt;/a&gt;1. 简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;HashMap为键值对（key -&amp;gt; value）结构存储，其中&lt;font color=&quot;green&quot;&gt;key是唯一、不重复的、无序的，key和value都允许为null&lt;/font&gt;，只允许一条记录的key为null，允许多条记录的value为null。HashMap一般通过key来定位value，当put操作时，传入相同key会覆盖value。&lt;/li&gt;
+&lt;li&gt;HashMap&lt;font color=&quot;green&quot;&gt;默认初始容量为16&lt;/font&gt;；&lt;font color=&quot;green&quot;&gt;默认负载因子为0.75&lt;/font&gt;；&lt;font color=&quot;green&quot;&gt;位桶数组table的大小总是为2的n次方&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;当位桶上的&lt;font color=&quot;green&quot;&gt;结点数大于8时会转为红黑树&lt;/font&gt;，当位桶上的&lt;font color=&quot;green&quot;&gt;结点数小于6时红黑树转为链表&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;当map中&lt;font color=&quot;green&quot;&gt;键值对数量超过临界阈值thread（容量 * 装载因子）时，将会进行扩容（位桶数组扩容）&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;位桶数组扩容是一个比较耗性能的操作，故而在初始化HashMap的时候可以给一个大致的数值（估算map大小），避免频繁的扩容。&lt;/li&gt;
+&lt;li&gt;HashMap是&lt;font color=&quot;green&quot;&gt;线程不安全&lt;/font&gt;的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：</summary>
+    
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/categories/Java/"/>
+    
+    <category term="Java 集合框架" scheme="https://sissilab.github.io/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/tags/Java/"/>
+    
+    <category term="Java 集合" scheme="https://sissilab.github.io/tags/Java-%E9%9B%86%E5%90%88/"/>
+    
+    <category term="Java Map" scheme="https://sissilab.github.io/tags/Java-Map/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三种方式实现扫码登录</title>
+    <link href="https://sissilab.github.io/qrcode-scan-login/"/>
+    <id>https://sissilab.github.io/qrcode-scan-login/</id>
+    <published>2019-05-23T09:05:15.000Z</published>
+    <updated>2021-12-07T04:03:17.295Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-需求描述&quot;&gt;&lt;a href=&quot;#1-需求描述&quot; class=&quot;headerlink&quot; title=&quot;1. 需求描述&quot;&gt;&lt;/a&gt;1. 需求描述&lt;/h1&gt;&lt;p&gt;目前大多网站都提供扫码登录功能，无需在网页端输入任何账号和密码信息，只需通过手机上的app，如微信、淘宝等，通过使用app上的扫码功能去扫面页面登录提供的二维码图片，即可完成登录。这不仅提高了安全性，也增加了用户的使用方便性。关于二维码与手机是如何绑定、网页端如何识别出手机端进行了扫码操作、以及网页端在扫码成功后如何获取到用户信息等问题，这些都会在接下来的篇幅中娓娓道来。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="小功能Demo实现系列" scheme="https://sissilab.github.io/categories/%E5%B0%8F%E5%8A%9F%E8%83%BDDemo%E5%AE%9E%E7%8E%B0%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="功能实现" scheme="https://sissilab.github.io/tags/%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring事务用法详解</title>
+    <link href="https://sissilab.github.io/spring/spring-transaction-use/"/>
+    <id>https://sissilab.github.io/spring/spring-transaction-use/</id>
+    <published>2019-04-29T14:24:16.000Z</published>
+    <updated>2021-12-07T04:03:17.302Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-数据库事务基础知识&quot;&gt;&lt;a href=&quot;#1-数据库事务基础知识&quot; class=&quot;headerlink&quot; title=&quot;1. 数据库事务基础知识&quot;&gt;&lt;/a&gt;1. 数据库事务基础知识&lt;/h1&gt;&lt;p&gt;在使用Spring开发过程中，我们常会使用到Spring事务管理，它提供了灵活方便的事务管理功能，但这些功能都是基于底层数据库本身的事务处理机制功工作的。因此欲深入了解Spring事务的管理和配置，有必要先了解下数据库基本的事务知识。&lt;/p&gt;
+&lt;h2 id=&quot;1-1-事务特性（ACID）&quot;&gt;&lt;a href=&quot;#1-1-事务特性（ACID）&quot; class=&quot;headerlink&quot; title=&quot;1.1. 事务特性（ACID）&quot;&gt;&lt;/a&gt;1.1. 事务特性（ACID）&lt;/h2&gt;&lt;p&gt;Spring事务中存在四种特性：原子性、一致性、隔离性和持久性。在这些事务特性中，数据“一致性”为最终目标，其他特性都是为实现这个目标方法和手段。数据库一般采用重执行日志保证原子性、一致性和持久性，采用数据库锁机制保证事务的隔离性。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Spring框架系列" scheme="https://sissilab.github.io/categories/Spring%E6%A1%86%E6%9E%B6%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="Spring" scheme="https://sissilab.github.io/tags/Spring/"/>
+    
+    <category term="事务" scheme="https://sissilab.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 集合之 LinkedList 源码分析（jdk1.8）</title>
+    <link href="https://sissilab.github.io/java/collections/LinkedList-sourcecode-analysis/"/>
+    <id>https://sissilab.github.io/java/collections/LinkedList-sourcecode-analysis/</id>
+    <published>2019-04-18T14:26:46.000Z</published>
+    <updated>2021-12-07T04:03:17.242Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1. 简介&quot;&gt;&lt;/a&gt;1. 简介&lt;/h1&gt;&lt;p&gt;LinkedList是基于&lt;font color=&quot;green&quot;&gt;双向链表&lt;/font&gt;实现。它是一种可以在任意位置进行高效地插入和移除操作的有序序列。&lt;br&gt;LinkedList是&lt;font color=&quot;green&quot;&gt;线程不安全&lt;/font&gt;的，若需在多线程环境使用，主要方法有：&lt;br&gt;① 使用List list = Collections.synchronizedList(new LinkedList(…))；&lt;br&gt;② 使用ConcurrentLinkedQueue；&lt;br&gt;③ 使用synchronized关键字。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/categories/Java/"/>
+    
+    <category term="Java 集合框架" scheme="https://sissilab.github.io/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/tags/Java/"/>
+    
+    <category term="Java 集合" scheme="https://sissilab.github.io/tags/Java-%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 集合之 ArrayList 源码分析（jdk1.8）</title>
+    <link href="https://sissilab.github.io/java/collections/ArrayList-sourcecode-analysis/"/>
+    <id>https://sissilab.github.io/java/collections/ArrayList-sourcecode-analysis/</id>
+    <published>2019-04-02T12:19:37.000Z</published>
+    <updated>2021-12-07T04:03:17.230Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1. 简介&quot;&gt;&lt;/a&gt;1. 简介&lt;/h1&gt;&lt;p&gt;ArrayList是&lt;font color=&quot;green&quot;&gt;基于数组&lt;/font&gt;实现，是一个可变大小的&lt;font color=&quot;green&quot;&gt;动态数组&lt;/font&gt;。&lt;br&gt;ArrayList是&lt;font color=&quot;green&quot;&gt;线程不安全&lt;/font&gt;的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有：&lt;br&gt;① 通过Collections.synchronizedList(List&lt;T&gt; list)方法返回一个线程安全的ArrayList类；&lt;br&gt;② 使用java.util.concurrent.CopyOnWriteArrayList；&lt;br&gt;③ 使用synchronized关键字。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/categories/Java/"/>
+    
+    <category term="Java 集合框架" scheme="https://sissilab.github.io/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/tags/Java/"/>
+    
+    <category term="Java 集合" scheme="https://sissilab.github.io/tags/Java-%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java集合框架概述（java.util包）</title>
+    <link href="https://sissilab.github.io/java/collections/java-collections-framework-overview/"/>
+    <id>https://sissilab.github.io/java/collections/java-collections-framework-overview/</id>
+    <published>2019-03-28T08:27:04.000Z</published>
+    <updated>2021-12-07T04:03:17.251Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-java-util中collection集合&quot;&gt;&lt;a href=&quot;#1-java-util中collection集合&quot; class=&quot;headerlink&quot; title=&quot;1. java.util中collection集合&quot;&gt;&lt;/a&gt;1. java.util中collection集合&lt;/h1&gt;&lt;p&gt;java.util下的集合框架主要基于Collection接口，它是最基本的集合接口，定义了集合的基本操作。Collection接口继承了Iterable接口，说明Collection的子类都可以实现遍历操作，通过Iterable接口中的 Iterator&amp;lt;T&amp;gt; iterator() 方法可返回一个Iterator（迭代器）进行遍历，通常用法如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Iterator it = collection.iterator(); &lt;span class=&quot;comment&quot;&gt;// 获取集合的迭代器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(it.hasNext()) &amp;#123; &lt;span class=&quot;comment&quot;&gt;// 集合中是否还有元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Object obj = it.next(); &lt;span class=&quot;comment&quot;&gt;// 返回下一个元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;此外，java 8新增了forEach方法，也可实现遍历操作。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/categories/Java/"/>
+    
+    <category term="Java 集合框架" scheme="https://sissilab.github.io/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Java" scheme="https://sissilab.github.io/tags/Java/"/>
+    
+    <category term="Java 集合" scheme="https://sissilab.github.io/tags/Java-%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper简介、三种搭建模式和配置文件详解</title>
+    <link href="https://sissilab.github.io/zookeeper/one-zookeeper-deploy/"/>
+    <id>https://sissilab.github.io/zookeeper/one-zookeeper-deploy/</id>
+    <published>2019-03-25T13:52:22.000Z</published>
+    <updated>2021-12-07T04:03:17.314Z</updated>
+    
+    
+    <summary type="html">&lt;style&gt;
+table th:first-of-type {
+    width: 100px;
+}
+&lt;/style&gt;
+
+&lt;h1 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1. 简介&quot;&gt;&lt;/a&gt;1. 简介&lt;/h1&gt;&lt;p&gt;Zookeeper缘起于非开源的Google的Chubby，雅虎模仿Chubby开发了ZooKeeper，实现了类似的分布式锁管理，并捐给了Apache，作为是Hadoop和Hbase的重要组件。&lt;br&gt;ZooKeeper是一种用于分布式应用程序的分布式开源协调服务，它主要是用来解决分布式应用中经常遇到的一些数据一致性问题。它的一致性、可靠性和容错性保证了其能够在大型分布式系统中稳定的表现，并不会因为某一个节点服务宕机而导致整个集群崩溃。它可提供的功能包括：配置维护、域名服务、分布式同步、组服务等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="zookeeper系列" scheme="https://sissilab.github.io/categories/zookeeper%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="zookeeper" scheme="https://sissilab.github.io/tags/zookeeper/"/>
+    
+  </entry>
+  
+</feed>

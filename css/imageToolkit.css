@@ -1,0 +1,39 @@
+article img {
+  cursor: zoom-in;
+}
+.image-toolkit-view-container {
+  position: fixed;
+  font-size: 0;
+  line-height: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1024;
+  display: none;
+}
+.image-toolkit-view-container .img-container {
+  position: absolute;
+  top: 0;
+}
+.image-toolkit-view-container .img-container .img-view {
+  max-height: none;
+}
+.image-toolkit-view-container .img-container .img-view:hover {
+  cursor: pointer;
+}
+.image-toolkit-view-container .img-tip {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 12px;
+  line-height: 20px;
+  height: 20px;
+  width: 50px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1;
+}
