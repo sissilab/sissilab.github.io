@@ -83,20 +83,22 @@
     <link href="https://sissilab.github.io/design-pattern/abstract-factory-pattern/"/>
     <id>https://sissilab.github.io/design-pattern/abstract-factory-pattern/</id>
     <published>2021-10-17T15:14:26.000Z</published>
-    <updated>2021-12-07T04:03:17.222Z</updated>
+    <updated>2021-12-09T11:09:27.665Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;抽象工厂模式&lt;/strong&gt;（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。&lt;/p&gt;
-&lt;p&gt;抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，&lt;u&gt;工厂方法模式针对的是一个产品等级结构&lt;/u&gt;，而&lt;u&gt;抽象工厂模式则需要面对多个产品等级结构&lt;/u&gt;。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。&lt;/p&gt;</summary>
+&lt;p&gt;抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，&lt;u&gt;工厂方法模式针对的是一个产品等级结构&lt;/u&gt;，而&lt;u&gt;抽象工厂模式则需要面对&lt;mark&gt;多个产品等级结构&lt;/mark&gt;&lt;/u&gt;。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。&lt;/p&gt;</summary>
     
     
     
-    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="23 种设计模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
     
     <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="创建型模式" scheme="https://sissilab.github.io/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
@@ -105,7 +107,7 @@
     <link href="https://sissilab.github.io/design-pattern/factory-method-pattern/"/>
     <id>https://sissilab.github.io/design-pattern/factory-method-pattern/</id>
     <published>2021-10-17T15:12:28.000Z</published>
-    <updated>2021-12-07T04:03:17.224Z</updated>
+    <updated>2021-12-09T10:39:45.984Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。&lt;/p&gt;
@@ -113,12 +115,14 @@
     
     
     
-    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="23 种设计模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
     
     <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="创建型模式" scheme="https://sissilab.github.io/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
@@ -127,10 +131,11 @@
     <link href="https://sissilab.github.io/design-pattern/singleton-pattern/"/>
     <id>https://sissilab.github.io/design-pattern/singleton-pattern/</id>
     <published>2021-10-17T14:59:50.000Z</published>
-    <updated>2021-12-07T04:03:17.227Z</updated>
+    <updated>2021-12-09T10:30:14.270Z</updated>
     
     
-    <summary type="html">&lt;style&gt;
+    <summary type="html">&lt;!-- 调整文章内表格宽度比例分配 --&gt;
+&lt;style&gt;
     table th:nth-of-type(1) {
         width: 20%;
     }
@@ -154,12 +159,14 @@
     
     
     
-    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="23 种设计模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <category term="1. 创建型模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
     
     <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="创建型模式" scheme="https://sissilab.github.io/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

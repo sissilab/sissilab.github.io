@@ -80,7 +80,7 @@
   <time datetime="2021-10-17T15:14:26.000Z" itemprop="datePublished">2021-10-17</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23种设计模式</a> / <a class="article-category-link" href="/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">1. 创建型模式</a>
+    <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23 种设计模式</a> / <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">1. 创建型模式</a>
   </div>
   
 <div class="word_count">
@@ -113,15 +113,14 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p><strong>抽象工厂模式</strong>（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。</p>
-<p>抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，<u>工厂方法模式针对的是一个产品等级结构</u>，而<u>抽象工厂模式则需要面对多个产品等级结构</u>。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。</p>
+<p>抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，<u>工厂方法模式针对的是一个产品等级结构</u>，而<u>抽象工厂模式则需要面对<mark>多个产品等级结构</mark></u>。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。</p>
 <span id="more"></span>
 <ul>
-<li><strong>产品族（Product Family）</strong>：指位于不同产品等级结构中，功能相关联的产品组成的家族；它==由同一个工厂生产的，位于不同产品等级结构中的一组产品==，比如，华为的手机、笔记本和耳机组成一个家族；苹果的手机、笔记本和耳机组成一个家族。而这华为和苹果这两个家族均来自于三个产品等级：手机、笔记本、耳机。</li>
-<li><strong>产品等级（Product Class）</strong>：即==产品的继承结构==，如一个抽象产品是手机，其子类有华为手机和苹果手机，则抽象手机与具体品牌的手机之间构成了一个产品等级结构，抽象手机是父类，而具体品牌的手机是其子类。</li>
+<li><strong>产品族（Product Family）</strong>：指位于不同产品等级结构中，功能相关联的产品组成的家族；它<mark>由同一个工厂生产的，位于不同产品等级结构中的一组产品</mark>，比如，华为的手机、笔记本和耳机组成一个家族；苹果的手机、笔记本和耳机组成一个家族。而这华为和苹果这两个家族均来自于三个产品等级：手机、笔记本、耳机。</li>
+<li><strong>产品等级（Product Class）</strong>：即<mark>产品的继承结构</mark>，如一个抽象产品是手机，其子类有华为手机和苹果手机，则抽象手机与具体品牌的手机之间构成了一个产品等级结构，抽象手机是父类，而具体品牌的手机是其子类。</li>
 </ul>
 <p>下图展示了产品族和产品等级的关系，横轴表示产品的等级结构，纵轴表示产品族。其中，共有2个产品族（华为工厂、苹果工厂），每个产品族有3个产品等级（手机、笔记本、耳机）。只要确定一个产品所属的产品族，以及它所属的等级结构，就可以唯一的确定这个产品。</p>
-<img src="/design-pattern/abstract-factory-pattern/abstract_factory_product_concept.png" class="" title="abstract_factory_product_concept">
-
+<p><img src="https://s2.loli.net/2021/12/09/uXLg9NCdbDlOEo1.png" alt="抽象工厂的产品族和产品等级示例图"></p>
 <p>从上图可以看出，每一个具体工厂可以生产属于一个产品族的所有产品，抽象工厂模式仅需2个具体工厂；若使用工厂方法模式，针对6个具体产品则需要6个具体工厂，增加了复杂性和系统中类的数量。</p>
 <h1 id="1-结构与实现"><a href="#1-结构与实现" class="headerlink" title="1. 结构与实现"></a>1. 结构与实现</h1><p>抽象工厂模式同工厂方法模式一样，也是由抽象工厂、具体工厂、抽象产品和具体产品等4个要素构成，但抽象工厂中方法个数不同，抽象产品的个数也不同。</p>
 <p>其主要角色如下：</p>
@@ -158,7 +157,8 @@
 <p>执行结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Create Huawei factory.</span><br><span class="line">Make Huawei phone...</span><br><span class="line">I am Huawei phone.</span><br><span class="line">Make Huawei laptop...</span><br><span class="line">I am Huawei laptop.</span><br><span class="line">Make Huawei earphone...</span><br><span class="line">I am Huawei earphone.</span><br><span class="line">-----------------</span><br><span class="line">Create Apple factory.</span><br><span class="line">Make Apple phone...</span><br><span class="line">I am Apple phone.</span><br><span class="line">Make Apple laptop...</span><br><span class="line">I am Apple laptop.</span><br><span class="line">Make Huawei earphone...</span><br><span class="line">I am Huawei earphone.</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h1><p><strong>适用场景</strong>：<br>抽象工厂模式最早的应用于创建属于不同操作系统的视窗构件，如 Java 的 AWT 中的 Button 和 Text 等构件在 Windows 和 UNIX 中的本地实现是不同的，即不同系统属于产品族，不同构件属于产品等级。</p>
+<h1 id="3-在源码中的应用"><a href="#3-在源码中的应用" class="headerlink" title="3. 在源码中的应用"></a>3. 在源码中的应用</h1><p>// todo</p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p><strong>适用场景</strong>：<br>抽象工厂模式最早的应用于创建属于不同操作系统的视窗构件，如 Java 的 AWT 中的 Button 和 Text 等构件在 Windows 和 UNIX 中的本地实现是不同的，即不同系统属于产品族，不同构件属于产品等级。</p>
 <ol>
 <li>一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节，这对于所有形态的工厂模式都是重要的。</li>
 <li>当需要创建的产品对象是一系列相互关联或相互依赖的产品族时，如电器工厂中的电视机、洗衣机、空调等。</li>
@@ -241,7 +241,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
 
     </footer>
   </div>
@@ -388,16 +388,6 @@
   <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
   <div class="reward-box">
     
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
     
   </div>
 </div>
