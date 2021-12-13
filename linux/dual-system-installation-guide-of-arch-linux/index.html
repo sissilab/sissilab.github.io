@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Arch Linux 双系统安装 |  SissiLab</title>
+      <title>Arch Linux &amp; Win10 双系统安装 |  SissiLab</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/A.svg" />
@@ -68,7 +68,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Arch Linux 双系统安装
+  Arch Linux &amp; Win10 双系统安装
 </h1>
  
 
@@ -80,7 +80,7 @@
   <time datetime="2021-10-17T15:27:07.000Z" itemprop="datePublished">2021-10-17</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Arch-Linux/">Arch Linux</a>
+    <a class="article-category-link" href="/categories/Arch-Linux-%E7%B3%BB%E5%88%97/">Arch Linux 系列</a>
   </div>
   
 <div class="word_count">
@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.8k</span>
+            <span class="post-count">4.1k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16 分钟</span>
+            <span class="post-count">17 分钟</span>
         </span>
     </span>
 </div>
@@ -112,7 +112,11 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>磁盘空间划分：</p>
+  <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>&#x2600; 天气不错，正好给自己的个人笔记本 ThinkPad T470p 重新安装下双系统（Windows 10 + Arch Linux (KDE)），先来张 Arch Linux 的系统信息图：</p>
+<img alt="Arch Linux 系统信息" src="https://s2.loli.net/2021/12/12/pZtSERuQMW4ilkV.png">
+<span id="more"></span>
+目前存储盘有两个，一个为 500G 的硬盘，另一个为 250G 的SSD，两个系统都安装在 SSD 上，具体磁盘空间划分如下表：
+
 <table>
 <thead>
 <tr>
@@ -132,7 +136,6 @@
 <td>剩余(约137.94G) 根目录 /</td>
 </tr>
 </tbody></table>
-<span id="more"></span>
 <h1 id="1-安装-Windows"><a href="#1-安装-Windows" class="headerlink" title="1. 安装 Windows"></a>1. 安装 Windows</h1><h2 id="1-1-准备-Windows-系统镜像"><a href="#1-1-准备-Windows-系统镜像" class="headerlink" title="1.1. 准备 Windows 系统镜像"></a>1.1. 准备 Windows 系统镜像</h2><p>下载网址：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn)</a></li>
@@ -144,55 +147,43 @@
 <li><a href="ed2k://|file|cn_windows_10_consumer_editions_version_1909_updated_jan_2020_x64_dvd_47161f17.iso|5417457664|274FEBA5BF0C874C291674182FA9C851|/">Windows 10 (consumer editions), version 1909 (updated Jan 2020) (x64) - DVD (Chinese-Simplified)</a></li>
 <li><a href="ed2k://|file|cn_windows_10_consumer_editions_version_21h1_x64_dvd_1baf479d.iso|5807677440|E53960C7CAD323F60442A8AB9C269C2E|/">Windows 10 21H1 简体中文多版本原版纯净官方镜像下载</a></li>
 </ul>
-<h2 id="1-2-制作启动-U-盘（使用-Rufus）"><a href="#1-2-制作启动-U-盘（使用-Rufus）" class="headerlink" title="1.2. 制作启动 U 盘（使用 Rufus）"></a>1.2. 制作启动 U 盘（使用 Rufus）</h2><p>使用 Rufus 来制作 U盘 启动盘，选择 Windows10 的 iso 镜像，分区类型为 GPT，目标系统类型为 UEFI，其他默认即可，点击开始。<br><img src="win10_make_USB.png" alt="win10_make_USB|400"></p>
-<h2 id="1-3-设置-BIOS"><a href="#1-3-设置-BIOS" class="headerlink" title="1.3. 设置 BIOS"></a>1.3. 设置 BIOS</h2><p>插入 U 盘，重启后，进入 BIOS 设置界面：</p>
+<h2 id="1-2-制作启动-U-盘（使用-Rufus）"><a href="#1-2-制作启动-U-盘（使用-Rufus）" class="headerlink" title="1.2. 制作启动 U 盘（使用 Rufus）"></a>1.2. 制作启动 U 盘（使用 Rufus）</h2><p>使用 <a target="_blank" rel="noopener" href="https://rufus.ie/">Rufus</a>（Linux 系统可使用 <code>dd</code>）来制作U盘启动盘，选择 Windows10 的 iso 镜像，分区类型为 GPT，目标系统类型为 UEFI，其他默认即可，点击开始。<br><img alt="Rufus制作Win10启动U盘" src="https://s2.loli.net/2021/12/12/82uTMrs9oSYfDi3.png"></p>
+<h2 id="1-3-设置-BIOS"><a href="#1-3-设置-BIOS" class="headerlink" title="1.3. 设置 BIOS"></a>1.3. 设置 BIOS</h2><p>插入U盘，重启后，进入 BIOS 设置界面：</p>
 <ul>
 <li>关闭主板设置中的 Secure Boot（Disabled）。</li>
 <li>调整启动方式为 UEFI（UEFI Only）。</li>
 </ul>
-<h2 id="1-4-进入启动引导界面（自定义）"><a href="#1-4-进入启动引导界面（自定义）" class="headerlink" title="1.4. 进入启动引导界面（自定义）"></a>1.4. 进入启动引导界面（自定义）</h2><p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面。遵循提示点击，直到看到安装类型选择，此时选择 “自定义”。</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_installation_type.png" class="" title="win10_installation_type">
-
+<h2 id="1-4-进入启动引导界面（自定义）"><a href="#1-4-进入启动引导界面（自定义）" class="headerlink" title="1.4. 进入启动引导界面（自定义）"></a>1.4. 进入启动引导界面（自定义）</h2><p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面。遵循提示点击，直到看到安装类型选择，此时选择 “自定义”。<br><img src="https://s2.loli.net/2021/12/12/I6LrAz3SPy9MH57.png" alt="win10安装类型选择"></p>
 <h2 id="1-5-磁盘分区"><a href="#1-5-磁盘分区" class="headerlink" title="1.5. 磁盘分区"></a>1.5. 磁盘分区</h2><p>按 Shift + F10 组合键打开命令提示符窗口。</p>
-<p>(1) 进入diskpart模式</p>
+<p>(1) 进入 diskpart 模式</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 打开Microsoft DiskPart分区工具</span><br><span class="line"><span class="function">X:\<span class="title">Sources</span>&gt; <span class="title">diskpart</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"># 查看磁盘信息</span></span><br><span class="line"><span class="function"><span class="title">DISKPART</span>&gt; <span class="title">list</span> <span class="title">disk</span></span></span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_enter_diskpart.png" class="" title="win10_enter_diskpart">
+<img alt="进入diskpart模式" src="https://s2.loli.net/2021/12/12/tTkSayBFmb8IeND.png" width="500px">
 
-<p>(2) 清空磁盘0分区</p>
+<p>(2) 清空磁盘0分区（<mark>注意会格式化磁盘，请提前备份重要数据</mark>）</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 选中磁盘<span class="number">0</span>（<span class="number">500</span>G硬盘）</span><br><span class="line">DISKPART&gt; select disk <span class="number">0</span></span><br><span class="line"></span><br><span class="line"># 清除硬盘上原有分区和数据</span><br><span class="line">DISKPART&gt; clean</span><br><span class="line"></span><br><span class="line"># 把当前选中硬盘转换为GPT格式</span><br><span class="line">DISKPART&gt; <span class="built_in">convert</span> gpt</span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_clean_disk0.png" class="" title="win10_clean_disk0">
+<img alt="格式化disk0" src="https://s2.loli.net/2021/12/12/mhwBLij9OTxCtU1.png" width="400px">
 
-<p>(3) 清空磁盘1分区</p>
+<p>(3) 清空磁盘1分区（<mark>注意会格式化磁盘，请提前备份重要数据</mark>）</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 选中磁盘<span class="number">1</span>（<span class="number">250</span>G SSD）</span><br><span class="line">DISKPART&gt; select disk <span class="number">1</span></span><br><span class="line"></span><br><span class="line"># 清除硬盘上原有分区和数据</span><br><span class="line">DISKPART&gt; clean</span><br><span class="line"></span><br><span class="line"># 把当前选中硬盘转换为GPT格式</span><br><span class="line">DISKPART&gt; <span class="built_in">convert</span> gpt</span><br><span class="line"></span><br><span class="line"># 验证清除结果</span><br><span class="line">DISKPART&gt; list disk</span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_clean_disk1.png" class="" title="win10_clean_disk1">
+<img alt="格式化disk1" src="https://s2.loli.net/2021/12/12/5DPzliur9Lj2hY1.png" width="500px">
 
 <p>(4) 系统分区</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 选中磁盘<span class="number">1</span>（SSD）作为系统盘</span><br><span class="line">DISKPART&gt; select disk <span class="number">1</span></span><br><span class="line"></span><br><span class="line"># 创建efi分区 <span class="number">500</span>M</span><br><span class="line">DISKPART&gt; create partition efi size=<span class="number">500</span></span><br><span class="line"></span><br><span class="line"># 创建msr分区 <span class="number">50</span>M</span><br><span class="line">DISKPART&gt; create partition msr size=<span class="number">50</span></span><br><span class="line"></span><br><span class="line"># 创建系统主分区 <span class="number">100</span>G</span><br><span class="line">DISKPART&gt; create partition primary size=<span class="number">102400</span></span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_os_partition.png" class="" title="win10_os_partition">
+<img alt="系统分区disk1" src="https://s2.loli.net/2021/12/12/coe1GhN2AgYyVbM.png" width="500px">
 
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 确认当前磁盘</span><br><span class="line">DISKPART&gt; list disk</span><br><span class="line"></span><br><span class="line"># 查看已经创建的分区信息</span><br><span class="line">DISKPART&gt; list partition</span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_os_partition_result.png" class="" title="win10_os_partition_result">
+<img alt="查看disk1分区结果" src="https://s2.loli.net/2021/12/12/XcqgGzwSUPvdAhB.png" width="500px">
 
-<h2 id="1-6-系统安装"><a href="#1-6-系统安装" class="headerlink" title="1.6. 系统安装"></a>1.6. 系统安装</h2><p>完成分区后，在 Windows 安装位置选择界面，点击“刷新”，即可展示刚通过命令行来分区的结果，如下图所示：</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_installation_location.png" class="" title="win10_installation_location">
-<p>选中 “驱动器1分区3”（100G空间的系统安装位置），点击“下一步”，即可开始 Windows 的安装。</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_installing_page.png" class="" title="win10_installing_page">
-
+<h2 id="1-6-系统安装"><a href="#1-6-系统安装" class="headerlink" title="1.6. 系统安装"></a>1.6. 系统安装</h2><p>完成分区后，在 Windows 安装位置选择界面，点击“刷新”，即可展示刚通过命令行来分区的结果，如下图所示：<br><img alt="选择安装win10的分区" src="https://s2.loli.net/2021/12/12/KEMVJR9nuo7BeOj.png" width="500px"><br>选中 “驱动器1分区3”（100G空间的系统安装位置），点击“下一步”，即可开始 Windows 的安装。<br><img alt="正在安装Windows" src="https://s2.loli.net/2021/12/12/9KqNtSOEaX7oxQW.png" width="500px"></p>
 <h2 id="1-7-安装成功"><a href="#1-7-安装成功" class="headerlink" title="1.7. 安装成功"></a>1.7. 安装成功</h2><p>系统安装好后，会自动重启，此时可拔出 U 盘。<br>重启后，会进行一系列的配置，不再赘述。</p>
-<p>安装成功后，进入磁盘管理界面，再从 500G 硬盘中分出 140G 作为个人应用数据存储用，如下图所示：</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/win10_create_HD_partition.png" class="" title="win10_create_HD_partition">
-
+<p>安装成功后，进入磁盘管理界面，再从 500G 硬盘中分出 140G 作为个人应用数据存储用，如下图所示：<br><img src="https://s2.loli.net/2021/12/12/ac8CiwWUbFljrGY.png" alt="win10磁盘管理"></p>
 <h1 id="2-安装-Arch-Linux"><a href="#2-安装-Arch-Linux" class="headerlink" title="2. 安装 Arch Linux"></a>2. 安装 Arch Linux</h1><h2 id="2-1-准备-Arch-Linux-镜像"><a href="#2-1-准备-Arch-Linux-镜像" class="headerlink" title="2.1. 准备 Arch Linux 镜像"></a>2.1. 准备 Arch Linux 镜像</h2><ul>
 <li>下载网站：<a target="_blank" rel="noopener" href="https://archlinux.org/download/">Arch Linux - Downloads</a></li>
 <li>镜像磁力链接：<a href="magnet:?xt=urn:btih:50f06e56adac70e52fddb37ad6ee331564d6aba1&dn=archlinux-2021.10.01-x86_64.iso">Magnet link for 2021.10.01</a></li>
 </ul>
-<h2 id="2-2-制作启动-U-盘（使用-Rufus）"><a href="#2-2-制作启动-U-盘（使用-Rufus）" class="headerlink" title="2.2. 制作启动 U 盘（使用 Rufus）"></a>2.2. 制作启动 U 盘（使用 Rufus）</h2><p>选择 Arch Linux 的 iso 镜像，采用 UEFI + GPT，点击开始准备写入。</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_make_usb.png" class="" title="archlinux_make_usb">
-
-<p>点击开始时，选择 “<strong>以 DD 镜像 模式写入</strong>”：<br><img src="archlinux_make_usb_dd.png" alt="archlinux_make_usb_dd"></p>
-<h2 id="2-3-启动到-Live-环境"><a href="#2-3-启动到-Live-环境" class="headerlink" title="2.3. 启动到 Live 环境"></a>2.3. 启动到 Live 环境</h2><p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面，一般默认选第一个。<br>当看到如下界面，说明启动成功。</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_live_env.png" class="" title="archlinux_live_env">
-
+<h2 id="2-2-制作启动-U-盘（使用-Rufus）"><a href="#2-2-制作启动-U-盘（使用-Rufus）" class="headerlink" title="2.2. 制作启动 U 盘（使用 Rufus）"></a>2.2. 制作启动 U 盘（使用 Rufus）</h2><p>选择 Arch Linux 的 iso 镜像，采用 UEFI + GPT，点击开始准备写入。<br><img src="https://s2.loli.net/2021/12/12/oT3vqK4Brl9tCA5.png" alt="制作Arch Linux启动盘|300"></p>
+<p>点击开始时，选择 “<strong>以 DD 镜像 模式写入</strong>”：<br><img src="https://s2.loli.net/2021/12/12/LAOyVPfhpvambNT.png" alt="以DD镜像写入|400"></p>
+<h2 id="2-3-启动到-Live-环境"><a href="#2-3-启动到-Live-环境" class="headerlink" title="2.3. 启动到 Live 环境"></a>2.3. 启动到 Live 环境</h2><p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面，一般默认选第一个。<br>当看到如下界面，说明启动成功。<br><img alt="成功进入Arch Linux" src="https://s2.loli.net/2021/12/12/ty19bQhfAvmMWHr.png" width="500px"></p>
 <h2 id="2-4-验证引导模式"><a href="#2-4-验证引导模式" class="headerlink" title="2.4. 验证引导模式"></a>2.4. 验证引导模式</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 若结果显示了目录且没有报告错误, 则系统以 UEFI 模式引导, 否则可能是以 BIOS 模式引导</span></span><br><span class="line">root@archiso ~ # ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-5-禁用-reflector"><a href="#2-5-禁用-reflector" class="headerlink" title="2.5. 禁用 reflector"></a>2.5. 禁用 reflector</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 禁用 reflector，避免自己更新 mirrorlist</span></span><br><span class="line">root@archiso ~ # systemctl stop reflector.service</span><br></pre></td></tr></table></figure>
@@ -209,8 +200,7 @@
 <h2 id="2-8-建立硬盘分区"><a href="#2-8-建立硬盘分区" class="headerlink" title="2.8. 建立硬盘分区"></a>2.8. 建立硬盘分区</h2><p><strong>(1) 查看磁盘信息</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看磁盘信息</span></span><br><span class="line">root@archiso ~ # fdisk -l</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 或通过 lsblk 查看磁盘, 看不到未建分区的磁盘块</span></span><br><span class="line">root@archiso ~ # lsblk</span><br></pre></td></tr></table></figure>
 
-<p><code>lsblk</code>  显示如下图所示：</p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_first_lsblk.png" class="" title="archlinux_first_lsblk">
+<p><code>lsblk</code>  显示如下图所示：<br><img src="https://s2.loli.net/2021/12/12/mGCcbKqvwR3Wod9.png" alt="lsblk展示磁盘信息"></p>
 <ul>
 <li>sda 为 500G 的硬盘，140G 的 sda1 为 win10 的 个人应用数据存储盘，剩余的都用来作为 Arch Linux 的用户主目录 <code>/home</code>；</li>
 <li>nvme0n1 为 250G 的 SSD，500M 的 nvme0n1p1 为 win10 的 efi，50M 的 nvme0n1p2 为 win10 的 msr，99.4G（约100G）的 nvme0n1p3 为 win10 的系统盘， nvme0n1p4 为 win10 的恢复系统盘，剩余的都用来作为 Arch Linux 的根目录 <code>/</code>。</li>
@@ -227,8 +217,9 @@
 <ul>
 <li><p><strong>分区格式化</strong>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将刚刚分好的区格式化为ext4格式，这里认准分区号是nvme0n1p5</span></span><br><span class="line">root@archiso ~ # mkfs.ext4 /dev/nvme0n1p5</span><br></pre></td></tr></table></figure>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_mkfs_ext4_root.png" class="" title="archlinux_mkfs_ext4_root"></li>
-<li><p>** 挂载分区**：</p>
+<p><img src="https://s2.loli.net/2021/12/12/54vitAId8xjobMy.png" alt="格式化nvme0n1p5为ext4"></p>
+</li>
+<li><p><strong>挂载分区</strong>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将根目录挂载到/mnt</span></span><br><span class="line">root@archiso ~ #  mount /dev/nvme0n1p5 /mnt</span><br></pre></td></tr></table></figure></li>
 </ul>
 <blockquote>
@@ -247,9 +238,7 @@
 <p><strong>(4) 挂载 efi</strong><br>由于是双系统安装，Arch Linux 的 EFI 分区共用的是 Windows的。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkdir /mnt/efi</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 挂载EFI分区</span></span><br><span class="line">root@archiso ~ # mount /dev/nvme0n1p1 /mnt/efi</span><br></pre></td></tr></table></figure>
 
-<p><strong>(5) 确认所有挂载情况</strong></p>
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_final_lsblk.png" class="" title="archlinux_final_lsblk">
-
+<p><strong>(5) 确认所有挂载情况</strong><br><img src="https://s2.loli.net/2021/12/12/VqCgIlS6v8ZMLoy.png" alt="lsblk确认挂载情况"></p>
 <h2 id="2-9-安装基本系统"><a href="#2-9-安装基本系统" class="headerlink" title="2.9. 安装基本系统"></a>2.9. 安装基本系统</h2><p>安装之前，可考虑更换国内镜像源来加快下载速度，如 中科大 ustc、清华 tsinghua。<br>使用 <code>vim /etc/pacman.d/mirrorlist</code> 修改镜像源，在首行加入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch </span><br><span class="line"># 中科大</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</span><br></pre></td></tr></table></figure>
 
@@ -289,13 +278,12 @@
 <li>grub 2.06 现在会自动添加 固件设置菜单 引导项目，无需手动创建。</li>
 </ol>
 </blockquote>
-<p>鉴于此需要手动启用os-prober来确保Windows能被正确识别：</p>
+<p>鉴于此需要手动启用 os-prober 来确保 Windows 能被正确识别：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# vim /etc/default/grub</span><br></pre></td></tr></table></figure>
 <p>在里面找一条空行输入：<code>GRUB_DISABLE_OS_PROBER=false</code>，保存退出。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将 GRUB EFI 应用 grubx64.efi 安装到 /efi，并将其模块安装到 /boot/grub/x86_64-efi/</span></span><br><span class="line">[root@archiso /]# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成grub.cfg</span></span><br><span class="line">[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
 
-<img src="/linux/dual-system-installation-guide-of-arch-linux/archlinux_grub_mkconfig.png" class="" title="archlinux_grub_mkconfig">
-
+<p><img src="https://s2.loli.net/2021/12/12/2DAXIRQFtSTPlwf.png" alt="安装grub引导程序"></p>
 <h2 id="2-17-完成安装"><a href="#2-17-完成安装" class="headerlink" title="2.17. 完成安装"></a>2.17. 完成安装</h2><p>退出新系统并取消挂载：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 退出arch-chroot</span></span><br><span class="line">[root@archiso /]# exit</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消所有挂载</span></span><br><span class="line">root@archiso ~ # umount -R /mnt</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启，启动时请拔出u盘</span></span><br><span class="line">root@archiso ~ # reboot</span><br></pre></td></tr></table></figure>
 
@@ -357,8 +345,10 @@
 <blockquote>
 <p>休眠功能：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate">Power management/Suspend and hibernate - ArchWiki (archlinux.org)</a></p>
 </blockquote>
-<h3 id="3-4-4-安装-KDE-应用"><a href="#3-4-4-安装-KDE-应用" class="headerlink" title="3.4.4. 安装 KDE 应用"></a>3.4.4. 安装 KDE 应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装 kde 应用包库：如 kde-applications 或 kde-applications-meta，亦可选择性安装：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 推荐安装系统工具，包含了KDE桌面环境所需的基本应用，如 终端工具Konsole 等</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-utilities</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形工具，包含图片查看器Gwenview、PDF查看器Okular、截图工具Spectacle 等</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-graphics</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-system</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-4-4-安装-KDE-应用"><a href="#3-4-4-安装-KDE-应用" class="headerlink" title="3.4.4. 安装 KDE 应用"></a>3.4.4. 安装 KDE 应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装 kde 应用包库：如 kde-applications 或 kde-applications-meta，亦可选择性安装：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 推荐安装系统工具，包含了KDE桌面环境所需的基本应用，如 终端工具Konsole 、文件编辑器Kate、下拉式终端yakuake、压缩工具Ark、 等</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-utilities</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形工具集合，包含图片查看器Gwenview、PDF查看器Okular、截图工具Spectacle 等</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-graphics</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 系统工具集合，包含文件管理器dolphin、分区管理器partitionmanager 等</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-system</span></span><br></pre></td></tr></table></figure>
 
+<p>以上为选择性安装，亦可直接选择安装 KDE 全家桶，<code>kde-applications-meta</code> 包含了各种各样的软件，应用全面也意味着其安装后空间占用十分大，通常不建议安装，可根据个人实际需要来选择性安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S kde-applications-meta</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>[1] <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation guide (简体中文) - ArchWiki (archlinux.org)</a><br>[2] <a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio</a><br>[3] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138951848">2021 Archlinux双系统安装教程（超详细） - 知乎 (zhihu.com)</a><br>[4] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c2ab582e13d">Arch Linux + KDE安装教程 - 简书 (jianshu.com)</a></p>
  
@@ -430,7 +420,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch-Linux/" rel="tag">Arch Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch-Linux/" rel="tag">Arch Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KDE/" rel="tag">KDE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
 
     </footer>
   </div>
@@ -583,14 +573,13 @@
     
 <script src="/js/jquery-3.6.0.min.js"></script>
  
-<script src="/js/lazyload.min.js"></script>
 
+<script src="/js/lazyload.min.js"></script>
 
 <!-- imageToolkit.js -->
  
 <script src="/js/imageToolkit.js"></script>
  
-
 <!-- Tocbot -->
  
 <script src="/js/tocbot.min.js"></script>
@@ -610,13 +599,11 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
 <script src="/dist/main.js"></script>
+
 
 <!-- ImageViewer -->
 

@@ -6,7 +6,7 @@
   <link href="https://sissilab.github.io/atom.xml" rel="self"/>
   
   <link href="https://sissilab.github.io/"/>
-  <updated>2021-12-07T04:03:17.253Z</updated>
+  <updated>2021-12-13T04:50:08.754Z</updated>
   <id>https://sissilab.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://sissilab.github.io/linux/arch-Linux-software-recommendation/"/>
     <id>https://sissilab.github.io/linux/arch-Linux-software-recommendation/</id>
     <published>2021-10-17T15:33:00.000Z</published>
-    <updated>2021-12-07T04:03:17.253Z</updated>
+    <updated>2021-12-13T04:50:08.754Z</updated>
     
     
     <summary type="html">&lt;ul&gt;
@@ -29,7 +29,7 @@
     
     
     
-    <category term="Arch Linux" scheme="https://sissilab.github.io/categories/Arch-Linux/"/>
+    <category term="Arch Linux 系列" scheme="https://sissilab.github.io/categories/Arch-Linux-%E7%B3%BB%E5%88%97/"/>
     
     
     <category term="Arch Linux" scheme="https://sissilab.github.io/tags/Arch-Linux/"/>
@@ -39,42 +39,28 @@
   </entry>
   
   <entry>
-    <title>Arch Linux 双系统安装</title>
+    <title>Arch Linux &amp; Win10 双系统安装</title>
     <link href="https://sissilab.github.io/linux/dual-system-installation-guide-of-arch-linux/"/>
     <id>https://sissilab.github.io/linux/dual-system-installation-guide-of-arch-linux/</id>
     <published>2021-10-17T15:27:07.000Z</published>
-    <updated>2021-12-07T04:03:17.254Z</updated>
+    <updated>2021-12-13T04:50:08.755Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0. 前言&quot;&gt;&lt;/a&gt;0. 前言&lt;/h1&gt;&lt;p&gt;磁盘空间划分：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;磁盘类型&lt;/th&gt;
-&lt;th&gt;Windows 10&lt;/th&gt;
-&lt;th&gt;Arch Linux&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;500G HD&lt;/td&gt;
-&lt;td&gt;140G 应用数据存储&lt;/td&gt;
-&lt;td&gt;剩余(约325.76G) 用户主目录 /home&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;250G SSD&lt;/td&gt;
-&lt;td&gt;500M EFI, 50M MSR, 100G 系统&lt;/td&gt;
-&lt;td&gt;剩余(约137.94G) 根目录 /&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0. 前言&quot;&gt;&lt;/a&gt;0. 前言&lt;/h1&gt;&lt;p&gt;&amp;#x2600; 天气不错，正好给自己的个人笔记本 ThinkPad T470p 重新安装下双系统（Windows 10 + Arch Linux (KDE)），先来张 Arch Linux 的系统信息图：&lt;/p&gt;
+&lt;img alt=&quot;Arch Linux 系统信息&quot; src=&quot;https://s2.loli.net/2021/12/12/pZtSERuQMW4ilkV.png&quot;&gt;</summary>
     
     
     
-    <category term="Arch Linux" scheme="https://sissilab.github.io/categories/Arch-Linux/"/>
+    <category term="Arch Linux 系列" scheme="https://sissilab.github.io/categories/Arch-Linux-%E7%B3%BB%E5%88%97/"/>
     
     
     <category term="Arch Linux" scheme="https://sissilab.github.io/tags/Arch-Linux/"/>
     
     <category term="Linux" scheme="https://sissilab.github.io/tags/Linux/"/>
+    
+    <category term="Windows" scheme="https://sissilab.github.io/tags/Windows/"/>
+    
+    <category term="KDE" scheme="https://sissilab.github.io/tags/KDE/"/>
     
   </entry>
   
@@ -83,7 +69,7 @@
     <link href="https://sissilab.github.io/design-pattern/abstract-factory-pattern/"/>
     <id>https://sissilab.github.io/design-pattern/abstract-factory-pattern/</id>
     <published>2021-10-17T15:14:26.000Z</published>
-    <updated>2021-12-09T11:09:27.665Z</updated>
+    <updated>2021-12-10T09:15:51.778Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;抽象工厂模式&lt;/strong&gt;（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。&lt;/p&gt;
@@ -175,7 +161,7 @@
     <link href="https://sissilab.github.io/design-pattern/design-pattern-overview/"/>
     <id>https://sissilab.github.io/design-pattern/design-pattern-overview/</id>
     <published>2021-10-17T14:58:01.000Z</published>
-    <updated>2021-12-07T04:03:17.224Z</updated>
+    <updated>2021-12-13T04:50:08.753Z</updated>
     
     
     <summary type="html">&lt;p&gt;设计模式一般共分为三大类：&lt;/p&gt;
@@ -183,9 +169,9 @@
     
     
     
-    <category term="23种设计模式" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="23 种设计模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-    <category term="0. 概览" scheme="https://sissilab.github.io/categories/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-%E6%A6%82%E8%A7%88/"/>
+    <category term="0. 概览" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-%E6%A6%82%E8%A7%88/"/>
     
     
     <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
