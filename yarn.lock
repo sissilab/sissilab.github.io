@@ -1281,9 +1281,9 @@ hexo-renderer-marked@^5.0.0:
     jsdom "^19.0.0"
     marked "^4.0.1"
 
-hexo-renderer-pug@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/hexo-renderer-pug/-/hexo-renderer-pug-2.0.0.tgz"
+hexo-renderer-pug@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hexo-renderer-pug/-/hexo-renderer-pug-3.0.0.tgz#4ca631cd0ecccefc43b70ac44230d5008956adc2"
   dependencies:
     pug "^3.0.2"
 
