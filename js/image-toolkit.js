@@ -191,16 +191,29 @@ function zoomAndRender(ratio, event) {
     TARGET_IMG_INFO.imgViewEl.style.setProperty('margin-left', zoomData.left + 'px', 'important');
 }
 
+const IMG_VIEW_MIN = 30;
+
 function zoom(ratio, TARGET_IMG_INFO, offsetSize) {
     const zoomInFlag = ratio > 0;
     ratio = zoomInFlag ? 1 + ratio : 1 / (1 - ratio);
     const curWidth = TARGET_IMG_INFO.curWidth;
     // const curHeight = TARGET_IMG_INFO.curHeight;
     let zoomRatio = curWidth * ratio / TARGET_IMG_INFO.realWidth;
-    const newWidth = TARGET_IMG_INFO.realWidth * zoomRatio;
-    const newHeight = TARGET_IMG_INFO.realHeight * zoomRatio;
-    const left = TARGET_IMG_INFO.left + (offsetSize.offsetX - offsetSize.offsetX * ratio);
-    const top = TARGET_IMG_INFO.top + (offsetSize.offsetY - offsetSize.offsetY * ratio);
+    let newWidth = TARGET_IMG_INFO.realWidth * zoomRatio;
+    let newHeight = TARGET_IMG_INFO.realHeight * zoomRatio;
+    if (IMG_VIEW_MIN >= newWidth || IMG_VIEW_MIN >= newHeight) {
+        // set minimum width or height
+        if (IMG_VIEW_MIN >= newWidth) {
+            newWidth = IMG_VIEW_MIN;
+            newHeight = (newWidth * TARGET_IMG_INFO.realHeight) / TARGET_IMG_INFO.realWidth;
+        } else {
+            newHeight = IMG_VIEW_MIN;
+            newWidth = (newHeight * TARGET_IMG_INFO.realWidth) / TARGET_IMG_INFO.realHeight;
+        }
+        ratio = 1;
+    }
+    const left = TARGET_IMG_INFO.left + offsetSize.offsetX * (1 - ratio);
+    const top = TARGET_IMG_INFO.top + offsetSize.offsetY * (1 - ratio);
     // cache image info: curWidth, curHeight, left, top
     TARGET_IMG_INFO.curWidth = newWidth;
     TARGET_IMG_INFO.curHeight = newHeight;

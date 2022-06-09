@@ -20,14 +20,13 @@
        
 <link rel="stylesheet" href="/dist/main.css">
 
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
-      />
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
       
 <link rel="stylesheet" href="/css/custom.css">
  
-      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
        
  
 
@@ -65,10 +64,10 @@
     
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="https://s2.loli.net/2021/12/06/Opxjkn5W98iCKbD.jpg" alt="image frame" />
+      <img src="https://s1.ax1x.com/2022/06/09/XyZvZj.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
-      <h1><a href="/"><img src="/images/logo.png" alt="SissiLab"></a></h1>
+      <h1><a href="/">SissiLab</a></h1>
       <div id="subtitle-box">
         
         <span id="subtitle"></span>
@@ -86,7 +85,7 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
 
 
 <!-- Subtitle -->
@@ -94,13 +93,7 @@
   <script>
     try {
       var typed = new Typed("#subtitle", {
-        strings: [ 
-                   'One ship drives east and another drives west', 
-                   'With the self-same winds that blow;', 
-                   '’Tis the set of the sails', 
-                   'That decides its goal', 
-                   'And not the calm or the strife'
-                 ],
+        strings: ['One ship drives east and another drives west', 'With the self-same winds that blow;', '’Tis the set of the sails'],
         startDelay: 0,
         typeSpeed: 150,
         loop: true,
@@ -196,7 +189,8 @@
     <div class="article-entry" itemprop="articleBody">
        
   <ul>
-<li><strong>输入法</strong><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.配置环境变量</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.pam_environment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.重启，生效</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5.添加输入法</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure> 
+<li><p><strong>输入法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.配置环境变量</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.pam_environment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.重启，生效</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5.添加输入法</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure> 
       <a class="article-more-link" href="/linux/arch-Linux-software-recommendation/"
         >More...</a
       >
@@ -782,7 +776,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2021
+        2021-2022
         <i class="ri-heart-fill heart_icon"></i> Roy
       </li>
     </ul>
@@ -899,21 +893,24 @@
     
 <script src="/js/jquery-3.6.0.min.js"></script>
  
-
 <script src="/js/lazyload.min.js"></script>
+
 
 <!-- imageToolkit.js -->
  
-<script src="/js/imageToolkit.js"></script>
+<script src="/js/image-toolkit.js"></script>
  
+
 <!-- Tocbot -->
 
-<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
 
 <script src="/dist/main.js"></script>
-
 
 <!-- ImageViewer -->
 
@@ -934,7 +931,7 @@
 <!-- CodeCopy -->
  
 <link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
 <script>
   function wait(callback, seconds) {
     var timelag = null;
@@ -989,10 +986,12 @@
   }(window, document);
 </script>
  
+
 <!-- imageToolkit.styl -->
  
-<link rel="stylesheet" href="/css/imageToolkit.css">
+<link rel="stylesheet" href="/css/image-toolkit.css">
  
+
 <!-- CanvasBackground -->
 
 <script>
