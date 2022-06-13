@@ -6,7 +6,7 @@
   <link href="https://sissilab.github.io/atom.xml" rel="self"/>
   
   <link href="https://sissilab.github.io/"/>
-  <updated>2022-06-13T07:00:33.475Z</updated>
+  <updated>2022-06-13T07:03:46.139Z</updated>
   <id>https://sissilab.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://sissilab.github.io/rabbitmq/seven-messaging-modes/"/>
     <id>https://sissilab.github.io/rabbitmq/seven-messaging-modes/</id>
     <published>2022-06-10T14:23:28.000Z</published>
-    <updated>2022-06-13T07:00:33.475Z</updated>
+    <updated>2022-06-13T07:03:46.139Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;本文介绍了 RabbitMQ 七种消息传递模式，并提供了 Java Client 和 Spring Boot 的代码示例，内容及代码主要参考于官网，具体资料可参考本文末尾的参考资料的链接。&lt;/p&gt;
@@ -32,7 +32,8 @@
 &lt;li&gt;&lt;b&gt;&lt;a href=&quot;#4-Routing-%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F%EF%BC%88direct%EF%BC%89&quot;&gt;Routing 路由模式&lt;/a&gt;&lt;/b&gt;：direct 类型交换机，生产者发布消息，交换机通过指定的 &lt;code&gt;routingKey&lt;/code&gt; 将消息分发给与之绑定的消费者。&lt;/li&gt;
 &lt;li&gt;&lt;b&gt;&lt;a href=&quot;#5-Topics-%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%BC%8F%EF%BC%88topic%EF%BC%89&quot;&gt;Topics 主题模式&lt;/a&gt;&lt;/b&gt;：topic 类型交换机，生产者发布消息的 &lt;code&gt;routingKey&lt;/code&gt; 可为 &lt;u&gt;以点号分割的单词列表&lt;/u&gt;，而消费者可通过 &lt;code&gt;* (星号，匹配一个单词)&lt;/code&gt; 或 &lt;code&gt;# (井号，匹配大于等于0个单词)&lt;/code&gt; 来模糊匹配 &lt;code&gt;routingKey&lt;/code&gt;，从而接收到某一主题的消息。&lt;/li&gt;
 &lt;li&gt;&lt;b&gt;&lt;a href=&quot;#6-RPC-%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E6%A8%A1%E5%BC%8F&quot;&gt;RPC&lt;/a&gt;&lt;/b&gt;：通过 RabbitMQ 实现 RPC。&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;&lt;a href=&quot;#7-Publisher-Confirms-%E5%8F%91%E5%B8%83%E7%A1%AE%E8%AE%A4%E6%A8%A1%E5%BC%8F&quot;&gt;Publisher Confirms 发布确认模式&lt;/a&gt;&lt;/b&gt;：通过将信道设置成 确认（confirm）模式，生产者则可以知晓消息是否已确认，并且可以通过回调方法来处理 ack  和 nack 情况的消息。</summary>
+&lt;li&gt;&lt;b&gt;&lt;a href=&quot;#7-Publisher-Confirms-%E5%8F%91%E5%B8%83%E7%A1%AE%E8%AE%A4%E6%A8%A1%E5%BC%8F&quot;&gt;Publisher Confirms 发布确认模式&lt;/a&gt;&lt;/b&gt;：通过将信道设置成 确认（confirm）模式，生产者则可以知晓消息是否已确认，并且可以通过回调方法来处理 ack  和 nack 情况的消息。&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
