@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> SissiLab</title>
+      <title>RabbitMQ 七种消息传递模式 |  SissiLab</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/A.svg" />
@@ -54,109 +54,8 @@
     
       
     <main class="content on">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/sissilab"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="https://s1.ax1x.com/2022/06/09/XyZvZj.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">SissiLab</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['One ship drives east and another drives west', 'With the self-same winds that blow;', '’Tis the set of the sails'],
-        startDelay: 0,
-        typeSpeed: 150,
-        loop: true,
-        backSpeed: 50,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  
-  
-
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
-    }
-
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
-    }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article
+      <section class="outer">
+  <article
   id="post-rabbitmq/seven-messaging-modes"
   class="article article-type-post"
   itemscope
@@ -167,10 +66,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/rabbitmq/seven-messaging-modes/"
-    >RabbitMQ 七种消息传递模式</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  RabbitMQ 七种消息传递模式
+</h1>
  
 
       
@@ -183,9 +81,34 @@
   <div class="article-category">
     <a class="article-category-link" href="/categories/RabbitMQ-%E7%B3%BB%E5%88%97/">RabbitMQ 系列</a>
   </div>
-   
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">18k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">81 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>本文介绍了 RabbitMQ 七种消息传递模式，并提供了 Java Client 和 Spring Boot 的代码示例，内容及代码主要参考于官网，具体资料可参考本文末尾的参考资料的链接。</p>
@@ -558,577 +481,89 @@
 
     <!-- copyright -->
     
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
     <footer class="article-footer">
        
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sissilab.github.io/rabbitmq/seven-messaging-modes/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
 
     </footer>
   </div>
 
    
+  <nav class="article-nav">
     
-</article>
-
     
-    <article
-  id="post-linux/arch-Linux-software-recommendation"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+      <a href="/linux/arch-Linux-software-recommendation/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Arch Linux 常用软件</div>
+      </a>
     
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/linux/arch-Linux-software-recommendation/"
-    >Arch Linux 常用软件</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/linux/arch-Linux-software-recommendation/" class="article-date">
-  <time datetime="2021-10-17T15:33:00.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Arch-Linux-%E7%B3%BB%E5%88%97/">Arch Linux 系列</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <ul>
-<li><p><strong>输入法</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S fcitx5 fcitx5-configtool fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.配置环境变量</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.pam_environment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.重启，生效</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5.添加输入法</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure> 
-      <a class="article-more-link" href="/linux/arch-Linux-software-recommendation/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch-Linux/" rel="tag">Arch Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-linux/dual-system-installation-guide-of-arch-linux"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/linux/dual-system-installation-guide-of-arch-linux/"
-    >Arch Linux &amp; Win10 双系统安装</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/linux/dual-system-installation-guide-of-arch-linux/" class="article-date">
-  <time datetime="2021-10-17T15:27:07.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Arch-Linux-%E7%B3%BB%E5%88%97/">Arch Linux 系列</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>&#x2600; 天气不错，正好给自己的个人笔记本 ThinkPad T470p 重新安装下双系统（Windows 10 + Arch Linux (KDE)），先来张 Arch Linux 的系统信息图：</p>
-<img alt="Arch Linux 系统信息" src="https://s2.loli.net/2021/12/12/pZtSERuQMW4ilkV.png"> 
-      <a class="article-more-link" href="/linux/dual-system-installation-guide-of-arch-linux/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arch-Linux/" rel="tag">Arch Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KDE/" rel="tag">KDE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-design-pattern/abstract-factory-pattern"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/design-pattern/abstract-factory-pattern/"
-    >设计模式之抽象工厂模式</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/design-pattern/abstract-factory-pattern/" class="article-date">
-  <time datetime="2021-10-17T15:14:26.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23 种设计模式</a> / <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">1. 创建型模式</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p><strong>抽象工厂模式</strong>（Abstract Factory Pattern）定义：是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就能得到同族的不同等级的产品的模式结构。</p>
-<p>抽象工厂模式属于创建型模式，可以说它是工厂方法模式的升级版。其中，<u>工厂方法模式针对的是一个产品等级结构</u>，而<u>抽象工厂模式则需要面对<mark>多个产品等级结构</mark></u>。当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率。</p> 
-      <a class="article-more-link" href="/design-pattern/abstract-factory-pattern/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-design-pattern/factory-method-pattern"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/design-pattern/factory-method-pattern/"
-    >设计模式之工厂方法模式</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/design-pattern/factory-method-pattern/" class="article-date">
-  <time datetime="2021-10-17T15:12:28.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23 种设计模式</a> / <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">1. 创建型模式</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。</p>
-<p>工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。</p> 
-      <a class="article-more-link" href="/design-pattern/factory-method-pattern/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-design-pattern/singleton-pattern"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/design-pattern/singleton-pattern/"
-    >设计模式之单例模式</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/design-pattern/singleton-pattern/" class="article-date">
-  <time datetime="2021-10-17T14:59:50.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23 种设计模式</a> / <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">1. 创建型模式</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <!-- 调整文章内表格宽度比例分配 -->
-<style>
-    table th:nth-of-type(1) {
-        width: 20%;
-    }
-    table th:nth-of-type(2) {
-        width: 40%;
-    }
-    table th:nth-of-type(3) {
-        width: 30%;
-    }
-    table th:nth-of-type(4) {
-        width: 10%;
-    }
-</style>
-
-<h1 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h1><p>单例模式属于创建型模式，在系统整个生命周期内只存在一个实例，它保证这个类仅有一个实例，并提供一个访问它的全局访问点。</p>
-<p><strong>核心步骤：</strong></p>
-<ol>
-<li>构造方法私有化；</li>
-<li>在本类中创建本类的实例；</li>
-<li>在本类中提供给外部获取实例的方式。 
-      <a class="article-more-link" href="/design-pattern/singleton-pattern/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-design-pattern/design-pattern-overview"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/design-pattern/design-pattern-overview/"
-    >设计模式概览</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/design-pattern/design-pattern-overview/" class="article-date">
-  <time datetime="2021-10-17T14:58:01.000Z" itemprop="datePublished">2021-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">23 种设计模式</a> / <a class="article-category-link" href="/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-%E6%A6%82%E8%A7%88/">0. 概览</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>设计模式一般共分为三大类：</p>
-<p><strong>1. 创建型模式：</strong><br>    - <a href="/design-pattern/singleton-pattern">1.1.单例模式</a><br>    - <a href="/design-pattern/factory-method-pattern">1.2.工厂方法模式</a><br>    - <a href="/design-pattern/abstract-factory-pattern">1.3.抽象工厂模式</a><br>    - <a href="#">1.4.建造者模式</a><br>    - <a href="#">1.5.原型模式</a></p> 
-      <a class="article-more-link" href="/design-pattern/design-pattern-overview/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A6%82%E8%A7%88/" rel="tag">概览</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-java/collections/HashMap-sourcecode-analysis"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/java/collections/HashMap-sourcecode-analysis/"
-    >Java 集合之 HashMap 源码分析（jdk1.8）</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/java/collections/HashMap-sourcecode-analysis/" class="article-date">
-  <time datetime="2019-07-04T14:30:35.000Z" itemprop="datePublished">2019-07-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java 集合框架</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <style>
-.example tbody td {
-    text-align: center;
-}
-.example thead th {
-    text-align: center;
-}
-</style>
-
-<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><ul>
-<li>HashMap为键值对（key -&gt; value）结构存储，其中<font color="green">key是唯一、不重复的、无序的，key和value都允许为null</font>，只允许一条记录的key为null，允许多条记录的value为null。HashMap一般通过key来定位value，当put操作时，传入相同key会覆盖value。</li>
-<li>HashMap<font color="green">默认初始容量为16</font>；<font color="green">默认负载因子为0.75</font>；<font color="green">位桶数组table的大小总是为2的n次方</font>。</li>
-<li>当位桶上的<font color="green">结点数大于8时会转为红黑树</font>，当位桶上的<font color="green">结点数小于6时红黑树转为链表</font>。</li>
-<li>当map中<font color="green">键值对数量超过临界阈值thread（容量 * 装载因子）时，将会进行扩容（位桶数组扩容）</font>。</li>
-<li>位桶数组扩容是一个比较耗性能的操作，故而在初始化HashMap的时候可以给一个大致的数值（估算map大小），避免频繁的扩容。</li>
-<li>HashMap是<font color="green">线程不安全</font>的，只可在单线程环境下使用，若需在多线程环境使用，主要方法有： 
-      <a class="article-more-link" href="/java/collections/HashMap-sourcecode-analysis/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Map/" rel="tag">Java Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-%E9%9B%86%E5%90%88/" rel="tag">Java 集合</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-scene/qrcode-scan-login"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/scene/qrcode-scan-login/"
-    >三种方式实现扫码登录</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/scene/qrcode-scan-login/" class="article-date">
-  <time datetime="2019-05-23T09:05:15.000Z" itemprop="datePublished">2019-05-23</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B0%8F%E5%8A%9F%E8%83%BDDemo%E5%AE%9E%E7%8E%B0%E7%B3%BB%E5%88%97/">小功能Demo实现系列</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1-需求描述"><a href="#1-需求描述" class="headerlink" title="1. 需求描述"></a>1. 需求描述</h1><p>目前大多网站都提供扫码登录功能，无需在网页端输入任何账号和密码信息，只需通过手机上的app，如微信、淘宝等，通过使用app上的扫码功能去扫面页面登录提供的二维码图片，即可完成登录。这不仅提高了安全性，也增加了用户的使用方便性。关于二维码与手机是如何绑定、网页端如何识别出手机端进行了扫码操作、以及网页端在扫码成功后如何获取到用户信息等问题，这些都会在接下来的篇幅中娓娓道来。</p> 
-      <a class="article-more-link" href="/scene/qrcode-scan-login/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/" rel="tag">功能实现</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-spring/spring-transaction-use"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/spring/spring-transaction-use/"
-    >Spring事务用法详解</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/spring/spring-transaction-use/" class="article-date">
-  <time datetime="2019-04-29T14:24:16.000Z" itemprop="datePublished">2019-04-29</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Spring%E6%A1%86%E6%9E%B6%E7%B3%BB%E5%88%97/">Spring框架系列</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1-数据库事务基础知识"><a href="#1-数据库事务基础知识" class="headerlink" title="1. 数据库事务基础知识"></a>1. 数据库事务基础知识</h1><p>在使用Spring开发过程中，我们常会使用到Spring事务管理，它提供了灵活方便的事务管理功能，但这些功能都是基于底层数据库本身的事务处理机制功工作的。因此欲深入了解Spring事务的管理和配置，有必要先了解下数据库基本的事务知识。</p>
-<h2 id="1-1-事务特性（ACID）"><a href="#1-1-事务特性（ACID）" class="headerlink" title="1.1. 事务特性（ACID）"></a>1.1. 事务特性（ACID）</h2><p>Spring事务中存在四种特性：原子性、一致性、隔离性和持久性。在这些事务特性中，数据“一致性”为最终目标，其他特性都是为实现这个目标方法和手段。数据库一般采用重执行日志保证原子性、一致性和持久性，采用数据库锁机制保证事务的隔离性。</p> 
-      <a class="article-more-link" href="/spring/spring-transaction-use/"
-        >More...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-  </article>
-  
-
-  
-  <nav class="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
-  
-</section>
-</div>
 
+  
+   
+     
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -1260,6 +695,22 @@
  
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

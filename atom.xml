@@ -6,7 +6,7 @@
   <link href="https://sissilab.github.io/atom.xml" rel="self"/>
   
   <link href="https://sissilab.github.io/"/>
-  <updated>2022-06-09T11:08:56.165Z</updated>
+  <updated>2022-06-13T06:53:02.917Z</updated>
   <id>https://sissilab.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RabbitMQ 七种消息传递模式</title>
+    <link href="https://sissilab.github.io/rabbitmq/seven-messaging-modes/"/>
+    <id>https://sissilab.github.io/rabbitmq/seven-messaging-modes/</id>
+    <published>2022-06-10T14:23:28.000Z</published>
+    <updated>2022-06-13T06:53:02.917Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;本文介绍了 RabbitMQ 七种消息传递模式，并提供了 Java Client 和 Spring Boot</summary>
+        
+      
+    
+    
+    
+    <category term="RabbitMQ 系列" scheme="https://sissilab.github.io/categories/RabbitMQ-%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="RabbitMQ" scheme="https://sissilab.github.io/tags/RabbitMQ/"/>
+    
+    <category term="Java" scheme="https://sissilab.github.io/tags/Java/"/>
+    
+    <category term="SpringBoot" scheme="https://sissilab.github.io/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>Arch Linux 常用软件</title>
@@ -223,10 +252,10 @@
   
   <entry>
     <title>三种方式实现扫码登录</title>
-    <link href="https://sissilab.github.io/qrcode-scan-login/"/>
-    <id>https://sissilab.github.io/qrcode-scan-login/</id>
+    <link href="https://sissilab.github.io/scene/qrcode-scan-login/"/>
+    <id>https://sissilab.github.io/scene/qrcode-scan-login/</id>
     <published>2019-05-23T09:05:15.000Z</published>
-    <updated>2021-12-07T04:03:17.295Z</updated>
+    <updated>2022-06-13T06:53:02.919Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;1-需求描述&quot;&gt;&lt;a href=&quot;#1-需求描述&quot; class=&quot;headerlink&quot; title=&quot;1. 需求描述&quot;&gt;&lt;/a&gt;1. 需求描述&lt;/h1&gt;&lt;p&gt;目前大多网站都提供扫码登录功能，无需在网页端输入任何账号和密码信息，只需通过手机上的app，如微信、淘宝等，通过使用app上的扫码功能去扫面页面登录提供的二维码图片，即可完成登录。这不仅提高了安全性，也增加了用户的使用方便性。关于二维码与手机是如何绑定、网页端如何识别出手机端进行了扫码操作、以及网页端在扫码成功后如何获取到用户信息等问题，这些都会在接下来的篇幅中娓娓道来。&lt;/p&gt;</summary>
