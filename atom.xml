@@ -6,7 +6,7 @@
   <link href="https://sissilab.github.io/atom.xml" rel="self"/>
   
   <link href="https://sissilab.github.io/"/>
-  <updated>2022-06-14T07:58:00.092Z</updated>
+  <updated>2022-06-14T08:28:02.563Z</updated>
   <id>https://sissilab.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://sissilab.github.io/rabbitmq/seven-messaging-modes/"/>
     <id>https://sissilab.github.io/rabbitmq/seven-messaging-modes/</id>
     <published>2022-06-10T14:23:28.000Z</published>
-    <updated>2022-06-14T07:58:00.092Z</updated>
+    <updated>2022-06-14T08:28:02.563Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;本文介绍了 RabbitMQ 七种消息传递模式，并提供了 Java Client 和 Spring Boot 的代码示例，内容及代码主要参考于官网，具体资料可参考本文末尾的参考资料的链接。&lt;/p&gt;
