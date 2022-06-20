@@ -6,7 +6,7 @@
   <link href="https://sissilab.github.io/atom.xml" rel="self"/>
   
   <link href="https://sissilab.github.io/"/>
-  <updated>2022-06-14T08:28:02.563Z</updated>
+  <updated>2022-06-20T01:56:07.002Z</updated>
   <id>https://sissilab.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>策略模式</title>
+    <link href="https://sissilab.github.io/design-pattern/strategy-pattern/"/>
+    <id>https://sissilab.github.io/design-pattern/strategy-pattern/</id>
+    <published>2022-06-20T01:44:39.000Z</published>
+    <updated>2022-06-20T01:56:07.002Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;0-简介&quot;&gt;&lt;a href=&quot;#0-简介&quot; class=&quot;headerlink&quot; title=&quot;0. 简介&quot;&gt;&lt;/a&gt;0. 简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;策略（Strategy）模式&lt;/strong&gt;的定义：该模式定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的变化不会影响使用算法的客户。策略模式属于对象行为模式，它通过对算法进行封装，把使用算法的责任和算法的实现分割开来，并委派给不同的对象对这些算法进行管理。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="23 种设计模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="3. 行为型模式" scheme="https://sissilab.github.io/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/3-%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="设计模式" scheme="https://sissilab.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="行为型模式" scheme="https://sissilab.github.io/tags/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>RabbitMQ 七种消息传递模式</title>
