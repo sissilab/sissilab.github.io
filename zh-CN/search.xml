@@ -4,13 +4,29 @@
     
     
     <entry>
-        <title></title>
+        <title>单例模式</title>
         <link href="/zh-CN/design-pattern/singleton-pattern/"/>
         <url>/zh-CN/design-pattern/singleton-pattern/</url>
         
         <content type="html"><![CDATA[]]></content>
         
         
+        <categories>
+            
+            <category> 23 设计模式 </category>
+            
+            <category> 1. 创造型模式 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+            <tag> 创造型模式 </tag>
+            
+        </tags>
         
     </entry>
     
