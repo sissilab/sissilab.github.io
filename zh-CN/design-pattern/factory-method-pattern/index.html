@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      工厂方法模式 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="zh-CN">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/zh-CN/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/zh-CN/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/zh-CN/">
+          <a href="/zh-CN/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/archives/">
+          <a href="/zh-CN/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/categories/">
+          <a href="/zh-CN/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/tags/">
+          <a href="/zh-CN/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">工厂方法模式</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+          2024-10-31
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/zh-CN/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="23 种设计模式">
+                    23 种设计模式
+                  </a>
+                </span>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/zh-CN/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="1. 创建型模式">
+                    1. 创建型模式
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                    #设计模式
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="创建型模式">
+                    #创建型模式
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="0-简介"><a class="markdownIt-Anchor" href="#0-简介"></a> 0. 简介</h1>
+<p>工厂模式主要划分为三类：简单工厂模式、工厂方法模式、和抽象工厂模式。它们都属于创建型模式，其中简单工厂模式不属于 GoF 23 种设计模式。</p>
+<p>工厂模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。</p>
+<h1 id="1-简单工厂模式"><a class="markdownIt-Anchor" href="#1-简单工厂模式"></a> 1. 简单工厂模式</h1>
+<p><strong>简单工厂模式</strong>，又称为<strong>静态工厂模式</strong>（Static Factory Method Pattern），由一个工厂对象决定创建出哪一种产品类的实例，简单工厂模式的实质是由一个工厂类根据传入的参数（如产品类型），动态决定应该创建哪一个产品类。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>由一个工厂类来获取所有不同的产品，结构简单，实现简单，易于理解；</li>
+<li>使用方无需知晓所创建具体产品的类名，只需要传入一个正确的参数（如产品类型），就可以获取你所需要的对象，而无需知道其创建细节。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>工厂类单一、且职责相对过重，当增加新产品时，需修改工厂类的判断逻辑（扩展困难），违背了开闭原则；</li>
+<li>工厂类使用了 static 工厂方法来创建产品，造成工厂角色无法形成基于继承的等级结构。</li>
+</ol>
+<p><strong>适用场景：</strong></p>
+<ol>
+<li>工程类负责创建的产品对象较少；</li>
+<li>使用方（客户端）只需要知道传入工厂类的参数，无需知晓创建对象的逻辑和细节。</li>
+</ol>
+<h2 id="11-结构与实现"><a class="markdownIt-Anchor" href="#11-结构与实现"></a> 1.1. 结构与实现</h2>
+<p>简单工厂模式的主要角色如下：</p>
+<ul>
+<li><strong>简单工厂</strong>（SimpleFactory）：是简单工厂模式的核心，负责创建所有产品的内部逻辑。工厂类的创建产品的方法为公有静态方法， 可被外界直接调用，根据产品类型参数来创建所需的产品对象。</li>
+<li><strong>抽象产品</strong>（IProduct）：是简单工厂创建所有产品对象的父级接口，负责描述所有产品实例的公共接口。</li>
+<li><strong>具体产品</strong>（Phone、Laptop、Earphone）：是简单工厂模式的创建目标，实现了产品公共接口。</li>
+</ul>
+<p>其类图如下所示：</p>
+<img class="kroki" src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI1NDZweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjYzN3B4O2hlaWdodDo1NDZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2MzcgNTQ2IiB3aWR0aD0iNjM3cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48IS0tY2x1c3RlciBQcm9kdWN0LS0+PGcgaWQ9ImNsdXN0ZXJfUHJvZHVjdCI+PHJlY3QgZmlsbD0ibm9uZSIgaGVpZ2h0PSIyNTYuNTkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgd2lkdGg9IjQzMiIgeD0iMTk5IiB5PSIyODMuNiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI2MiIgeD0iMzg0IiB5PSIyOTguNTk1MSI+UHJvZHVjdDwvdGV4dD48L2c+PCEtLWNsYXNzIElQcm9kdWN0LS0+PGcgaWQ9ImVsZW1fSVByb2R1Y3QiPjxyZWN0IGNvZGVMaW5lPSI0IiBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjY0LjI5NjkiIGlkPSJJUHJvZHVjdCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTAyIiB4PSIzNjgiIHk9IjMyNi42Ii8+PGVsbGlwc2UgY3g9IjM4OC44NSIgY3k9IjM0Mi42IiBmaWxsPSIjQjRBN0U1IiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTM4NC43NzE5LDMzOC4zNjU2IEwzODQuNzcxOSwzMzYuMjA5NCBMMzkyLjE2MjUsMzM2LjIwOTQgTDM5Mi4xNjI1LDMzOC4zNjU2IEwzODkuNjkzOCwzMzguMzY1NiBMMzg5LjY5MzgsMzQ2LjQ0MzggTDM5Mi4xNjI1LDM0Ni40NDM4IEwzOTIuMTYyNSwzNDguNiBMMzg0Ljc3MTksMzQ4LjYgTDM4NC43NzE5LDM0Ni40NDM4IEwzODcuMjQwNiwzNDYuNDQzOCBMMzg3LjI0MDYsMzM4LjM2NTYgTDM4NC43NzE5LDMzOC4zNjU2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtc3R5bGU9Iml0YWxpYyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI1NyIgeD0iNDA0LjE1IiB5PSIzNDcuNDQ2NyI+SVByb2R1Y3Q8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMzY5IiB4Mj0iNDY5IiB5MT0iMzU4LjYiIHkyPSIzNTguNiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjM2OSIgeDI9IjQ2OSIgeTE9IjM2Ni42IiB5Mj0iMzY2LjYiLz48ZWxsaXBzZSBjeD0iMzc5IiBjeT0iMzgwLjI0ODQiIGZpbGw9IiM4NEJFODQiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNzYiIHg9IjM4OCIgeT0iMzgzLjU5NTEiPnZvaWQgZGVzYygpPC90ZXh0PjwvZz48IS0tY2xhc3MgUGhvbmUtLT48ZyBpZD0iZWxlbV9QaG9uZSI+PHJlY3QgY29kZUxpbmU9IjciIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNjQuMjk2OSIgaWQ9IlBob25lIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMDIiIHg9IjIzMSIgeT0iNDUxLjg5Ii8+PGVsbGlwc2UgY3g9IjI1Ny4yNSIgY3k9IjQ2Ny44OSIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0yNjAuMjE4OCw0NzMuNTMwNiBRMjU5LjY0MDYsNDczLjgyNzUgMjU5LDQ3My45NjgxIFEyNTguMzU5NCw0NzQuMTI0NCAyNTcuNjU2Myw0NzQuMTI0NCBRMjU1LjE1NjMsNDc0LjEyNDQgMjUzLjgyODEsNDcyLjQ4MzggUTI1Mi41MTU2LDQ3MC44Mjc1IDI1Mi41MTU2LDQ2Ny43MDI1IFEyNTIuNTE1Niw0NjQuNTc3NSAyNTMuODI4MSw0NjIuOTIxMyBRMjU1LjE1NjMsNDYxLjI2NSAyNTcuNjU2Myw0NjEuMjY1IFEyNTguMzU5NCw0NjEuMjY1IDI1OSw0NjEuNDIxMyBRMjU5LjY1NjMsNDYxLjU3NzUgMjYwLjIxODgsNDYxLjg3NDQgTDI2MC4yMTg4LDQ2NC41OTMxIFEyNTkuNTkzOCw0NjQuMDE1IDI1OSw0NjMuNzQ5NCBRMjU4LjQwNjMsNDYzLjQ2ODEgMjU3Ljc4MTMsNDYzLjQ2ODEgUTI1Ni40Mzc1LDQ2My40NjgxIDI1NS43NSw0NjQuNTQ2MyBRMjU1LjA2MjUsNDY1LjYwODggMjU1LjA2MjUsNDY3LjcwMjUgUTI1NS4wNjI1LDQ2OS43OTYzIDI1NS43NSw0NzAuODc0NCBRMjU2LjQzNzUsNDcxLjkzNjkgMjU3Ljc4MTMsNDcxLjkzNjkgUTI1OC40MDYzLDQ3MS45MzY5IDI1OSw0NzEuNjcxMyBRMjU5LjU5MzgsNDcxLjM5IDI2MC4yMTg4LDQ3MC44MTE5IEwyNjAuMjE4OCw0NzMuNTMwNiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQ1IiB4PSIyNzMuNzUiIHk9IjQ3Mi43MzY3Ij5QaG9uZTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyMzIiIHgyPSIzMzIiIHkxPSI0ODMuODkiIHkyPSI0ODMuODkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyMzIiIHgyPSIzMzIiIHkxPSI0OTEuODkiIHkyPSI0OTEuODkiLz48ZWxsaXBzZSBjeD0iMjQyIiBjeT0iNTA1LjUzODQiIGZpbGw9IiM4NEJFODQiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNzYiIHg9IjI1MSIgeT0iNTA4Ljg4NTEiPnZvaWQgZGVzYygpPC90ZXh0PjwvZz48IS0tY2xhc3MgTGFwdG9wLS0+PGcgaWQ9ImVsZW1fTGFwdG9wIj48cmVjdCBjb2RlTGluZT0iMTAiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNjQuMjk2OSIgaWQ9IkxhcHRvcCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTAyIiB4PSIzNjgiIHk9IjQ1MS44OSIvPjxlbGxpcHNlIGN4PSIzOTMuMzUiIGN5PSI0NjcuODkiIGZpbGw9IiNBREQxQjIiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cGF0aCBkPSJNMzk2LjMxODgsNDczLjUzMDYgUTM5NS43NDA2LDQ3My44Mjc1IDM5NS4xLDQ3My45NjgxIFEzOTQuNDU5NCw0NzQuMTI0NCAzOTMuNzU2Myw0NzQuMTI0NCBRMzkxLjI1NjMsNDc0LjEyNDQgMzg5LjkyODEsNDcyLjQ4MzggUTM4OC42MTU2LDQ3MC44Mjc1IDM4OC42MTU2LDQ2Ny43MDI1IFEzODguNjE1Niw0NjQuNTc3NSAzODkuOTI4MSw0NjIuOTIxMyBRMzkxLjI1NjMsNDYxLjI2NSAzOTMuNzU2Myw0NjEuMjY1IFEzOTQuNDU5NCw0NjEuMjY1IDM5NS4xLDQ2MS40MjEzIFEzOTUuNzU2Myw0NjEuNTc3NSAzOTYuMzE4OCw0NjEuODc0NCBMMzk2LjMxODgsNDY0LjU5MzEgUTM5NS42OTM4LDQ2NC4wMTUgMzk1LjEsNDYzLjc0OTQgUTM5NC41MDYzLDQ2My40NjgxIDM5My44ODEzLDQ2My40NjgxIFEzOTIuNTM3NSw0NjMuNDY4MSAzOTEuODUsNDY0LjU0NjMgUTM5MS4xNjI1LDQ2NS42MDg4IDM5MS4xNjI1LDQ2Ny43MDI1IFEzOTEuMTYyNSw0NjkuNzk2MyAzOTEuODUsNDcwLjg3NDQgUTM5Mi41Mzc1LDQ3MS45MzY5IDM5My44ODEzLDQ3MS45MzY5IFEzOTQuNTA2Myw0NzEuOTM2OSAzOTUuMSw0NzEuNjcxMyBRMzk1LjY5MzgsNDcxLjM5IDM5Ni4zMTg4LDQ3MC44MTE5IEwzOTYuMzE4OCw0NzMuNTMwNiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQ3IiB4PSI0MDkuNjUiIHk9IjQ3Mi43MzY3Ij5MYXB0b3A8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMzY5IiB4Mj0iNDY5IiB5MT0iNDgzLjg5IiB5Mj0iNDgzLjg5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMzY5IiB4Mj0iNDY5IiB5MT0iNDkxLjg5IiB5Mj0iNDkxLjg5Ii8+PGVsbGlwc2UgY3g9IjM3OSIgY3k9IjUwNS41Mzg0IiBmaWxsPSIjODRCRTg0IiByeD0iMyIgcnk9IjMiIHN0eWxlPSJzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijc2IiB4PSIzODgiIHk9IjUwOC44ODUxIj52b2lkIGRlc2MoKTwvdGV4dD48L2c+PCEtLWNsYXNzIEVhcnBob25lLS0+PGcgaWQ9ImVsZW1fRWFycGhvbmUiPjxyZWN0IGNvZGVMaW5lPSIxMyIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI2NC4yOTY5IiBpZD0iRWFycGhvbmUiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEwMiIgeD0iNTA1IiB5PSI0NTEuODkiLz48ZWxsaXBzZSBjeD0iNTIxLjM1IiBjeT0iNDY3Ljg5IiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTUyNC4zMTg4LDQ3My41MzA2IFE1MjMuNzQwNiw0NzMuODI3NSA1MjMuMSw0NzMuOTY4MSBRNTIyLjQ1OTQsNDc0LjEyNDQgNTIxLjc1NjMsNDc0LjEyNDQgUTUxOS4yNTYzLDQ3NC4xMjQ0IDUxNy45MjgxLDQ3Mi40ODM4IFE1MTYuNjE1Niw0NzAuODI3NSA1MTYuNjE1Niw0NjcuNzAyNSBRNTE2LjYxNTYsNDY0LjU3NzUgNTE3LjkyODEsNDYyLjkyMTMgUTUxOS4yNTYzLDQ2MS4yNjUgNTIxLjc1NjMsNDYxLjI2NSBRNTIyLjQ1OTQsNDYxLjI2NSA1MjMuMSw0NjEuNDIxMyBRNTIzLjc1NjMsNDYxLjU3NzUgNTI0LjMxODgsNDYxLjg3NDQgTDUyNC4zMTg4LDQ2NC41OTMxIFE1MjMuNjkzOCw0NjQuMDE1IDUyMy4xLDQ2My43NDk0IFE1MjIuNTA2Myw0NjMuNDY4MSA1MjEuODgxMyw0NjMuNDY4MSBRNTIwLjUzNzUsNDYzLjQ2ODEgNTE5Ljg1LDQ2NC41NDYzIFE1MTkuMTYyNSw0NjUuNjA4OCA1MTkuMTYyNSw0NjcuNzAyNSBRNTE5LjE2MjUsNDY5Ljc5NjMgNTE5Ljg1LDQ3MC44NzQ0IFE1MjAuNTM3NSw0NzEuOTM2OSA1MjEuODgxMyw0NzEuOTM2OSBRNTIyLjUwNjMsNDcxLjkzNjkgNTIzLjEsNDcxLjY3MTMgUTUyMy42OTM4LDQ3MS4zOSA1MjQuMzE4OCw0NzAuODExOSBMNTI0LjMxODgsNDczLjUzMDYgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI2NyIgeD0iNTM1LjY1IiB5PSI0NzIuNzM2NyI+RWFycGhvbmU8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iNTA2IiB4Mj0iNjA2IiB5MT0iNDgzLjg5IiB5Mj0iNDgzLjg5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iNTA2IiB4Mj0iNjA2IiB5MT0iNDkxLjg5IiB5Mj0iNDkxLjg5Ii8+PGVsbGlwc2UgY3g9IjUxNiIgY3k9IjUwNS41Mzg0IiBmaWxsPSIjODRCRTg0IiByeD0iMyIgcnk9IjMiIHN0eWxlPSJzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijc2IiB4PSI1MjUiIHk9IjUwOC44ODUxIj52b2lkIGRlc2MoKTwvdGV4dD48L2c+PCEtLWNsYXNzIFNpbXBsZUZhY3RvcnktLT48ZyBpZD0iZWxlbV9TaW1wbGVGYWN0b3J5Ij48cmVjdCBjb2RlTGluZT0iMTgiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iODAuNTkzOCIgaWQ9IlNpbXBsZUZhY3RvcnkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjQwMCIgeD0iNyIgeT0iMTMyIi8+PGVsbGlwc2UgY3g9IjE1NC43NSIgY3k9IjE0OCIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0xNTcuNzE4OCwxNTMuNjQwNiBRMTU3LjE0MDYsMTUzLjkzNzUgMTU2LjUsMTU0LjA3ODEgUTE1NS44NTk0LDE1NC4yMzQ0IDE1NS4xNTYzLDE1NC4yMzQ0IFExNTIuNjU2MywxNTQuMjM0NCAxNTEuMzI4MSwxNTIuNTkzOCBRMTUwLjAxNTYsMTUwLjkzNzUgMTUwLjAxNTYsMTQ3LjgxMjUgUTE1MC4wMTU2LDE0NC42ODc1IDE1MS4zMjgxLDE0My4wMzEzIFExNTIuNjU2MywxNDEuMzc1IDE1NS4xNTYzLDE0MS4zNzUgUTE1NS44NTk0LDE0MS4zNzUgMTU2LjUsMTQxLjUzMTMgUTE1Ny4xNTYzLDE0MS42ODc1IDE1Ny43MTg4LDE0MS45ODQ0IEwxNTcuNzE4OCwxNDQuNzAzMSBRMTU3LjA5MzgsMTQ0LjEyNSAxNTYuNSwxNDMuODU5NCBRMTU1LjkwNjMsMTQzLjU3ODEgMTU1LjI4MTMsMTQzLjU3ODEgUTE1My45Mzc1LDE0My41NzgxIDE1My4yNSwxNDQuNjU2MyBRMTUyLjU2MjUsMTQ1LjcxODggMTUyLjU2MjUsMTQ3LjgxMjUgUTE1Mi41NjI1LDE0OS45MDYzIDE1My4yNSwxNTAuOTg0NCBRMTUzLjkzNzUsMTUyLjA0NjkgMTU1LjI4MTMsMTUyLjA0NjkgUTE1NS45MDYzLDE1Mi4wNDY5IDE1Ni41LDE1MS43ODEzIFExNTcuMDkzOCwxNTEuNSAxNTcuNzE4OCwxNTAuOTIxOSBMMTU3LjcxODgsMTUzLjY0MDYgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5NiIgeD0iMTc1LjI1IiB5PSIxNTIuODQ2NyI+U2ltcGxlRmFjdG9yeTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI4IiB4Mj0iNDA2IiB5MT0iMTY0IiB5Mj0iMTY0Ii8+PGVsbGlwc2UgY3g9IjE4IiBjeT0iMTc3LjY0ODQiIGZpbGw9Im5vbmUiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTU3IiB4PSIyNyIgeT0iMTgwLjk5NTEiPmVudW0gUFJPRFVDVF9UWVBFPC90ZXh0PjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjgiIHgyPSI0MDYiIHkxPSIxODguMjk2OSIgeTI9IjE4OC4yOTY5Ii8+PGVsbGlwc2UgY3g9IjE4IiBjeT0iMjAxLjk0NTMiIGZpbGw9IiM4NEJFODQiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dC1kZWNvcmF0aW9uPSJ1bmRlcmxpbmUiIHRleHRMZW5ndGg9IjM3NCIgeD0iMjciIHk9IjIwNS4yOTIiPklQcm9kdWN0IGNyZWF0ZVByb2R1Y3QoUFJPRFVDVF9UWVBFIHByb2R1Y3RUeXBlKTwvdGV4dD48L2c+PCEtLWNsYXNzIFNpbXBsZUZhY3RvcnlNYWluLS0+PGcgaWQ9ImVsZW1fU2ltcGxlRmFjdG9yeU1haW4iPjxyZWN0IGNvZGVMaW5lPSIyMyIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI0OCIgaWQ9IlNpbXBsZUZhY3RvcnlNYWluIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNjAiIHg9IjEyNyIgeT0iNyIvPjxlbGxpcHNlIGN4PSIxNDIiIGN5PSIyMyIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0xNDQuOTY4OCwyOC42NDA2IFExNDQuMzkwNiwyOC45Mzc1IDE0My43NSwyOS4wNzgxIFExNDMuMTA5NCwyOS4yMzQ0IDE0Mi40MDYzLDI5LjIzNDQgUTEzOS45MDYzLDI5LjIzNDQgMTM4LjU3ODEsMjcuNTkzOCBRMTM3LjI2NTYsMjUuOTM3NSAxMzcuMjY1NiwyMi44MTI1IFExMzcuMjY1NiwxOS42ODc1IDEzOC41NzgxLDE4LjAzMTMgUTEzOS45MDYzLDE2LjM3NSAxNDIuNDA2MywxNi4zNzUgUTE0My4xMDk0LDE2LjM3NSAxNDMuNzUsMTYuNTMxMyBRMTQ0LjQwNjMsMTYuNjg3NSAxNDQuOTY4OCwxNi45ODQ0IEwxNDQuOTY4OCwxOS43MDMxIFExNDQuMzQzOCwxOS4xMjUgMTQzLjc1LDE4Ljg1OTQgUTE0My4xNTYzLDE4LjU3ODEgMTQyLjUzMTMsMTguNTc4MSBRMTQxLjE4NzUsMTguNTc4MSAxNDAuNSwxOS42NTYzIFExMzkuODEyNSwyMC43MTg4IDEzOS44MTI1LDIyLjgxMjUgUTEzOS44MTI1LDI0LjkwNjMgMTQwLjUsMjUuOTg0NCBRMTQxLjE4NzUsMjcuMDQ2OSAxNDIuNTMxMywyNy4wNDY5IFExNDMuMTU2MywyNy4wNDY5IDE0My43NSwyNi43ODEzIFExNDQuMzQzOCwyNi41IDE0NC45Njg4LDI1LjkyMTkgTDE0NC45Njg4LDI4LjY0MDYgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMjgiIHg9IjE1NiIgeT0iMjcuODQ2NyI+U2ltcGxlRmFjdG9yeU1haW48L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTI4IiB4Mj0iMjg2IiB5MT0iMzkiIHkyPSIzOSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjEyOCIgeDI9IjI4NiIgeTE9IjQ3IiB5Mj0iNDciLz48L2c+PCEtLXJldmVyc2UgbGluayBJUHJvZHVjdCB0byBQaG9uZS0tPjxnIGlkPSJsaW5rX0lQcm9kdWN0X1Bob25lIj48cGF0aCBkPSJNMzcwLjY5MSw0MDMuMjIxNyBDMzUwLjA4MSw0MjEuNzcxNyAzMzcuNDYsNDMzLjEzIDMxNi44Niw0NTEuNjcgIiBmaWxsPSJub25lIiBpZD0iSVByb2R1Y3QtYmFja3RvLVBob25lIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0ibm9uZSIgcG9pbnRzPSIzODQuMDcsMzkxLjE4LDM2Ni42NzcxLDM5OC43NjIxLDM3NC43MDQ5LDQwNy42ODE0LDM4NC4wNywzOTEuMTgiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElQcm9kdWN0IHRvIExhcHRvcC0tPjxnIGlkPSJsaW5rX0lQcm9kdWN0X0xhcHRvcCI+PHBhdGggZD0iTTQxOSw0MDkuMTggQzQxOSw0MjcuNzMgNDE5LDQzMy4xMyA0MTksNDUxLjY3ICIgZmlsbD0ibm9uZSIgaWQ9IklQcm9kdWN0LWJhY2t0by1MYXB0b3AiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSJub25lIiBwb2ludHM9IjQxOSwzOTEuMTgsNDEzLDQwOS4xOCw0MjUsNDA5LjE4LDQxOSwzOTEuMTgiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElQcm9kdWN0IHRvIEVhcnBob25lLS0+PGcgaWQ9ImxpbmtfSVByb2R1Y3RfRWFycGhvbmUiPjxwYXRoIGQ9Ik00NjcuMzA5LDQwMy4yMjE3IEM0ODcuOTE5LDQyMS43NzE3IDUwMC41NCw0MzMuMTMgNTIxLjE0LDQ1MS42NyAiIGZpbGw9Im5vbmUiIGlkPSJJUHJvZHVjdC1iYWNrdG8tRWFycGhvbmUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSJub25lIiBwb2ludHM9IjQ1My45MywzOTEuMTgsNDYzLjI5NTEsNDA3LjY4MTQsNDcxLjMyMjksMzk4Ljc2MjEsNDUzLjkzLDM5MS4xOCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PC9nPjwhLS1saW5rIFNpbXBsZUZhY3RvcnkgdG8gUHJvZHVjdC0tPjxnIGlkPSJsaW5rX1NpbXBsZUZhY3RvcnlfUHJvZHVjdCI+PHBhdGggY29kZUxpbmU9IjI2IiBkPSJNMjA3LDIxMi44NyBDMjA3LDIyNi4yMDc1IDIwNywyNDEuNzU0NCAyMDcsMjU3LjYxNTUgQzIwNywyNjUuNTQ2IDIwNywyNzMuNTU1MSAyMDcsMjgxLjQwNTkgQzIwNywyODEuODk2NiAyMDcsMjc2LjM4NjYgMjA3LDI3Ni44NzYgIiBmaWxsPSJub25lIiBpZD0iU2ltcGxlRmFjdG9yeS10by1Qcm9kdWN0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDcsMjgyLjg3NiwyMTEsMjczLjg3NiwyMDcsMjc3Ljg3NiwyMDMsMjczLjg3NiwyMDcsMjgyLjg3NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTYzIiB4PSIyMDgiIHk9IjI1NS42NjY5Ij5jcmVhdGUgYnkgUFJPRFVDVF9UWVBFPC90ZXh0PjwvZz48IS0tbGluayBTaW1wbGVGYWN0b3J5TWFpbiB0byBTaW1wbGVGYWN0b3J5LS0+PGcgaWQ9ImxpbmtfU2ltcGxlRmFjdG9yeU1haW5fU2ltcGxlRmFjdG9yeSI+PHBhdGggY29kZUxpbmU9IjI3IiBkPSJNMjA3LDU1LjMyIEMyMDcsNzYuMDcgMjA3LDEwMC44OCAyMDcsMTI1LjUzICIgZmlsbD0ibm9uZSIgaWQ9IlNpbXBsZUZhY3RvcnlNYWluLXRvLVNpbXBsZUZhY3RvcnkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIwNywxMzEuNTMsMjExLDEyMi41MywyMDcsMTI2LjUzLDIwMywxMjIuNTMsMjA3LDEzMS41MyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjMiIHg9IjIwOCIgeT0iOTguMDY2OSI+dXNlPC90ZXh0PjwvZz48IS0tU1JDPVtmUDdESXlEMDRDTmwtclZDcFBQWVNXeWI1d3FXajFYZ0Y3WUlTSkVjWV9sNXhhRzg5Vi14UUg4X1dkWW1wYzVYdC1weGxHVHhTTTNzQ0tqSmh6NW9PdEdZZEtjYm5YV2xBdUxyRzJFNEhfY0FESzRITkRMOFhsTHdKdkJIcmZobzc4dTItYjZNQVJvVzlCWnpVM09rSmhFMkR3U2dnMlpBbk45R2stNFNTZzB1RTRrV1pEVGFvN0J5RXM2QmRmdF81c0EzbVBfUGVuRFlQRG1GdFhrS3g0OHhjTFAwalo1R3hFLWs3d3hBZl9BbnM0cHdDSkFvYWpyTlowbzRKRERqeVRxMlZYSkJyakZvYnkwVEFqazd6aWp2Wm9KOUZ0eWtjcEJXa1ByTi1hYXdzVVFXMzlmOHVYcTBdLS0+PC9nPjwvc3ZnPg=='>
+<h2 id="12-代码示例"><a class="markdownIt-Anchor" href="#12-代码示例"></a> 1.2. 代码示例</h2>
+<p>产品接口、及具体实现后的产品类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="comment">// 描述产品内容</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Phone</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a phone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Laptop</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a laptop.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Earphone</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a earphone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>简单工厂模式的工厂类，负责各种产品的创建，并提供返回统一的公有产品接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 产品类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">PRODUCT_TYPE</span> &#123;</span><br><span class="line">        PHONE,</span><br><span class="line">        LAPTOP,</span><br><span class="line">        EARPHONE</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据类型，创建不同的产品</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> productType</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> IProduct <span class="title function_">createProduct</span><span class="params">(PRODUCT_TYPE productType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">null</span> != productType) &#123;</span><br><span class="line">            <span class="keyword">switch</span> (productType) &#123;</span><br><span class="line">                <span class="keyword">case</span> PHONE:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Phone</span>();</span><br><span class="line">                <span class="keyword">case</span> LAPTOP:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Laptop</span>();</span><br><span class="line">                <span class="keyword">case</span> EARPHONE:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Earphone</span>();</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单工厂的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleFactoryMain</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">phone</span> <span class="operator">=</span> SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.PHONE);</span><br><span class="line">        phone.desc();</span><br><span class="line"></span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">laptop</span> <span class="operator">=</span> SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.LAPTOP);</span><br><span class="line">        laptop.desc();</span><br><span class="line"></span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">earphone</span> <span class="operator">=</span> SimpleFactory.createProduct(SimpleFactory.PRODUCT_TYPE.EARPHONE);</span><br><span class="line">        earphone.desc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I am a phone.</span><br><span class="line">I am a laptop.</span><br><span class="line">I am a earphone.</span><br></pre></td></tr></table></figure>
+<h1 id="2-工厂方法模式"><a class="markdownIt-Anchor" href="#2-工厂方法模式"></a> 2. 工厂方法模式</h1>
+<p><strong>工厂方法模式</strong>（Factory Method Pattern），又称为<strong>多态性工厂模式</strong>，属于设计模式三大分类中的创建型模式。<br />
+它<mark>定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个，即工厂方法模式将实例化推迟到了子类</mark>。<br />
+与简单工厂模式相比，它的核心工厂类不再负责所有产品的创建，而是将具体的工作（如创建产品）交由具体子类去做。其中，该核心工厂类成为一个抽象工厂角色，仅负责定义具体工厂子类必须实现的公有接口，而不再负责具体某一产品的工作细节。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>用户只需关心所需产品对应的工厂就可获得所需产品，无需关注产品的具体创建逻辑；</li>
+<li>当增加新产品时，只需增加对应工厂类即可，扩展性较好，符合开闭原则。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>当产品增加时，易造成类的个数过多，增加了复杂度和对系统的理解难度；</li>
+<li>抽象产品只能生产一种产品，此问题可使用抽象工厂模式来解决。</li>
+</ol>
+<p><strong>适用场景：</strong></p>
+<ol>
+<li>使用方（客户）只知道产品对应的工厂名，而不知道具体的产品名，如 手机工厂、笔记本工厂等；</li>
+<li>创建对象的任务由多个具体子工厂中的某一个完成，而抽象工厂只提供创建产品的接口。</li>
+<li>使用方（客户）不关心创建产品的细节，只关心产品的生产工厂。</li>
+<li>当您需要一台笔记本，可以直接从生产笔记本的工厂去拿货，而不用管这台笔记本是如何制造出来的，以及这台笔记本的具体实现。</li>
+</ol>
+<h2 id="21-结构与实现"><a class="markdownIt-Anchor" href="#21-结构与实现"></a> 2.1. 结构与实现</h2>
+<p>工厂方法模式的主要角色如下：</p>
+<ul>
+<li><strong>抽象工厂</strong>（IFactory）：提供了创建产品的接口，调用者通过它访问具体工厂的工厂方法 <code>createProduct()</code> 来创建产品。</li>
+<li><strong>具体工厂</strong>（PhoneFactory、LaptopFactory、EarphoneFactory）：主要是实现抽象工厂中的方法，完成具体产品的创建。</li>
+<li><strong>抽象产品</strong>（IProduct）：定义了产品的规范，描述了产品的主要特性和功能。</li>
+<li><strong>具体产品</strong>（Phone、Laptop、Earphone）：实现了抽象产品角色所定义的接口，由具体工厂来创建，它同具体工厂之间一一对应。</li>
+</ul>
+<p>其类图如下所示：</p>
+<img class="kroki" src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI1NjBweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjEyMzhweDtoZWlnaHQ6NTYwcHg7YmFja2dyb3VuZDojRkZGRkZGOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTIzOCA1NjAiIHdpZHRoPSIxMjM4cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48IS0tY2x1c3RlciBQcm9kdWN0LS0+PGcgaWQ9ImNsdXN0ZXJfUHJvZHVjdCI+PHJlY3QgZmlsbD0ibm9uZSIgaGVpZ2h0PSIyNzQuNTkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgd2lkdGg9IjQwOCIgeD0iODI0LjUiIHk9IjI4MC4zIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjYyIiB4PSI5OTcuNSIgeT0iMjk1LjI5NTEiPlByb2R1Y3Q8L3RleHQ+PC9nPjwhLS1jbHVzdGVyIEZhY3RvcnktLT48ZyBpZD0iY2x1c3Rlcl9GYWN0b3J5Ij48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjI3Ny41OSIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB3aWR0aD0iNzEwIiB4PSI4Mi41IiB5PSIxMjYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNTkiIHg9IjQwOCIgeT0iMTQwLjk5NTEiPkZhY3Rvcnk8L3RleHQ+PC9nPjwhLS1jbGFzcyBJUHJvZHVjdC0tPjxnIGlkPSJlbGVtX0lQcm9kdWN0Ij48cmVjdCBjb2RlTGluZT0iNCIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI2NC4yOTY5IiBpZD0iSVByb2R1Y3QiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEwMiIgeD0iOTc3LjUiIHk9IjMxNS4zIi8+PGVsbGlwc2UgY3g9Ijk5OC4zNSIgY3k9IjMzMS4zIiBmaWxsPSIjQjRBN0U1IiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTk5NC4yNzE5LDMyNy4wNjU2IEw5OTQuMjcxOSwzMjQuOTA5NCBMMTAwMS42NjI1LDMyNC45MDk0IEwxMDAxLjY2MjUsMzI3LjA2NTYgTDk5OS4xOTM4LDMyNy4wNjU2IEw5OTkuMTkzOCwzMzUuMTQzNyBMMTAwMS42NjI1LDMzNS4xNDM3IEwxMDAxLjY2MjUsMzM3LjMgTDk5NC4yNzE5LDMzNy4zIEw5OTQuMjcxOSwzMzUuMTQzNyBMOTk2Ljc0MDYsMzM1LjE0MzcgTDk5Ni43NDA2LDMyNy4wNjU2IEw5OTQuMjcxOSwzMjcuMDY1NiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXN0eWxlPSJpdGFsaWMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNTciIHg9IjEwMTMuNjUiIHk9IjMzNi4xNDY3Ij5JUHJvZHVjdDwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI5NzguNSIgeDI9IjEwNzguNSIgeTE9IjM0Ny4zIiB5Mj0iMzQ3LjMiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI5NzguNSIgeDI9IjEwNzguNSIgeTE9IjM1NS4zIiB5Mj0iMzU1LjMiLz48ZWxsaXBzZSBjeD0iOTg4LjUiIGN5PSIzNjguOTQ4NCIgZmlsbD0iIzg0QkU4NCIgcng9IjMiIHJ5PSIzIiBzdHlsZT0ic3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3NiIgeD0iOTk3LjUiIHk9IjM3Mi4yOTUxIj52b2lkIGRlc2MoKTwvdGV4dD48L2c+PCEtLWNsYXNzIFBob25lLS0+PGcgaWQ9ImVsZW1fUGhvbmUiPjxyZWN0IGNvZGVMaW5lPSI3IiBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjY0LjI5NjkiIGlkPSJQaG9uZSIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTAyIiB4PSI4NDAuNSIgeT0iNDc0LjU5Ii8+PGVsbGlwc2UgY3g9Ijg2Ni43NSIgY3k9IjQ5MC41OSIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik04NjkuNzE4OCw0OTYuMjMwNiBRODY5LjE0MDYsNDk2LjUyNzUgODY4LjUsNDk2LjY2ODEgUTg2Ny44NTk0LDQ5Ni44MjQ0IDg2Ny4xNTYzLDQ5Ni44MjQ0IFE4NjQuNjU2Myw0OTYuODI0NCA4NjMuMzI4MSw0OTUuMTgzOCBRODYyLjAxNTYsNDkzLjUyNzUgODYyLjAxNTYsNDkwLjQwMjUgUTg2Mi4wMTU2LDQ4Ny4yNzc1IDg2My4zMjgxLDQ4NS42MjEzIFE4NjQuNjU2Myw0ODMuOTY1IDg2Ny4xNTYzLDQ4My45NjUgUTg2Ny44NTk0LDQ4My45NjUgODY4LjUsNDg0LjEyMTMgUTg2OS4xNTYzLDQ4NC4yNzc1IDg2OS43MTg4LDQ4NC41NzQ0IEw4NjkuNzE4OCw0ODcuMjkzMSBRODY5LjA5MzgsNDg2LjcxNSA4NjguNSw0ODYuNDQ5NCBRODY3LjkwNjMsNDg2LjE2ODEgODY3LjI4MTMsNDg2LjE2ODEgUTg2NS45Mzc1LDQ4Ni4xNjgxIDg2NS4yNSw0ODcuMjQ2MyBRODY0LjU2MjUsNDg4LjMwODggODY0LjU2MjUsNDkwLjQwMjUgUTg2NC41NjI1LDQ5Mi40OTYzIDg2NS4yNSw0OTMuNTc0NCBRODY1LjkzNzUsNDk0LjYzNjkgODY3LjI4MTMsNDk0LjYzNjkgUTg2Ny45MDYzLDQ5NC42MzY5IDg2OC41LDQ5NC4zNzEzIFE4NjkuMDkzOCw0OTQuMDkgODY5LjcxODgsNDkzLjUxMTkgTDg2OS43MTg4LDQ5Ni4yMzA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDUiIHg9Ijg4My4yNSIgeT0iNDk1LjQzNjciPlBob25lPC90ZXh0PjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9Ijg0MS41IiB4Mj0iOTQxLjUiIHkxPSI1MDYuNTkiIHkyPSI1MDYuNTkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI4NDEuNSIgeDI9Ijk0MS41IiB5MT0iNTE0LjU5IiB5Mj0iNTE0LjU5Ii8+PGVsbGlwc2UgY3g9Ijg1MS41IiBjeT0iNTI4LjIzODQiIGZpbGw9IiM4NEJFODQiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNzYiIHg9Ijg2MC41IiB5PSI1MzEuNTg1MSI+dm9pZCBkZXNjKCk8L3RleHQ+PC9nPjwhLS1jbGFzcyBMYXB0b3AtLT48ZyBpZD0iZWxlbV9MYXB0b3AiPjxyZWN0IGNvZGVMaW5lPSIxMCIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI2NC4yOTY5IiBpZD0iTGFwdG9wIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMDIiIHg9Ijk3Ny41IiB5PSI0NzQuNTkiLz48ZWxsaXBzZSBjeD0iMTAwMi44NSIgY3k9IjQ5MC41OSIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0xMDA1LjgxODgsNDk2LjIzMDYgUTEwMDUuMjQwNiw0OTYuNTI3NSAxMDA0LjYsNDk2LjY2ODEgUTEwMDMuOTU5NCw0OTYuODI0NCAxMDAzLjI1NjMsNDk2LjgyNDQgUTEwMDAuNzU2Myw0OTYuODI0NCA5OTkuNDI4MSw0OTUuMTgzOCBROTk4LjExNTYsNDkzLjUyNzUgOTk4LjExNTYsNDkwLjQwMjUgUTk5OC4xMTU2LDQ4Ny4yNzc1IDk5OS40MjgxLDQ4NS42MjEzIFExMDAwLjc1NjMsNDgzLjk2NSAxMDAzLjI1NjMsNDgzLjk2NSBRMTAwMy45NTk0LDQ4My45NjUgMTAwNC42LDQ4NC4xMjEzIFExMDA1LjI1NjMsNDg0LjI3NzUgMTAwNS44MTg4LDQ4NC41NzQ0IEwxMDA1LjgxODgsNDg3LjI5MzEgUTEwMDUuMTkzOCw0ODYuNzE1IDEwMDQuNiw0ODYuNDQ5NCBRMTAwNC4wMDYzLDQ4Ni4xNjgxIDEwMDMuMzgxMyw0ODYuMTY4MSBRMTAwMi4wMzc1LDQ4Ni4xNjgxIDEwMDEuMzUsNDg3LjI0NjMgUTEwMDAuNjYyNSw0ODguMzA4OCAxMDAwLjY2MjUsNDkwLjQwMjUgUTEwMDAuNjYyNSw0OTIuNDk2MyAxMDAxLjM1LDQ5My41NzQ0IFExMDAyLjAzNzUsNDk0LjYzNjkgMTAwMy4zODEzLDQ5NC42MzY5IFExMDA0LjAwNjMsNDk0LjYzNjkgMTAwNC42LDQ5NC4zNzEzIFExMDA1LjE5MzgsNDk0LjA5IDEwMDUuODE4OCw0OTMuNTExOSBMMTAwNS44MTg4LDQ5Ni4yMzA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDciIHg9IjEwMTkuMTUiIHk9IjQ5NS40MzY3Ij5MYXB0b3A8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iOTc4LjUiIHgyPSIxMDc4LjUiIHkxPSI1MDYuNTkiIHkyPSI1MDYuNTkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI5NzguNSIgeDI9IjEwNzguNSIgeTE9IjUxNC41OSIgeTI9IjUxNC41OSIvPjxlbGxpcHNlIGN4PSI5ODguNSIgY3k9IjUyOC4yMzg0IiBmaWxsPSIjODRCRTg0IiByeD0iMyIgcnk9IjMiIHN0eWxlPSJzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijc2IiB4PSI5OTcuNSIgeT0iNTMxLjU4NTEiPnZvaWQgZGVzYygpPC90ZXh0PjwvZz48IS0tY2xhc3MgRWFycGhvbmUtLT48ZyBpZD0iZWxlbV9FYXJwaG9uZSI+PHJlY3QgY29kZUxpbmU9IjEzIiBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjY0LjI5NjkiIGlkPSJFYXJwaG9uZSIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTAyIiB4PSIxMTE0LjUiIHk9IjQ3NC41OSIvPjxlbGxpcHNlIGN4PSIxMTMwLjg1IiBjeT0iNDkwLjU5IiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTExMzMuODE4OCw0OTYuMjMwNiBRMTEzMy4yNDA2LDQ5Ni41Mjc1IDExMzIuNiw0OTYuNjY4MSBRMTEzMS45NTk0LDQ5Ni44MjQ0IDExMzEuMjU2Myw0OTYuODI0NCBRMTEyOC43NTYzLDQ5Ni44MjQ0IDExMjcuNDI4MSw0OTUuMTgzOCBRMTEyNi4xMTU2LDQ5My41Mjc1IDExMjYuMTE1Niw0OTAuNDAyNSBRMTEyNi4xMTU2LDQ4Ny4yNzc1IDExMjcuNDI4MSw0ODUuNjIxMyBRMTEyOC43NTYzLDQ4My45NjUgMTEzMS4yNTYzLDQ4My45NjUgUTExMzEuOTU5NCw0ODMuOTY1IDExMzIuNiw0ODQuMTIxMyBRMTEzMy4yNTYzLDQ4NC4yNzc1IDExMzMuODE4OCw0ODQuNTc0NCBMMTEzMy44MTg4LDQ4Ny4yOTMxIFExMTMzLjE5MzgsNDg2LjcxNSAxMTMyLjYsNDg2LjQ0OTQgUTExMzIuMDA2Myw0ODYuMTY4MSAxMTMxLjM4MTMsNDg2LjE2ODEgUTExMzAuMDM3NSw0ODYuMTY4MSAxMTI5LjM1LDQ4Ny4yNDYzIFExMTI4LjY2MjUsNDg4LjMwODggMTEyOC42NjI1LDQ5MC40MDI1IFExMTI4LjY2MjUsNDkyLjQ5NjMgMTEyOS4zNSw0OTMuNTc0NCBRMTEzMC4wMzc1LDQ5NC42MzY5IDExMzEuMzgxMyw0OTQuNjM2OSBRMTEzMi4wMDYzLDQ5NC42MzY5IDExMzIuNiw0OTQuMzcxMyBRMTEzMy4xOTM4LDQ5NC4wOSAxMTMzLjgxODgsNDkzLjUxMTkgTDExMzMuODE4OCw0OTYuMjMwNiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjY3IiB4PSIxMTQ1LjE1IiB5PSI0OTUuNDM2NyI+RWFycGhvbmU8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTExNS41IiB4Mj0iMTIxNS41IiB5MT0iNTA2LjU5IiB5Mj0iNTA2LjU5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTExNS41IiB4Mj0iMTIxNS41IiB5MT0iNTE0LjU5IiB5Mj0iNTE0LjU5Ii8+PGVsbGlwc2UgY3g9IjExMjUuNSIgY3k9IjUyOC4yMzg0IiBmaWxsPSIjODRCRTg0IiByeD0iMyIgcnk9IjMiIHN0eWxlPSJzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijc2IiB4PSIxMTM0LjUiIHk9IjUzMS41ODUxIj52b2lkIGRlc2MoKTwvdGV4dD48L2c+PCEtLWNsYXNzIElGYWN0b3J5LS0+PGcgaWQ9ImVsZW1fSUZhY3RvcnkiPjxyZWN0IGNvZGVMaW5lPSIxOSIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI2NC4yOTY5IiBpZD0iSUZhY3RvcnkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5NSIgeD0iMzQ0IiB5PSIxNjkiLz48ZWxsaXBzZSBjeD0iNDEwLjc1IiBjeT0iMTg1IiBmaWxsPSIjQjRBN0U1IiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTQwNi42NzE5LDE4MC43NjU2IEw0MDYuNjcxOSwxNzguNjA5NCBMNDE0LjA2MjUsMTc4LjYwOTQgTDQxNC4wNjI1LDE4MC43NjU2IEw0MTEuNTkzOCwxODAuNzY1NiBMNDExLjU5MzgsMTg4Ljg0MzggTDQxNC4wNjI1LDE4OC44NDM4IEw0MTQuMDYyNSwxOTEgTDQwNi42NzE5LDE5MSBMNDA2LjY3MTksMTg4Ljg0MzggTDQwOS4xNDA2LDE4OC44NDM4IEw0MDkuMTQwNiwxODAuNzY1NiBMNDA2LjY3MTksMTgwLjc2NTYgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC1zdHlsZT0iaXRhbGljIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjUzIiB4PSI0MzEuMjUiIHk9IjE4OS44NDY3Ij5JRmFjdG9yeTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIzNDUiIHgyPSI1MzgiIHkxPSIyMDEiIHkyPSIyMDEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIzNDUiIHgyPSI1MzgiIHkxPSIyMDkiIHkyPSIyMDkiLz48ZWxsaXBzZSBjeD0iMzU1IiBjeT0iMjIyLjY0ODQiIGZpbGw9IiM4NEJFODQiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTY5IiB4PSIzNjQiIHk9IjIyNS45OTUxIj5JUHJvZHVjdCBjcmVhdGVQcm9kdWN0KCk8L3RleHQ+PC9nPjwhLS1jbGFzcyBQaG9uZUZhY3RvcnktLT48ZyBpZD0iZWxlbV9QaG9uZUZhY3RvcnkiPjxyZWN0IGNvZGVMaW5lPSIyMiIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI2NC4yOTY5IiBpZD0iUGhvbmVGYWN0b3J5IiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxOTUiIHg9IjExNCIgeT0iMzE1LjMiLz48ZWxsaXBzZSBjeD0iMTU5Ljc1IiBjeT0iMzMxLjMiIGZpbGw9IiNBREQxQjIiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cGF0aCBkPSJNMTYyLjcxODgsMzM2Ljk0MDYgUTE2Mi4xNDA2LDMzNy4yMzc1IDE2MS41LDMzNy4zNzgxIFExNjAuODU5NCwzMzcuNTM0NCAxNjAuMTU2MywzMzcuNTM0NCBRMTU3LjY1NjMsMzM3LjUzNDQgMTU2LjMyODEsMzM1Ljg5MzcgUTE1NS4wMTU2LDMzNC4yMzc1IDE1NS4wMTU2LDMzMS4xMTI1IFExNTUuMDE1NiwzMjcuOTg3NSAxNTYuMzI4MSwzMjYuMzMxMiBRMTU3LjY1NjMsMzI0LjY3NSAxNjAuMTU2MywzMjQuNjc1IFExNjAuODU5NCwzMjQuNjc1IDE2MS41LDMyNC44MzEyIFExNjIuMTU2MywzMjQuOTg3NSAxNjIuNzE4OCwzMjUuMjg0NCBMMTYyLjcxODgsMzI4LjAwMzEgUTE2Mi4wOTM4LDMyNy40MjUgMTYxLjUsMzI3LjE1OTQgUTE2MC45MDYzLDMyNi44NzgxIDE2MC4yODEzLDMyNi44NzgxIFExNTguOTM3NSwzMjYuODc4MSAxNTguMjUsMzI3Ljk1NjIgUTE1Ny41NjI1LDMyOS4wMTg3IDE1Ny41NjI1LDMzMS4xMTI1IFExNTcuNTYyNSwzMzMuMjA2MiAxNTguMjUsMzM0LjI4NDQgUTE1OC45Mzc1LDMzNS4zNDY5IDE2MC4yODEzLDMzNS4zNDY5IFExNjAuOTA2MywzMzUuMzQ2OSAxNjEuNSwzMzUuMDgxMiBRMTYyLjA5MzgsMzM0LjggMTYyLjcxODgsMzM0LjIyMTkgTDE2Mi43MTg4LDMzNi45NDA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTUiIHg9IjE4MC4yNSIgeT0iMzM2LjE0NjciPlBob25lRmFjdG9yeTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIxMTUiIHgyPSIzMDgiIHkxPSIzNDcuMyIgeTI9IjM0Ny4zIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTE1IiB4Mj0iMzA4IiB5MT0iMzU1LjMiIHkyPSIzNTUuMyIvPjxlbGxpcHNlIGN4PSIxMjUiIGN5PSIzNjguOTQ4NCIgZmlsbD0iIzg0QkU4NCIgcng9IjMiIHJ5PSIzIiBzdHlsZT0ic3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNjkiIHg9IjEzNCIgeT0iMzcyLjI5NTEiPklQcm9kdWN0IGNyZWF0ZVByb2R1Y3QoKTwvdGV4dD48L2c+PCEtLWNsYXNzIExhcHRvcEZhY3RvcnktLT48ZyBpZD0iZWxlbV9MYXB0b3BGYWN0b3J5Ij48cmVjdCBjb2RlTGluZT0iMjUiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNjQuMjk2OSIgaWQ9IkxhcHRvcEZhY3RvcnkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5NSIgeD0iMzQ0IiB5PSIzMTUuMyIvPjxlbGxpcHNlIGN4PSIzODguNzUiIGN5PSIzMzEuMyIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0zOTEuNzE4OCwzMzYuOTQwNiBRMzkxLjE0MDYsMzM3LjIzNzUgMzkwLjUsMzM3LjM3ODEgUTM4OS44NTk0LDMzNy41MzQ0IDM4OS4xNTYzLDMzNy41MzQ0IFEzODYuNjU2MywzMzcuNTM0NCAzODUuMzI4MSwzMzUuODkzNyBRMzg0LjAxNTYsMzM0LjIzNzUgMzg0LjAxNTYsMzMxLjExMjUgUTM4NC4wMTU2LDMyNy45ODc1IDM4NS4zMjgxLDMyNi4zMzEyIFEzODYuNjU2MywzMjQuNjc1IDM4OS4xNTYzLDMyNC42NzUgUTM4OS44NTk0LDMyNC42NzUgMzkwLjUsMzI0LjgzMTIgUTM5MS4xNTYzLDMyNC45ODc1IDM5MS43MTg4LDMyNS4yODQ0IEwzOTEuNzE4OCwzMjguMDAzMSBRMzkxLjA5MzgsMzI3LjQyNSAzOTAuNSwzMjcuMTU5NCBRMzg5LjkwNjMsMzI2Ljg3ODEgMzg5LjI4MTMsMzI2Ljg3ODEgUTM4Ny45Mzc1LDMyNi44NzgxIDM4Ny4yNSwzMjcuOTU2MiBRMzg2LjU2MjUsMzI5LjAxODcgMzg2LjU2MjUsMzMxLjExMjUgUTM4Ni41NjI1LDMzMy4yMDYyIDM4Ny4yNSwzMzQuMjg0NCBRMzg3LjkzNzUsMzM1LjM0NjkgMzg5LjI4MTMsMzM1LjM0NjkgUTM4OS45MDYzLDMzNS4zNDY5IDM5MC41LDMzNS4wODEyIFEzOTEuMDkzOCwzMzQuOCAzOTEuNzE4OCwzMzQuMjIxOSBMMzkxLjcxODgsMzM2Ljk0MDYgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5NyIgeD0iNDA5LjI1IiB5PSIzMzYuMTQ2NyI+TGFwdG9wRmFjdG9yeTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIzNDUiIHgyPSI1MzgiIHkxPSIzNDcuMyIgeTI9IjM0Ny4zIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMzQ1IiB4Mj0iNTM4IiB5MT0iMzU1LjMiIHkyPSIzNTUuMyIvPjxlbGxpcHNlIGN4PSIzNTUiIGN5PSIzNjguOTQ4NCIgZmlsbD0iIzg0QkU4NCIgcng9IjMiIHJ5PSIzIiBzdHlsZT0ic3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNjkiIHg9IjM2NCIgeT0iMzcyLjI5NTEiPklQcm9kdWN0IGNyZWF0ZVByb2R1Y3QoKTwvdGV4dD48L2c+PCEtLWNsYXNzIEVhcnBob25lRmFjdG9yeS0tPjxnIGlkPSJlbGVtX0VhcnBob25lRmFjdG9yeSI+PHJlY3QgY29kZUxpbmU9IjI4IiBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjY0LjI5NjkiIGlkPSJFYXJwaG9uZUZhY3RvcnkiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5NSIgeD0iNTc0IiB5PSIzMTUuMyIvPjxlbGxpcHNlIGN4PSI2MDkuNyIgY3k9IjMzMS4zIiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTYxMi42Njg4LDMzNi45NDA2IFE2MTIuMDkwNiwzMzcuMjM3NSA2MTEuNDUsMzM3LjM3ODEgUTYxMC44MDk0LDMzNy41MzQ0IDYxMC4xMDYzLDMzNy41MzQ0IFE2MDcuNjA2MywzMzcuNTM0NCA2MDYuMjc4MSwzMzUuODkzNyBRNjA0Ljk2NTYsMzM0LjIzNzUgNjA0Ljk2NTYsMzMxLjExMjUgUTYwNC45NjU2LDMyNy45ODc1IDYwNi4yNzgxLDMyNi4zMzEyIFE2MDcuNjA2MywzMjQuNjc1IDYxMC4xMDYzLDMyNC42NzUgUTYxMC44MDk0LDMyNC42NzUgNjExLjQ1LDMyNC44MzEyIFE2MTIuMTA2MywzMjQuOTg3NSA2MTIuNjY4OCwzMjUuMjg0NCBMNjEyLjY2ODgsMzI4LjAwMzEgUTYxMi4wNDM4LDMyNy40MjUgNjExLjQ1LDMyNy4xNTk0IFE2MTAuODU2MywzMjYuODc4MSA2MTAuMjMxMywzMjYuODc4MSBRNjA4Ljg4NzUsMzI2Ljg3ODEgNjA4LjIsMzI3Ljk1NjIgUTYwNy41MTI1LDMyOS4wMTg3IDYwNy41MTI1LDMzMS4xMTI1IFE2MDcuNTEyNSwzMzMuMjA2MiA2MDguMiwzMzQuMjg0NCBRNjA4Ljg4NzUsMzM1LjM0NjkgNjEwLjIzMTMsMzM1LjM0NjkgUTYxMC44NTYzLDMzNS4zNDY5IDYxMS40NSwzMzUuMDgxMiBRNjEyLjA0MzgsMzM0LjggNjEyLjY2ODgsMzM0LjIyMTkgTDYxMi42Njg4LDMzNi45NDA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTE3IiB4PSI2MjguMyIgeT0iMzM2LjE0NjciPkVhcnBob25lRmFjdG9yeTwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI1NzUiIHgyPSI3NjgiIHkxPSIzNDcuMyIgeTI9IjM0Ny4zIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iNTc1IiB4Mj0iNzY4IiB5MT0iMzU1LjMiIHkyPSIzNTUuMyIvPjxlbGxpcHNlIGN4PSI1ODUiIGN5PSIzNjguOTQ4NCIgZmlsbD0iIzg0QkU4NCIgcng9IjMiIHJ5PSIzIiBzdHlsZT0ic3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNjkiIHg9IjU5NCIgeT0iMzcyLjI5NTEiPklQcm9kdWN0IGNyZWF0ZVByb2R1Y3QoKTwvdGV4dD48L2c+PCEtLWNsYXNzIEZhY3RvcnlNZXRob2RNYWluLS0+PGcgaWQ9ImVsZW1fRmFjdG9yeU1ldGhvZE1haW4iPjxyZWN0IGNvZGVMaW5lPSIzMyIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSI0OCIgaWQ9IkZhY3RvcnlNZXRob2RNYWluIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNjciIHg9IjciIHk9IjciLz48ZWxsaXBzZSBjeD0iMjIiIGN5PSIyMyIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0yNC45Njg4LDI4LjY0MDYgUTI0LjM5MDYsMjguOTM3NSAyMy43NSwyOS4wNzgxIFEyMy4xMDk0LDI5LjIzNDQgMjIuNDA2MywyOS4yMzQ0IFExOS45MDYzLDI5LjIzNDQgMTguNTc4MSwyNy41OTM4IFExNy4yNjU2LDI1LjkzNzUgMTcuMjY1NiwyMi44MTI1IFExNy4yNjU2LDE5LjY4NzUgMTguNTc4MSwxOC4wMzEzIFExOS45MDYzLDE2LjM3NSAyMi40MDYzLDE2LjM3NSBRMjMuMTA5NCwxNi4zNzUgMjMuNzUsMTYuNTMxMyBRMjQuNDA2MywxNi42ODc1IDI0Ljk2ODgsMTYuOTg0NCBMMjQuOTY4OCwxOS43MDMxIFEyNC4zNDM4LDE5LjEyNSAyMy43NSwxOC44NTk0IFEyMy4xNTYzLDE4LjU3ODEgMjIuNTMxMywxOC41NzgxIFEyMS4xODc1LDE4LjU3ODEgMjAuNSwxOS42NTYzIFExOS44MTI1LDIwLjcxODggMTkuODEyNSwyMi44MTI1IFExOS44MTI1LDI0LjkwNjMgMjAuNSwyNS45ODQ0IFEyMS4xODc1LDI3LjA0NjkgMjIuNTMxMywyNy4wNDY5IFEyMy4xNTYzLDI3LjA0NjkgMjMuNzUsMjYuNzgxMyBRMjQuMzQzOCwyNi41IDI0Ljk2ODgsMjUuOTIxOSBMMjQuOTY4OCwyOC42NDA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTM1IiB4PSIzNiIgeT0iMjcuODQ2NyI+RmFjdG9yeU1ldGhvZE1haW48L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iOCIgeDI9IjE3MyIgeTE9IjM5IiB5Mj0iMzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSI4IiB4Mj0iMTczIiB5MT0iNDciIHkyPSI0NyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElQcm9kdWN0IHRvIFBob25lLS0+PGcgaWQ9ImxpbmtfSVByb2R1Y3RfUGhvbmUiPjxwYXRoIGQ9Ik05ODkuMjg1MywzOTMuNDcxMiBDOTY1LjM4NTMsNDIwLjkwMTIgOTQyLjczLDQ0Ni45MiA5MTguODUsNDc0LjM0ICIgZmlsbD0ibm9uZSIgaWQ9IklQcm9kdWN0LWJhY2t0by1QaG9uZSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7c3Ryb2tlLWRhc2hhcnJheTo3LjAsNy4wOyIvPjxwb2x5Z29uIGZpbGw9Im5vbmUiIHBvaW50cz0iMTAwMS4xMSwzNzkuOSw5ODQuNzYxNiwzODkuNTI5Niw5OTMuODA5LDM5Ny40MTI3LDEwMDEuMTEsMzc5LjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElQcm9kdWN0IHRvIExhcHRvcC0tPjxnIGlkPSJsaW5rX0lQcm9kdWN0X0xhcHRvcCI+PHBhdGggZD0iTTEwMjguNSwzOTcuOSBDMTAyOC41LDQyNS4zMyAxMDI4LjUsNDQ2LjkyIDEwMjguNSw0NzQuMzQgIiBmaWxsPSJub25lIiBpZD0iSVByb2R1Y3QtYmFja3RvLUxhcHRvcCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7c3Ryb2tlLWRhc2hhcnJheTo3LjAsNy4wOyIvPjxwb2x5Z29uIGZpbGw9Im5vbmUiIHBvaW50cz0iMTAyOC41LDM3OS45LDEwMjIuNSwzOTcuOSwxMDM0LjUsMzk3LjksMTAyOC41LDM3OS45IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLXJldmVyc2UgbGluayBJUHJvZHVjdCB0byBFYXJwaG9uZS0tPjxnIGlkPSJsaW5rX0lQcm9kdWN0X0VhcnBob25lIj48cGF0aCBkPSJNMTA2Ny43MTQ3LDM5My40NzEyIEMxMDkxLjYxNDcsNDIwLjkwMTIgMTExNC4yNyw0NDYuOTIgMTEzOC4xNSw0NzQuMzQgIiBmaWxsPSJub25lIiBpZD0iSVByb2R1Y3QtYmFja3RvLUVhcnBob25lIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0ibm9uZSIgcG9pbnRzPSIxMDU1Ljg5LDM3OS45LDEwNjMuMTkxLDM5Ny40MTI3LDEwNzIuMjM4NCwzODkuNTI5NiwxMDU1Ljg5LDM3OS45IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLXJldmVyc2UgbGluayBJRmFjdG9yeSB0byBQaG9uZUZhY3RvcnktLT48ZyBpZD0ibGlua19JRmFjdG9yeV9QaG9uZUZhY3RvcnkiPjxwYXRoIGQ9Ik0zNzMuODU3NywyNDIuOTk3OSBDMzU0LjEyNzcsMjU0Ljk4NzkgMzQ2LjkxLDI1OS41IDMyNi41LDI3Mi4zIEMzMDQuNDYsMjg2LjEyIDI4MC4yNCwzMDEuNjggMjU5LjczLDMxNC45NyAiIGZpbGw9Im5vbmUiIGlkPSJJRmFjdG9yeS1iYWNrdG8tUGhvbmVGYWN0b3J5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0ibm9uZSIgcG9pbnRzPSIzODkuMjQsMjMzLjY1LDM3MC43NDE3LDIzNy44NzA1LDM3Ni45NzM2LDI0OC4xMjU0LDM4OS4yNCwyMzMuNjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElGYWN0b3J5IHRvIExhcHRvcEZhY3RvcnktLT48ZyBpZD0ibGlua19JRmFjdG9yeV9MYXB0b3BGYWN0b3J5Ij48cGF0aCBkPSJNNDQxLjUsMjUxLjQ2IEM0NDEuNSwyNzUuNjYgNDQxLjUsMjkxLjAxIDQ0MS41LDMxNS4yICIgZmlsbD0ibm9uZSIgaWQ9IklGYWN0b3J5LWJhY2t0by1MYXB0b3BGYWN0b3J5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0ibm9uZSIgcG9pbnRzPSI0NDEuNSwyMzMuNDYsNDM1LjUsMjUxLjQ2LDQ0Ny41LDI1MS40Niw0NDEuNSwyMzMuNDYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIElGYWN0b3J5IHRvIEVhcnBob25lRmFjdG9yeS0tPjxnIGlkPSJsaW5rX0lGYWN0b3J5X0VhcnBob25lRmFjdG9yeSI+PHBhdGggZD0iTTUwOS4xNDIzLDI0Mi45OTc5IEM1MjguODcyMywyNTQuOTg3OSA1MzYuMDksMjU5LjUgNTU2LjUsMjcyLjMgQzU3OC41NCwyODYuMTIgNjAyLjc2LDMwMS42OCA2MjMuMjcsMzE0Ljk3ICIgZmlsbD0ibm9uZSIgaWQ9IklGYWN0b3J5LWJhY2t0by1FYXJwaG9uZUZhY3RvcnkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSJub25lIiBwb2ludHM9IjQ5My43NiwyMzMuNjUsNTA2LjAyNjQsMjQ4LjEyNTQsNTEyLjI1ODMsMjM3Ljg3MDUsNDkzLjc2LDIzMy42NSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PC9nPjwhLS1saW5rIFBob25lRmFjdG9yeSB0byBQaG9uZS0tPjxnIGlkPSJsaW5rX1Bob25lRmFjdG9yeV9QaG9uZSI+PHBhdGggY29kZUxpbmU9IjM2IiBkPSJNMjUzLjMzLDM4MC4wMiBDMjc0LjI2LDM5NC4yOSAzMDAuNjEsNDEwLjA2IDMyNi41LDQxOS41OSBDNTA3LjM4LDQ4Ni4xNyA3MzMuMDczNCw1MDEuMTA2OCA4MzQuMzEzNCw1MDQuNTM2OCAiIGZpbGw9Im5vbmUiIGlkPSJQaG9uZUZhY3RvcnktdG8tUGhvbmUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijg0MC4zMSw1MDQuNzQsODMxLjQ1MDYsNTAwLjQzNzUsODM1LjMxMjksNTA0LjU3MDcsODMxLjE3OTcsNTA4LjQzMyw4NDAuMzEsNTA0Ljc0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI0MSIgeD0iNDAwLjUiIHk9IjQ0MC42NTY5Ij5jcmVhdGU8L3RleHQ+PC9nPjwhLS1saW5rIExhcHRvcEZhY3RvcnkgdG8gTGFwdG9wLS0+PGcgaWQ9ImxpbmtfTGFwdG9wRmFjdG9yeV9MYXB0b3AiPjxwYXRoIGNvZGVMaW5lPSIzNyIgZD0iTTQ4Mi45OSwzODAuMDIgQzUwMy45NiwzOTQuMzggNTMwLjQzLDQxMC4yMyA1NTYuNSw0MTkuNTkgQzcyNy4wNSw0ODAuODIgNzg2LjQ3LDQyNC4wOSA5NjAuNSw0NzQuNTkgQzk2NS45OSw0NzYuMTkgOTY2LjAxMjUsNDc1Ljk2MzYgOTcxLjUzMjUsNDc4LjEyMzYgIiBmaWxsPSJub25lIiBpZD0iTGFwdG9wRmFjdG9yeS10by1MYXB0b3AiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijk3Ny4xMiw0ODAuMzEsOTcwLjE5NjQsNDczLjMwNTQsOTcyLjQ2MzgsNDc4LjQ4OCw5NjcuMjgxMiw0ODAuNzU1NCw5NzcuMTIsNDgwLjMxIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI0MSIgeD0iNjQ3LjUiIHk9IjQ0MC42NTY5Ij5jcmVhdGU8L3RleHQ+PC9nPjwhLS1saW5rIEVhcnBob25lRmFjdG9yeSB0byBFYXJwaG9uZS0tPjxnIGlkPSJsaW5rX0VhcnBob25lRmFjdG9yeV9FYXJwaG9uZSI+PHBhdGggY29kZUxpbmU9IjM4IiBkPSJNNzMwLjg1LDM4MC4wNCBDNzU4LjY2LDM5My44IDc5Mi42Myw0MDkuMTQgODI0LjUsNDE5LjU5IEM5NDIuMSw0NTguMTggOTc5Ljc5LDQzNi4zNCAxMDk3LjUsNDc0LjU5IEMxMTAyLjkzLDQ3Ni4zNiAxMTAyLjk0ODIsNDc2LjE4OSAxMTA4LjQ1ODIsNDc4LjQxOSAiIGZpbGw9Im5vbmUiIGlkPSJFYXJwaG9uZUZhY3RvcnktdG8tRWFycGhvbmUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wO3N0cm9rZS1kYXNoYXJyYXk6Ny4wLDcuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjExMTQuMDIsNDgwLjY3LDExMDcuMTc4LDQ3My41ODU3LDExMDkuMzg1Miw0NzguNzk0MiwxMTA0LjE3NjcsNDgxLjAwMTQsMTExNC4wMiw0ODAuNjciIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQxIiB4PSI5MzMuNSIgeT0iNDQwLjY1NjkiPmNyZWF0ZTwvdGV4dD48L2c+PCEtLWxpbmsgRmFjdG9yeU1ldGhvZE1haW4gdG8gRmFjdG9yeS0tPjxnIGlkPSJsaW5rX0ZhY3RvcnlNZXRob2RNYWluX0ZhY3RvcnkiPjxwYXRoIGNvZGVMaW5lPSI0MCIgZD0iTTkwLjUsNTUuMzggQzkwLjUsNjYuNzUgOTAuNSw4MS4yOTEzIDkwLjUsOTYuNzU0NCBDOTAuNSwxMDQuNDg1OSA5MC41LDExMi40NDggOTAuNSwxMjAuMzU5MyBDOTAuNSwxMjEuMzQ4MiA5MC41LDEyMi4zMzYzIDkwLjUsMTIzLjMyMzEgQzkwLjUsMTIzLjgxNjUgOTAuNSwxMjQuMzA5NiA5MC41LDEyNC44MDIyIEM5MC41LDEyNS4wNDg1IDkwLjUsMTE5LjI5NDggOTAuNSwxMTkuNTQwOSAiIGZpbGw9Im5vbmUiIGlkPSJGYWN0b3J5TWV0aG9kTWFpbi10by1GYWN0b3J5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDtzdHJva2UtZGFzaGFycmF5OjcuMCw3LjA7Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI5MC41LDEyNS41NDA5LDk0LjUsMTE2LjU0MDksOTAuNSwxMjAuNTQwOSw4Ni41LDExNi41NDA5LDkwLjUsMTI1LjU0MDkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIzIiB4PSI5MS41IiB5PSI5OC4wNjY5Ij51c2U8L3RleHQ+PC9nPjwhLS1TUkM9W2hQQlJJV0duMzhSbC1uSXZLbjVkeGVUYnhYSTROTFh5V3ozNmNNOUZqMWIxUERfVEVSSlpoWUFZa3hhZWpGZHA5VnQ5TFN5U0tiRk5tUTNabVBmQVViakJXb2RUQU9yVEgyajRHRmMyN1M0LVVaTDhYaXRjWUlJWndtb3JCUm1CNjRDeGZsWUNhazJubzlSNDVCVm13aEsySEtiVXR5b2xYX2NTLXkyLXp1djBzczM4YWtGcVR5OE0wX2ptNWs4VU9fWmQ3OFRGWG52R2llemxscGJLUENWU2pQY0NYNHB2emZEVFhOMHl4TGRLblNBQk91a2o1bUFGTFlfU05CaVp4aHRRZU5PWlBLb1VVNURMUlR3ajlrRjR3SXlkR0x3VExWNXJ1NGNweGlRZzRqX3hKeTlJckMyR0k3bTBdLS0+PC9nPjwvc3ZnPg=='>
+<h2 id="22-代码示例"><a class="markdownIt-Anchor" href="#22-代码示例"></a> 2.2. 代码示例</h2>
+<p>产品接口、及具体实现后的产品类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="comment">// 描述产品内容</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Phone</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a phone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Laptop</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a laptop.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Earphone</span> <span class="keyword">implements</span> <span class="title class_">IProduct</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">desc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a earphone.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象工厂接口、及其具体工厂：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    <span class="comment">// 创建产品</span></span><br><span class="line">    IProduct <span class="title function_">createProduct</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 手机工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PhoneFactory</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> IProduct <span class="title function_">createProduct</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Phone</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 笔记本工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LaptopFactory</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> IProduct <span class="title function_">createProduct</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Laptop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 耳机工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EarphoneFactory</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> IProduct <span class="title function_">createProduct</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Earphone</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>工厂方法模式的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryMethodMain</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">phone</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PhoneFactory</span>().createProduct();</span><br><span class="line">        phone.desc();</span><br><span class="line"></span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">laptop</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LaptopFactory</span>().createProduct();</span><br><span class="line">        laptop.desc();</span><br><span class="line"></span><br><span class="line">        <span class="type">IProduct</span> <span class="variable">earphone</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EarphoneFactory</span>().createProduct();</span><br><span class="line">        earphone.desc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I am a phone.</span><br><span class="line">I am a laptop.</span><br><span class="line">I am a earphone.</span><br></pre></td></tr></table></figure>
+<h1 id="3-在源码中的应用"><a class="markdownIt-Anchor" href="#3-在源码中的应用"></a> 3. 在源码中的应用</h1>
+<h2 id="31-jdk源码-javautilcalendar简单工厂模式"><a class="markdownIt-Anchor" href="#31-jdk源码-javautilcalendar简单工厂模式"></a> 3.1. JDK源码-java.util.Calendar（简单工厂模式）</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java.util.Calendar</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Calendar</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>, Cloneable, Comparable&lt;Calendar&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Calendar <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> createCalendar(TimeZone.getDefault(), Locale.getDefault(Locale.Category.FORMAT));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Calendar <span class="title function_">createCalendar</span><span class="params">(TimeZone zone, Locale aLocale)</span> &#123;</span><br><span class="line">        <span class="type">CalendarProvider</span> <span class="variable">provider</span> <span class="operator">=</span> LocaleProviderAdapter.getAdapter(CalendarProvider.class, aLocale).getCalendarProvider();</span><br><span class="line">        <span class="keyword">if</span> (provider != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> provider.getInstance(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalArgumentException iae) &#123;</span><br><span class="line">                <span class="comment">// fall back to the default instantiation</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Calendar</span> <span class="variable">cal</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (aLocale.hasExtensions()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">caltype</span> <span class="operator">=</span> aLocale.getUnicodeLocaleType(<span class="string">&quot;ca&quot;</span>);</span><br><span class="line">            <span class="comment">// 根据不同的 caltype，生成 Calendar 不同的子类实例</span></span><br><span class="line">            <span class="keyword">if</span> (caltype != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">switch</span> (caltype) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;buddhist&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> <span class="title class_">BuddhistCalendar</span>(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;japanese&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> <span class="title class_">JapaneseImperialCalendar</span>(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&quot;gregory&quot;</span>:</span><br><span class="line">                        cal = <span class="keyword">new</span> <span class="title class_">GregorianCalendar</span>(zone, aLocale);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cal == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 根据判断条件，来决定生成 Calendar 不同的子类实例</span></span><br><span class="line">            <span class="keyword">if</span> (aLocale.getLanguage() == <span class="string">&quot;th&quot;</span> &amp;&amp; aLocale.getCountry() == <span class="string">&quot;TH&quot;</span>) &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> <span class="title class_">BuddhistCalendar</span>(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (aLocale.getVariant() == <span class="string">&quot;JP&quot;</span> &amp;&amp; aLocale.getLanguage() == <span class="string">&quot;ja&quot;</span> &amp;&amp; aLocale.getCountry() == <span class="string">&quot;JP&quot;</span>) &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> <span class="title class_">JapaneseImperialCalendar</span>(zone, aLocale);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cal = <span class="keyword">new</span> <span class="title class_">GregorianCalendar</span>(zone, aLocale);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cal;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Calendar 在 <code>createCalendar()</code> 静态方法中根据判断条件返回不同 Calendar 的子类实例，涉及具体子类有：</p>
+<img class="kroki" src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIyNzhweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjQxOXB4O2hlaWdodDoyNzhweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA0MTkgMjc4IiB3aWR0aD0iNDE5cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48IS0tY2xhc3MgQ2FsZW5kYXItLT48ZyBpZD0iZWxlbV9DYWxlbmRhciI+PHJlY3QgY29kZUxpbmU9IjMiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNDgiIGlkPSJDYWxlbmRhciIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iOTMiIHg9IjE3NSIgeT0iNyIvPjxlbGxpcHNlIGN4PSIxOTAiIGN5PSIyMyIgZmlsbD0iI0E5RENERiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0xOTAuMTA5NCwxOC4zNDM4IEwxODguOTUzMSwyMy40MjE5IEwxOTEuMjgxMywyMy40MjE5IEwxOTAuMTA5NCwxOC4zNDM4IFogTTE4OC42MjUsMTYuMTA5NCBMMTkxLjYwOTQsMTYuMTA5NCBMMTk0Ljk2ODgsMjguNSBMMTkyLjUxNTYsMjguNSBMMTkxLjc1LDI1LjQzNzUgTDE4OC40Njg4LDI1LjQzNzUgTDE4Ny43MTg4LDI4LjUgTDE4NS4yODEzLDI4LjUgTDE4OC42MjUsMTYuMTA5NCBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXN0eWxlPSJpdGFsaWMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNjEiIHg9IjIwNCIgeT0iMjcuODQ2NyI+Q2FsZW5kYXI8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTc2IiB4Mj0iMjY3IiB5MT0iMzkiIHkyPSIzOSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjE3NiIgeDI9IjI2NyIgeTE9IjQ3IiB5Mj0iNDciLz48L2c+PCEtLWNsYXNzIEphcGFuZXNlSW1wZXJpYWxDYWxlbmRhci0tPjxnIGlkPSJlbGVtX0phcGFuZXNlSW1wZXJpYWxDYWxlbmRhciI+PHJlY3QgY29kZUxpbmU9IjYiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNDgiIGlkPSJKYXBhbmVzZUltcGVyaWFsQ2FsZW5kYXIiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjIwOSIgeD0iNyIgeT0iMTE1Ii8+PGVsbGlwc2UgY3g9IjIyIiBjeT0iMTMxIiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTI0Ljk2ODgsMTM2LjY0MDYgUTI0LjM5MDYsMTM2LjkzNzUgMjMuNzUsMTM3LjA3ODEgUTIzLjEwOTQsMTM3LjIzNDQgMjIuNDA2MywxMzcuMjM0NCBRMTkuOTA2MywxMzcuMjM0NCAxOC41NzgxLDEzNS41OTM4IFExNy4yNjU2LDEzMy45Mzc1IDE3LjI2NTYsMTMwLjgxMjUgUTE3LjI2NTYsMTI3LjY4NzUgMTguNTc4MSwxMjYuMDMxMyBRMTkuOTA2MywxMjQuMzc1IDIyLjQwNjMsMTI0LjM3NSBRMjMuMTA5NCwxMjQuMzc1IDIzLjc1LDEyNC41MzEzIFEyNC40MDYzLDEyNC42ODc1IDI0Ljk2ODgsMTI0Ljk4NDQgTDI0Ljk2ODgsMTI3LjcwMzEgUTI0LjM0MzgsMTI3LjEyNSAyMy43NSwxMjYuODU5NCBRMjMuMTU2MywxMjYuNTc4MSAyMi41MzEzLDEyNi41NzgxIFEyMS4xODc1LDEyNi41NzgxIDIwLjUsMTI3LjY1NjMgUTE5LjgxMjUsMTI4LjcxODggMTkuODEyNSwxMzAuODEyNSBRMTkuODEyNSwxMzIuOTA2MyAyMC41LDEzMy45ODQ0IFEyMS4xODc1LDEzNS4wNDY5IDIyLjUzMTMsMTM1LjA0NjkgUTIzLjE1NjMsMTM1LjA0NjkgMjMuNzUsMTM0Ljc4MTMgUTI0LjM0MzgsMTM0LjUgMjQuOTY4OCwxMzMuOTIxOSBMMjQuOTY4OCwxMzYuNjQwNiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE3NyIgeD0iMzYiIHk9IjEzNS44NDY3Ij5KYXBhbmVzZUltcGVyaWFsQ2FsZW5kYXI8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iOCIgeDI9IjIxNSIgeTE9IjE0NyIgeTI9IjE0NyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjgiIHgyPSIyMTUiIHkxPSIxNTUiIHkyPSIxNTUiLz48L2c+PCEtLWNsYXNzIEdyZWdvcmlhbkNhbGVuZGFyLS0+PGcgaWQ9ImVsZW1fR3JlZ29yaWFuQ2FsZW5kYXIiPjxyZWN0IGNvZGVMaW5lPSI5IiBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjQ4IiBpZD0iR3JlZ29yaWFuQ2FsZW5kYXIiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE2MSIgeD0iMjUxIiB5PSIxMTUiLz48ZWxsaXBzZSBjeD0iMjY2IiBjeT0iMTMxIiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTI2OC45Njg4LDEzNi42NDA2IFEyNjguMzkwNiwxMzYuOTM3NSAyNjcuNzUsMTM3LjA3ODEgUTI2Ny4xMDk0LDEzNy4yMzQ0IDI2Ni40MDYzLDEzNy4yMzQ0IFEyNjMuOTA2MywxMzcuMjM0NCAyNjIuNTc4MSwxMzUuNTkzOCBRMjYxLjI2NTYsMTMzLjkzNzUgMjYxLjI2NTYsMTMwLjgxMjUgUTI2MS4yNjU2LDEyNy42ODc1IDI2Mi41NzgxLDEyNi4wMzEzIFEyNjMuOTA2MywxMjQuMzc1IDI2Ni40MDYzLDEyNC4zNzUgUTI2Ny4xMDk0LDEyNC4zNzUgMjY3Ljc1LDEyNC41MzEzIFEyNjguNDA2MywxMjQuNjg3NSAyNjguOTY4OCwxMjQuOTg0NCBMMjY4Ljk2ODgsMTI3LjcwMzEgUTI2OC4zNDM4LDEyNy4xMjUgMjY3Ljc1LDEyNi44NTk0IFEyNjcuMTU2MywxMjYuNTc4MSAyNjYuNTMxMywxMjYuNTc4MSBRMjY1LjE4NzUsMTI2LjU3ODEgMjY0LjUsMTI3LjY1NjMgUTI2My44MTI1LDEyOC43MTg4IDI2My44MTI1LDEzMC44MTI1IFEyNjMuODEyNSwxMzIuOTA2MyAyNjQuNSwxMzMuOTg0NCBRMjY1LjE4NzUsMTM1LjA0NjkgMjY2LjUzMTMsMTM1LjA0NjkgUTI2Ny4xNTYzLDEzNS4wNDY5IDI2Ny43NSwxMzQuNzgxMyBRMjY4LjM0MzgsMTM0LjUgMjY4Ljk2ODgsMTMzLjkyMTkgTDI2OC45Njg4LDEzNi42NDA2IFogIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTI5IiB4PSIyODAiIHk9IjEzNS44NDY3Ij5HcmVnb3JpYW5DYWxlbmRhcjwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyNTIiIHgyPSI0MTEiIHkxPSIxNDciIHkyPSIxNDciLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyNTIiIHgyPSI0MTEiIHkxPSIxNTUiIHkyPSIxNTUiLz48L2c+PCEtLWNsYXNzIEJ1ZGRoaXN0Q2FsZW5kYXItLT48ZyBpZD0iZWxlbV9CdWRkaGlzdENhbGVuZGFyIj48cmVjdCBjb2RlTGluZT0iMTIiIGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNDgiIGlkPSJCdWRkaGlzdENhbGVuZGFyIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNTUiIHg9IjI1NCIgeT0iMjIzIi8+PGVsbGlwc2UgY3g9IjI2OSIgY3k9IjIzOSIgZmlsbD0iI0FERDFCMiIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0yNzEuOTY4OCwyNDQuNjQwNiBRMjcxLjM5MDYsMjQ0LjkzNzUgMjcwLjc1LDI0NS4wNzgxIFEyNzAuMTA5NCwyNDUuMjM0NCAyNjkuNDA2MywyNDUuMjM0NCBRMjY2LjkwNjMsMjQ1LjIzNDQgMjY1LjU3ODEsMjQzLjU5MzggUTI2NC4yNjU2LDI0MS45Mzc1IDI2NC4yNjU2LDIzOC44MTI1IFEyNjQuMjY1NiwyMzUuNjg3NSAyNjUuNTc4MSwyMzQuMDMxMyBRMjY2LjkwNjMsMjMyLjM3NSAyNjkuNDA2MywyMzIuMzc1IFEyNzAuMTA5NCwyMzIuMzc1IDI3MC43NSwyMzIuNTMxMyBRMjcxLjQwNjMsMjMyLjY4NzUgMjcxLjk2ODgsMjMyLjk4NDQgTDI3MS45Njg4LDIzNS43MDMxIFEyNzEuMzQzOCwyMzUuMTI1IDI3MC43NSwyMzQuODU5NCBRMjcwLjE1NjMsMjM0LjU3ODEgMjY5LjUzMTMsMjM0LjU3ODEgUTI2OC4xODc1LDIzNC41NzgxIDI2Ny41LDIzNS42NTYzIFEyNjYuODEyNSwyMzYuNzE4OCAyNjYuODEyNSwyMzguODEyNSBRMjY2LjgxMjUsMjQwLjkwNjMgMjY3LjUsMjQxLjk4NDQgUTI2OC4xODc1LDI0My4wNDY5IDI2OS41MzEzLDI0My4wNDY5IFEyNzAuMTU2MywyNDMuMDQ2OSAyNzAuNzUsMjQyLjc4MTMgUTI3MS4zNDM4LDI0Mi41IDI3MS45Njg4LDI0MS45MjE5IEwyNzEuOTY4OCwyNDQuNjQwNiBaICIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEyMyIgeD0iMjgzIiB5PSIyNDMuODQ2NyI+QnVkZGhpc3RDYWxlbmRhcjwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyNTUiIHgyPSI0MDgiIHkxPSIyNTUiIHkyPSIyNTUiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIyNTUiIHgyPSI0MDgiIHkxPSIyNjMiIHkyPSIyNjMiLz48L2c+PCEtLXJldmVyc2UgbGluayBDYWxlbmRhciB0byBKYXBhbmVzZUltcGVyaWFsQ2FsZW5kYXItLT48ZyBpZD0ibGlua19DYWxlbmRhcl9KYXBhbmVzZUltcGVyaWFsQ2FsZW5kYXIiPjxwYXRoIGQ9Ik0xODQuNDAxLDY3Ljc1MjYgQzE2Ni4wNjEsODUuNDMyNiAxNTMuOTEsOTcuMTMgMTM1LjU4LDExNC43OSAiIGZpbGw9Im5vbmUiIGlkPSJDYWxlbmRhci1iYWNrdG8tSmFwYW5lc2VJbXBlcmlhbENhbGVuZGFyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSJub25lIiBwb2ludHM9IjE5Ny4zNiw1NS4yNiwxODAuMjM2OCw2My40MzMsMTg4LjU2NTIsNzIuMDcyMywxOTcuMzYsNTUuMjYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tcmV2ZXJzZSBsaW5rIENhbGVuZGFyIHRvIEdyZWdvcmlhbkNhbGVuZGFyLS0+PGcgaWQ9ImxpbmtfQ2FsZW5kYXJfR3JlZ29yaWFuQ2FsZW5kYXIiPjxwYXRoIGQ9Ik0yNTguNTk5LDY3Ljc1MjYgQzI3Ni45MzksODUuNDMyNiAyODkuMDksOTcuMTMgMzA3LjQyLDExNC43OSAiIGZpbGw9Im5vbmUiIGlkPSJDYWxlbmRhci1iYWNrdG8tR3JlZ29yaWFuQ2FsZW5kYXIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwb2x5Z29uIGZpbGw9Im5vbmUiIHBvaW50cz0iMjQ1LjY0LDU1LjI2LDI1NC40MzQ4LDcyLjA3MjMsMjYyLjc2MzIsNjMuNDMzLDI0NS42NCw1NS4yNiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PC9nPjwhLS1yZXZlcnNlIGxpbmsgR3JlZ29yaWFuQ2FsZW5kYXIgdG8gQnVkZGhpc3RDYWxlbmRhci0tPjxnIGlkPSJsaW5rX0dyZWdvcmlhbkNhbGVuZGFyX0J1ZGRoaXN0Q2FsZW5kYXIiPjxwYXRoIGQ9Ik0zMzEuNSwxODEuMjYgQzMzMS41LDE5OC45NCAzMzEuNSwyMDUuMTMgMzMxLjUsMjIyLjc5ICIgZmlsbD0ibm9uZSIgaWQ9IkdyZWdvcmlhbkNhbGVuZGFyLWJhY2t0by1CdWRkaGlzdENhbGVuZGFyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSJub25lIiBwb2ludHM9IjMzMS41LDE2My4yNiwzMjUuNSwxODEuMjYsMzM3LjUsMTgxLjI2LDMzMS41LDE2My4yNiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PC9nPjwhLS1TUkM9W1pPbW4yVzhuNDROeEVLS3dBcXJsZ09OZUJSeDlpMWtPUDREYzVlSjVrbmlLamphangzd0Z6X3ZYREFqd3podUFZaXJQSmM3QUZXWEtacDVYUUNYNFVBZXIxN0RWeGd1R0JYN0RCVkdjLWg0N0FXZWh0dEZiYlkyaG1vX2hPcC13REh3Y1JmVV94Q2lTdXZaS0RsQnNQZDR6LW0wMF0tLT48L2c+PC9zdmc+'>
+<h2 id="32-jdk源码-javatextnumberformat简单工厂模式"><a class="markdownIt-Anchor" href="#32-jdk源码-javatextnumberformat简单工厂模式"></a> 3.2. JDK源码-java.text.NumberFormat（简单工厂模式）</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java.text.NumberFormat</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">NumberFormat</span> <span class="keyword">extends</span> <span class="title class_">Format</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constants used by factory methods to specify a style of format.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUMBERSTYLE</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">CURRENCYSTYLE</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">PERCENTSTYLE</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">SCIENTIFICSTYLE</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INTEGERSTYLE</span> <span class="operator">=</span> <span class="number">4</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> NumberFormat <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getInstance(Locale.getDefault(Locale.Category.FORMAT), NUMBERSTYLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> NumberFormat <span class="title function_">getInstance</span><span class="params">(Locale desiredLocale, <span class="type">int</span> choice)</span> &#123;</span><br><span class="line">        LocaleProviderAdapter adapter;</span><br><span class="line">        adapter = LocaleProviderAdapter.getAdapter(NumberFormatProvider.class, desiredLocale);</span><br><span class="line">        <span class="type">NumberFormat</span> <span class="variable">numberFormat</span> <span class="operator">=</span> getInstance(adapter, desiredLocale, choice);</span><br><span class="line">        <span class="keyword">if</span> (numberFormat == <span class="literal">null</span>) &#123;</span><br><span class="line">            numberFormat = getInstance(LocaleProviderAdapter.forJRE(), desiredLocale, choice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numberFormat;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据 choice，获取不同用途的 NumberFormat 实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> NumberFormat <span class="title function_">getInstance</span><span class="params">(LocaleProviderAdapter adapter, Locale locale, <span class="type">int</span> choice)</span> &#123;</span><br><span class="line">        <span class="type">NumberFormatProvider</span> <span class="variable">provider</span> <span class="operator">=</span> adapter.getNumberFormatProvider();</span><br><span class="line">        <span class="type">NumberFormat</span> <span class="variable">numberFormat</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">            <span class="keyword">case</span> NUMBERSTYLE:</span><br><span class="line">                numberFormat = provider.getNumberInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> PERCENTSTYLE:</span><br><span class="line">                numberFormat = provider.getPercentInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CURRENCYSTYLE:</span><br><span class="line">                numberFormat = provider.getCurrencyInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> INTEGERSTYLE:</span><br><span class="line">                numberFormat = provider.getIntegerInstance(locale);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numberFormat;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>NumberFormat 的 <code>getInstance()</code> 静态方法根据不同的 locale 参数来决定生成不同的 NumberFormat 子类实例。默认，都会进入 <code>sun.util.locale.provider.NumberFormatProviderImpl#getInstance</code> 来生成新的 java.text.DecimalFormat 实例，并按需求进行不同的格式化设置，如 货币格式、百分比格式等。</p>
+<h2 id="33-jdk源码-javaneturlstreamhandlerfactory工厂方法模式"><a class="markdownIt-Anchor" href="#33-jdk源码-javaneturlstreamhandlerfactory工厂方法模式"></a> 3.3. JDK源码-java.net.URLStreamHandlerFactory（工厂方法模式）</h2>
+<p>URLStreamHandlerFactory 接口（抽象工厂）为 URL 流协议处理程序定义一个工厂，是所有流协议处理程序的通用基类。流协议处理程序知道如何为特定协议类型建立连接，例如 http 或 https  。</p>
+<p>URLStreamHandler 抽象类作为抽象产品，其子类（即具体产品）的实例不是由应用程序直接创建的，而是由实现 URLStreamHandlerFactory 工厂类接口的类（即具体工厂）去进行管理创建的。</p>
+<p>抽象工厂、及其子类（具体工厂）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">URLStreamHandlerFactory</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建具有指定协议的新 URLStreamHandler 实例</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> protocol 协议（&quot;ftp&quot;、&quot;http&quot; 和 &quot;nntp&quot; 等）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    URLStreamHandler <span class="title function_">createURLStreamHandler</span><span class="params">(String protocol)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Launcher</span> &#123;</span><br><span class="line">    <span class="comment">// 具体工厂</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Factory</span> <span class="keyword">implements</span> <span class="title class_">URLStreamHandlerFactory</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">PREFIX</span> <span class="operator">=</span> <span class="string">&quot;sun.net.www.protocol&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="title function_">Factory</span><span class="params">()</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// var1: 为 protocol 协议，根据不同协议进行实例创建</span></span><br><span class="line">        <span class="keyword">public</span> URLStreamHandler <span class="title function_">createURLStreamHandler</span><span class="params">(String protocol)</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">var2</span> <span class="operator">=</span> PREFIX + <span class="string">&quot;.&quot;</span> + protocol + <span class="string">&quot;.Handler&quot;</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Class</span> <span class="variable">var3</span> <span class="operator">=</span> Class.forName(var2);</span><br><span class="line">                <span class="keyword">return</span> (URLStreamHandler)var3.newInstance();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ReflectiveOperationException var4) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InternalError</span>(<span class="string">&quot;could not load &quot;</span> + protocol + <span class="string">&quot;system protocol handler&quot;</span>, var4);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象产品、及其子类（具体产品）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">URLStreamHandler</span> &#123;</span><br><span class="line">    <span class="keyword">abstract</span> <span class="keyword">protected</span> URLConnection <span class="title function_">openConnection</span><span class="params">(URL u)</span> <span class="keyword">throws</span> IOException;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品：如 sun.net.www.protocol.http.Handler</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Handler</span> <span class="keyword">extends</span> <span class="title class_">sun</span>.net.www.protocol.http.Handler &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Handler</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> URLConnection <span class="title function_">openConnection</span><span class="params">(URL var1)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">URLConnection</span> <span class="variable">var2</span> <span class="operator">=</span> <span class="built_in">super</span>.openConnection(var1);</span><br><span class="line">        URLUtil.setTimeouts(var2);</span><br><span class="line">        <span class="keyword">return</span> var2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，URLStreamHandler 抽象产品的具体子类产品如下图红框如下：<br />
+<img src="https://s2.loli.net/2021/12/08/el1WbKtVH78yDz4.png" alt="URLStreamHandler_subclasses.png" width="700"  srcFile="URLStreamHandler_subclasses.png"></p>
+<h2 id="34-slf4j源码-orgslf4jiloggerfactory工厂方法模式"><a class="markdownIt-Anchor" href="#34-slf4j源码-orgslf4jiloggerfactory工厂方法模式"></a> 3.4. slf4j源码-org.slf4j.ILoggerFactory（工厂方法模式）</h2>
+<p>抽象工厂、及其具体工厂如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ILoggerFactory</span> &#123;</span><br><span class="line">    <span class="comment">// 用于创建Logger对象</span></span><br><span class="line">    Logger <span class="title function_">getLogger</span><span class="params">(String name)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂：NOPLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NOPLoggerFactory</span> <span class="keyword">implements</span> <span class="title class_">ILoggerFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">NOPLoggerFactory</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">getLogger</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> NOPLogger.NOP_LOGGER;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂: log4j的日志工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4jLoggerFactory</span> <span class="keyword">implements</span> <span class="title class_">ILoggerFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">getLogger</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="type">Logger</span> <span class="variable">slf4jLogger</span> <span class="operator">=</span> (Logger)<span class="built_in">this</span>.loggerMap.get(name);</span><br><span class="line">        <span class="keyword">if</span> (slf4jLogger != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> slf4jLogger;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            org.apache.log4j.Logger log4jLogger;</span><br><span class="line">            <span class="keyword">if</span> (name.equalsIgnoreCase(<span class="string">&quot;ROOT&quot;</span>)) &#123;</span><br><span class="line">                log4jLogger = LogManager.getRootLogger();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                log4jLogger = LogManager.getLogger(name);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">Logger</span> <span class="variable">newInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Log4jLoggerAdapter</span>(log4jLogger);</span><br><span class="line">            <span class="type">Logger</span> <span class="variable">oldInstance</span> <span class="operator">=</span> (Logger)<span class="built_in">this</span>.loggerMap.putIfAbsent(name, newInstance);</span><br><span class="line">            <span class="keyword">return</span> (Logger)(oldInstance == <span class="literal">null</span> ? newInstance : oldInstance);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象产品、及其具体产品如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品：NOPLogger，对应工厂 NOPLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NOPLogger</span> <span class="keyword">extends</span> <span class="title class_">MarkerIgnoringBase</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品: log4j的Logger子类，对应工厂 Log4jLoggerFactory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">Log4jLoggerAdapter</span> <span class="keyword">extends</span> <span class="title class_">MarkerIgnoringBase</span> <span class="keyword">implements</span> <span class="title class_">LocationAwareLogger</span>, Serializable &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">MarkerIgnoringBase</span> <span class="keyword">extends</span> <span class="title class_">NamedLoggerBase</span> <span class="keyword">implements</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="35-jdk源码-javaxxmlbindjaxbcontext工厂方法模式"><a class="markdownIt-Anchor" href="#35-jdk源码-javaxxmlbindjaxbcontext工厂方法模式"></a> 3.5. JDK源码-javax.xml.bind.JAXBContext（工厂方法模式）</h2>
+<p>抽象工厂、及其具体工厂如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">JAXBContext</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Marshaller <span class="title function_">createMarshaller</span><span class="params">()</span> <span class="keyword">throws</span> JAXBException;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">JAXBContextImpl</span> <span class="keyword">extends</span> <span class="title class_">JAXBRIContext</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> MarshallerImpl <span class="title function_">createMarshaller</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MarshallerImpl</span>(<span class="built_in">this</span>, (AssociationMap)<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">JAXBRIContext</span> <span class="keyword">extends</span> <span class="title class_">JAXBContext</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象产品、及其具体产品如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Marshaller</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品，对应工厂JAXBContextImpl.createMarshaller()</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">MarshallerImpl</span> <span class="keyword">extends</span> <span class="title class_">AbstractMarshallerImpl</span> <span class="keyword">implements</span> <span class="title class_">ValidationEventHandler</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractMarshallerImpl</span> <span class="keyword">implements</span> <span class="title class_">Marshaller</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="36-javautil源码的iterator-javautilcollection工厂方法模式"><a class="markdownIt-Anchor" href="#36-javautil源码的iterator-javautilcollection工厂方法模式"></a> 3.6. java.util源码的Iterator-java.util.Collection（工厂方法模式）</h2>
+<p>抽象工厂、及其具体工厂如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Collection</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Iterable</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="comment">// 获取迭代器实例</span></span><br><span class="line">    Iterator&lt;E&gt; <span class="title function_">iterator</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂：ArrayList 实现了 List接口 集成了 Collection接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">AbstractList</span>&lt;E&gt;</span><br><span class="line">        <span class="keyword">implements</span> <span class="title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 具体实现方法：获取迭代器 Iterator 实例: Itr</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;E&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Itr</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂：ArrayDeque</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDeque</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">AbstractCollection</span>&lt;E&gt;</span><br><span class="line">                           <span class="keyword">implements</span> <span class="title class_">Deque</span>&lt;E&gt;, Cloneable, Serializable</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 具体实现方法：获取迭代器 Iterator 实例: DeqIterator</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;E&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DeqIterator</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象产品、及其具体产品如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象产品</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Iterator</span>&lt;E&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    E <span class="title function_">next</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品 Itr: ArrayList 内部私有类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">AbstractList</span>&lt;E&gt;</span><br><span class="line">        <span class="keyword">implements</span> <span class="title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 具体产品</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Itr</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;E&gt; &#123;</span><br><span class="line">        Itr() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> cursor != size;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">public</span> E <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体产品 ArrayDeque：ArrayDeque 内部私有类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDeque</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">AbstractCollection</span>&lt;E&gt;</span><br><span class="line">                           <span class="keyword">implements</span> <span class="title class_">Deque</span>&lt;E&gt;, Cloneable, Serializable</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 具体产品</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">DeqIterator</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;E&gt; &#123;</span><br><span class="line">        Itr() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> cursor != size;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">public</span> E <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/8385.html">C语言中文网-简单工厂模式</a></li>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/1348.html">C语言中文网-工厂模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jing99/p/12595494.html">设计模式之工厂模式(3种)详解及代码示例</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+              2024-10-31
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/zh-CN/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="23 种设计模式">
+                        23 种设计模式
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/zh-CN/categories/23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1-%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="1. 创建型模式">
+                        1. 创建型模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        #设计模式
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="创建型模式">
+                        #创建型模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/zh-CN/design-pattern/singleton-pattern/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E7%AE%80%E4%BB%8B"><span class="toc-text"> 0. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 1. 简单工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-text"> 1.1. 结构与实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text"> 1.2. 代码示例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 2. 工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-text"> 2.1. 结构与实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text"> 2.2. 代码示例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%9C%A8%E6%BA%90%E7%A0%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text"> 3. 在源码中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#31-jdk%E6%BA%90%E7%A0%81-javautilcalendar%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.1. JDK源码-java.util.Calendar（简单工厂模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-jdk%E6%BA%90%E7%A0%81-javatextnumberformat%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.2. JDK源码-java.text.NumberFormat（简单工厂模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-jdk%E6%BA%90%E7%A0%81-javaneturlstreamhandlerfactory%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.3. JDK源码-java.net.URLStreamHandlerFactory（工厂方法模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-slf4j%E6%BA%90%E7%A0%81-orgslf4jiloggerfactory%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.4. slf4j源码-org.slf4j.ILoggerFactory（工厂方法模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-jdk%E6%BA%90%E7%A0%81-javaxxmlbindjaxbcontext%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.5. JDK源码-javax.xml.bind.JAXBContext（工厂方法模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#36-javautil%E6%BA%90%E7%A0%81%E7%9A%84iterator-javautilcollection%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 3.6. java.util源码的Iterator-java.util.Collection（工厂方法模式）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fzh-CN%2Fdesign-pattern%2Ffactory-method-pattern%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/zh-CN/design-pattern/factory-method-pattern/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/design-pattern/factory-method-pattern/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/design-pattern/factory-method-pattern/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>
