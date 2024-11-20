@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      Arch Linux KDE Hibernate Configuration 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="en">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/en/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/en/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/en/">
+          <a href="/en/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/archives/">
+          <a href="/en/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/categories/">
+          <a href="/en/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/tags/">
+          <a href="/en/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Arch Linux KDE Hibernate Configuration</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-11-19
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                    Arch Linux Series
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                    #Arch_Linux
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/OS/" title="OS">
+                    #OS
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <details class="custom-callout info" open><summary class="callout-title"><div class="callout-icon"></div><div>Power Management/Suspend and Hibernate</div>
+<div class="callout-fold"></div></summary><div class="callout-body">
+<p>Usually, on Linux, there are various methods available for suspending the system. The system state is saved in memory or on the disk, entering a low-power mode. When the computer is resumed, it allows for a quick recovery to the previous state.</p>
+<ul>
+<li><strong>Suspend to RAM (Suspend to memory, commonly known as suspend/sleep)</strong>: Saves the current system state in RAM by powering down most components in the machine that are not related to RAM. In this case, RAM is necessary to restore the machine’s state and must continue to be powered. Since the system state is stored in RAM, the system recovery speed is very fast.</li>
+<li><strong>Suspend to disk (Suspend to hard disk, commonly known as hibernate)</strong>: Saves the current system state on the disk (usually in a swap partition or swap file) and then turns off the power. When resuming, the system recovers data from the disk. Compared to the RAM method, hibernation can maintain the system state for a longer period, but the recovery time is longer. This article mainly introduces how to enable and configure hibernation mode.</li>
+<li><strong>Suspend to both (Suspend to both/hybrid suspend)</strong>: Combines the advantages of suspending to RAM and disk methods. It saves the current system state on the disk (swap space) and then enters sleep mode while keeping RAM powered. When resuming, the system will first recover quickly from RAM, and if RAM is lost, it will recover from the disk. For example, if the battery is depleted, the system will recover from the disk.</li>
+</ul>
+</div>
+</details><h1 id="adding-swap"><a class="markdownIt-Anchor" href="#adding-swap"></a> Adding Swap</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Swap">Swap - ArchWiki</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If there is no swap space currently, a new swap needs to be created</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Use <span class="built_in">dd</span> to create a 15 GiB swap file</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1M count=15k status=progress</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set the right permissions (a world-readable swap file is a huge <span class="built_in">local</span> vulnerability):</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">chmod</span> 0600 /swapfile</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After creating the correctly sized file, format it to swap:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo mkswap -U clear /swapfile</span></span><br><span class="line">mkswap: /swapfile: warning: wiping old swap signature.</span><br><span class="line">Setting up swapspace version 1, size = 15 GiB (16106123264 bytes)</span><br><span class="line">no label, UUID=00000000-0000-0000-0000-000000000000</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Activate the swap file:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo swapon /swapfile</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Finally, edit the fstab configuration to add an entry <span class="keyword">for</span> the swap file:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo vim /etc/fstab</span></span><br><span class="line">/swapfile none swap defaults 0 0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Verify <span class="keyword">if</span> the swap is active:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo swapon --show</span></span><br><span class="line">NAME      TYPE SIZE USED PRIO</span><br><span class="line">/swapfile file  15G 256K   -2</span><br></pre></td></tr></table></figure>
+<h1 id="hibernate"><a class="markdownIt-Anchor" href="#hibernate"></a> Hibernate</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Confirm the UUID of the partition <span class="built_in">where</span> the swap file is located</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">findmnt -no UUID -T /swapfile</span></span><br><span class="line">0fdd557a-e3bb-4db4-a93a-0d1ebcf75769</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check the swapfile offset <span class="keyword">for</span> use with resume_offset</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo filefrag -v /swapfile | awk <span class="string">&#x27;&#123; if($1==&quot;0:&quot;)&#123;print substr($4, 1, length($4)-2)&#125; &#125;&#x27;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The resume parameter is the partition <span class="built_in">where</span> the swap file is located, <span class="built_in">which</span> can be specified as /dev/nvme0n1p5 or UUID=0fdd557a-e3bb-4db4-a93a-0d1ebcf75769</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">resume_offset is the physical offset of the file<span class="string">&#x27;s beginning in this partition, which can be viewed with `filefrag -v /swapfile`.</span></span></span><br><span class="line">resume=UUID=0fdd557a-e3bb-4db4-a93a-0d1ebcf75769 resume_offset=17278976</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Regarding the setting of kernel parameters, if using GRUB, append to GRUB_CMDLINE_LINUX_DEFAULT</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo vim /etc/default/grub</span></span></span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 quiet resume=UUID=0fdd557a-e3bb-4db4-a93a-0d1ebcf75769 resume_offset=17278976&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Regenerate grub.cfg</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo grub-mkconfig -o /boot/grub/grub.cfg</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">##################</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">If your initramfs does not use the systemd hook (uses base), then you also need to add a resume hook to attempt to recover from hibernation:</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Edit the /etc/mkinitcpio.conf file, add resume to any position after udev in HOOKS=(...).</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo vim /etc/mkinitcpio.conf</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Finally, regenerate the initramfs:</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo mkinitcpio -p linux</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">The configuration work is all done, hibernate through `systemctl hibernate`, and then press the power button to start up and check if the hibernation function is working properly.</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate">Power management/Suspend and hibernate - ArchWiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://timothyqiu.com/archives/104/">给 Arch 添加 Swap 文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation">Power management/Suspend and hibernate - ArchWiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://harttle.land/2019/10/19/hibernate-archlinux.html">ArchLinux 休眠到交换文件 | Harttle Land</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-11-19
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                        Arch Linux Series
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                        #Arch_Linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/OS/" title="OS">
+                        #OS
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/en/os/common-software-and-configuration-for-arch-linux/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#adding-swap"><span class="toc-text"> Adding Swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hibernate"><span class="toc-text"> Hibernate</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#references"><span class="toc-text"> References</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Arch%20Linux%20KDE%20Hibernate%20Configuration + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fen%2Fos%2Farch-linux-kde-hibernate-configuration%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/en/os/arch-linux-kde-hibernate-configuration/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/os/arch-linux-kde-hibernate-configuration/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/os/arch-linux-kde-hibernate-configuration/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>
