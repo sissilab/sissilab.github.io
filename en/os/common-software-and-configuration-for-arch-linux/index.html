@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      Common Software and Configuration for Arch Linux 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="en">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/en/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/en/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/en/">
+          <a href="/en/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/archives/">
+          <a href="/en/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/categories/">
+          <a href="/en/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/tags/">
+          <a href="/en/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Common Software and Configuration for Arch Linux</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-11-18
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                    Arch Linux Series
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                    #Arch_Linux
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/OS/" title="OS">
+                    #OS
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="input-method"><a class="markdownIt-Anchor" href="#input-method"></a> Input method</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install Pinyin Input Method fcitx5</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. Install fcitx5 related packages</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">fcitx5-pinyin-zhwiki: Offline dictionary</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-material-color fcitx5-pinyin-zhwiki</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. Configure environment variables</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo vim /etc/environment</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD=fcitx5  </span><br><span class="line">GTK_IM_MODULE=fcitx5  </span><br><span class="line">QT_IM_MODULE=fcitx5  </span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Supplement:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.xprofile</span></span><br><span class="line">export INPUT_METHOD=fcitx5</span><br><span class="line">export GTK_IM_MODULE=fcitx5</span><br><span class="line">export QT_IM_MODULE=fcitx5</span><br><span class="line">export XMODIFIERS=@im=fcitx5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. Add autostart</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4. Restart, take effect</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5. Add input method</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System Setting / Search `Input method`: Click `Add Input Method`, search <span class="keyword">for</span> `pinyin`, and add.</span></span><br></pre></td></tr></table></figure>
+<h1 id="install-zshoh-my-zsh-and-related-plugins"><a class="markdownIt-Anchor" href="#install-zshoh-my-zsh-and-related-plugins"></a> Install zsh/oh-my-zsh and related plugins</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Most default shells are bash, it is recommended to use zsh, <span class="built_in">which</span> provides more useful features</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install zsh</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S zsh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Change default shell, or edit /etc/passwd file, modify the default shell (/bin/zsh) after the username to change the default shell</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">chsh -s /bin/zsh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install oh-my-zsh-git: It is a community-driven zsh management tool that provides rich plugins and themes</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S oh-my-zsh-git</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Default configuration</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">cp</span> /usr/share/oh-my-zsh/zshrc ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Change theme: Modify ZSH_THEME to the theme you want, themes can be seen at: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Plugins: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install plugins:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh-syntax-highlighting: Provides <span class="built_in">command</span> highlighting, <span class="keyword">for</span> example, commands that are entered incorrectly are displayed <span class="keyword">in</span> red, and commands that are entered correctly are displayed <span class="keyword">in</span> green</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh-autosuggestions: Provides <span class="built_in">command</span> suggestions, <span class="built_in">which</span> can automatically suggest completion based on the Shell commands you execute</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S zsh-syntax-highlighting zsh-autosuggestions</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Plugins that need to be installed are placed <span class="keyword">in</span> `/usr/share/oh-my-zsh/custom/plugins/`</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ln</span> -s /usr/share/zsh/plugins/zsh-syntax-highlighting /usr/share/oh-my-zsh/custom/plugins/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ln</span> -s /usr/share/zsh/plugins/zsh-autosuggestions /usr/share/oh-my-zsh/custom/plugins/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">autojump: Fuzzy address jump based on access records, usage document: https://github.com/wting/autojump</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S autojump</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Configure plugins to be added</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.zshrc</span></span><br><span class="line">plugins=(</span><br><span class="line">        git</span><br><span class="line">        autojump</span><br><span class="line">        zsh-syntax-highlighting</span><br><span class="line">        zsh-autosuggestions</span><br><span class="line">)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Take effect .zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After the autojump plugin is configured, you can view the recorded access paths (stored <span class="keyword">in</span> autojump.tx)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">j --<span class="built_in">stat</span></span></span><br><span class="line">10.0:   /home/ray/Project</span><br><span class="line">14.1:   /usr/share/fonts</span><br><span class="line">________________________________________</span><br><span class="line"></span><br><span class="line">24:      total weight</span><br><span class="line">2:       number of entries</span><br><span class="line">0.00:    current directory weight</span><br><span class="line"></span><br><span class="line">data:    /home/ray/.local/share/autojump/autojump.tx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Fuzzy match <span class="string">&quot;pro&quot;</span> directory, and open it with file manager</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">jo pro</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create personal profile file: Since the shell is changed to zsh, you need to activate the configuration `.profile` <span class="keyword">in</span> `.zshrc`, subsequent personal environment variables and other configurations can be written to `~/.profile`</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Or you can add `\<span class="variable">$HOME</span>/.profile` to the end of `.zshrc` yourself</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;\n# activate home custom profile\n. \$HOME/.profile&quot;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Activate the newly added configuration</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Supplement: Install the required symbol fonts</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/powerline/fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S powerline-fonts</span>   </span><br></pre></td></tr></table></figure>
+<h1 id="system-common-toolscommands"><a class="markdownIt-Anchor" href="#system-common-toolscommands"></a> System common tools/commands</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Support <span class="keyword">for</span> recognizing ntfs format hard drives</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ntfs-3g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Common commands</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">net-tools: Supports ifconfig, netstat, route, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">dnsutils (<span class="built_in">bind</span>): Supports dig, nslookup, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">inetutils: Supports hostname, telnet, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iproute2: Supports ip, nstat, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">htop: A process management tool similar to top</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S net-tools dnsutils inetutils iproute2 htop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System monitor: If you want to use Netspeed Widget (depends on ksysguard), you need to install this, otherwise it won<span class="string">&#x27;t display</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S ksysguard</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">dialog is a tool that can be used with Shell scripts to create dialog boxes in a text interface (useful when writing shell scripts)</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S dialog</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">View most of the system hardware information, including difficult-to-get memory frequencies, motherboard BIOS, etc.</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S dmidecode</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Linux power management, can save battery for laptops</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">TLP Wiki: https://wiki.archlinux.org/title/TLP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S tlp</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo systemctl enable --now tlp</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Theme with Kvantum Manager can achieve better results</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S kvantum-qt5</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="software-package-management"><a class="markdownIt-Anchor" href="#software-package-management"></a> Software Package Management</h2>
+<h3 id="downgrade"><a class="markdownIt-Anchor" href="#downgrade"></a> Downgrade</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">expac: Can <span class="built_in">print</span> various formats of Pacman package information</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S expac</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Sort by package size</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac -H M <span class="string">&#x27;%m\t%n&#x27;</span> | <span class="built_in">sort</span> -h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View the 100 most recently installed packages</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac --timefmt=<span class="string">&#x27;%Y-%m-%d %T&#x27;</span> <span class="string">&#x27;%l\t%n&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">tail</span> -n 100</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Draw package graph http://kmkeen.com/pacgraph/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pacgraph</span></span><br></pre></td></tr></table></figure>
+<h3 id="paru"><a class="markdownIt-Anchor" href="#paru"></a> Paru</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Based on Yay, a new AUR helper</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Official GitHub: https://github.com/Morganamilo/paru</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://dbigr.com/article/481262/</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install Paru</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S --needed base-devel</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://aur.archlinux.org/paru.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> paru</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">makepkg -si</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Paru can use proxychains</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">proxychains paru -S &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="other-package-management-software"><a class="markdownIt-Anchor" href="#other-package-management-software"></a> Other Package Management Software</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">expac: Can <span class="built_in">print</span> various formats of Pacman package information</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S expac</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Sort by package size</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac -H M <span class="string">&#x27;%m\t%n&#x27;</span> | <span class="built_in">sort</span> -h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View the 100 most recently installed packages</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac --timefmt=<span class="string">&#x27;%Y-%m-%d %T&#x27;</span> <span class="string">&#x27;%l\t%n&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">tail</span> -n 100</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Draw package graph http://kmkeen.com/pacgraph/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pacgraph</span></span><br></pre></td></tr></table></figure>
+<h2 id="bluetooth"><a class="markdownIt-Anchor" href="#bluetooth"></a> Bluetooth</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Bluetooth</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bluedevil: Bluetooth graphical management tool</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pulseaudio-bluetooth: Supports Bluetooth speakers, Bluetooth headsets</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S bluez bluez-utils bluedevil pulseaudio-bluetooth</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable startup</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> bluetooth.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start immediately</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">sudo systemctl start bluetooth.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="ssh-service"><a class="markdownIt-Anchor" href="#ssh-service"></a> SSH Service</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S openssh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start ssh service</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable ssh service to start on boot</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Stop ssh service</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Restart ssh service</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart sshd.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="fzf-file-fuzzy-search"><a class="markdownIt-Anchor" href="#fzf-file-fuzzy-search"></a> fzf File Fuzzy Search</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">fzf: Fuzzy search file artifact https://github.com/junegunn/fzf</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S fzf</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">You can <span class="built_in">set</span> the fzf display style as needed</span></span><br><span class="line">export FZF_DEFAULT_OPTS=&quot;--height 50% --reverse --border --preview &#x27;cat &#123;&#125;&#x27;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Personal preference, add to startup configuration file</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.profile</span></span><br><span class="line">export FZF_DEFAULT_OPTS=&quot;--border --preview &#x27;cat &#123;&#125;&#x27;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Take effect immediately, but closing the current terminal will be invalid</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">. ~/.profile</span></span><br></pre></td></tr></table></figure>
+<h1 id="fonts"><a class="markdownIt-Anchor" href="#fonts"></a> Fonts</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-serif-cn-fonts wqy-zenhei ttf-dejavu wqy-microhei</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install windows fonts - Method 1:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">mkdir</span> /usr/share/fonts/winfonts</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Copy windows fonts to Linux, win_font_path represents the absolute path of your `C:/Windows/Fonts`, here is `/run/media/ray/OS/Windows/Fonts`</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">cp</span> win_font_path/* /usr/share/fonts/winfonts/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> /usr/share/fonts/winfonts/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">rm</span> *.fon</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create font index information, update font cache</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo mkfontscale</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo mkfontdir</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">fc-cache -fv</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Or, install windows fonts - Method 2: https://wiki.archlinux.org/title/Microsoft_fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S ttf-ms-win10</span></span><br></pre></td></tr></table></figure>
+<h1 id="plasma-widgets"><a class="markdownIt-Anchor" href="#plasma-widgets"></a> Plasma Widgets</h1>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/998895">Netspeed Widget</a>: Displays upload and download network speeds, depends on ksysguard<br />
+<img src="https://s2.loli.net/2024/11/20/2ZSse7MqjFrWEDi.png" alt="Pasted image 20230119145715.png"   srcFile="Pasted image 20230119145715.png"></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/998901">Event Calendar</a>: With time, calendar, weather, timer, Google Calendar/Tasks synchronization and other functions, highly configurable (only available for Plasma 5)<br />
+<img src="https://s2.loli.net/2024/11/20/tcdRJkwg35shDpI.png" alt="Pasted image 20230119195648.png" width="500"  srcFile="Pasted image 20230119195648.png"></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/1160672">Tiled Menu</a>: Magnetic start menu, similar to the start menu on Win10<br />
+<img src="https://s2.loli.net/2024/11/20/m4epin5aDJBR9X8.png" alt="Pasted image 20230119203204.png" width="600"  srcFile="Pasted image 20230119203204.png"></p>
+</li>
+<li>
+<p>Sticky notes: Built-in widget, convenient for taking notes<br />
+<img src="https://s2.loli.net/2024/11/20/XSf7jyKBYvQiq2g.png" alt="Pasted image 20230119203834.png" width="300"  srcFile="Pasted image 20230119203834.png"></p>
+</li>
+</ol>
+<h1 id="kde-apps"><a class="markdownIt-Anchor" href="#kde-apps"></a> KDE Apps</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kdeconnect: Enables Android phones and Arch Linux to interact on the same LAN, such as sending files, clipboard synchronization, message notifications, etc.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kdeconnect</span></span><br></pre></td></tr></table></figure>
+<h1 id="dock-software-launcher"><a class="markdownIt-Anchor" href="#dock-software-launcher"></a> dock Software / Launcher</h1>
+<h2 id="latte-dock"><a class="markdownIt-Anchor" href="#latte-dock"></a> latte-dock</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">latte dock: A dock software, similar to the dock area on macOS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S latte-dock</span></span><br></pre></td></tr></table></figure>
+<h2 id="rofi"><a class="markdownIt-Anchor" href="#rofi"></a> Rofi</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Rofi: https://wiki.archlinux.org/title/rofi</span></span><br><span class="line">$ sudo pacman -S rofi</span><br><span class="line"></span><br><span class="line"><span class="comment"># some commands:</span></span><br><span class="line">$ rofi -show drun -show-icons</span><br><span class="line">$ rofi -combi-modi window,drun -show combi -show-icons</span><br><span class="line"></span><br><span class="line"><span class="comment"># https://github.com/Mange/rofi-emoji</span></span><br><span class="line">$ sudo pacman -S rofi-emoji</span><br><span class="line"><span class="comment"># Install adapters to copy and use emojis: https://github.com/Mange/rofi-emoji#optional-dependencies</span></span><br><span class="line">$ sudo pacman -S xdotool xsel</span><br></pre></td></tr></table></figure>
+<h1 id="browsers"><a class="markdownIt-Anchor" href="#browsers"></a> Browsers</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Google Chrome (Stable version)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S google-chrome</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Microsoft Edge (Stable version)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S microsoft-edge-stable-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Google<span class="string">&#x27;s open-source browser chromium</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S chromium</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Firefox browser</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S firefox</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="proxy"><a class="markdownIt-Anchor" href="#proxy"></a> Proxy</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. ssr</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S electron-ssr</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. shadowsocks-qt5</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S shadowsocks-qt5</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. clash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage document: https://docs.cfw.lbyczf.com/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Configuration reference: https://github.com/Dreamacro/clash/wiki/configuration</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TUN mode: For software that does not follow system proxy, TUN mode can take over its traffic and hand it over to CFW <span class="keyword">for</span> processing</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mixin: Supports injecting public attribute settings into all configuration files (the content of the configuration files will not be modified, and the mixing behavior will only occur <span class="keyword">in</span> memory)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S clash-for-windows-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">proxychains: For specific usage, please refer to https://wiki.archlinux.org/title/Proxy_server<span class="comment">#Using_a_SOCKS_proxy</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S proxychains</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo vim /etc/proxychains.conf</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Edit /etc/proxychains.conf, change the last line to:</span> </span><br><span class="line">socks5 127.0.0.1 1080</span><br></pre></td></tr></table></figure>
+<h1 id="downloads"><a class="markdownIt-Anchor" href="#downloads"></a> Downloads</h1>
+<h2 id="aria2"><a class="markdownIt-Anchor" href="#aria2"></a> aria2</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://aria2.github.io/manual/en/html/index.html">aria2 official document</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1959590">Configure aria2 on Arch Linux</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">aria2 is a lightweight, multi-protocol command-line download utility. It supports protocols including HTTP(S), FTP, BitTorrent, Metalink, etc. The aria2 tool can download concurrently and also supports splicing and resuming, automatically replacing slow threads, etc.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After installation, you can use the aria2c <span class="built_in">command</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S aria2</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">You can directly refer to the configuration organized by the big guy, download to your Home directory<span class="string">&#x27;s .aria2 directory, because the default configuration file path of aria2 is $HOME/.aria2/aria2.conf</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">git clone https://github.com/P3TERX/aria2.conf ~/.aria2</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Simply modify the downloaded aria2 configuration:</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">(1) dir=/root/Download change to the download directory you need, such as dir=/home/ray/Downloads</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">    You can directly replace the remaining /root in batches with your own Home directory path /home/ray</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">(2) rpc-secret=P3TERX it is recommended to modify</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">If you encounter an error: Caught an exceptionException: [download_helper.cc:562] errorCode=1 Failed to open file $HOME/.aria2/aria2.session, reason: File not found or it is a directory</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">You can create the file by yourself</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">touch /home/ray/.aria2/aria2.session</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Start aria2c, it will start listening on port 6800</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">aria2c --enable-rpc</span></span></span><br><span class="line">01/26 09:45:38 [NOTICE] IPv4 RPC: Listening on TCP port 6800</span><br><span class="line">01/26 09:45:39 [NOTICE] The session has been successfully serialized to /home/ray/.aria2/aria2.session.</span><br></pre></td></tr></table></figure>
+<p>Install Aria2 plugins for browsers:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://microsoftedge.microsoft.com/addons/detail/aria2-for-edge/jjfgljkjddpcpfapejfkelkbjbehagbh?hl=zh-CN">Aria2 for Edge</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn">Aria2 for Chrome</a></li>
+</ul>
+<p>After installing the browser plugin and enabling it, open the Aria2 plugin interface: Click AriaNG Settings -&gt; RPC (localhost:6800)<br />
+<img src="https://s2.loli.net/2024/11/20/1Fof6yILktaQTgD.png" alt="Pasted image 20230126095145.png" width="400"  srcFile="Pasted image 20230126095145.png"></p>
+<p>Enter the RPC settings interface, you can see the default port is <code>6800</code>, no need to adjust, set the <strong>Aria2 RPC key</strong> to the just set <code>rpc-secret</code> value, and reload the interface, if successful, you can see <strong>Aria2 status</strong> display as connected.<br />
+<img src="https://s2.loli.net/2024/11/20/qRgHvMi4lZQsXNF.png" alt="Pasted image 20230126095304.png" width="600"  srcFile="Pasted image 20230126095304.png"></p>
+<p>Every time you use it, you need to execute <code>aria2c --enable-rpc</code>, which is quite troublesome, change to start automatically.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> -p ~/.config/systemd/user</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/.config/systemd/user</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim aria2.servide</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Aria2 Daemon</span><br><span class="line">  </span><br><span class="line">[Service]  </span><br><span class="line">ExecStart=/usr/bin/aria2c</span><br><span class="line">  </span><br><span class="line">[Install]  </span><br><span class="line">WantedBy=default.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user <span class="built_in">enable</span> aria2.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user start aria2.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check status</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user status aria2.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="motrix"><a class="markdownIt-Anchor" href="#motrix"></a> Motrix</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Multi-threaded downloader</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S motrix</span></span><br></pre></td></tr></table></figure>
+<h1 id="communicationconference-software"><a class="markdownIt-Anchor" href="#communicationconference-software"></a> Communication/Conference Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Telegram</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S telegram-desktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Team collaboration tool slack</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S slack-desktop</span> </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Cisco<span class="string">&#x27;s video conferencing software</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S webex-bin</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">VDI virtual desktop, for remote office use</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S vmware-horizon-client</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="wechat"><a class="markdownIt-Anchor" href="#wechat"></a> WeChat</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/%E5%BE%AE%E4%BF%A1">WeChat wiki</a></li>
+</ul>
+<h3 id="docker-wechat"><a class="markdownIt-Anchor" href="#docker-wechat"></a> docker WeChat</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/huan/docker-wechat">docker-wehcat github</a></li>
+<li>Prerequisite for installation: Docker is installed, and sudo is set.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## Installation ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Method 1: You can directly use the following <span class="built_in">command</span> to start</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://raw.githubusercontent.com/huan/docker-wechat/master/dochat.sh | bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If the above installation is slow, domestic <span class="built_in">users</span> (Chinese) can use the following script</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Method 2: Or, directly pull down the entire project with git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/huan/docker-wechat.git</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Then, enter the docker-wechat directory and execute the following script to automatically download the image and start:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./dochat.sh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## Installation Issues ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. Permission is not enough, and the following prompt appears:</span></span><br><span class="line">[DoChat] Boxed WeChat v0.15.0</span><br><span class="line">Disabling patch for /home/user/.wine/drive_c/users/user/AppData/Roaming/Tencent/WeChat ...</span><br><span class="line">Disabling patch for /home/user/.wine/drive_c/users/user/Application Data/Tencent/WeChat ...</span><br><span class="line">mkdir: cannot create directory “/home/user/.wine/drive_c/users/user/Application Data/Tencent”: Permission denied</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Solution：Grant permissions to the DoChat directory under the home directory</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">chmod</span> -R 777 ~/DoChat</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. main:line 82: lshw: <span class="built_in">command</span> not found</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Solution: Install the `lshw` <span class="built_in">command</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S lshw</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. docker: Error response from daemon: could not select device driver <span class="string">&quot;&quot;</span> with capabilities: [[gpu]].</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Solution：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(1) First confirm whether the current NVIDIA installation is correct, refer to https://wiki.archlinuxcn.org/wiki/NVIDIA<span class="comment">#%E5%AE%89%E8%A3%85</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(2) Then consider whether to install nvidia-container-toolkit, refer to https://github.com/NVIDIA/nvidia-docker/issues/1243</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4. If it cannot be started, and there is no clear error message, such as `DoChat Exited with code [0]`, you can increase the debug start as follows to view:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | DOCHAT_DEBUG=<span class="literal">true</span> bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If it includes the following error message</span></span><br><span class="line">00dc:err:winediag:nodrv_CreateWindow Application tried to create a window, but no driver could be loaded.</span><br><span class="line">00dc:err:winediag:nodrv_CreateWindow Make sure that your X server is running and that $DISPLAY is set correctly.</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">You need to authorize access to the X server:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The following allows all <span class="built_in">users</span> to access the X server (https://wiki.archlinux.org/title/Xhost), and <span class="keyword">then</span> start wechat</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xhost +</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## After Installation ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View images</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images</span></span><br><span class="line">REPOSITORY     TAG         IMAGE ID       CREATED        SIZE</span><br><span class="line">zixia/wechat   3.3.0.115   69b2b2eb6770   8 months ago   3.73GB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After starting, you can see the container DoChat</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps</span>        </span><br><span class="line">CONTAINER ID   IMAGE                    COMMAND            CREATED          STATUS          PORTS     NAMES</span><br><span class="line">f6068b03e6e9   zixia/wechat:3.3.0.115   &quot;/entrypoint.sh&quot;   20 minutes ago   Up 20 minutes             DoChat</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">But when you leave and <span class="built_in">exit</span> WeChat, the container will be automatically deleted because dochat.sh adds --<span class="built_in">rm</span> to docker run, <span class="built_in">which</span> automatically deletes the container after the container exits</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create Desktop shortcut, more: https://wiki.archlinux.org/title/Desktop_entries</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Exec fill <span class="keyword">in</span> the specific <span class="built_in">command</span> to execute, use 1 as “curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | bash”，use 2 as “/home/ray/Project/docker/docker-wechat/dochat.sh”``</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/.local/share/applications/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim wechat-docker.desktop</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=WeChatDocker</span><br><span class="line">Comment=Dockerized WeChat (盒装微信) PC Windows Client for Linux</span><br><span class="line">Exec=curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh</span><br><span class="line">Icon=wechat</span><br><span class="line">Type=Application</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Verify the desktop file</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">desktop-file-validate wechat-docker.desktop</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Then you can search <span class="keyword">for</span> <span class="string">&quot;WeChatDocker&quot;</span> <span class="keyword">in</span> the Menu to see it</span></span><br></pre></td></tr></table></figure>
+<h1 id="note-taking-software"><a class="markdownIt-Anchor" href="#note-taking-software"></a> Note-taking Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Obsidian note-taking software</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S obsidian</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Joplin note-taking software</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">cli</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S joplin</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">desktop</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S joplin-desktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Trilium open-source electron note-taking software</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S trilium-bin</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S trilium-server-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Markdown editor</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S marktext-git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mind map</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S xmind</span></span><br></pre></td></tr></table></figure>
+<h1 id="drawing-software"><a class="markdownIt-Anchor" href="#drawing-software"></a> Drawing Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">drawio</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S drawio-desktop-bin</span></span><br></pre></td></tr></table></figure>
+<h1 id="unarchiving-software"><a class="markdownIt-Anchor" href="#unarchiving-software"></a> Unarchiving Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ark belongs to the kde-utilities package group</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ark</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">unar, lsar</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S unarchiver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Unzip/zip</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S unzip zip</span></span><br></pre></td></tr></table></figure>
+<h1 id="imagescreenshot-software"><a class="markdownIt-Anchor" href="#imagescreenshot-software"></a> Image/Screenshot Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gwenview belongs to the kde-graphics package group</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S gwenview</span> </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Flameshot</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S flameshot</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">You can configure the shortcut key Ctrl+Alt+A, the <span class="built_in">command</span> configuration is: flameshot gui</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Snipaste screenshot + <span class="built_in">paste</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S snipaste</span></span><br></pre></td></tr></table></figure>
+<h1 id="audiovideo-software"><a class="markdownIt-Anchor" href="#audiovideo-software"></a> Audio/Video Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NetEase Cloud Music</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S netease-cloud-music</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Audio/video player</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S vlc</span></span><br></pre></td></tr></table></figure>
+<h1 id="officereadingpdf-software"><a class="markdownIt-Anchor" href="#officereadingpdf-software"></a> Office/Reading/PDF Software</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">LibreOffice stable version</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S libreoffice-still</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">KDE<span class="string">&#x27;s default PDF lightweight reader</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S okular</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">A highly customizable, feature-rich, minimalist, vim-like shortcut key PDF reader</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Official doc: https://pwmt.org/projects/zathura/documentation/</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Supported plugins: https://pwmt.org/projects/zathura/plugins/</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S zathura-pdf-mupdf</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Foxit Reader</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S foxitreader</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">WPS Office</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">wps-office-mui-zh-cn: Chinese language pack</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S wps-office wps-office-mui-zh-cn wps-office-mime-cn wps-office-fonts ttf-ms-fonts ttf-wps-fonts wps-office-all-dicts-win-languages</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">If wps pdf cannot start, then install libtiff5 dependency</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S libtiff5</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Comic reader</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S yacreader-poppler</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Reader suitable for touch screens</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S koreader-bin</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Hammer PDF: A new scientific and technological intelligent reader developed and maintained by the DataHammer research group of the Computer College of Beijing Institute of Technology, which can quickly analyze PDF academic literature and provide reliable academic information in real-time.</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">https://github.com/HammerPDF/Smart-Scientific-Reader</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">yay -S hammer-pdf</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="software-development-related-tools"><a class="markdownIt-Anchor" href="#software-development-related-tools"></a> Software Development Related Tools</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vscode</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S visual-studio-code-bin</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If vscode<span class="string">&#x27;s terminal cannot display some characters when using zsh, you can install the font patch</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="string">sudo pacman -S powerline-fonts</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Open vsode&#x27;</span>s configuration and find Terminal › Integrated: Font Family: You can change the font to Hack, it will work</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nodejs npm environment</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S nodejs npm</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Configuration: <span class="string">&quot;/home/ray/&quot;</span> is your home directory, adjust as needed</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm config <span class="built_in">set</span> prefix <span class="string">&quot;/home/ray/.nodejs&quot;</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm config <span class="built_in">set</span> cache <span class="string">&quot;/home/ray/.nodejs/cache&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Database management tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S dbeaver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RESP.app: Redis visualization management tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S resp-app</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ZooKeeper visualization management tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S prettyzoo</span></span><br></pre></td></tr></table></figure>
+<h1 id="rdp"><a class="markdownIt-Anchor" href="#rdp"></a> RDP</h1>
+<h2 id="xfreerdp"><a class="markdownIt-Anchor" href="#xfreerdp"></a> xfreerdp</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xfreerdp performs better than rdesktop</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S krdc-xfreerdp libvncserver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage:</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xfreerdp [file] [options] [/v:&lt;server&gt;[:port]]</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/sec:rdp       Force specific rdp protocol security</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/f             Fullscreen mode (&lt;Ctrl&gt;+&lt;Alt&gt;+&lt;Enter&gt; toggles fullscreen)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+smart-sizing  Allow RDP client to dynamically adjust the resolution of the remote desktop according to the window size</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+clipboard     Enable Redirect clipboard</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/bpp:&lt;depth&gt;   Set the color depth of the session, such as 16 efficient color depth, suitable <span class="keyword">for</span> situations with limited bandwidth; 24: Provides richer colors, suitable <span class="keyword">for</span> most scenarios; 32: The highest color depth, suitable <span class="keyword">for</span> applications that require high-quality images</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+compression   Enable compression to improve performance</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xfreerdp /v:&lt;server&gt;[:port] /u:&lt;username&gt; /p:&lt;password&gt; /sec:rdp /f +smart-sizing +clipboard /bpp:24 +compression</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If you are not sure what the username of the Windows you want to connect to is, you can check it by entering <span class="built_in">whoami</span> <span class="keyword">in</span> the CMD</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If the following error occurs, try modifying the registry on the Windows to be connected: Open `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp` and change `SecurityLayer` from 2 to 1</span></span><br><span class="line">[ERROR][com.freerdp.core] - transport_ssl_cb:freerdp_set_last_error_ex ERRCONNECT_PASSWORD_CERTAINLY_EXPIRED [0x0002000F]</span><br><span class="line">[ERROR][com.freerdp.core.transport] - BIO_read returned an error: error:0A000438:SSL routines::tlsv1 alert internal error</span><br></pre></td></tr></table></figure>
+<h2 id="rdesktop"><a class="markdownIt-Anchor" href="#rdesktop"></a> rdesktop</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rdesktop: an open <span class="built_in">source</span> client <span class="keyword">for</span> Windows Remote Desktop Services.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S rdesktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rdesktop -u &lt;username&gt; -p &lt;password&gt; &lt;server&gt;[:port]</span></span><br></pre></td></tr></table></figure>
+<h1 id="virtual-machinestechnology"><a class="markdownIt-Anchor" href="#virtual-machinestechnology"></a> Virtual Machines/Technology</h1>
+<h2 id="virtual-box"><a class="markdownIt-Anchor" href="#virtual-box"></a> Virtual Box</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install virtualbox</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Determine the kernel version</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-headers</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Choose virtualbox-host-dkms</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S virtualbox</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S virtualbox-guest-iso</span></span><br></pre></td></tr></table></figure>
+<h2 id="vmware"><a class="markdownIt-Anchor" href="#vmware"></a> VMware</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install VMware</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-headers</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S vmware-workstation</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> Docker</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set to start on boot</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> docker</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set docker to run without sudo</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(1) Create a docker group</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo groupadd docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(2) Add the current user to the docker group</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo usermod -aG docker <span class="variable">$USER</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(3) Log out and <span class="built_in">log</span> back <span class="keyword">in</span> to the shell</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install docker compose: container orchestration tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S docker-compose</span></span><br></pre></td></tr></table></figure>
+<h2 id="waydroid-android-emulator"><a class="markdownIt-Anchor" href="#waydroid-android-emulator"></a> Waydroid (Android Emulator)</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check the kernel version: The default Arch Linux kernel does not support binder, you need to switch to another available kernel, such as linux-zen, DKMS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span></span><br><span class="line">6.2.6-arch1-1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the available kernel module linux-zen</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-zen</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Regenerate the grub configuration file, and restart to find the kernel <span class="keyword">in</span> the grub interface</span></span><br><span class="line">sudo grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">Generating grub configuration file ...</span><br><span class="line">Found Linux image: /boot/vmlinuz-linux-zen</span><br><span class="line">Found initrd image: /boot/intel-ucode.img /boot/initramfs-linux-zen.img</span><br><span class="line">Found fallback initrd image(s) in /boot:  intel-ucode.img initramfs-linux-zen-fallback.img</span><br><span class="line">Found Linux image: /boot/vmlinuz-linux</span><br><span class="line">Found initrd image: /boot/intel-ucode.img /boot/initramfs-linux.img</span><br><span class="line">Found fallback initrd image(s) in /boot:  intel-ucode.img initramfs-linux-fallback.img</span><br><span class="line">Warning: os-prober will run to detect other bootable partitions. It will use the output of os-prober to detect bootable binaries in the partitions and create new boot entries. Found Windows Boot Manager on /dev/nvme0n1p1@/EFI/Microsoft/Boot/bootmgfw.efi</span><br><span class="line">Adding UEFI firmware setup entries...</span><br><span class="line">Done</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Restart and switch to the linux-zen kernel: Select the advanced options <span class="keyword">in</span> the grub boot interface and choose to boot linux-zen</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">reboot</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Verify the current kernel, you can find that it has switched to linux-zen</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span></span><br><span class="line">6.2.6-zen1-1-zen</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Waydroid requires Wayland</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$XDG_SESSION_TYPE</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://wiki.archlinux.org/title/Weston</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S weston</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S waydroid</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Initialize</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo waydroid init -s GAPPS -f</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start the service with systemctl</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start waydroid-container.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start the UI</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">waydroid show-full-ui</span></span><br></pre></td></tr></table></figure>
+<h3 id="common-issues"><a class="markdownIt-Anchor" href="#common-issues"></a> Common Issues</h3>
+<h4 id="network-issues"><a class="markdownIt-Anchor" href="#network-issues"></a> Network Issues</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ufw</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw status</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw <span class="built_in">enable</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw allow 53</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw allow 67</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw default allow FORWARD</span></span><br></pre></td></tr></table></figure>
+<h4 id="failed-to-start-clipboard-manager-service"><a class="markdownIt-Anchor" href="#failed-to-start-clipboard-manager-service"></a> Failed to start Clipboard manager service</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S python-pyclipper</span></span><br></pre></td></tr></table></figure>
+<h4 id="google-play-this-device-is-not-certified-with-google-play-protect"><a class="markdownIt-Anchor" href="#google-play-this-device-is-not-certified-with-google-play-protect"></a> Google Play: This device is not certified with Google Play Protect</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Log <span class="keyword">in</span> to the shell</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo waydroid shell</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Then enter the following <span class="built_in">command</span> to get an android_id -&gt; Enter https://www.google.com/android/uncertified, enter this <span class="built_in">id</span> and register, <span class="built_in">wait</span> <span class="keyword">for</span> a <span class="keyword">while</span></span></span><br><span class="line">ANDROID_RUNTIME_ROOT=/apex/com.android.runtime ANDROID_DATA=/data ANDROID_TZDATA_ROOT=/apex/com.android.tzdata ANDROID_I18N_ROOT=/apex/com.android.i18n sqlite3 /data/data/com.google.android.gsf/databases/gservices.db &quot;select * from main where name = \&quot;android_id\&quot;;&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart waydroid-container.service</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ivonblog.com/posts/archlinux-waydroid/">https://ivonblog.com/posts/archlinux-waydroid/</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Waydroid#Usage">https://wiki.archlinux.org/title/Waydroid#Usage</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.waydro.id/usage/waydroid-prop-options">https://docs.waydro.id/usage/waydroid-prop-options</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/casualsnek/waydroid_script</span></span><br></pre></td></tr></table></figure>
+<h1 id="file-sharing"><a class="markdownIt-Anchor" href="#file-sharing"></a> File Sharing</h1>
+<h2 id="alibaba-cloud-drive-webdav-service"><a class="markdownIt-Anchor" href="#alibaba-cloud-drive-webdav-service"></a> Alibaba Cloud Drive WebDAV Service</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/messense/aliyundrive-webdav">aliyundrive-webdav github</a>: The main scenario is to cooperate with client apps that support the WebDAV protocol such as Infuse, nPlayer, etc., to directly watch videos in the cloud drive on the TV, support client apps to directly obtain files from Alibaba Cloud Drive for playback without going through the server where this app is running, support file uploads, but limited by the WebDAV protocol does not support file second transmission.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Method one: Install Alibaba Cloud Drive WebDAV Service</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S aliyundrive-webdav-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start the service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. Get the Alibaba Cloud Drive refresh token, refer to: https://github.com/messense/aliyundrive-webdav<span class="comment">#%E8%8E%B7%E5%8F%96-refresh-token</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. Command to start, more <span class="built_in">command</span> <span class="built_in">help</span> can refer to: aliyundrive-webdav --<span class="built_in">help</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">aliyundrive-webdav -p &lt;port&gt; --auth-user &lt;user&gt; --auth-password &lt;password&gt; --refresh-token &lt;refresh token&gt;</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. Access with Dolphin:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1.1. Direct url access: webdav://&lt;ip&gt;:&lt;port&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1.2. Create a new network folder: Click <span class="string">&quot;Network&quot;</span> -&gt; Click <span class="string">&quot;Add Network Folder&quot;</span> -&gt; Choose <span class="string">&quot;Web Folder (webdav)&quot;</span> and click Next -&gt; Fill <span class="keyword">in</span> the information as needed, and click Save and Connect (<span class="keyword">if</span> you have <span class="built_in">set</span> a password, it will prompt you to enter the password at this time) -&gt; Done, you can see the newly added webdav folder <span class="keyword">in</span> the <span class="string">&quot;Network&quot;</span> folder (click to go <span class="keyword">in</span>, you can see the files <span class="keyword">in</span> your Alibaba Cloud Drive)</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Method two: Run with docker, more can refer to: https://github.com/messense/aliyundrive-webdav<span class="comment">#docker-%E8%BF%90%E8%A1%8C</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--restart=unless-stopped: It means that the container will always restart when it exits, but it does not consider containers that have already stopped when the docker daemon is running</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -d --name=aliyundrive-webdav --restart=unless-stopped -p &lt;port&gt;:8080 \</span></span><br><span class="line"><span class="language-bash">  -v /etc/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \</span></span><br><span class="line"><span class="language-bash">  -e REFRESH_TOKEN=<span class="string">&#x27;&lt;refresh token&gt;&#x27;</span> \</span></span><br><span class="line"><span class="language-bash">  -e WEBDAV_AUTH_USER=&lt;user&gt; \</span></span><br><span class="line"><span class="language-bash">  -e WEBDAV_AUTH_PASSWORD=&lt;password&gt; \</span></span><br><span class="line"><span class="language-bash">  messense/aliyundrive-webdav</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After starting, you will see the refresh_token file <span class="keyword">in</span> the /etc/aliyundrive-webdav directory of the host machine, <span class="keyword">if</span> the refresh token is invalid, you can directly change the file here</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> /etc/aliyundrive-webdav</span>                       </span><br><span class="line">refresh_token</span><br></pre></td></tr></table></figure>
+<h2 id="alist"><a class="markdownIt-Anchor" href="#alist"></a> AList</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/">AList official document（Very Detailed）</a>：A file list program that supports multiple storages, supports WebDAV, and supports file/video/audio/image preview.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installation (one-click script): After successful installation (default installation <span class="keyword">in</span> /opt/alist), it will prompt the access address and admin account password -&gt; Log <span class="keyword">in</span>, click on the management at the bottom of the page to <span class="built_in">set</span> up storage, such as adding Alibaba Cloud storage -&gt; After setting up, you can see the files <span class="keyword">in</span> your Alibaba Cloud</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s install</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s update</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uninstall</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s uninstall</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check status:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl status alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start service:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Restart service:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Stop service:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop alist</span></span><br></pre></td></tr></table></figure>
+<h1 id="keyboard-mapping"><a class="markdownIt-Anchor" href="#keyboard-mapping"></a> Keyboard Mapping</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/houmain/keymapper</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S keymapper</span></span><br></pre></td></tr></table></figure>
+<h1 id="others"><a class="markdownIt-Anchor" href="#others"></a> Others</h1>
+<h2 id="custom-notification-reminders"><a class="markdownIt-Anchor" href="#custom-notification-reminders"></a> Custom Notification Reminders</h2>
+<p>Send reminder notifications with notify-send, found online that dbus-monitor can monitor tray signals, I tried it, not sure how to implement specifically</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">D-Bus visualization debugging tool</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S d-feet</span></span><br></pre></td></tr></table></figure>
+<h2 id="pandoc"><a class="markdownIt-Anchor" href="#pandoc"></a> pandoc</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">A cross-platform, free and open-source command-line tool <span class="keyword">for</span> converting between markup languages, known as the <span class="string">&quot;Swiss Army Knife&quot;</span> <span class="keyword">in</span> this field</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pandoc</span></span><br></pre></td></tr></table></figure>
+<h1 id="common-issues-2"><a class="markdownIt-Anchor" href="#common-issues-2"></a> Common Issues</h1>
+<ol>
+<li>Change single-click to double-click to open folders in file managers?</li>
+</ol>
+<blockquote>
+<p>System Settings / Workspace Behavior / General Behavior: In “When clicking files or folders”, select “Select them (double-click to open files/folders)”.</p>
+</blockquote>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-11-18
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                        Arch Linux Series
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                        #Arch_Linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/OS/" title="OS">
+                        #OS
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/en/os/dual-boot-installation-guide-of-arch-linux-win-10/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#input-method"><span class="toc-text"> Input method</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#install-zshoh-my-zsh-and-related-plugins"><span class="toc-text"> Install zsh&#x2F;oh-my-zsh and related plugins</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#system-common-toolscommands"><span class="toc-text"> System common tools&#x2F;commands</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#software-package-management"><span class="toc-text"> Software Package Management</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#downgrade"><span class="toc-text"> Downgrade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paru"><span class="toc-text"> Paru</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#other-package-management-software"><span class="toc-text"> Other Package Management Software</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bluetooth"><span class="toc-text"> Bluetooth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-service"><span class="toc-text"> SSH Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fzf-file-fuzzy-search"><span class="toc-text"> fzf File Fuzzy Search</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fonts"><span class="toc-text"> Fonts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#plasma-widgets"><span class="toc-text"> Plasma Widgets</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#kde-apps"><span class="toc-text"> KDE Apps</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dock-software-launcher"><span class="toc-text"> dock Software &#x2F; Launcher</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#latte-dock"><span class="toc-text"> latte-dock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rofi"><span class="toc-text"> Rofi</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#browsers"><span class="toc-text"> Browsers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#proxy"><span class="toc-text"> Proxy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#downloads"><span class="toc-text"> Downloads</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#aria2"><span class="toc-text"> aria2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motrix"><span class="toc-text"> Motrix</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#communicationconference-software"><span class="toc-text"> Communication&#x2F;Conference Software</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#wechat"><span class="toc-text"> WeChat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-wechat"><span class="toc-text"> docker WeChat</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#note-taking-software"><span class="toc-text"> Note-taking Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#drawing-software"><span class="toc-text"> Drawing Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unarchiving-software"><span class="toc-text"> Unarchiving Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#imagescreenshot-software"><span class="toc-text"> Image&#x2F;Screenshot Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#audiovideo-software"><span class="toc-text"> Audio&#x2F;Video Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#officereadingpdf-software"><span class="toc-text"> Office&#x2F;Reading&#x2F;PDF Software</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#software-development-related-tools"><span class="toc-text"> Software Development Related Tools</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rdp"><span class="toc-text"> RDP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#xfreerdp"><span class="toc-text"> xfreerdp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rdesktop"><span class="toc-text"> rdesktop</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#virtual-machinestechnology"><span class="toc-text"> Virtual Machines&#x2F;Technology</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtual-box"><span class="toc-text"> Virtual Box</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vmware"><span class="toc-text"> VMware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker"><span class="toc-text"> Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#waydroid-android-emulator"><span class="toc-text"> Waydroid (Android Emulator)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#common-issues"><span class="toc-text"> Common Issues</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#network-issues"><span class="toc-text"> Network Issues</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#failed-to-start-clipboard-manager-service"><span class="toc-text"> Failed to start Clipboard manager service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#google-play-this-device-is-not-certified-with-google-play-protect"><span class="toc-text"> Google Play: This device is not certified with Google Play Protect</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#file-sharing"><span class="toc-text"> File Sharing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#alibaba-cloud-drive-webdav-service"><span class="toc-text"> Alibaba Cloud Drive WebDAV Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alist"><span class="toc-text"> AList</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#keyboard-mapping"><span class="toc-text"> Keyboard Mapping</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#others"><span class="toc-text"> Others</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#custom-notification-reminders"><span class="toc-text"> Custom Notification Reminders</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandoc"><span class="toc-text"> pandoc</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#common-issues-2"><span class="toc-text"> Common Issues</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Common%20Software%20and%20Configuration%20for%20Arch%20Linux + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fen%2Fos%2Fcommon-software-and-configuration-for-arch-linux%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/en/os/common-software-and-configuration-for-arch-linux/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/os/common-software-and-configuration-for-arch-linux/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/os/common-software-and-configuration-for-arch-linux/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>

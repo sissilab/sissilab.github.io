@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      Arch Linux &amp; Win10 双系统安装 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="zh-CN">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/zh-CN/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/zh-CN/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/zh-CN/">
+          <a href="/zh-CN/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/archives/">
+          <a href="/zh-CN/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/categories/">
+          <a href="/zh-CN/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/tags/">
+          <a href="/zh-CN/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Arch Linux & Win10 双系统安装</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+          2024-11-16
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/zh-CN/categories/Arch-Linux-%E7%B3%BB%E5%88%97/" title="Arch Linux 系列">
+                    Arch Linux 系列
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/Arch-Linux/" title="Arch_Linux">
+                    #Arch_Linux
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/OS/" title="OS">
+                    #OS
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/Windows/" title="Windows">
+                    #Windows
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="0-前言"><a class="markdownIt-Anchor" href="#0-前言"></a> 0. 前言</h1>
+<p>☀ 天气不错，正好给自己的个人笔记本 ThinkPad T470p 重新安装下双系统（Windows 10 + Arch Linux (KDE)），先来张 Arch Linux 的系统信息图：</p>
+<img src="https://s2.loli.net/2021/12/12/pZtSERuQMW4ilkV.png" alt="Arch_Linux_system_info.png"   srcFile="Arch_Linux_system_info.png">
+<p>目前存储盘有两个，一个为 <strong>500G 的硬盘</strong>，另一个为 <strong>250G 的 SSD</strong>，两个系统都安装在 SSD 上，然后将 HD 磁盘分别作为两个系统的数据存储盘。先安装 Windows 系统，再安装 Arch Linux。具体磁盘空间划分如下表：</p>
+<table>
+<thead>
+<tr>
+<th>磁盘类型</th>
+<th>Windows 10</th>
+<th>Arch Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500G HD</td>
+<td>140G 应用数据存储</td>
+<td>剩余(约 325.76G) 用户主目录 <code>/home</code></td>
+</tr>
+<tr>
+<td>250G SSD</td>
+<td>500M EFI, 50M MSR, 100G 系统</td>
+<td>剩余(约 137.94G) 根目录 <code>/</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="1-安装-windows"><a class="markdownIt-Anchor" href="#1-安装-windows"></a> 1. 安装 Windows</h1>
+<h2 id="11-准备-windows-系统镜像"><a class="markdownIt-Anchor" href="#11-准备-windows-系统镜像"></a> 1.1. 准备 Windows 系统镜像</h2>
+<p>随便选择一个自己喜欢的 Windows 系统版本：</p>
+<p>下载网址：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn)</a></li>
+</ul>
+<p>Win10 镜像 ed2k 链接：</p>
+<ul>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_business_editions_version_1909_updated_jan_2020_x64_dvd_b3e1f3a6.iso%7C5311711232%7C3527D2A9845FF4105F485CC364655B66%7C/">Windows 10 (business editions), version 1909 (updated Jan 2020) (x64) - DVD (Chinese-Simplified)</a></li>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_consumer_editions_version_1909_updated_jan_2020_x64_dvd_47161f17.iso%7C5417457664%7C274FEBA5BF0C874C291674182FA9C851%7C/">Windows 10 (consumer editions), version 1909 (updated Jan 2020) (x64) - DVD (Chinese-Simplified)</a></li>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_consumer_editions_version_21h1_x64_dvd_1baf479d.iso%7C5807677440%7CE53960C7CAD323F60442A8AB9C269C2E%7C/">Windows 10 21H1 简体中文多版本原版纯净官方镜像下载</a></li>
+</ul>
+<h2 id="12-制作启动-u-盘使用-rufus"><a class="markdownIt-Anchor" href="#12-制作启动-u-盘使用-rufus"></a> 1.2. 制作启动 U 盘（使用 Rufus）</h2>
+<p>使用 <a target="_blank" rel="noopener" href="https://rufus.ie/">Rufus</a>（Linux 系统可使用 <code>dd</code>）来制作U盘启动盘，选择 Windows10 的 iso 镜像，分区类型为 GPT，目标系统类型为 UEFI，其他默认即可，点击开始。</p>
+<img src="https://s2.loli.net/2021/12/12/KMUG8bdRpsaJ1lP.png" alt="Rufus制作Win10启动U盘" width="300"  srcFile="win10_make_USB.png">
+<h2 id="13-设置-bios"><a class="markdownIt-Anchor" href="#13-设置-bios"></a> 1.3. 设置 BIOS</h2>
+<p>插入U盘，重启后，进入 BIOS 设置界面：</p>
+<ul>
+<li>关闭主板设置中的 Secure Boot（Disabled）</li>
+<li>调整启动方式为 UEFI（UEFI Only）</li>
+</ul>
+<h2 id="14-进入启动引导界面自定义"><a class="markdownIt-Anchor" href="#14-进入启动引导界面自定义"></a> 1.4. 进入启动引导界面（自定义）</h2>
+<p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面。遵循提示点击，直到看到安装类型选择，此时选择 “自定义”。</p>
+<img src="https://s2.loli.net/2021/12/12/I6LrAz3SPy9MH57.png" alt="win10安装类型选择" width="400"  srcFile="win10_installation_type.png">
+<h2 id="15-磁盘分区"><a class="markdownIt-Anchor" href="#15-磁盘分区"></a> 1.5. 磁盘分区</h2>
+<p>按 <code>Shift + F10</code> 组合键打开命令提示符窗口。</p>
+<p>(1) 进入 diskpart 模式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开Microsoft DiskPart分区工具</span></span><br><span class="line">X:\Sources&gt; diskpart</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看磁盘信息:</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/tTkSayBFmb8IeND.png" alt="进入diskpart模式" width="400"  srcFile="win10_enter_diskpart.png">
+<p>(2) 清空磁盘0分区（<mark>注意会格式化磁盘，请提前备份重要数据</mark>）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选中磁盘0（500G硬盘）</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 0</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清除硬盘上原有分区和数据</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">clean</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把当前选中硬盘转换为GPT格式</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">convert gpt</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/mhwBLij9OTxCtU1.png" alt="格式化disk0" width="300"  srcFile="win10_clean_disk0.png">
+<p>(3) 清空磁盘1分区（<mark>注意会格式化磁盘，请提前备份重要数据</mark>）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选中磁盘1（250G SSD）</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 1</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清除硬盘上原有分区和数据</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">clean</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把当前选中硬盘转换为GPT格式</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">convert gpt</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证清除结果</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/5DPzliur9Lj2hY1.png" alt="格式化disk1" width="400"  srcFile="win10_clean_disk1.png">
+<p>(4) 系统分区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选中磁盘1（SSD）作为系统盘</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 1</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建efi分区 500M</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition efi size=500</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建msr分区 50M</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition msr size=50</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建系统主分区 100G</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition primary size=102400</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/coe1GhN2AgYyVbM.png" alt="系统分区disk1" width="400"  srcFile="win10_os_partition.png">
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确认当前磁盘</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看已经创建的分区信息</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list partition</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/XcqgGzwSUPvdAhB.png" alt="查看disk1分区结果" width="400"  srcFile="win10_os_partition_result.png">
+<h2 id="16-系统安装"><a class="markdownIt-Anchor" href="#16-系统安装"></a> 1.6. 系统安装</h2>
+<p>完成分区后，在 Windows 安装位置选择界面，点击“刷新”，即可展示刚通过命令行来分区的结果，如下图所示：<br />
+<img src="https://s2.loli.net/2021/12/12/KEMVJR9nuo7BeOj.png" alt="选择安装win10的分区" width="500"  srcFile="win10_installation_location.png"><br />
+选中 “驱动器1分区3”（100G空间的系统安装位置），点击“下一步”，即可开始 Windows 的安装。<br />
+<img src="https://s2.loli.net/2021/12/12/jtOylnUk3VMK7RT.png" alt="正在安装Windows" width="600"  srcFile="win10_installing_page.png"></p>
+<h2 id="17-安装成功"><a class="markdownIt-Anchor" href="#17-安装成功"></a> 1.7. 安装成功</h2>
+<p>系统安装好后，会自动重启，此时可拔出 U 盘。<br />
+重启后，会进行一系列的配置，不再赘述。</p>
+<p>安装成功后，进入磁盘管理界面，再从 500G HD 硬盘中分出 140G 作为个人应用数据存储用，如下图所示：<br />
+<img src="https://s2.loli.net/2021/12/12/ac8CiwWUbFljrGY.png" alt="win10磁盘管理"   srcFile="win10_create_HD_partition.png"></p>
+<h1 id="2-安装-arch-linux"><a class="markdownIt-Anchor" href="#2-安装-arch-linux"></a> 2. 安装 Arch Linux</h1>
+<p>安装 Arch Linux 时，可以<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide">Arch Linux 官方安装说明</a>为主，本文参考为辅。</p>
+<h2 id="21-准备-arch-linux-镜像"><a class="markdownIt-Anchor" href="#21-准备-arch-linux-镜像"></a> 2.1. 准备 Arch Linux 镜像</h2>
+<p>可以进入 Arch Linux Downloads 官网选择最新系统包下载：</p>
+<ul>
+<li>下载网站：<a target="_blank" rel="noopener" href="https://archlinux.org/download/">Arch Linux - Downloads</a></li>
+<li>镜像磁力链接（2021.10.01 版，建议选择最新版）：<a href="magnet:?xt=urn:btih:50f06e56adac70e52fddb37ad6ee331564d6aba1&amp;dn=archlinux-2021.10.01-x86_64.iso">Magnet link for 2021.10.01</a></li>
+</ul>
+<h2 id="22-制作启动-u-盘使用-rufus"><a class="markdownIt-Anchor" href="#22-制作启动-u-盘使用-rufus"></a> 2.2. 制作启动 U 盘（使用 Rufus）</h2>
+<p>选择 Arch Linux 的 iso 镜像，采用 UEFI + GPT，点击开始准备写入。<br />
+<img src="https://s2.loli.net/2021/12/12/oT3vqK4Brl9tCA5.png" alt="制作Arch Linux启动盘" width="300"  srcFile="archlinux_make_usb.png"></p>
+<p>点击开始时，选择 “<strong>以 DD 镜像 模式写入</strong>”：<br />
+<img src="https://s2.loli.net/2021/12/12/LAOyVPfhpvambNT.png" alt="以DD镜像写入" width="400"  srcFile="archlinux_make_usb_dd.png"></p>
+<h2 id="23-启动到-live-环境"><a class="markdownIt-Anchor" href="#23-启动到-live-环境"></a> 2.3. 启动到 Live 环境</h2>
+<p>重启后，看见开机画面，一直按 F12（不同机器不一样）进入启动引导界面，一般默认选第一个。<br />
+当看到如下界面，说明启动成功。</p>
+<img src="https://s2.loli.net/2021/12/12/ty19bQhfAvmMWHr.png" alt="成功进入Arch Linux" width="500"  srcFile="archlinux_live_env.png">
+<h2 id="24-验证引导模式"><a class="markdownIt-Anchor" href="#24-验证引导模式"></a> 2.4. 验证引导模式</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若结果显示了目录且没有报告错误, 则系统以 UEFI 模式引导, 否则可能是以 BIOS 模式引导</span></span><br><span class="line">root@archiso ~ # ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+<h2 id="25-禁用-reflector"><a class="markdownIt-Anchor" href="#25-禁用-reflector"></a> 2.5. 禁用 reflector</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">禁用 reflector，避免自己更新 mirrorlist</span></span><br><span class="line">root@archiso ~ # systemctl stop reflector.service</span><br></pre></td></tr></table></figure>
+<h2 id="26-连接网络"><a class="markdownIt-Anchor" href="#26-连接网络"></a> 2.6. 连接网络</h2>
+<p>可以先检查下无线设备是否被禁用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查无线设备状态</span></span><br><span class="line">root@archiso ~ # rfkill list</span><br><span class="line">0: tpacpi_bluetooth_sw: Bluetooth</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">1: phy0: Wireless LAN</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">2: hci0: Bluetooth</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">    </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若 Wireless LAN 有 blocked: <span class="built_in">yes</span>，说明无线连接被禁用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用无线连接（若无禁用，则无需执行下面命令）</span></span><br><span class="line">root@archiso ~ # rfkill unblock wifi</span><br></pre></td></tr></table></figure>
+<p>使用 <code>iwctl</code> 连接无线网络：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看网络设备信息</span></span><br><span class="line">root@archiso ~ # ip a</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用 iwctl 连接 wifi</span></span><br><span class="line">root@archiso ~ # iwctl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出所有 WiFi 设备</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">device list</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扫描网络 (wlan0 为你的设备)</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 scan</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出所有可用的网络</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 get-networks</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选择一个无线进行连接 (xixi 为你的无线名)</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 connect xixi</span></span><br><span class="line">Type the network passphrase for xixi psk.</span><br><span class="line">Passphrase: # 输入密码</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">连接成功之后, 即可退出 iwctl</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash"><span class="built_in">exit</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证是否成功连接上网络</span></span><br><span class="line">root@archiso ~ # ping -c 5 baidu.com</span><br></pre></td></tr></table></figure>
+<p>若为有线情况，理论上只要插上网线，就能直接上网。</p>
+<h2 id="27-更新系统时间"><a class="markdownIt-Anchor" href="#27-更新系统时间"></a> 2.7. 更新系统时间</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # timedatectl set-ntp true</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查服务状态</span></span><br><span class="line">root@archiso ~ # timedatectl status</span><br></pre></td></tr></table></figure>
+<h2 id="28-建立硬盘分区"><a class="markdownIt-Anchor" href="#28-建立硬盘分区"></a> 2.8. 建立硬盘分区</h2>
+<p><strong>(1) 查看磁盘信息</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看磁盘信息</span></span><br><span class="line">root@archiso ~ # fdisk -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或通过 lsblk 查看磁盘, 看不到未建分区的磁盘块</span></span><br><span class="line">root@archiso ~ # lsblk</span><br></pre></td></tr></table></figure>
+<p><code>lsblk</code>  显示如下图所示：<br />
+<img src="https://s2.loli.net/2021/12/12/mGCcbKqvwR3Wod9.png" alt="lsblk展示磁盘信息" width="500"  srcFile="archlinux_first_lsblk.png"></p>
+<ul>
+<li>sda 为 500G 的硬盘，140G 的 sda1 为 win10 的 个人应用数据存储盘，剩余的都用来作为 Arch Linux 的用户主目录 <code>/home</code>；</li>
+<li>nvme0n1 为 250G 的 SSD，500M 的 nvme0n1p1 为 win10 的 efi，50M 的 nvme0n1p2 为 win10 的 msr，99.4G（约100G）的 nvme0n1p3 为 win10 的系统盘， nvme0n1p4 为 win10 的恢复系统盘，剩余的都用来作为 Arch Linux 的根目录 <code>/</code>。</li>
+</ul>
+<p><strong>(2) 创建/格式化/挂载 根目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # cfdisk /dev/nvme0n1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>创建分区</strong>：此时移动键盘向下按键，选中 Device 列表最下方显示有 “Free space” 所在行，选择 “New” 并回车，左下角 “Partition size” 默认填充了当前磁盘最大可用空间（可自行修改），确认输入好分区大小后，回车。</li>
+<li><strong>写入分区</strong>：选择 “Write” 并回车，然后输入 yes 确认将该分区写入磁盘。</li>
+<li><strong>退出 cfdisk</strong>：选择 “Quit” 退出。</li>
+</ul>
+<p>此时输入 <code>lsblk</code> 可查看新增分区，如 nvme0n1 下多了一个新增分区 nvme0n1p5。</p>
+<ul>
+<li><strong>分区格式化</strong>：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将刚刚分好的区格式化为ext4格式，这里认准分区号是nvme0n1p5</span></span><br><span class="line">root@archiso ~ # mkfs.ext4 /dev/nvme0n1p5</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/54vitAId8xjobMy.png" alt="格式化nvme0n1p5为ext4" width="550"  srcFile="archlinux_mkfs_ext4_root.png">
+<ul>
+<li><strong>挂载分区</strong>：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将根目录挂载到 `/mnt`</span></span><br><span class="line">root@archiso ~ #  mount /dev/nvme0n1p5 /mnt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意： 挂载分区一定要遵循顺序，先挂载根（root）分区（到 /mnt），再挂载引导（boot）分区（到 /mnt/boot 或 /mnt/efi，如果单独分出来了的话），最后再挂载其他分区。否则您可能遇到安装完成后无法启动系统的问题。</p>
+</blockquote>
+<p><strong>(3) 创建/格式化/挂载 用户主目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p>创建和写入分区 同上面操作。</p>
+<p>此时输入 <code>lsblk</code> 可查看新增分区，如 sda 下多了一个新增分区 sda2。</p>
+<ul>
+<li><strong>分区格式化</strong>：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将刚刚分好的区格式化为ext4格式，这里认准分区号是sda2</span></span><br><span class="line">root@archiso ~ # mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>挂载分区</strong>：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkdir /mnt/home</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将用户主目录挂载到/mnt/home</span></span><br><span class="line">root@archiso ~ # mount /dev/sda2 /mnt/home</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 挂载 efi</strong><br />
+由于是双系统安装，Arch Linux 的 EFI 分区共用的是 Windows的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkdir /mnt/efi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载EFI分区</span></span><br><span class="line">root@archiso ~ # mount /dev/nvme0n1p1 /mnt/efi</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 确认所有挂载情况</strong><br />
+<img src="https://s2.loli.net/2021/12/12/VqCgIlS6v8ZMLoy.png" alt="lsblk确认挂载情况" width="500"  srcFile="archlinux_final_lsblk.png"></p>
+<h2 id="29-安装基本系统"><a class="markdownIt-Anchor" href="#29-安装基本系统"></a> 2.9. 安装基本系统</h2>
+<p>安装之前，可考虑更换国内镜像源来加快下载速度，如 中科大 ustc、清华 tsinghua。<br />
+使用 <code>vim /etc/pacman.d/mirrorlist</code> 修改镜像源，在首行加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch </span><br><span class="line"># 中科大</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</span><br></pre></td></tr></table></figure>
+<p>更新软件包缓存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # pacman -Syy</span><br></pre></td></tr></table></figure>
+<p>安装基础包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装base软件包和Linux内核以及常规硬件的固件</span></span><br><span class="line">root@archiso ~ # pacstrap /mnt base base-devel linux linux-firmware</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装功能性软件：dhcpcd 有线、iwd 无线、vim 编辑器、sudo 提权工具</span></span><br><span class="line">root@archiso ~ # pacstrap /mnt dhcpcd iwd vim sudo</span><br></pre></td></tr></table></figure>
+<h2 id="210-生成-fstab-文件"><a class="markdownIt-Anchor" href="#210-生成-fstab-文件"></a> 2.10. 生成 fstab 文件</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查生成的fstab文件</span></span><br><span class="line">root@archiso ~ # cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h2 id="211-chroot"><a class="markdownIt-Anchor" href="#211-chroot"></a> 2.11. Chroot</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Change root 到新安装的系统</span></span><br><span class="line">root@archiso ~ # arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<h2 id="212-设置时区"><a class="markdownIt-Anchor" href="#212-设置时区"></a> 2.12. 设置时区</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置时区</span></span><br><span class="line">[root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或</span></span><br><span class="line">[root@archiso /]# timedatectl set-timezone Asia/Shanghai</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同步硬件时钟</span></span><br><span class="line">[root@archiso /]# hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h2 id="213-设置-locale"><a class="markdownIt-Anchor" href="#213-设置-locale"></a> 2.13. 设置 locale</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>找到 <code>en_US.UTF-8 UTF-8</code> 和 <code>zh_CN.UTF-8 UTF-8</code> 所在行，分别删除前面的 <code>#</code>，保存退出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成locale信息</span></span><br><span class="line">[root@archiso /]# locale-gen</span><br></pre></td></tr></table></figure>
+<p>创建并写入 /etc/locale.conf 文件：<code>vim /etc/locale.conf</code><br />
+填入内容：<code>LANG=en_US.UTF-8</code><br />
+退出保存。</p>
+<h2 id="214-设置-hostname"><a class="markdownIt-Anchor" href="#214-设置-hostname"></a> 2.14. 设置 hostname</h2>
+<p>创建并写入hostname：<code>vim /etc/hostname</code><br />
+填入内容（按需修改）：<code>utopia</code></p>
+<p>修改hosts：<code>vim /etc/hosts</code><br />
+填入内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.0.1   utopia</span><br></pre></td></tr></table></figure>
+<p>退出保存。</p>
+<h2 id="215-设置-root-用户密码"><a class="markdownIt-Anchor" href="#215-设置-root-用户密码"></a> 2.15. 设置 root 用户密码</h2>
+<p>为 root 用户创建密码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# passwd root</span><br></pre></td></tr></table></figure>
+<h2 id="216-创建启动器"><a class="markdownIt-Anchor" href="#216-创建启动器"></a> 2.16. 创建启动器</h2>
+<ul>
+<li><strong>安装微码</strong>：<br />
+不确定 CPU 型号，可以安装 <code>pacman -S neofetch</code> 来查看自己电脑的 CPU 型号。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">intel的CPU安装intel-ucode</span></span><br><span class="line">[root@archiso /]# pacman -S intel-ucode</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">amd的CPU安装amd-ucode</span></span><br><span class="line">[root@archiso /]# pacman -S amd-ucode</span><br></pre></td></tr></table></figure>
+<p>对于UEFI启动模式，需要同时安装 grub 和 efibootmgr：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grub是启动引导器，efibootmgr被grub脚本用来将启动项写入NVRAM</span></span><br><span class="line">[root@archiso /]# pacman -S grub efibootmgr</span><br><span class="line">[root@archiso /]# pacman -S os-prober dosfstools</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Grub 2.06 更新 os-prober 用户需要手动干预：</p>
+<ol>
+<li>如果您正在使用 os-prober 生成其他系统的引导项，grub 2.06 不再自动启用 os-prober，您需要添加 <code>GRUB_DISABLE_OS_PROBER=false</code> 至 /etc/default/grub 配置文件中并且重新运行 grub-mkconfig；</li>
+<li>grub 2.06 现在会自动添加 固件设置菜单 引导项目，无需手动创建。</li>
+</ol>
+</blockquote>
+<p>鉴于此需要手动启用 os-prober 来确保 Windows 能被正确识别：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+<p>在里面找一条空行输入：<code>GRUB_DISABLE_OS_PROBER=false</code>，保存退出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 GRUB EFI 应用 grubx64.efi 安装到 /efi，并将其模块安装到 /boot/grub/x86_64-efi/</span></span><br><span class="line">[root@archiso /]# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成grub.cfg</span></span><br><span class="line">[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/2DAXIRQFtSTPlwf.png" alt="安装grub引导程序" width="600"  srcFile="archlinux_grub_mkconfig.png">
+<h2 id="217-完成安装"><a class="markdownIt-Anchor" href="#217-完成安装"></a> 2.17. 完成安装</h2>
+<p>退出新系统并取消挂载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">退出arch-chroot</span></span><br><span class="line">[root@archiso /]# exit</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取消所有挂载</span></span><br><span class="line">root@archiso ~ # umount -R /mnt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启，启动时请拔出u盘</span></span><br><span class="line">root@archiso ~ # reboot</span><br></pre></td></tr></table></figure>
+<p>重启后，输入 root 用户和密码进行登录。<br />
+连接网络：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">立即启动dhcp</span></span><br><span class="line">[root@utopia ~]# systemctl start dhcpcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若为无线连接，则需启动iwd，通过iwctl来连接</span></span><br><span class="line">[root@utopia ~]# systemctl start iwd</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iwctl连接方式同上</span></span><br><span class="line">[root@utopia ~]# iwctl</span><br></pre></td></tr></table></figure>
+<h1 id="3-arch-linux-桌面环境与常用应用"><a class="markdownIt-Anchor" href="#3-arch-linux-桌面环境与常用应用"></a> 3. Arch Linux 桌面环境与常用应用</h1>
+<h2 id="31-设置-archlinuxcn-源-和-安装-yay"><a class="markdownIt-Anchor" href="#31-设置-archlinuxcn-源-和-安装-yay"></a> 3.1. 设置 archlinuxcn 源 和 安装 yay</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 /etc/pacman.conf，末尾添加：</span></span><br><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Include = /etc/pacman.d/archlinuxcn</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后创建 /etc/pacman.d/archlinuxcn，并追加：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">中科大</span></span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清华大学</span></span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改好后，更新数据源</span></span><br><span class="line">[root@utopia ~]# pacman -Syyu</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装密钥环</span></span><br><span class="line">[root@utopia ~]# pacman -Sy archlinuxcn-keyring</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 yay (Yet Another Yaourt)：官方源未收录，只有archlinuxcn收录了</span></span><br><span class="line">[root@utopia ~]# pacman -S yay</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>AUR 是 Arch Linux 社区维护的软件源，官方地址：<a target="_blank" rel="noopener" href="https://aur.archlinux.org/">AUR (en) - Home (archlinux.org)</a>。<br />
+可通过 yaourt （曾经主流，现已停止维护） 和 yay （目前首选）来使用 AUR 源软件。</p>
+</blockquote>
+<h2 id="32-增加非-root-用户设置个人账户"><a class="markdownIt-Anchor" href="#32-增加非-root-用户设置个人账户"></a> 3.2. 增加非 root 用户（设置个人账户）</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">wheel附加组可sudo进行提权 -m同时创建用户家目录，ray为用户名（按需设置自己的用户）</span></span><br><span class="line">[root@utopia ~]# useradd -m -G wheel -s /bin/bash ray</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">给新增用户ray设置新密码</span></span><br><span class="line">[root@utopia ~]# passwd ray</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑 sudo 文件</span></span><br><span class="line">[root@utopia ~]# EDITOR=vim visudo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">找到 <span class="comment">#%wheel ALL=(ALL) ALL 所在行，并去掉前面的 #，:wq 保存退出即可</span></span> </span><br></pre></td></tr></table></figure>
+<h2 id="33-安装双显卡驱动"><a class="markdownIt-Anchor" href="#33-安装双显卡驱动"></a> 3.3. 安装双显卡驱动</h2>
+<p><strong>(0) 查看显卡设备：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看显卡信息</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lspci -k | grep -A 2 -E <span class="string">&quot;(VGA|3D)&quot;</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的为双显卡：</span></span><br><span class="line">00:02.0 VGA compatible controller: Intel Corporation HD Graphics 630 (rev 04)</span><br><span class="line">        Subsystem: Lenovo Device 505e</span><br><span class="line">        Kernel driver in use: i915</span><br><span class="line">--</span><br><span class="line">02:00.0 3D controller: NVIDIA Corporation GM108M [GeForce 940MX] (rev a2)</span><br><span class="line">        Subsystem: Lenovo Device 505e</span><br><span class="line">        Kernel modules: nouveau</span><br></pre></td></tr></table></figure>
+<p><strong>(1) 安装 xorg：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">图形界面必备</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xorg是X11的一种具体开源实现, 只是提供了一个X Server，负责底层的操作当你运行一个程序的时候，这个程序会连接到X server上，由X server接收键盘鼠标输入和负责屏幕输出窗口的移动，窗口标题的样式等等</span></span><br><span class="line">[root@utopia ~]# pacman -S xorg</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>所有 AMD 显卡建议使用开源驱动，英伟达显卡建议使用闭源驱动。</p>
+</blockquote>
+<p><strong>(2) 安装英特尔核心显卡：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@utopia ~]# pacman -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Intel graphics Wiki：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Intel_graphics">Intel graphics - ArchWiki (archlinux.org)</a><br />
+Arch Wiki 一般不建议安装 xf86-video-intel，而是使用 xorg 的 modesetting 驱动（较为稳定）。<br />
+注意：只有 Intel HD 4000 及以上的核显才支持 vulkan。</p>
+</blockquote>
+<p><strong>(3) 安装英伟达独立显卡：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GeForce 930 起、10 系至 20 系、 Quadro / Tesla / Tegra K-系列以及更新的显卡（NV110 以及更新的显卡家族），安装 nvidia包 （用于 linux包） 或者 nvidia-lts包 （用于linux-lts包）。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NVIDIA 安装wiki: https://wiki.archlinuxcn.org/wiki/NVIDIA<span class="comment">#%E5%AE%89%E8%A3%85</span></span></span><br><span class="line">[root@utopia ~]# pacman -S nvidia</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NVIDIA Wiki: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA">NVIDIA - ArchWiki (archlinux.org)</a></p>
+</blockquote>
+<p><strong>(4) 安装双显卡切换工具：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@utopia ~]# yay -S optimus-manager optimus-manager-qt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>optimus-manager 提供三种模式：仅用独显、仅用核显、hybrid 动态切换模式。</p>
+<p>安装完成后重启即可使用。安装完成后 optimus-manager 会默认 enable optimus-manager 的服务，可在重启前检查其状态，若未 enable，可 <code>sudo systemctl enable optimus-manager</code>。</p>
+<p>可参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_Optimus">NVIDIA Optimus - ArchWiki (archlinux.org)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Askannz/optimus-manager/wiki">Home · Askannz/optimus-manager Wiki (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver">显卡驱动 (archlinuxstudio.github.io)</a></li>
+</ul>
+</blockquote>
+<h2 id="34-安装图像界面-kde-plasma"><a class="markdownIt-Anchor" href="#34-安装图像界面-kde-plasma"></a> 3.4. 安装图像界面 - KDE Plasma</h2>
+<h3 id="341-安装-kde-桌面"><a class="markdownIt-Anchor" href="#341-安装-kde-桌面"></a> 3.4.1. 安装 KDE 桌面</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装plasma-meta元软件包</span></span><br><span class="line">[root@utopia ~]# pacman -S plasma-meta</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 konsole 终端、dolphin 文件管理器</span></span><br><span class="line">[root@utopia ~]# pacman -S konsole dolphin </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 greeter sddm</span></span><br><span class="line">[root@utopia ~]# systemctl enable sddm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>KDE wiki</strong>：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">KDE (简体中文) - ArchWiki (archlinux.org)</a></li>
+<li><strong>元软件包（如 plasma-meta） 和 软件包组（如 plasma） 的区别</strong>可参看：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Meta_package_and_package_group_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Meta package and package group (简体中文) - ArchWiki (archlinux.org)</a><br />
+<strong>plasma-meta</strong>：元软件包，通过依赖关系安装软件包。若后续有新增软件包会在更新时自动安装；用户无法选择仅安装元软件包依赖的部分软件。<br />
+<strong>plasma</strong>：软件包组，仅是一个列表，与 plasma-meta 提供功能类似。若后续有新增软件包<mark>不会</mark>在更新时自动安装；用户可以选择安装组中的部分软件，也可以选择仅删除软件包组中的部分软件。</li>
+</ul>
+</blockquote>
+<p>重启后，即可进入 KDE 图形界面。更多 KDE 使用可参考 <a target="_blank" rel="noopener" href="https://userbase.kde.org/Welcome_to_KDE_UserBase/zh-cn">KDE UserBase</a>。</p>
+<h3 id="342-设置和连接网络"><a class="markdownIt-Anchor" href="#342-设置和连接网络"></a> 3.4.2. 设置和连接网络</h3>
+<p>完成重启并输入用户密码进入桌面后，打开 konsole 命令终端，进行网络设置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保iwd开机处于关闭状态，其无线连接会与NetworkManager冲突</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">disable</span> iwd</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop iwd</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保先启动NetworkManager，并进行网络连接</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> --now NetworkManager</span></span><br></pre></td></tr></table></figure>
+<h3 id="343-设置交换文件-swap"><a class="markdownIt-Anchor" href="#343-设置交换文件-swap"></a> 3.4.3. 设置交换文件 swap</h3>
+<p>在桌面环境中，交换分区或文件用来实现休眠（hibernate）的功能，即将当前环境保存在磁盘的交换文件或分区部分。交换文件与分区性能相同，且交换文件更为灵活，可随时变更大小，增加与删除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建16G的交换空间 大小根据需要自定</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1M count=16384 status=progress</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置正确的权限</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> 600 /swapfile</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式化swap文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">mkswap /swapfile</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用swap文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">swapon /swapfile</span></span><br></pre></td></tr></table></figure>
+<p>最后，向 <code>/etc/fstab</code> 中追加如下内容：<code>/swapfile none swap defaults 0 0</code><br />
+KDE 自身提供开箱即用的睡眠功能(suspend)，即将系统挂起到内存，消耗少量的电量。休眠(hibernate)会将系统挂起到交换分区或文件，几乎不消耗电量。</p>
+<blockquote>
+<p>休眠功能：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate">Power management/Suspend and hibernate - ArchWiki (archlinux.org)</a></p>
+</blockquote>
+<h3 id="344-安装-kde-应用"><a class="markdownIt-Anchor" href="#344-安装-kde-应用"></a> 3.4.4. 安装 KDE 应用</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 kde 应用包库：如 kde-applications 或 kde-applications-meta，亦可选择性安装：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">推荐安装系统工具，包含了KDE桌面环境所需的基本应用，如 终端工具Konsole 、文件编辑器Kate、下拉式终端yakuake、压缩工具Ark、 等</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-utilities</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">图形工具集合，包含图片查看器Gwenview、PDF查看器Okular、截图工具Spectacle 等</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-graphics</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">系统工具集合，包含文件管理器dolphin、分区管理器partitionmanager 等</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-system</span></span><br></pre></td></tr></table></figure>
+<p>以上为选择性安装，亦可直接选择安装 KDE 全家桶，<code>kde-applications-meta / kde-applications</code> 包含了各种各样的软件，应用全面也意味着其安装后空间占用十分大，通常不建议安装，可根据个人实际需要来选择性安装。<strong>元软件包</strong> 或 <strong>软件包组</strong> 的区别可参阅：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Meta_package_and_package_group_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Meta package and package group</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">元软件包</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-applications-meta</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">软件包组</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-applications</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97">Arch Linux 安装指南 (wiki)</a></li>
+<li><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138951848">2021 Archlinux双系统安装教程（超详细）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c2ab582e13d">Arch Linux + KDE安装教程</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+              <a href="/zh-CN/os/common-software-and-configuration-for-arch-linux/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+              2024-11-16
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/zh-CN/categories/Arch-Linux-%E7%B3%BB%E5%88%97/" title="Arch Linux 系列">
+                        Arch Linux 系列
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/Arch-Linux/" title="Arch_Linux">
+                        #Arch_Linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/OS/" title="OS">
+                        #OS
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/Windows/" title="Windows">
+                        #Windows
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/zh-CN/design-pattern/abstract-factory-pattern/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-text"> 0. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-windows"><span class="toc-text"> 1. 安装 Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%87%86%E5%A4%87-windows-%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F"><span class="toc-text"> 1.1. 准备 Windows 系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%88%B6%E4%BD%9C%E5%90%AF%E5%8A%A8-u-%E7%9B%98%E4%BD%BF%E7%94%A8-rufus"><span class="toc-text"> 1.2. 制作启动 U 盘（使用 Rufus）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E8%AE%BE%E7%BD%AE-bios"><span class="toc-text"> 1.3. 设置 BIOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E8%BF%9B%E5%85%A5%E5%90%AF%E5%8A%A8%E5%BC%95%E5%AF%BC%E7%95%8C%E9%9D%A2%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-text"> 1.4. 进入启动引导界面（自定义）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-text"> 1.5. 磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="toc-text"> 1.6. 系统安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-text"> 1.7. 安装成功</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-arch-linux"><span class="toc-text"> 2. 安装 Arch Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E5%87%86%E5%A4%87-arch-linux-%E9%95%9C%E5%83%8F"><span class="toc-text"> 2.1. 准备 Arch Linux 镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E5%88%B6%E4%BD%9C%E5%90%AF%E5%8A%A8-u-%E7%9B%98%E4%BD%BF%E7%94%A8-rufus"><span class="toc-text"> 2.2. 制作启动 U 盘（使用 Rufus）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-%E5%90%AF%E5%8A%A8%E5%88%B0-live-%E7%8E%AF%E5%A2%83"><span class="toc-text"> 2.3. 启动到 Live 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-%E9%AA%8C%E8%AF%81%E5%BC%95%E5%AF%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 2.4. 验证引导模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-%E7%A6%81%E7%94%A8-reflector"><span class="toc-text"> 2.5. 禁用 reflector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26-%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C"><span class="toc-text"> 2.6. 连接网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27-%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4"><span class="toc-text"> 2.7. 更新系统时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28-%E5%BB%BA%E7%AB%8B%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-text"> 2.8. 建立硬盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#29-%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%B3%BB%E7%BB%9F"><span class="toc-text"> 2.9. 安装基本系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#210-%E7%94%9F%E6%88%90-fstab-%E6%96%87%E4%BB%B6"><span class="toc-text"> 2.10. 生成 fstab 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#211-chroot"><span class="toc-text"> 2.11. Chroot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#212-%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA"><span class="toc-text"> 2.12. 设置时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#213-%E8%AE%BE%E7%BD%AE-locale"><span class="toc-text"> 2.13. 设置 locale</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#214-%E8%AE%BE%E7%BD%AE-hostname"><span class="toc-text"> 2.14. 设置 hostname</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#215-%E8%AE%BE%E7%BD%AE-root-%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-text"> 2.15. 设置 root 用户密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#216-%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E5%99%A8"><span class="toc-text"> 2.16. 创建启动器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#217-%E5%AE%8C%E6%88%90%E5%AE%89%E8%A3%85"><span class="toc-text"> 2.17. 完成安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-arch-linux-%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8"><span class="toc-text"> 3. Arch Linux 桌面环境与常用应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#31-%E8%AE%BE%E7%BD%AE-archlinuxcn-%E6%BA%90-%E5%92%8C-%E5%AE%89%E8%A3%85-yay"><span class="toc-text"> 3.1. 设置 archlinuxcn 源 和 安装 yay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-%E5%A2%9E%E5%8A%A0%E9%9D%9E-root-%E7%94%A8%E6%88%B7%E8%AE%BE%E7%BD%AE%E4%B8%AA%E4%BA%BA%E8%B4%A6%E6%88%B7"><span class="toc-text"> 3.2. 增加非 root 用户（设置个人账户）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-%E5%AE%89%E8%A3%85%E5%8F%8C%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="toc-text"> 3.3. 安装双显卡驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-%E5%AE%89%E8%A3%85%E5%9B%BE%E5%83%8F%E7%95%8C%E9%9D%A2-kde-plasma"><span class="toc-text"> 3.4. 安装图像界面 - KDE Plasma</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#341-%E5%AE%89%E8%A3%85-kde-%E6%A1%8C%E9%9D%A2"><span class="toc-text"> 3.4.1. 安装 KDE 桌面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#342-%E8%AE%BE%E7%BD%AE%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C"><span class="toc-text"> 3.4.2. 设置和连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#343-%E8%AE%BE%E7%BD%AE%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6-swap"><span class="toc-text"> 3.4.3. 设置交换文件 swap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#344-%E5%AE%89%E8%A3%85-kde-%E5%BA%94%E7%94%A8"><span class="toc-text"> 3.4.4. 安装 KDE 应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Arch%20Linux%20%26%20Win10%20%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85 + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fzh-CN%2Fos%2Fdual-boot-installation-guide-of-arch-linux-win-10%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/zh-CN/os/dual-boot-installation-guide-of-arch-linux-win-10/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/os/dual-boot-installation-guide-of-arch-linux-win-10/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/os/dual-boot-installation-guide-of-arch-linux-win-10/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>

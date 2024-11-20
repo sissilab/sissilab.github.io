@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      Arch Linux 常用软件及配置 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="zh-CN">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/zh-CN/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/zh-CN/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/zh-CN/">
+          <a href="/zh-CN/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/archives/">
+          <a href="/zh-CN/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/categories/">
+          <a href="/zh-CN/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/zh-CN/tags/">
+          <a href="/zh-CN/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Arch Linux 常用软件及配置</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+          2024-11-18
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/zh-CN/categories/Arch-Linux-%E7%B3%BB%E5%88%97/" title="Arch Linux 系列">
+                    Arch Linux 系列
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/Arch-Linux/" title="Arch_Linux">
+                    #Arch_Linux
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/zh-CN/tags/OS/" title="OS">
+                    #OS
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="输入法"><a class="markdownIt-Anchor" href="#输入法"></a> 输入法</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装拼音输入法 fcitx5</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1.安装fcitx5相关包</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">fcitx5-pinyin-zhwiki: 离线词库</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-material-color fcitx5-pinyin-zhwiki</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2.配置环境变量</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo vim /etc/environment</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">set</span> fcitx5</span></span><br><span class="line">INPUT_METHOD=fcitx5  </span><br><span class="line">GTK_IM_MODULE=fcitx5  </span><br><span class="line">QT_IM_MODULE=fcitx5  </span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.xprofile</span></span><br><span class="line">export INPUT_METHOD=fcitx5</span><br><span class="line">export GTK_IM_MODULE=fcitx5</span><br><span class="line">export QT_IM_MODULE=fcitx5</span><br><span class="line">export XMODIFIERS=@im=fcitx5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3.添加自启</span></span><br><span class="line">System Settings / Startup and shutdown / Autostart：点击 Add / Add Application，搜索 fcitx5，并添加 /usr/bin/fcitx5。</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4.重启，生效</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5.添加输入法</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System Setting / 搜索 Input method：点击 Add Input Method，搜索 pinyin，并添加。</span></span><br></pre></td></tr></table></figure>
+<h1 id="安装-zshoh-my-zsh-及相关插件"><a class="markdownIt-Anchor" href="#安装-zshoh-my-zsh-及相关插件"></a> 安装 zsh/oh-my-zsh 及相关插件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">大多默认shell都是bash，推荐使用zsh，提供了更多好用功能</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装zsh</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S zsh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更改默认终端，或者编辑/etc/passwd文件，修改用户名后面的默认Shell（/bin/zsh）即可</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">chsh -s /bin/zsh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装oh-my-zsh-git: 是一个社区驱动的zsh管理工具，提供了丰富的插件和主题</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S oh-my-zsh-git</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">默认配置</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">cp</span> /usr/share/oh-my-zsh/zshrc ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更换主题: 修改 ZSH_THEME 为你想要的主题，主题可见: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">插件: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装插件:</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh-syntax-highlighting: 提供命令高亮现实，比如命令输入错误显示红色，命令输入正确显示绿色</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh-autosuggestions: 提供命令建议，可以根据你执行的Shell命令记录，自动建议补全</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S zsh-syntax-highlighting zsh-autosuggestions</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要安装的插件放在 `/usr/share/oh-my-zsh/custom/plugins/` 下</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ln</span> -s /usr/share/zsh/plugins/zsh-syntax-highlighting /usr/share/oh-my-zsh/custom/plugins/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ln</span> -s /usr/share/zsh/plugins/zsh-autosuggestions /usr/share/oh-my-zsh/custom/plugins/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">autojump: 根据访问记录模糊地址跳转，使用文档: https://github.com/wting/autojump</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S autojump</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置加入插件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.zshrc</span></span><br><span class="line">plugins=(</span><br><span class="line">        git</span><br><span class="line">        autojump</span><br><span class="line">        zsh-syntax-highlighting</span><br><span class="line">        zsh-autosuggestions</span><br><span class="line">)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生效 .zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">autojump 插件配置好后，如下可查看已记录的访问路径（存储在 autojump.tx）</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">j --<span class="built_in">stat</span></span></span><br><span class="line">10.0:   /home/ray/Project</span><br><span class="line">14.1:   /usr/share/fonts</span><br><span class="line">________________________________________</span><br><span class="line"></span><br><span class="line">24:      total weight</span><br><span class="line">2:       number of entries</span><br><span class="line">0.00:    current directory weight</span><br><span class="line"></span><br><span class="line">data:    /home/ray/.local/share/autojump/autojump.tx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">模糊匹配<span class="string">&quot;pro&quot;</span>的目录，并用文件管理器打开</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">jo pro</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">建立个人配置文件profile: 由于shell改为zsh，需在 .zshrc 中激活配置 .profile，后续个人环境变量等配置可写到 ~/.profile</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者可自行将 `\<span class="variable">$HOME</span>/.profile` 追加至 .zshrc 末尾</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;\n# activate home custom profile\n. \$HOME/.profile&quot;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">激活刚增加的配置</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充：安装所需符号字体</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/powerline/fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S powerline-fonts</span>   </span><br></pre></td></tr></table></figure>
+<h1 id="系统常用工具命令"><a class="markdownIt-Anchor" href="#系统常用工具命令"></a> 系统常用工具/命令</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">支持识别 ntfs 格式的硬盘</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ntfs-3g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">net-tools: 支持 ifconfig, netstat, route, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">dnsutils (<span class="built_in">bind</span>): 支持 dig, nslookup, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">inetutils: 支持 hostname, telnet, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iproute2: 支持 ip, nstat, ...</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">htop: 与top类似的进程管理工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S net-tools dnsutils inetutils iproute2 htop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">系统监视器: 若想使用 Netspeed Widget（依赖 ksysguard），需安装这个，否则不然不显示</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ksysguard</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">dialog 是一个可以和Shell脚本配合使用的文本界面下的创建对话框的工具（编写shell脚本可用到）</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S dialog</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看系统绝大部分硬件信息，包括较难得到的内存频率，主板 BIOS 等等。</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S dmidecode</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Linux 下电源管理，可为笔记本节省电量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TLP Wiki: https://wiki.archlinux.org/title/TLP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S tlp</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> --now tlp</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主题配合 Kvantum Manager 可以达到更好的效果</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kvantum-qt5</span></span><br></pre></td></tr></table></figure>
+<h2 id="软件包管理"><a class="markdownIt-Anchor" href="#软件包管理"></a> 软件包管理</h2>
+<h3 id="降级"><a class="markdownIt-Anchor" href="#降级"></a> 降级</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">expac: 可以使用各种格式来打印 Pacman 包信息</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S expac</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">按软件包大小排序</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac -H M <span class="string">&#x27;%m\t%n&#x27;</span> | <span class="built_in">sort</span> -h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看最近安装的100个软件包</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac --timefmt=<span class="string">&#x27;%Y-%m-%d %T&#x27;</span> <span class="string">&#x27;%l\t%n&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">tail</span> -n 100</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">绘制软件包图 http://kmkeen.com/pacgraph/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pacgraph</span></span><br></pre></td></tr></table></figure>
+<h3 id="paru"><a class="markdownIt-Anchor" href="#paru"></a> Paru</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基于 Yay 的新 AUR 助手</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">官方github: https://github.com/Morganamilo/paru</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://dbigr.com/article/481262/</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Paru</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S --needed base-devel</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://aur.archlinux.org/paru.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> paru</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">makepkg -si</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">paru可以使用proxychains</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">proxychains paru -S &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他包管理软件"><a class="markdownIt-Anchor" href="#其他包管理软件"></a> 其他包管理软件</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">expac: 可以使用各种格式来打印 Pacman 包信息</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S expac</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">按软件包大小排序</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac -H M <span class="string">&#x27;%m\t%n&#x27;</span> | <span class="built_in">sort</span> -h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看最近安装的100个软件包</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">expac --timefmt=<span class="string">&#x27;%Y-%m-%d %T&#x27;</span> <span class="string">&#x27;%l\t%n&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">tail</span> -n 100</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">绘制软件包图 http://kmkeen.com/pacgraph/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pacgraph</span></span><br></pre></td></tr></table></figure>
+<h2 id="蓝牙"><a class="markdownIt-Anchor" href="#蓝牙"></a> 蓝牙</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">蓝牙</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bluedevil: 蓝牙图形化管理工具</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pulseaudio-bluetooth: 支持蓝牙音响、蓝牙耳机</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S bluez bluez-utils bluedevil pulseaudio-bluetooth</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开机启动</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> bluetooth.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">立即开启</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">sudo systemctl start bluetooth.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="ssh-服务"><a class="markdownIt-Anchor" href="#ssh-服务"></a> SSH 服务</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh 工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S openssh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh服务 启动</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh服务 开机自启</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh服务 停止</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop sshd.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh服务 重启</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart sshd.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="fzf-文件模糊搜索"><a class="markdownIt-Anchor" href="#fzf-文件模糊搜索"></a> fzf 文件模糊搜索</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">fzf: 模糊搜索文件神器 https://github.com/junegunn/fzf</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S fzf</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可按需设定fzf显示样式</span></span><br><span class="line">export FZF_DEFAULT_OPTS=&quot;--height 50% --reverse --border --preview &#x27;cat &#123;&#125;&#x27;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">个人倾向，加入启动配置文件中</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim ~/.profile</span></span><br><span class="line">export FZF_DEFAULT_OPTS=&quot;--border --preview &#x27;cat &#123;&#125;&#x27;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">立即生效, 但是关闭当前终端会失效</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">. ~/.profile</span></span><br></pre></td></tr></table></figure>
+<h1 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装字体</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-serif-cn-fonts wqy-zenhei ttf-dejavu wqy-microhei</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装windows字体 - 方式1:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">mkdir</span> /usr/share/fonts/winfonts</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制windows的字体到Linux下，win_font_path代表自己C:/Windows/Fonts/的绝对路径，我这里为/run/media/ray/OS/Windows/Fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">cp</span> win_font_path/* /usr/share/fonts/winfonts/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> /usr/share/fonts/winfonts/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">rm</span> *.fon</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">建立字体索引信息，更新字体缓存</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo mkfontscale</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo mkfontdir</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">fc-cache -fv</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者，安装windows字体 - 方式2: https://wiki.archlinux.org/title/Microsoft_fonts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S ttf-ms-win10</span></span><br></pre></td></tr></table></figure>
+<h1 id="plasma-挂件"><a class="markdownIt-Anchor" href="#plasma-挂件"></a> Plasma 挂件</h1>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/998895">Netspeed Widget</a>: 显示上下行网速，依赖 ksysguard<br />
+<img src="https://s2.loli.net/2024/11/20/2ZSse7MqjFrWEDi.png" alt="Pasted image 20230119145715.png"   srcFile="Pasted image 20230119145715.png"></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/998901">Event Calendar</a>: 具有时间、日历、天气、计时器、Google Calendar/Tasks同步等功能，可配置性很高 (仅 Plasma 5 可用)<br />
+<img src="https://s2.loli.net/2024/11/20/tcdRJkwg35shDpI.png" alt="Pasted image 20230119195648.png" width="500"  srcFile="Pasted image 20230119195648.png"></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://store.kde.org/p/1160672">Tiled Menu</a>: 磁吸开始菜单，类似 Win10 的开始菜单<br />
+<img src="https://s2.loli.net/2024/11/20/m4epin5aDJBR9X8.png" alt="Pasted image 20230119203204.png" width="600"  srcFile="Pasted image 20230119203204.png"></p>
+</li>
+<li>
+<p>便利贴: 自带挂件，方便记录笔记<br />
+<img src="https://s2.loli.net/2024/11/20/XSf7jyKBYvQiq2g.png" alt="Pasted image 20230119203834.png" width="300"  srcFile="Pasted image 20230119203834.png"></p>
+</li>
+</ol>
+<h1 id="kde-应用"><a class="markdownIt-Anchor" href="#kde-应用"></a> KDE 应用</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kdeconnect: 实现Android手机与Arch Linux在同一局域网互动，如 发送文件、剪贴板同步、消息通知等</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kdeconnect</span></span><br></pre></td></tr></table></figure>
+<h1 id="dock-软件-launcher"><a class="markdownIt-Anchor" href="#dock-软件-launcher"></a> dock 软件 / Launcher</h1>
+<h2 id="latte-dock"><a class="markdownIt-Anchor" href="#latte-dock"></a> latte-dock</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">latte dock: 一款dock软件，类似于macOS上的停靠区</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S latte-dock</span></span><br></pre></td></tr></table></figure>
+<h2 id="rofi"><a class="markdownIt-Anchor" href="#rofi"></a> Rofi</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Rofi: https://wiki.archlinux.org/title/rofi</span></span><br><span class="line">$ sudo pacman -S rofi</span><br><span class="line"></span><br><span class="line"><span class="comment"># some commands:</span></span><br><span class="line">$ rofi -show drun -show-icons</span><br><span class="line">$ rofi -combi-modi window,drun -show combi -show-icons</span><br><span class="line"></span><br><span class="line"><span class="comment"># https://github.com/Mange/rofi-emoji</span></span><br><span class="line">$ sudo pacman -S rofi-emoji</span><br><span class="line"><span class="comment"># 安装适配器来拷贝使用emoji: https://github.com/Mange/rofi-emoji#optional-dependencies</span></span><br><span class="line">$ sudo pacman -S xdotool xsel</span><br></pre></td></tr></table></figure>
+<h1 id="浏览器"><a class="markdownIt-Anchor" href="#浏览器"></a> 浏览器</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">谷歌浏览器 chrome (Stable版)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S google-chrome</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">微软 Edge 浏览器 (Stable版)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S microsoft-edge-stable-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">谷歌开源浏览器 chromium</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S chromium</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">火狐浏览器 firefox</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S firefox</span></span><br></pre></td></tr></table></figure>
+<h1 id="代理"><a class="markdownIt-Anchor" href="#代理"></a> 代理</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. ssr</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S electron-ssr</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. shadowsocks-qt5</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S shadowsocks-qt5</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. clash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用文档: https://docs.cfw.lbyczf.com/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置参考：https://github.com/Dreamacro/clash/wiki/configuration</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TUN 模式: 对于不遵循系统代理的软件，TUN 模式可以接管其流量并交由 CFW 处理</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mixin: 支持向所有配置文件中注入公共属性设置 (配置文件内容不会被修改，混合行为只会发生在内存中)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S clash-for-windows-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">proxychains: 具体使用可参看 https://wiki.archlinux.org/title/Proxy_server<span class="comment">#Using_a_SOCKS_proxy</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S proxychains</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo vim /etc/proxychains.conf</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑 /etc/proxychains.conf，将最后一行改成:</span> </span><br><span class="line">socks5 127.0.0.1 1080</span><br></pre></td></tr></table></figure>
+<h1 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h1>
+<h2 id="aria2"><a class="markdownIt-Anchor" href="#aria2"></a> aria2</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://aria2.github.io/manual/en/html/index.html">aria2 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1959590">ArchLinux下配置aria2</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">aria2 是一个轻量级、支持多种协议的命令行下载工具。它支持的协议包括 HTTP(S)、FTP、BitTorrent、Metalink 等。aria2 工具可以并发地进行下载，同时还支持分片与续传，自动替换慢的线程等</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装好后可使用 aria2c 命令</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S aria2</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可直接参考使用大佬整理的配置，下载到自己的Home目录的.aria2目录，因为aria2的默认配置文件路径为<span class="variable">$HOME</span>/.aria2/aria2.conf</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/P3TERX/aria2.conf ~/.aria2</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单修改git下载的aria2配置:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(1) <span class="built_in">dir</span>=/root/Download 改为自己需要的下载目录，如 <span class="built_in">dir</span>=/home/ray/Downloads</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">    可直接把剩余 /root 批量替换为自己的Home目录路径 /home/ray</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(2) rpc-secret=P3TERX 建议修改</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若报错: 捕捉到异常Exception: [download_helper.cc:562] errorCode=1 打开文件 <span class="variable">$HOME</span>/.aria2/aria2.session 失败，原因：File not found or it is a directory</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可自行创建该文件即可</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">touch</span> /home/ray/.aria2/aria2.session</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动aria2c，会开始监听6800端口</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">aria2c --enable-rpc</span></span><br><span class="line">01/26 09:45:38 [NOTICE] IPv4 RPC：正在监听 TCP 端口 6800</span><br><span class="line">01/26 09:45:39 [NOTICE] 会话已成功序列化至 /home/ray/.aria2/aria2.session。</span><br></pre></td></tr></table></figure>
+<p>为浏览器安装 Aria2 插件：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://microsoftedge.microsoft.com/addons/detail/aria2-for-edge/jjfgljkjddpcpfapejfkelkbjbehagbh?hl=zh-CN">Aria2 for Edge</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn">Aria2 for Chrome</a></li>
+</ul>
+<p>安装浏览器插件并启用后，打开 Aria2 插件界面：在系统设置下点击 AriaNG 设置 -&gt; RPC（localhost:6800）<br />
+<img src="https://s2.loli.net/2024/11/20/1Fof6yILktaQTgD.png" alt="Pasted image 20230126095145.png" width="400"  srcFile="Pasted image 20230126095145.png"></p>
+<p>进入 RPC 设置界面可看到默认端口为 <code>6800</code>，不需调整，将 <strong>Aria2 RPC 密钥</strong> 设置为刚自行设置的 <code>rpc-secret</code> 值，并重新加载界面即可，成功可见 <strong>Aria2 状态</strong> 显示为 已连接。<br />
+<img src="https://s2.loli.net/2024/11/20/qRgHvMi4lZQsXNF.png" alt="Pasted image 20230126095304.png" width="600"  srcFile="Pasted image 20230126095304.png"></p>
+<p>每次使用需执行 <code>aria2c --enable-rpc</code> ，比较麻烦，改为开机自启。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> -p ~/.config/systemd/user</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/.config/systemd/user</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim aria2.servide</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Aria2 Daemon</span><br><span class="line">  </span><br><span class="line">[Service]  </span><br><span class="line">ExecStart=/usr/bin/aria2c</span><br><span class="line">  </span><br><span class="line">[Install]  </span><br><span class="line">WantedBy=default.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user <span class="built_in">enable</span> aria2.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user start aria2.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看状态</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl --user status aria2.service</span></span><br></pre></td></tr></table></figure>
+<h2 id="motrix"><a class="markdownIt-Anchor" href="#motrix"></a> Motrix</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">多线程下载器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S motrix</span></span><br></pre></td></tr></table></figure>
+<h1 id="沟通会议软件"><a class="markdownIt-Anchor" href="#沟通会议软件"></a> 沟通/会议软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">telegram</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S telegram-desktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">团队协作工具 slack</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S slack-desktop</span> </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Cisco的视频会议软件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S webex-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">VDI虚拟桌面，远程办公用</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S vmware-horizon-client</span></span><br></pre></td></tr></table></figure>
+<h2 id="微信"><a class="markdownIt-Anchor" href="#微信"></a> 微信</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/%E5%BE%AE%E4%BF%A1">微信 wiki</a></li>
+</ul>
+<h3 id="docker-微信"><a class="markdownIt-Anchor" href="#docker-微信"></a> docker 微信</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/huan/docker-wechat">docker-wehcat github</a></li>
+<li>安装前提：已安装 docker，并设置了 sudo。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 安装 ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用1：可直接使用如下命令启动</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://raw.githubusercontent.com/huan/docker-wechat/master/dochat.sh | bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若上面安装慢，国内用户可使用下面脚本</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用2：或者，直接git拉下整个项目</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/huan/docker-wechat.git</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后，进入docker-wechat目录，执行如下脚本，开始自动下载镜像和启动：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./dochat.sh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 安装问题 ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 权限不够，提示如下：</span></span><br><span class="line">[DoChat] 盒装微信 v0.15.0</span><br><span class="line">Disabling patch for /home/user/.wine/drive_c/users/user/AppData/Roaming/Tencent/WeChat ...</span><br><span class="line">Disabling patch for /home/user/.wine/drive_c/users/user/Application Data/Tencent/WeChat ...</span><br><span class="line">mkdir: 无法创建目录 “/home/user/.wine/drive_c/users/user/Application Data/Tencent”: 权限不够</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方案：为home目录下的DoChat目录赋权限</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">chmod</span> -R 777 ~/DoChat</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. main:行82: lshw：未找到命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方案：安装 lshw 命令</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S lshw</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. docker: Error response from daemon: could not select device driver <span class="string">&quot;&quot;</span> with capabilities: [[gpu]].</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方案：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(1) 先确认当前是否正确安装nvidia，参考 https://wiki.archlinuxcn.org/wiki/NVIDIA<span class="comment">#%E5%AE%89%E8%A3%85</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(2) 再考虑是否安装 nvidia-container-toolkit，参考 https://github.com/NVIDIA/nvidia-docker/issues/1243</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4.若无法启动，则无明确错误信息，如 DoChat Exited with code [0]，可如下增加debug调试启动查看:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | DOCHAT_DEBUG=<span class="literal">true</span> bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若包含如下错误信息</span></span><br><span class="line">00dc:err:winediag:nodrv_CreateWindow Application tried to create a window, but no driver could be loaded.</span><br><span class="line">00dc:err:winediag:nodrv_CreateWindow Make sure that your X server is running and that $DISPLAY is set correctly.</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需授权访问Xserver:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如下是使所有用户都能访问Xserver（https://wiki.archlinux.org/title/Xhost），再启动wechat即可</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xhost +</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 安装后 ###</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看镜像</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images</span></span><br><span class="line">REPOSITORY     TAG         IMAGE ID       CREATED        SIZE</span><br><span class="line">zixia/wechat   3.3.0.115   69b2b2eb6770   8 months ago   3.73GB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动后，可以看到容器DoChat</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps</span>        </span><br><span class="line">CONTAINER ID   IMAGE                    COMMAND            CREATED          STATUS          PORTS     NAMES</span><br><span class="line">f6068b03e6e9   zixia/wechat:3.3.0.115   &quot;/entrypoint.sh&quot;   20 minutes ago   Up 20 minutes             DoChat</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">但是当离开退出微信后，容器会被自动删除，因为dochat.sh中docker run加了--<span class="built_in">rm</span>，会在容器退出后自动删除容器</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建Desktop快捷方式，更多：https://wiki.archlinux.org/title/Desktop_entries</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Exec填写具体执行的命令，使用1为 “curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh | bash”，使用2为 “/home/ray/Project/docker/docker-wechat/dochat.sh”``</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/.local/share/applications/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim wechat-docker.desktop</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=WeChatDocker</span><br><span class="line">Comment=Dockerized WeChat (盒装微信) PC Windows Client for Linux</span><br><span class="line">Exec=curl -sL https://gitee.com/mirrors/dochat/raw/main/dochat.sh</span><br><span class="line">Icon=wechat</span><br><span class="line">Type=Application</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证desktop文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">desktop-file-validate wechat-docker.desktop</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后就可以在Menu菜单中搜索“WeChatDocker”即可看到</span></span><br></pre></td></tr></table></figure>
+<h1 id="笔记软件"><a class="markdownIt-Anchor" href="#笔记软件"></a> 笔记软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Obsidian 笔记软件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S obsidian</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Joplin 笔记软件</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">cli</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S joplin</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">desktop</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S joplin-desktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Trilium 开源的 electron 笔记软件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S trilium-bin</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S trilium-server-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Markdown 编辑器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S marktext-git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">脑图</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S xmind</span></span><br></pre></td></tr></table></figure>
+<h1 id="画图软件"><a class="markdownIt-Anchor" href="#画图软件"></a> 画图软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">drawio</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S drawio-desktop-bin</span></span><br></pre></td></tr></table></figure>
+<h1 id="解压缩软件"><a class="markdownIt-Anchor" href="#解压缩软件"></a> 解压缩软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ark 属于 kde-utilities 软件包组</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ark</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">unar, lsar</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S unarchiver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压/压缩 zip</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S unzip zip</span></span><br></pre></td></tr></table></figure>
+<h1 id="图片截图软件"><a class="markdownIt-Anchor" href="#图片截图软件"></a> 图片/截图软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gwenview 属于 kde-graphics 软件组</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S gwenview</span> </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">火焰截图</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S flameshot</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可配置快捷键 Ctrl+Alt+A，命令配置为: flameshot gui</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Snipaste 截图+贴图</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S snipaste</span> </span><br></pre></td></tr></table></figure>
+<h1 id="音视频软件"><a class="markdownIt-Anchor" href="#音视频软件"></a> 音视频软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">网易云音乐</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S netease-cloud-music</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">音/视频播放器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S vlc</span></span><br></pre></td></tr></table></figure>
+<h1 id="办公阅读pdf软件"><a class="markdownIt-Anchor" href="#办公阅读pdf软件"></a> 办公/阅读/PDF软件</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">libreoffice 稳定版</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S libreoffice-still</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kde的默认pdf轻量阅读器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S okular</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一款可高度自定义、功能丰富、极简轻量、类vim快捷键的pdf阅读器</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">官方doc: https://pwmt.org/projects/zathura/documentation/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">支持插件: https://pwmt.org/projects/zathura/plugins/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S zathura-pdf-mupdf</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">福昕阅读器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S foxitreader</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">WPS Office</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">wps-office-mui-zh-cn: 中文语言包</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S wps-office wps-office-mui-zh-cn wps-office-mime-cn wps-office-fonts ttf-ms-fonts ttf-wps-fonts wps-office-all-dicts-win-languages</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若 wps pdf 无法启动，则安装libtiff5依赖</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S libtiff5</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">漫画阅读器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S yacreader-poppler</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">适合触屏的阅读器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S koreader-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Hammer PDF: 一款由北京理工大学计算机学院 DataHammer 研究组开发维护的全新科技智能阅读器，能够快速分析 PDF 学术文献，实时提供可靠的学术信息。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/HammerPDF/Smart-Scientific-Reader</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S hammer-pdf</span></span><br></pre></td></tr></table></figure>
+<h1 id="软件开发相关工具"><a class="markdownIt-Anchor" href="#软件开发相关工具"></a> 软件开发相关工具</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vscode</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S visual-studio-code-bin</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若vscode的terminal在使用zsh时，部分字符无法显示出来，可安装字体patch</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S powerline-fonts</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开vsode的配置找到 Terminal › Integrated: Font Family: 可将字体修改为 Hack，即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nodejs npm 环境</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S nodejs npm</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置: <span class="string">&quot;/home/ray/&quot;</span> 为自己的home目录，按需调整</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm config <span class="built_in">set</span> prefix <span class="string">&quot;/home/ray/.nodejs&quot;</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm config <span class="built_in">set</span> cache <span class="string">&quot;/home/ray/.nodejs/cache&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">数据库管理工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S dbeaver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RESP.app: Redis 可视化管理工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S resp-app</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ZooKeeper 可视化管理工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S prettyzoo</span></span><br></pre></td></tr></table></figure>
+<h1 id="rdp"><a class="markdownIt-Anchor" href="#rdp"></a> RDP</h1>
+<h2 id="xfreerdp"><a class="markdownIt-Anchor" href="#xfreerdp"></a> xfreerdp</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xfreerdp 性能比 rdesktop 要好</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S krdc-xfreerdp libvncserver</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage:</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xfreerdp [file] [options] [/v:&lt;server&gt;[:port]]</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/sec:rdp       Force specific rdp protocol security</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/f             Fullscreen mode (&lt;Ctrl&gt;+&lt;Alt&gt;+&lt;Enter&gt; toggles fullscreen)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+smart-sizing  允许 RDP 客户端根据窗口大小动态调整远程桌面的分辨率</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+clipboard     Enable Redirect clipboard</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/bpp:&lt;depth&gt;   设置会话的颜色深度, 如 16 高效的色彩深度，适合带宽有限的情况; 24：提供更丰富的色彩，适合大多数使用场景; 32：最高色彩深度，适合需要高质量图像的应用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">+compression   启用压缩以提高性能</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">xfreerdp /v:&lt;server&gt;[:port] /u:&lt;username&gt; /p:&lt;password&gt; /sec:rdp /f +smart-sizing +clipboard /bpp:24 +compression</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若不确定要连接的Windows的username是什么，可在 CMD 输入 <span class="built_in">whoami</span> 来查看</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若出现如下报错，可尝试在 被连接的 Windows 中修改注册表: 打开 `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp` 修改 `SecurityLayer` 从 2 改到 1</span></span><br><span class="line">[ERROR][com.freerdp.core] - transport_ssl_cb:freerdp_set_last_error_ex ERRCONNECT_PASSWORD_CERTAINLY_EXPIRED [0x0002000F]</span><br><span class="line">[ERROR][com.freerdp.core.transport] - BIO_read returned an error: error:0A000438:SSL routines::tlsv1 alert internal error</span><br></pre></td></tr></table></figure>
+<h2 id="rdesktop"><a class="markdownIt-Anchor" href="#rdesktop"></a> rdesktop</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rdesktop: an open <span class="built_in">source</span> client <span class="keyword">for</span> Windows Remote Desktop Services.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S rdesktop</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Usage:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rdesktop -u &lt;username&gt; -p &lt;password&gt; &lt;server&gt;[:port]</span></span><br></pre></td></tr></table></figure>
+<h1 id="虚拟机技术"><a class="markdownIt-Anchor" href="#虚拟机技术"></a> 虚拟机/技术</h1>
+<h2 id="virtual-box"><a class="markdownIt-Anchor" href="#virtual-box"></a> Virtual Box</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 virtualbox</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确定内核版本</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-headers</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选择  virtualbox-host-dkms</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S virtualbox</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S virtualbox-guest-iso</span></span><br></pre></td></tr></table></figure>
+<h2 id="vmware"><a class="markdownIt-Anchor" href="#vmware"></a> VMware</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 VMware</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-headers</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S vmware-workstation</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> Docker</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置开机自启</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> docker</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 docker 无需 sudo</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(1) 创建一个docker组</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo groupadd docker</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(2) 添加当前用户到docker组</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo usermod -aG docker <span class="variable">$USER</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(3) 登出重新登陆shell 即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装docker compose: 容器编排工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S docker-compose</span></span><br></pre></td></tr></table></figure>
+<h2 id="waydroid-安卓模拟器"><a class="markdownIt-Anchor" href="#waydroid-安卓模拟器"></a> Waydroid (安卓模拟器)</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看内核版本: Arch Linux 默认内核不支持binder，需切换至其他可用的内核，如 linux-zen、DKMS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span></span><br><span class="line">6.2.6-arch1-1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装可用内核模块 linux-zen</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S linux-zen</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重新生成grub配置文件，重启后在grub界面找到该内核</span></span><br><span class="line">sudo grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">正在生成 grub 配置文件 ...</span><br><span class="line">找到 Linux 镜像：/boot/vmlinuz-linux-zen</span><br><span class="line">找到 initrd 镜像：/boot/intel-ucode.img /boot/initramfs-linux-zen.img</span><br><span class="line">Found fallback initrd image(s) in /boot:  intel-ucode.img initramfs-linux-zen-fallback.img</span><br><span class="line">找到 Linux 镜像：/boot/vmlinuz-linux</span><br><span class="line">找到 initrd 镜像：/boot/intel-ucode.img /boot/initramfs-linux.img</span><br><span class="line">Found fallback initrd image(s) in /boot:  intel-ucode.img initramfs-linux-fallback.img</span><br><span class="line">警告： os-prober 将运行以检测其它可引导分区。将使用 os-prober 的输出，以检测分区中可引导的二进制文件，并为其创建新的启动项。发现了 Windows Boot Manager，位于 /dev/nvme0n1p1@/EFI/Microsoft/Boot/bootmgfw.efi</span><br><span class="line">正在添加 UEFI 固件设置的引导菜单项……</span><br><span class="line">完成</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启，并切换至linux-zen内核：在grub引导界面选择高级选项中的linux-zen启动</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">reboot</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证当前内核，可发现已切换至linux-zen</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uname</span> -r</span></span><br><span class="line">6.2.6-zen1-1-zen</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Waydroid需用Wayland</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$XDG_SESSION_TYPE</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://wiki.archlinux.org/title/Weston</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S weston</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S waydroid</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo waydroid init -s GAPPS -f</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用systemctl启动服务</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start waydroid-container.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动UI</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">waydroid show-full-ui</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="常见问题"><a class="markdownIt-Anchor" href="#常见问题"></a> 常见问题</h3>
+<h4 id="网络问题"><a class="markdownIt-Anchor" href="#网络问题"></a> 网络问题</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S ufw</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw status</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw <span class="built_in">enable</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw allow 53</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw allow 67</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo ufw default allow FORWARD</span></span><br></pre></td></tr></table></figure>
+<h4 id="failed-to-start-clipboard-manager-service"><a class="markdownIt-Anchor" href="#failed-to-start-clipboard-manager-service"></a> Failed to start Clipboard manager service</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S python-pyclipper</span></span><br></pre></td></tr></table></figure>
+<h4 id="goole-play-此设备未获得-play-保护机制认证"><a class="markdownIt-Anchor" href="#goole-play-此设备未获得-play-保护机制认证"></a> Goole Play: 此设备未获得 Play 保护机制认证</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登陆进shell</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo waydroid shell</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后输入如下指令，可以得到一串android_id -&gt; 进入 https://www.google.com/android/uncertified，输入这串<span class="built_in">id</span>并注册，等待一会即可</span></span><br><span class="line">ANDROID_RUNTIME_ROOT=/apex/com.android.runtime ANDROID_DATA=/data ANDROID_TZDATA_ROOT=/apex/com.android.tzdata ANDROID_I18N_ROOT=/apex/com.android.i18n sqlite3 /data/data/com.google.android.gsf/databases/gservices.db &quot;select * from main where name = \&quot;android_id\&quot;;&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart waydroid-container.service</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ivonblog.com/posts/archlinux-waydroid/">https://ivonblog.com/posts/archlinux-waydroid/</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Waydroid#Usage">https://wiki.archlinux.org/title/Waydroid#Usage</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.waydro.id/usage/waydroid-prop-options">https://docs.waydro.id/usage/waydroid-prop-options</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/casualsnek/waydroid_script</span></span><br></pre></td></tr></table></figure>
+<h1 id="文件共享"><a class="markdownIt-Anchor" href="#文件共享"></a> 文件共享</h1>
+<h2 id="阿里云盘-webdav-服务"><a class="markdownIt-Anchor" href="#阿里云盘-webdav-服务"></a> 阿里云盘 WebDAV 服务</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/messense/aliyundrive-webdav">aliyundrive-webdav github</a>: 主要使用场景为配合支持 WebDAV 协议的客户端 App 如 Infuse、nPlayer 等实现在电视上直接观看云盘视频内容， 支持客户端 App 直接从阿里云盘获取文件播放而不经过运行本应用的服务器中转, 支持上传文件，但受限于 WebDAV 协议不支持文件秒传。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式一：安装阿里云盘 WebDAV 服务</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S aliyundrive-webdav-bin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 获取阿里云盘的refresh token，参考: https://github.com/messense/aliyundrive-webdav<span class="comment">#获取-refresh-token</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 命令启动, 更多命令帮助可参考: aliyundrive-webdav --<span class="built_in">help</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">aliyundrive-webdav -p &lt;port&gt; --auth-user &lt;user&gt; --auth-password &lt;password&gt; --refresh-token &lt;refresh token&gt;</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 使用Dolphin访问:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1.1. 直接url访问: webdav://&lt;ip&gt;:&lt;port&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1.2. 新建网络文件夹: 点击“网络” -&gt; 点击“添加网络文件夹” -&gt; 选择“Web文件夹(webdav)”并点击下一步 -&gt; 按需填写信息，并点击保存并连接（若有设置密码，此时会弹出让输入密码） -&gt; 完成，即可在“网络”文件夹中看到刚新增的webdav文件夹（点击进去，即可看到自己阿里云盘的文件）</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式二：使用 docker 运行，更多可参考：https://github.com/messense/aliyundrive-webdav<span class="comment">#docker-运行</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--restart=unless-stopped: 表示容器退出时总是重启，但是不考虑docker守护进程运行时就已经停止的容器</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -d --name=aliyundrive-webdav --restart=unless-stopped -p &lt;port&gt;:8080 \</span></span><br><span class="line"><span class="language-bash">  -v /etc/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \</span></span><br><span class="line"><span class="language-bash">  -e REFRESH_TOKEN=<span class="string">&#x27;&lt;refresh token&gt;&#x27;</span> \</span></span><br><span class="line"><span class="language-bash">  -e WEBDAV_AUTH_USER=&lt;user&gt; \</span></span><br><span class="line"><span class="language-bash">  -e WEBDAV_AUTH_PASSWORD=&lt;password&gt; \</span></span><br><span class="line"><span class="language-bash">  messense/aliyundrive-webdav</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动后会在宿主机/etc/aliyundrive-webdav目录下看到refresh_token文件，若refresh token失效可直接改这里的文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> /etc/aliyundrive-webdav</span>                       </span><br><span class="line">refresh_token</span><br></pre></td></tr></table></figure>
+<h2 id="alist"><a class="markdownIt-Anchor" href="#alist"></a> AList</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/">AList 官方文档（十分详尽）</a>：一个支持多种存储的文件列表程序，支持 WebDAV，支持文件/视频/音频/图片预览。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装（一键脚本）：安装成功后（默认安装在/opt/alist）会提示访问地址和admin账号密码 -&gt; 登陆进入，点击页面下方管理可设置存储，比如为设置添加了阿里云的存储 -&gt; 设置成功后，可看到自己阿里云的文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s install</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s update</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">卸载</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl -fsSL <span class="string">&quot;https://alist.nn.ci/v3.sh&quot;</span> | sudo bash -s uninstall</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看状态：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl status alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl start alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启服务：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl restart alist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止服务：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop alist</span></span><br></pre></td></tr></table></figure>
+<h1 id="键盘映射"><a class="markdownIt-Anchor" href="#键盘映射"></a> 键盘映射</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/houmain/keymapper</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yay -S keymapper</span></span><br></pre></td></tr></table></figure>
+<h1 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h1>
+<h2 id="自定义消息提醒"><a class="markdownIt-Anchor" href="#自定义消息提醒"></a> 自定义消息提醒</h2>
+<p>发提醒通知可以用notify-send，在网上找了下发现dbus-monitor可以监听托盘信号，我尝试了下，不知道具体怎么实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">D-Bus可视化调试工具</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S d-feet</span></span><br></pre></td></tr></table></figure>
+<h2 id="pandoc"><a class="markdownIt-Anchor" href="#pandoc"></a> pandoc</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用Haskell语言编写的一款跨平台、自由开源及命令行界面的标记语言转换工具，可实现不同标记语言间的格式转换，堪称该领域中的“瑞士军刀”</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S pandoc</span></span><br></pre></td></tr></table></figure>
+<h1 id="常见问题-2"><a class="markdownIt-Anchor" href="#常见问题-2"></a> 常见问题</h1>
+<ol>
+<li>文件管理器中文件夹单击打开改成双击打开？</li>
+</ol>
+<blockquote>
+<p>系统设置 / 工作区行为 / 常规行为：在 “点击文件或文件夹时” 选中 “选中它们（双击打开文件/文件夹）”。</p>
+</blockquote>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+              2024-11-18
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/zh-CN/categories/Arch-Linux-%E7%B3%BB%E5%88%97/" title="Arch Linux 系列">
+                        Arch Linux 系列
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/Arch-Linux/" title="Arch_Linux">
+                        #Arch_Linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/zh-CN/tags/OS/" title="OS">
+                        #OS
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/zh-CN/os/dual-boot-installation-guide-of-arch-linux-win-10/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-text"> 输入法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-zshoh-my-zsh-%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8F%92%E4%BB%B6"><span class="toc-text"> 安装 zsh&#x2F;oh-my-zsh 及相关插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%91%BD%E4%BB%A4"><span class="toc-text"> 系统常用工具&#x2F;命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="toc-text"> 软件包管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%8D%E7%BA%A7"><span class="toc-text"> 降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paru"><span class="toc-text"> Paru</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8C%85%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 其他包管理软件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99"><span class="toc-text"> 蓝牙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-%E6%9C%8D%E5%8A%A1"><span class="toc-text"> SSH 服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fzf-%E6%96%87%E4%BB%B6%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2"><span class="toc-text"> fzf 文件模糊搜索</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E4%BD%93"><span class="toc-text"> 字体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#plasma-%E6%8C%82%E4%BB%B6"><span class="toc-text"> Plasma 挂件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#kde-%E5%BA%94%E7%94%A8"><span class="toc-text"> KDE 应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dock-%E8%BD%AF%E4%BB%B6-launcher"><span class="toc-text"> dock 软件 &#x2F; Launcher</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#latte-dock"><span class="toc-text"> latte-dock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rofi"><span class="toc-text"> Rofi</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text"> 浏览器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%90%86"><span class="toc-text"> 代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-text"> 下载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#aria2"><span class="toc-text"> aria2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motrix"><span class="toc-text"> Motrix</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B2%9F%E9%80%9A%E4%BC%9A%E8%AE%AE%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 沟通&#x2F;会议软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1"><span class="toc-text"> 微信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-%E5%BE%AE%E4%BF%A1"><span class="toc-text"> docker 微信</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 笔记软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%BB%E5%9B%BE%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 画图软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 解压缩软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%88%AA%E5%9B%BE%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 图片&#x2F;截图软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E8%A7%86%E9%A2%91%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 音视频软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9E%E5%85%AC%E9%98%85%E8%AF%BBpdf%E8%BD%AF%E4%BB%B6"><span class="toc-text"> 办公&#x2F;阅读&#x2F;PDF软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-text"> 软件开发相关工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rdp"><span class="toc-text"> RDP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#xfreerdp"><span class="toc-text"> xfreerdp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rdesktop"><span class="toc-text"> rdesktop</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8A%80%E6%9C%AF"><span class="toc-text"> 虚拟机&#x2F;技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtual-box"><span class="toc-text"> Virtual Box</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vmware"><span class="toc-text"> VMware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker"><span class="toc-text"> Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#waydroid-%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-text"> Waydroid (安卓模拟器)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text"> 常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="toc-text"> 网络问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#failed-to-start-clipboard-manager-service"><span class="toc-text"> Failed to start Clipboard manager service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#goole-play-%E6%AD%A4%E8%AE%BE%E5%A4%87%E6%9C%AA%E8%8E%B7%E5%BE%97-play-%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6%E8%AE%A4%E8%AF%81"><span class="toc-text"> Goole Play: 此设备未获得 Play 保护机制认证</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="toc-text"> 文件共享</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98-webdav-%E6%9C%8D%E5%8A%A1"><span class="toc-text"> 阿里云盘 WebDAV 服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alist"><span class="toc-text"> AList</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84"><span class="toc-text"> 键盘映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text"> 其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B6%88%E6%81%AF%E6%8F%90%E9%86%92"><span class="toc-text"> 自定义消息提醒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandoc"><span class="toc-text"> pandoc</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-2"><span class="toc-text"> 常见问题</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Arch%20Linux%20%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%8F%8A%E9%85%8D%E7%BD%AE + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fzh-CN%2Fos%2Fcommon-software-and-configuration-for-arch-linux%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/zh-CN/os/common-software-and-configuration-for-arch-linux/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/os/common-software-and-configuration-for-arch-linux/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/os/common-software-and-configuration-for-arch-linux/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>

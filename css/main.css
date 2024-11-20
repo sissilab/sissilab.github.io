@@ -2211,7 +2211,8 @@ a:hover {
   background: #1c84c8 !important;
 }
 .markdown-body > table {
-  width: 100%;
+  display: table !important;
+  width: auto !important;
   max-width: 65em;
   border: 1px solid #dedede;
   margin: 15px auto;

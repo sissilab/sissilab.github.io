@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="developer,blog" />
+  <meta name="author" content="Xiangru" />
+  <meta name="description" content="Happy Coding, Happy Life!" />
+  
+  
+  <title>
+    
+      Dual Boot Installation Guide of Arch Linux &amp; Windows 10 
+      
+      
+      |
+    
+     SissiLab
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    
+<script src="/plugins/jquery.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+
+  <!-- fancybox -->
+  
+    
+<link rel="stylesheet" href="/plugins/jquery.fancybox.min.css">
+
+    
+<script src="/plugins/jquery.fancybox.min.js" defer type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&hl=zh-cn&subset=chinese-simplified&noto.script=Hans"> -->
+  <!-- https://fonts.google.com/specimen/LXGW+WenKai+TC?query=LXGW -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <input type="hidden" id="xr-lang" value="en">
+  <input type="hidden" id="xr-context-path" value="/">
+  <div class="avatar">
+    <a href="/en/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname">
+      <a href="/en/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/en/">
+          <a href="/en/" title="Home">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/archives/">
+          <a href="/en/archives/" title="Archives">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/categories/">
+          <a href="/en/categories/" title="Categories">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/en/tags/">
+          <a href="/en/tags/" title="Tags">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
+    
+<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
+
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    
+<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
+
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Dual Boot Installation Guide of Arch Linux & Windows 10</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-11-16
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">&nbsp;/
+                  <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                    Arch Linux Series
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                    #Arch_Linux
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/OS/" title="OS">
+                    #OS
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/en/tags/Windows/" title="Windows">
+                    #Windows
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="0-introduction"><a class="markdownIt-Anchor" href="#0-introduction"></a> 0. Introduction</h1>
+<p>☀ The weather is nice, perfect for reinstalling a dual boot (Windows 10 + Arch Linux (KDE)) on my personal laptop, the ThinkPad T470p. Here’s a system info screenshot from Arch Linux:</p>
+<img src="https://s2.loli.net/2021/12/12/pZtSERuQMW4ilkV.png" alt="Arch_Linux_system_info.png"   srcFile="Arch_Linux_system_info.png">
+<p>Currently, there are two storage drives: a <strong>500GB HDD</strong> and a <strong>250GB SSD</strong>. Both systems are installed on the SSD, while the HDD is used as a data storage drive for both systems. First, the Windows system is installed, followed by Arch Linux. The disk space allocation is as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Disk Type</th>
+<th>Windows 10</th>
+<th>Arch Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500G HD</td>
+<td>140G for application data</td>
+<td>Remaining (approx. 325.76GB) for user home directory <code>/home</code></td>
+</tr>
+<tr>
+<td>250G SSD</td>
+<td>500M EFI, 50M MSR, 100G OS</td>
+<td>Remaining (approx. 137.94GB) for root directory <code>/</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="1-installing-windows"><a class="markdownIt-Anchor" href="#1-installing-windows"></a> 1. Installing Windows</h1>
+<h2 id="11-preparing-the-windows-system-image"><a class="markdownIt-Anchor" href="#11-preparing-the-windows-system-image"></a> 1.1. Preparing the Windows System Image</h2>
+<p>Choose any version of Windows that you prefer:</p>
+<p>Download URL:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">MSDN, itellyou.cn</a></li>
+</ul>
+<p>Win10 image ed2k link:</p>
+<ul>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_business_editions_version_1909_updated_jan_2020_x64_dvd_b3e1f3a6.iso%7C5311711232%7C3527D2A9845FF4105F485CC364655B66%7C/">Windows 10 (business editions), version 1909 (updated Jan 2020) (x64) - DVD (Chinese-Simplified)</a></li>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_consumer_editions_version_1909_updated_jan_2020_x64_dvd_47161f17.iso%7C5417457664%7C274FEBA5BF0C874C291674182FA9C851%7C/">Windows 10 (consumer editions), version 1909 (updated Jan 2020) (x64) - DVD (Chinese-Simplified)</a></li>
+<li><a href="ed2k://%7Cfile%7Ccn_windows_10_consumer_editions_version_21h1_x64_dvd_1baf479d.iso%7C5807677440%7CE53960C7CAD323F60442A8AB9C269C2E%7C/">Windows 10 21H1 Simplified Chinese Multi-Edition Official Original Clean Image Download</a></li>
+</ul>
+<h2 id="12-create-a-bootable-usb-drive-using-rufus"><a class="markdownIt-Anchor" href="#12-create-a-bootable-usb-drive-using-rufus"></a> 1.2. Create a Bootable USB Drive (Using Rufus)</h2>
+<p>Use <a target="_blank" rel="noopener" href="https://rufus.ie/">Rufus</a> (Linux users can use <code>dd</code>) to create a bootable USB drive. Select the Windows 10 ISO image, set the partition scheme to GPT, and the target system type to UEFI. Leave other options as default, then click “Start”.</p>
+<img src="https://s2.loli.net/2021/12/12/KMUG8bdRpsaJ1lP.png" alt="Rufus制作Win10启动U盘" width="300"  srcFile="win10_make_USB.png">
+<h2 id="13-configure-the-bios"><a class="markdownIt-Anchor" href="#13-configure-the-bios"></a> 1.3. Configure the BIOS</h2>
+<p>Insert the USB drive and restart the computer. Enter the BIOS settings menu:</p>
+<ul>
+<li>Disable Secure Boot in the motherboard settings.</li>
+<li>Set the boot mode to UEFI (UEFI Only).</li>
+</ul>
+<h2 id="14-access-the-boot-menu-custom-installation"><a class="markdownIt-Anchor" href="#14-access-the-boot-menu-custom-installation"></a> 1.4. Access the Boot Menu (Custom Installation)</h2>
+<p>After restarting, when you see the boot screen, press F12 repeatedly (or the key specific to your device) to enter the boot menu. Follow the on-screen instructions until you reach the installation type selection screen. Choose “Custom” at this stage.</p>
+<img src="https://s2.loli.net/2021/12/12/I6LrAz3SPy9MH57.png" alt="win10安装类型选择" width="400"  srcFile="win10_installation_type.png">
+<h2 id="15-disk-partitioning"><a class="markdownIt-Anchor" href="#15-disk-partitioning"></a> 1.5. Disk Partitioning</h2>
+<p>Press <code>Shift + F10</code> to open the Command Prompt window.</p>
+<p>(1) Enter diskpart mode:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Open Microsoft DiskPart partition tool</span></span><br><span class="line">X:\Sources&gt; diskpart</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View disk information:</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/tTkSayBFmb8IeND.png" alt="进入diskpart模式" width="400"  srcFile="win10_enter_diskpart.png">
+<p>(2) Clear partitions on Disk 0 (<mark>Warning: This will format the disk. Please back up important data in advance</mark>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Select Disk 0 (500GB hard drive)</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 0</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clear existing partitions and data on the hard drive</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">clean</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Convert the selected disk to GPT format</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">convert gpt</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/mhwBLij9OTxCtU1.png" alt="格式化disk0" width="300"  srcFile="win10_clean_disk0.png">
+<p>(3) Clear partitions on Disk 1 (<mark>Note: This will format the disk. Please back up important data in advance</mark>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Select disk 1 (250G SSD)</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 1</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clear existing partitions and data on the disk</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">clean</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Convert the currently selected disk to GPT format</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">convert gpt</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Verify the clearing result</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/5DPzliur9Lj2hY1.png" alt="格式化disk1" width="400"  srcFile="win10_clean_disk1.png">
+<p>(4) System Partition</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Select disk 1 (SSD) as the system disk</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">select disk 1</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create EFI partition 500M</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition efi size=500</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create MSR partition 50M</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition msr size=50</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create primary system partition 100G</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">create partition primary size=102400</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/coe1GhN2AgYyVbM.png" alt="系统分区disk1" width="400"  srcFile="win10_os_partition.png">
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Confirm the current disk</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list disk</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View the information of the created partitions</span></span><br><span class="line"><span class="meta prompt_">DISKPART&gt; </span><span class="language-bash">list partition</span></span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/XcqgGzwSUPvdAhB.png" alt="查看disk1分区结果" width="400"  srcFile="win10_os_partition_result.png">
+<h2 id="16-system-installation"><a class="markdownIt-Anchor" href="#16-system-installation"></a> 1.6. System Installation</h2>
+<p>After completing the partitioning, in the Windows installation location selection screen, click “Refresh” to display the result of the partitioning done through the command line, as shown in the following image:<br />
+<img src="https://s2.loli.net/2021/12/12/KEMVJR9nuo7BeOj.png" alt="选择安装win10的分区" width="500"  srcFile="win10_installation_location.png"></p>
+<p>Select “Drive 1 Partition 3” (the 100G space for system installation), and click “Next” to begin the Windows installation.<br />
+<img src="https://s2.loli.net/2021/12/12/jtOylnUk3VMK7RT.png" alt="正在安装Windows" width="600"  srcFile="win10_installing_page.png"></p>
+<h2 id="17-installation-success"><a class="markdownIt-Anchor" href="#17-installation-success"></a> 1.7. Installation Success</h2>
+<p>After the system is installed, it will automatically restart. At this point, you can remove the USB drive.<br />
+After rebooting, a series of configurations will take place, which will not be elaborated here.</p>
+<p>After installation is successful, go to the Disk Management interface and allocate 140G from the 500G HD disk for personal application data storage, as shown in the following image:<br />
+<img src="https://s2.loli.net/2021/12/12/ac8CiwWUbFljrGY.png" alt="win10磁盘管理"   srcFile="win10_create_HD_partition.png"></p>
+<h1 id="2-install-arch-linux"><a class="markdownIt-Anchor" href="#2-install-arch-linux"></a> 2. Install Arch Linux</h1>
+<p>When installing Arch Linux, you can refer to the <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide">official Arch Linux installation guide</a> as the primary resource, with this document as a supplementary reference.</p>
+<h2 id="21-prepare-arch-linux-image"><a class="markdownIt-Anchor" href="#21-prepare-arch-linux-image"></a> 2.1. Prepare Arch Linux Image</h2>
+<p>You can visit the Arch Linux Downloads official website to choose and download the latest system package:</p>
+<ul>
+<li>Download website: <a target="_blank" rel="noopener" href="https://archlinux.org/download/">Arch Linux - Downloads</a></li>
+<li>Magnet link for the image (2021.10.01 version, it is recommended to choose the latest version): <a href="magnet:?xt=urn:btih:50f06e56adac70e52fddb37ad6ee331564d6aba1&amp;dn=archlinux-2021.10.01-x86_64.iso">Magnet link for 2021.10.01</a></li>
+</ul>
+<h2 id="22-create-bootable-usb-drive-using-rufus"><a class="markdownIt-Anchor" href="#22-create-bootable-usb-drive-using-rufus"></a> 2.2. Create Bootable USB Drive (Using Rufus)</h2>
+<p>Select the Arch Linux iso image, use UEFI + GPT, and click Start to begin the writing process.<br />
+<img src="https://s2.loli.net/2021/12/12/oT3vqK4Brl9tCA5.png" alt="制作Arch Linux启动盘" width="300"  srcFile="archlinux_make_usb.png"></p>
+<p>When clicking Start, select “<strong>Write in DD image mode</strong>”:<br />
+<img src="https://s2.loli.net/2021/12/12/LAOyVPfhpvambNT.png" alt="以DD镜像写入" width="400"  srcFile="archlinux_make_usb_dd.png"></p>
+<h2 id="23-boot-into-live-environment"><a class="markdownIt-Anchor" href="#23-boot-into-live-environment"></a> 2.3. Boot into Live Environment</h2>
+<p>After restarting, when you see the boot screen, press F12 (this may vary depending on the machine) to enter the boot menu, usually selecting the first option by default.<br />
+When you see the following screen, it means the boot was successful.</p>
+<img src="https://s2.loli.net/2021/12/12/ty19bQhfAvmMWHr.png" alt="成功进入Arch Linux" width="500"  srcFile="archlinux_live_env.png">
+<h2 id="24-verify-boot-mode"><a class="markdownIt-Anchor" href="#24-verify-boot-mode"></a> 2.4. Verify Boot Mode</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If the result shows directories without errors, the system is booted <span class="keyword">in</span> UEFI mode. Otherwise, it may be booted <span class="keyword">in</span> BIOS mode.</span></span><br><span class="line">root@archiso ~ # ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+<h2 id="25-disable-reflector"><a class="markdownIt-Anchor" href="#25-disable-reflector"></a> 2.5. Disable Reflector</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Disable reflector to prevent updating the mirrorlist automatically</span></span><br><span class="line">root@archiso ~ # systemctl stop reflector.service</span><br></pre></td></tr></table></figure>
+<h2 id="26-connect-to-network"><a class="markdownIt-Anchor" href="#26-connect-to-network"></a> 2.6. Connect to Network</h2>
+<p>You can first check if the wireless device is disabled:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check the wireless device status</span></span><br><span class="line">root@archiso ~ # rfkill list</span><br><span class="line">0: tpacpi_bluetooth_sw: Bluetooth</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">1: phy0: Wireless LAN</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">2: hci0: Bluetooth</span><br><span class="line">    Soft blocked: no</span><br><span class="line">    Hard blocked: no</span><br><span class="line">    </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If Wireless LAN shows blocked: <span class="built_in">yes</span>, it means the wireless connection is disabled</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable wireless connection (<span class="keyword">if</span> not already disabled, skip the <span class="built_in">command</span> below)</span></span><br><span class="line">root@archiso ~ # rfkill unblock wifi</span><br></pre></td></tr></table></figure>
+<p>Use <code>iwctl</code> to connect to a wireless network:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View network device information</span></span><br><span class="line">root@archiso ~ # ip a</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Use iwctl to connect to WiFi</span></span><br><span class="line">root@archiso ~ # iwctl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">List all WiFi devices</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">device list</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Scan <span class="keyword">for</span> networks (wlan0 is your device)</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 scan</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">List all available networks</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 get-networks</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Choose a wireless network to connect to (xixi is your network name)</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash">station wlan0 connect xixi</span></span><br><span class="line">Type the network passphrase for xixi psk.</span><br><span class="line">Passphrase: # Enter password</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After successful connection, <span class="built_in">exit</span> iwctl</span></span><br><span class="line"><span class="meta prompt_">[iwd]# </span><span class="language-bash"><span class="built_in">exit</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Verify <span class="keyword">if</span> the network connection was successful</span></span><br><span class="line">root@archiso ~ # ping -c 5 baidu.com</span><br></pre></td></tr></table></figure>
+<p>For a wired connection, theoretically, just plug in the network cable, and you should be able to connect to the internet directly.</p>
+<h2 id="27-update-system-time"><a class="markdownIt-Anchor" href="#27-update-system-time"></a> 2.7. Update System Time</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # timedatectl set-ntp true</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check service status</span></span><br><span class="line">root@archiso ~ # timedatectl status</span><br></pre></td></tr></table></figure>
+<h2 id="28-create-disk-partitions"><a class="markdownIt-Anchor" href="#28-create-disk-partitions"></a> 2.8. Create Disk Partitions</h2>
+<p><strong>(1) View Disk Information</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">View Disk Information</span></span><br><span class="line">root@archiso ~ # fdisk -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Alternatively, use lsblk to view the disks. Disks without partitions will not be displayed as blocks.</span></span><br><span class="line">root@archiso ~ # lsblk</span><br></pre></td></tr></table></figure>
+<p><code>lsblk</code> displays as shown in the following image:<br />
+<img src="https://s2.loli.net/2021/12/12/mGCcbKqvwR3Wod9.png" alt="lsblk展示磁盘信息" width="500"  srcFile="archlinux_first_lsblk.png"></p>
+<ul>
+<li>sda is a 500G hard drive, with 140G of sda1 used as the Win10 personal application data storage partition, and the remaining space allocated for the Arch Linux user home directory <code>/home</code>;</li>
+<li>nvme0n1 is a 250G SSD, with 500M of nvme0n1p1 used for the Win10 EFI, 50M of nvme0n1p2 for the Win10 MSR, 99.4G (approximately 100G) of nvme0n1p3 for the Win10 system partition, nvme0n1p4 for the Win10 recovery system partition, and the remaining space allocated for the Arch Linux root directory <code>/</code>.</li>
+</ul>
+<p><strong>(2) Create/Format/Mount Root Directory</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # cfdisk /dev/nvme0n1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Create Partition</strong>: Use the down arrow key to select the row at the bottom of the Device list that shows “Free space.” Choose “New” and press Enter. The “Partition size” at the bottom left will automatically fill with the current maximum available space on the disk (which can be modified). After confirming the partition size, press Enter.</li>
+<li><strong>Write Partition</strong>: Select “Write” and press Enter, then type yes to confirm writing the partition to the disk.</li>
+<li><strong>Exit cfdisk</strong>: Select “Quit” to exit.</li>
+</ul>
+<p>At this point, you can use <code>lsblk</code> to view the newly added partition, such as a new partition nvme0n1p5 under nvme0n1.</p>
+<ul>
+<li><strong>Partition Formatting</strong>:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Format the newly created partition to ext4 format. Ensure the partition number is nvme0n1p5.</span></span><br><span class="line">root@archiso ~ # mkfs.ext4 /dev/nvme0n1p5</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/54vitAId8xjobMy.png" alt="格式化nvme0n1p5为ext4" width="550"  srcFile="archlinux_mkfs_ext4_root.png">
+<ul>
+<li><strong>Mount Partition</strong>:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount the root partition to `/mnt`</span></span><br><span class="line">root@archiso ~ #  mount /dev/nvme0n1p5 /mnt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: When mounting partitions, it’s essential to follow the correct order: first mount the root partition (to /mnt), then mount the boot partition (to /mnt/boot or /mnt/efi, if it’s separated), and finally mount any other partitions. Otherwise, you may encounter issues with booting the system after installation.</p>
+</blockquote>
+<p><strong>(3) Create/Format/Mount User Home Directory</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p>Create and write partitions as described above.</p>
+<p>At this point, you can use <code>lsblk</code> to view the newly added partition, such as an additional partition sda2 under sda.</p>
+<ul>
+<li><strong>Partition Formatting</strong>:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Format the newly created partition as ext4, ensuring the partition number is sda2</span></span><br><span class="line">root@archiso ~ # mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Mounting the Partition</strong>:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkdir /mnt/home</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount the user home directory to /mnt/home</span></span><br><span class="line">root@archiso ~ # mount /dev/sda2 /mnt/home</span><br></pre></td></tr></table></figure>
+<p><strong>(4) Mount EFI</strong><br />
+Since it’s a dual-boot installation, the EFI partition for Arch Linux shares the one used by Windows.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkdir /mnt/efi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount the EFI partition</span></span><br><span class="line">root@archiso ~ # mount /dev/nvme0n1p1 /mnt/efi</span><br></pre></td></tr></table></figure>
+<p><strong>(5) Confirm All Mounting Status</strong><br />
+<img src="https://s2.loli.net/2021/12/12/VqCgIlS6v8ZMLoy.png" alt="lsblk确认挂载情况" width="500"  srcFile="archlinux_final_lsblk.png"></p>
+<h2 id="29-install-the-basic-system"><a class="markdownIt-Anchor" href="#29-install-the-basic-system"></a> 2.9. Install the Basic System</h2>
+<p>Before installation, consider changing to a domestic mirror source to speed up download speeds, such as USTC or Tsinghua. (For Chinese user!)</p>
+<p>Use <code>vim /etc/pacman.d/mirrorlist</code> to modify the mirror sources, adding the following lines at the top:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Tsinghua University</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch </span><br><span class="line"># USTC</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</span><br></pre></td></tr></table></figure>
+<p>Update the package cache:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # pacman -Syy</span><br></pre></td></tr></table></figure>
+<p>Install the base packages:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the base software package, Linux kernel, and firmware <span class="keyword">for</span> common hardware</span></span><br><span class="line">root@archiso ~ # pacstrap /mnt base base-devel linux linux-firmware</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install functional software: dhcpcd <span class="keyword">for</span> wired, iwd <span class="keyword">for</span> wireless, vim editor, sudo <span class="keyword">for</span> privilege escalation</span></span><br><span class="line">root@archiso ~ # pacstrap /mnt dhcpcd iwd vim sudo</span><br></pre></td></tr></table></figure>
+<h2 id="210-generate-the-fstab-file"><a class="markdownIt-Anchor" href="#210-generate-the-fstab-file"></a> 2.10. Generate the fstab File</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check the generated fstab file</span></span><br><span class="line">root@archiso ~ # cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h2 id="211-chroot"><a class="markdownIt-Anchor" href="#211-chroot"></a> 2.11. Chroot</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Change root to the newly installed system</span></span><br><span class="line">root@archiso ~ # arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<h2 id="212-set-the-time-zone"><a class="markdownIt-Anchor" href="#212-set-the-time-zone"></a> 2.12. Set the Time Zone</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set the time zone</span></span><br><span class="line">[root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Or</span></span><br><span class="line">[root@archiso /]# timedatectl set-timezone Asia/Shanghai</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Synchronize the hardware clock</span></span><br><span class="line">[root@archiso /]# hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h2 id="213-set-locale"><a class="markdownIt-Anchor" href="#213-set-locale"></a> 2.13. Set Locale</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>Find the lines for <code>en_US.UTF-8 UTF-8</code> and <code>zh_CN.UTF-8 UTF-8</code>, remove the <code>#</code> at the beginning of each line, and save and exit.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate locale information</span></span><br><span class="line">[root@archiso /]# locale-gen</span><br></pre></td></tr></table></figure>
+<p>Create and write to the <code>/etc/locale.conf</code> file: <code>vim /etc/locale.conf</code><br />
+Add the following content: <code>LANG=en_US.UTF-8</code><br />
+Exit and save.</p>
+<h2 id="214-set-the-hostname"><a class="markdownIt-Anchor" href="#214-set-the-hostname"></a> 2.14. Set the Hostname</h2>
+<p>Create and write the hostname: <code>vim /etc/hostname</code><br />
+Add the following content (modify as needed): <code>utopia</code></p>
+<p>Modify the hosts file: <code>vim /etc/hosts</code><br />
+Add the following content:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.0.1   utopia</span><br></pre></td></tr></table></figure>
+<p>Exit and save.</p>
+<h2 id="215-set-the-root-user-password"><a class="markdownIt-Anchor" href="#215-set-the-root-user-password"></a> 2.15. Set the Root User Password</h2>
+<p>Create a password for the root user:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# passwd root</span><br></pre></td></tr></table></figure>
+<h2 id="216-create-the-bootloader"><a class="markdownIt-Anchor" href="#216-create-the-bootloader"></a> 2.16. Create the Bootloader</h2>
+<ul>
+<li><strong>Install Microcode</strong>:<br />
+If you’re unsure of your CPU model, you can install <code>pacman -S neofetch</code> to check your computer’s CPU model.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For Intel CPUs, install intel-ucode</span></span><br><span class="line">[root@archiso /]# pacman -S intel-ucode</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For AMD CPUs, install amd-ucode</span></span><br><span class="line">[root@archiso /]# pacman -S amd-ucode</span><br></pre></td></tr></table></figure>
+<p>For UEFI boot mode, you need to install both grub and efibootmgr:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grub is the bootloader, and efibootmgr is used by grub scripts to write boot entries to NVRAM</span></span><br><span class="line">[root@archiso /]# pacman -S grub efibootmgr</span><br><span class="line">[root@archiso /]# pacman -S os-prober dosfstools</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Grub 2.06 update requires user intervention for os-prober:</p>
+<ol>
+<li>If you are using os-prober to generate boot entries for other systems, grub 2.06 no longer automatically enables os-prober. You need to add <code>GRUB_DISABLE_OS_PROBER=false</code> to the /etc/default/grub configuration file and re-run grub-mkconfig.</li>
+<li>Grub 2.06 will now automatically add firmware setup menu boot entries, eliminating the need to create them manually.</li>
+</ol>
+</blockquote>
+<p>Given this, you need to manually enable os-prober to ensure Windows is correctly recognized:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@archiso /]# vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+<p>Find an empty line and add: <code>GRUB_DISABLE_OS_PROBER=false</code>, then save and exit.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the GRUB EFI application grubx64.efi to /efi and its modules to /boot/grub/x86_64-efi/</span></span><br><span class="line">[root@archiso /]# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate grub.cfg</span></span><br><span class="line">[root@archiso /]# grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2021/12/12/2DAXIRQFtSTPlwf.png" alt="安装grub引导程序" width="600"  srcFile="archlinux_grub_mkconfig.png">
+<h2 id="217-complete-the-installation"><a class="markdownIt-Anchor" href="#217-complete-the-installation"></a> 2.17. Complete the Installation</h2>
+<p>Exit the new system and unmount:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Exit arch-chroot</span></span><br><span class="line">[root@archiso /]# exit</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Unmount all</span></span><br><span class="line">root@archiso ~ # umount -R /mnt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Reboot, please remove the USB drive during startup</span></span><br><span class="line">root@archiso ~ # reboot</span><br></pre></td></tr></table></figure>
+<p>After rebooting, log in with the root user and password.<br />
+Connect to the network:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start DHCP immediately</span></span><br><span class="line">[root@utopia ~]# systemctl start dhcpcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For wireless connections, you need to start iwd and connect via iwctl</span></span><br><span class="line">[root@utopia ~]# systemctl start iwd</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Connect using iwctl as mentioned above</span></span><br><span class="line">[root@utopia ~]# iwctl</span><br></pre></td></tr></table></figure>
+<h1 id="3-arch-linux-desktop-environment-and-common-applications"><a class="markdownIt-Anchor" href="#3-arch-linux-desktop-environment-and-common-applications"></a> 3. Arch Linux Desktop Environment and Common Applications</h1>
+<h2 id="31-set-up-the-archlinuxcn-repository-and-install-yay"><a class="markdownIt-Anchor" href="#31-set-up-the-archlinuxcn-repository-and-install-yay"></a> 3.1. Set Up the archlinuxcn Repository and Install yay</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Modify /etc/pacman.conf and add the following at the end:</span></span><br><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Include = /etc/pacman.d/archlinuxcn</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Then create /etc/pacman.d/archlinuxcn and add:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">USTC</span></span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Tsinghua University</span></span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">After setting up, update the package sources</span></span><br><span class="line">[root@utopia ~]# pacman -Syyu</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the keyring</span></span><br><span class="line">[root@utopia ~]# pacman -Sy archlinuxcn-keyring</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install yay (Yet Another Yaourt): not included <span class="keyword">in</span> the official repository, only available <span class="keyword">in</span> archlinuxcn</span></span><br><span class="line">[root@utopia ~]# pacman -S yay</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The AUR is a software repository maintained by the Arch Linux community. The official address is: <a target="_blank" rel="noopener" href="https://aur.archlinux.org/">AUR (en) - Home (archlinux.org)</a>.<br />
+You can use AUR software through yaourt (previously popular but now discontinued) and yay (currently the preferred option).</p>
+</blockquote>
+<h2 id="32-add-a-non-root-user-set-up-a-personal-account"><a class="markdownIt-Anchor" href="#32-add-a-non-root-user-set-up-a-personal-account"></a> 3.2. Add a Non-root User (Set Up a Personal Account)</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The wheel group can use sudo <span class="keyword">for</span> privilege escalation. -m creates the user<span class="string">&#x27;s home directory, and ray is the username (set as needed).</span></span></span><br><span class="line">[root@utopia ~]# useradd -m -G wheel -s /bin/bash ray</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Set a new password for the newly created user ray</span></span></span><br><span class="line">[root@utopia ~]# passwd ray</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Edit the sudo file</span></span></span><br><span class="line">[root@utopia ~]# EDITOR=vim visudo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Find the line #%wheel ALL=(ALL) ALL and remove the # at the beginning, then :wq to save and exit.</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="33-install-dual-graphics-card-driver"><a class="markdownIt-Anchor" href="#33-install-dual-graphics-card-driver"></a> 3.3. Install Dual Graphics Card Driver</h2>
+<p><strong>(0) Check Graphics Card Devices:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check graphics card information</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lspci -k | grep -A 2 -E <span class="string">&quot;(VGA|3D)&quot;</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">I have a dual graphics card:</span></span><br><span class="line">00:02.0 VGA compatible controller: Intel Corporation HD Graphics 630 (rev 04)</span><br><span class="line">        Subsystem: Lenovo Device 505e</span><br><span class="line">        Kernel driver in use: i915</span><br><span class="line">--</span><br><span class="line">02:00.0 3D controller: NVIDIA Corporation GM108M [GeForce 940MX] (rev a2)</span><br><span class="line">        Subsystem: Lenovo Device 505e</span><br><span class="line">        Kernel modules: nouveau</span><br></pre></td></tr></table></figure>
+<p><strong>(1) Install xorg:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Essential <span class="keyword">for</span> graphical interface</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xorg is a specific open-source implementation of X11, providing an X Server responsible <span class="keyword">for</span> low-level operations. When you run a program, it connects to the X server, <span class="built_in">which</span> handles keyboard and mouse input, manages screen output, window movement, window title styles, and more.</span></span><br><span class="line">[root@utopia ~]# pacman -S xorg</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>It is recommended to use open-source drivers for all AMD graphics cards and closed-source drivers for NVIDIA graphics cards.</p>
+</blockquote>
+<p><strong>(2) Installing Intel Graphics:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@utopia ~]# pacman -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Intel Graphics Wiki: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Intel_graphics">Intel graphics - ArchWiki (archlinux.org)</a><br />
+Arch Wiki generally does not recommend installing xf86-video-intel, but instead using xorg’s modesetting driver (more stable).<br />
+Note: Only Intel HD 4000 and above integrated graphics support Vulkan.</p>
+</blockquote>
+<p><strong>(3) Installing NVIDIA Graphics Card:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For GeForce 930 and above, 10 series to 20 series, Quadro / Tesla / Tegra K-series, and newer GPUs (NV110 and newer GPU families), install the nvidia package (<span class="keyword">for</span> linux package) or nvidia-lts package (<span class="keyword">for</span> linux-lts package).</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NVIDIA Installation Wiki: https://wiki.archlinuxcn.org/wiki/NVIDIA<span class="comment">#%E5%AE%89%E8%A3%85</span></span></span><br><span class="line">[root@utopia ~]# pacman -S nvidia</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NVIDIA Wiki: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA">NVIDIA - ArchWiki (archlinux.org)</a></p>
+</blockquote>
+<p><strong>(4) Installing Switchable Graphics Tool:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@utopia ~]# yay -S optimus-manager optimus-manager-qt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>optimus-manager provides three modes: dedicated GPU only, integrated GPU only, and hybrid dynamic switching mode.</p>
+<p>After installation, simply restart to use. Upon installation, optimus-manager will automatically enable its service. You can check its status before rebooting; if not enabled, you can <code>sudo systemctl enable optimus-manager</code>.</p>
+<p>Reference:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_Optimus">NVIDIA Optimus - ArchWiki (archlinux.org)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Askannz/optimus-manager/wiki">Home · Askannz/optimus-manager Wiki (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver">Graphics Card Driver (archlinuxstudio.github.io)</a></li>
+</ul>
+</blockquote>
+<h2 id="34-installing-graphic-interface-kde-plasma"><a class="markdownIt-Anchor" href="#34-installing-graphic-interface-kde-plasma"></a> 3.4. Installing Graphic Interface - KDE Plasma</h2>
+<h3 id="341-installing-kde-desktop"><a class="markdownIt-Anchor" href="#341-installing-kde-desktop"></a> 3.4.1. Installing KDE Desktop</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the plasma-meta meta package</span></span><br><span class="line">[root@utopia ~]# pacman -S plasma-meta</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install konsole terminal, dolphin file manager</span></span><br><span class="line">[root@utopia ~]# pacman -S konsole dolphin </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Configure greeter sddm</span></span><br><span class="line">[root@utopia ~]# systemctl enable sddm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>KDE wiki</strong>: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">KDE (Simplified Chinese) - ArchWiki (archlinux.org)</a></li>
+<li>The difference between <strong>meta package (such as plasma-meta) and package group (such as plasma)</strong> can be found here: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Meta_package_and_package_group_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Meta package and package group (Simplified Chinese) - ArchWiki (archlinux.org)</a><br />
+<strong>plasma-meta</strong>: Meta package that installs software packages through dependencies. If new software packages are added later, they will be automatically installed during updates; users cannot choose to install only a part of the software that the meta package depends on.<br />
+<strong>plasma</strong>: Package group that is just a list, providing similar functionality to plasma-meta. If new software packages are added later, they <strong>will not</strong> be automatically installed during updates; users can choose to install some software in the group or choose to only remove some software from the package group.</li>
+</ul>
+</blockquote>
+<p>After rebooting, you can enter the KDE graphical interface. For more information on using KDE, you can refer to <a target="_blank" rel="noopener" href="https://userbase.kde.org/Welcome_to_KDE_UserBase/zh-cn">KDE UserBase</a>.</p>
+<h3 id="342-network-setup-and-connection"><a class="markdownIt-Anchor" href="#342-network-setup-and-connection"></a> 3.4.2. Network Setup and Connection</h3>
+<p>After completing the reboot and entering the desktop by entering the user password, open the konsole command terminal to configure the network settings.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ensure that iwd is disabled at boot as its wireless connections may conflict with NetworkManager</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">disable</span> iwd</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl stop iwd</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Make sure to start NetworkManager first and establish a network connection</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo systemctl <span class="built_in">enable</span> --now NetworkManager</span></span><br></pre></td></tr></table></figure>
+<h3 id="343-setting-up-swap-file"><a class="markdownIt-Anchor" href="#343-setting-up-swap-file"></a> 3.4.3. Setting Up Swap File</h3>
+<p>In a desktop environment, a swap partition or file is used to implement hibernation, which saves the current environment to a swap file or partition on disk. The performance of swap files and partitions is similar, but swap files are more flexible, allowing for changes in size, addition, and deletion at any time.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create 16G of swap space, size can be adjusted as needed</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1M count=16384 status=progress</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set the correct permissions</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> 600 /swapfile</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Format the swap file</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">mkswap /swapfile</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable the swap file</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">swapon /swapfile</span></span><br></pre></td></tr></table></figure>
+<p>Finally, append the following content to <code>/etc/fstab</code>: <code>/swapfile none swap defaults 0 0</code><br />
+KDE itself provides an out-of-the-box suspend function, which suspends the system to memory, consuming only a small amount of power. Hibernate will suspend the system to a swap partition or file, consuming almost no power.</p>
+<blockquote>
+<p>Hibernate function: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate">Power management/Suspend and hibernate - ArchWiki (archlinux.org)</a></p>
+</blockquote>
+<h3 id="344-install-kde-applications"><a class="markdownIt-Anchor" href="#344-install-kde-applications"></a> 3.4.4. Install KDE Applications</h3>
+<p>Here is the translation, keeping the format intact:</p>
+<h3 id="344-install-kde-applications-2"><a class="markdownIt-Anchor" href="#344-install-kde-applications-2"></a> 3.4.4. Install KDE Applications</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the KDE application package repository: such as kde-applications or kde-applications-meta, you can also choose to install:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">It is recommended to install system utilities, <span class="built_in">which</span> include basic applications required by the KDE desktop environment, such as the terminal tool Konsole, file editor Kate, dropdown terminal yakuake, compression tool Ark, etc.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-utilities</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Graphics tool collection, including image viewer Gwenview, PDF viewer Okular, screenshot tool Spectacle, etc.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-graphics</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System tool collection, including file manager dolphin, partition manager partitionmanager, etc.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-system</span></span><br></pre></td></tr></table></figure>
+<p>The above are optional installations. Alternatively, you can choose to install the full KDE suite. The <code>kde-applications-meta / kde-applications</code> package includes a variety of software, and while it offers a comprehensive set of applications, it also means the space usage after installation is quite large. It is generally not recommended to install it, and you can choose to install selectively based on your actual needs. For the difference between a <strong>meta package</strong> and a <strong>package group</strong>, refer to: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Meta_package_and_package_group_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Meta package and package group</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">meta package</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-applications-meta</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">package group</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo pacman -S kde-applications</span></span><br></pre></td></tr></table></figure>
+<h1 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97">Arch Linux 安装指南 (wiki)</a></li>
+<li><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138951848">2021 Archlinux双系统安装教程（超详细）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c2ab582e13d">Arch Linux + KDE安装教程</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+
+          <div class="post-foot-prev">
+            
+              <a href="/en/os/common-software-and-configuration-for-arch-linux/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-11-16
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">&nbsp;/
+                      <a href="/en/categories/Arch-Linux-Series/" title="Arch Linux Series">
+                        Arch Linux Series
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/Arch-Linux/" title="Arch_Linux">
+                        #Arch_Linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/OS/" title="OS">
+                        #OS
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/en/tags/Windows/" title="Windows">
+                        #Windows
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+
+          <div class="post-foot-next" >
+            
+              <a href="/en/design-pattern/abstract-factory-pattern/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-introduction"><span class="toc-text"> 0. Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-installing-windows"><span class="toc-text"> 1. Installing Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-preparing-the-windows-system-image"><span class="toc-text"> 1.1. Preparing the Windows System Image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-create-a-bootable-usb-drive-using-rufus"><span class="toc-text"> 1.2. Create a Bootable USB Drive (Using Rufus)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-configure-the-bios"><span class="toc-text"> 1.3. Configure the BIOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-access-the-boot-menu-custom-installation"><span class="toc-text"> 1.4. Access the Boot Menu (Custom Installation)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-disk-partitioning"><span class="toc-text"> 1.5. Disk Partitioning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-system-installation"><span class="toc-text"> 1.6. System Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-installation-success"><span class="toc-text"> 1.7. Installation Success</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-install-arch-linux"><span class="toc-text"> 2. Install Arch Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21-prepare-arch-linux-image"><span class="toc-text"> 2.1. Prepare Arch Linux Image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-create-bootable-usb-drive-using-rufus"><span class="toc-text"> 2.2. Create Bootable USB Drive (Using Rufus)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-boot-into-live-environment"><span class="toc-text"> 2.3. Boot into Live Environment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-verify-boot-mode"><span class="toc-text"> 2.4. Verify Boot Mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-disable-reflector"><span class="toc-text"> 2.5. Disable Reflector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26-connect-to-network"><span class="toc-text"> 2.6. Connect to Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27-update-system-time"><span class="toc-text"> 2.7. Update System Time</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28-create-disk-partitions"><span class="toc-text"> 2.8. Create Disk Partitions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#29-install-the-basic-system"><span class="toc-text"> 2.9. Install the Basic System</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#210-generate-the-fstab-file"><span class="toc-text"> 2.10. Generate the fstab File</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#211-chroot"><span class="toc-text"> 2.11. Chroot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#212-set-the-time-zone"><span class="toc-text"> 2.12. Set the Time Zone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#213-set-locale"><span class="toc-text"> 2.13. Set Locale</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#214-set-the-hostname"><span class="toc-text"> 2.14. Set the Hostname</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#215-set-the-root-user-password"><span class="toc-text"> 2.15. Set the Root User Password</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#216-create-the-bootloader"><span class="toc-text"> 2.16. Create the Bootloader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#217-complete-the-installation"><span class="toc-text"> 2.17. Complete the Installation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-arch-linux-desktop-environment-and-common-applications"><span class="toc-text"> 3. Arch Linux Desktop Environment and Common Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#31-set-up-the-archlinuxcn-repository-and-install-yay"><span class="toc-text"> 3.1. Set Up the archlinuxcn Repository and Install yay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-add-a-non-root-user-set-up-a-personal-account"><span class="toc-text"> 3.2. Add a Non-root User (Set Up a Personal Account)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-install-dual-graphics-card-driver"><span class="toc-text"> 3.3. Install Dual Graphics Card Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-installing-graphic-interface-kde-plasma"><span class="toc-text"> 3.4. Installing Graphic Interface - KDE Plasma</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#341-installing-kde-desktop"><span class="toc-text"> 3.4.1. Installing KDE Desktop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#342-network-setup-and-connection"><span class="toc-text"> 3.4.2. Network Setup and Connection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#343-setting-up-swap-file"><span class="toc-text"> 3.4.3. Setting Up Swap File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#344-install-kde-applications"><span class="toc-text"> 3.4.4. Install KDE Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#344-install-kde-applications-2"><span class="toc-text"> 3.4.4. Install KDE Applications</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#references"><span class="toc-text"> References</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/sissilab">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:xiangru.au@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Copyright © 2024 Arch</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/sissilab/hexo-theme-arch">Theme by Arch | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+      var lang = document.getElementById('xr-lang')?.value || '';
+      var contextPath = document.getElementById('xr-context-path')?.value;
+      var path = (contextPath && contextPath.endsWith('/') ? contextPath : contextPath + '/') + lang + "/search.xml";
+      searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Dual%20Boot%20Installation%20Guide%20of%20Arch%20Linux%20%26%20Windows%2010 + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fen%2Fos%2Fdual-boot-installation-guide-of-arch-linux-win-10%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/en/os/dual-boot-installation-guide-of-arch-linux-win-10/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+
+        <div class="switchlang-icon tools-bar-item" title="Switch a language">
+  <a href="javascript: void(0)" id="switchlang">
+    <i class="icon-lang-switcher">
+      <svg t="1670338371149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1377" width="16" height="16"><path d="M890.688 576h-124.672c-6.2912 100.928-27.264 192.7296-58.5216 266.5792 95.36-56.512 164.16-153.1072 183.1936-266.5792z m0-128c-19.0336-113.472-87.8336-210.0672-183.1936-266.5792 31.2512 73.856 52.2304 165.6576 58.528 266.5792h124.672zM133.312 448h124.672c6.2912-100.928 27.264-192.7296 58.5216-266.5792C221.1456 237.9328 152.3456 334.528 133.312 448z m0 128c19.0336 113.472 87.8336 210.0672 183.1936 266.5792-31.2512-73.856-52.2304-165.6576-58.528-266.5792H133.312z m504.416 0h-251.456c6.6944 93.6 27.8848 178.176 59.2 240.7936 16.0448 32.1088 33.4656 55.6416 49.5488 69.248 5.5488 4.6912 10.2336 7.6032 13.8688 9.088 1.7024 0.704 2.528 0.8704 3.1104 0.8704 0.576 0 1.408-0.1664 3.1104-0.864 3.6352-1.4912 8.32-4.4032 13.8688-9.0944 16.0832-13.6064 33.504-37.1392 49.5552-69.248 31.3088-62.6176 52.4992-147.1936 59.2-240.7936z m0-128c-6.6944-93.6-27.8848-178.176-59.2-240.7936-16.0448-32.1088-33.4656-55.6416-49.5488-69.248-5.5488-4.6912-10.2336-7.6032-13.8688-9.088-1.7024-0.704-2.528-0.8704-3.1104-0.8704-0.576 0-1.408 0.1664-3.1104 0.864-3.6352 1.4912-8.32 4.4032-13.8688 9.0944-16.0832 13.6064-33.504 37.1392-49.5552 69.248-31.3088 62.6176-52.4992 147.1936-59.2 240.7936h251.4624zM512 1024c-282.7712 0-512-229.2288-512-512S229.2288 0 512 0s512 229.2288 512 512-229.2288 512-512 512z" p-id="1378" fill="#666666"></path></svg>
+    </i>
+  </a>
+
+  
+
+  <div class="switchlang-content hidden">
+    
+        <a class="lang-item" href="/en/os/dual-boot-installation-guide-of-arch-linux-win-10/" title="en">
+          English
+        </a>
+    
+        <a class="lang-item" href="/zh-CN/os/dual-boot-installation-guide-of-arch-linux-win-10/" title="zh-CN">
+          简体中文
+        </a>
+    
+  </div>
+</div>
+
+
+<script src="/js/switchlang.js"></script>
+
+
+      </div>
+    </div>
+  </body>
+</html>
