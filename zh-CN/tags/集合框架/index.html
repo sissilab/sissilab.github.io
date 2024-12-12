@@ -11,8 +11,8 @@
   
   <title>
     
-      Design Pattern Overview 
-      
+      标签 
+       : 集合框架
       
       |
     
@@ -78,36 +78,36 @@
   <body>
     <div id="app">
       <div class="header">
-  <input type="hidden" id="xr-lang" value="en">
+  <input type="hidden" id="xr-lang" value="zh-CN">
   <input type="hidden" id="xr-context-path" value="/">
   <div class="avatar">
-    <a href="/en/">
+    <a href="/zh-CN/">
       <!-- 头像取消懒加载，添加no-lazy -->
       
         <img no-lazy src="/images/avatar.png" alt="">
       
     </a>
     <div class="nickname">
-      <a href="/en/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
+      <a href="/zh-CN/" title="SissiLab - Xiangru">SissiLab - Xiangru</a>
     </div>
   </div>
   <div class="navbar">
     <ul>
       
-        <li class="nav-item" data-path="/en/">
-          <a href="/en/" title="Home">Home</a>
+        <li class="nav-item" data-path="/zh-CN/">
+          <a href="/zh-CN/" title="Home">Home</a>
         </li>
       
-        <li class="nav-item" data-path="/en/archives/">
-          <a href="/en/archives/" title="Archives">Archives</a>
+        <li class="nav-item" data-path="/zh-CN/archives/">
+          <a href="/zh-CN/archives/" title="Archives">Archives</a>
         </li>
       
-        <li class="nav-item" data-path="/en/categories/">
-          <a href="/en/categories/" title="Categories">Categories</a>
+        <li class="nav-item" data-path="/zh-CN/categories/">
+          <a href="/zh-CN/categories/" title="Categories">Categories</a>
         </li>
       
-        <li class="nav-item" data-path="/en/tags/">
-          <a href="/en/tags/" title="Tags">Tags</a>
+        <li class="nav-item" data-path="/zh-CN/tags/">
+          <a href="/zh-CN/tags/" title="Tags">Tags</a>
         </li>
       
     </ul>
@@ -120,199 +120,30 @@
 
 
       <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
-<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+        <!-- Tags详情页，展示某个Tag下的文章列表，url形式：https://yoursite/:lang/tags/:tag/ -->
 
-
-  <!-- LaTex Display -->
-
-  
-    <!-- <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script> -->
-    
-<script src="/plugins/mathjax/tex-chtml.js" async type="text&#x2F;javascript"></script>
-
-  
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    }
-  </script>
-
-
-
-
-
-  <!-- clipboard -->
-
-  
-    
-<script src="/plugins/clipboard.min.js" async type="text&#x2F;javascript"></script>
-
-  
-  
-<script src="/js/codeCopy.js"></script>
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">Design Pattern Overview</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-09-11
-        </span>
-        
-              <span class="post-categories">
-                <i class="iconfont icon-bookmark" title="Categories"></i>
-                
-                <span class="span--category">&nbsp;/
-                  <a href="/en/categories/23-Design-Patterns/" title="23 Design Patterns">
-                    23 Design Patterns
-                  </a>
-                </span>
-                
-                <span class="span--category">&nbsp;/
-                  <a href="/en/categories/23-Design-Patterns/0-Overview/" title="0. Overview">
-                    0. Overview
-                  </a>
-                </span>
-                
-              </span>
-          
-              <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                
-                <span class="span--tag mr-8">
-                  <a href="/en/tags/Overview/" title="Overview">
-                    #Overview
-                  </a>
-                </span>
-                
-                <span class="span--tag mr-8">
-                  <a href="/en/tags/Design-Pattern/" title="Design_Pattern">
-                    #Design_Pattern
-                  </a>
-                </span>
-                
-              </span>
-          
-      </div>
-      <div class="markdown-body">
-        <p><strong>1. Creational Pattern:</strong></p>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> <a href="/en/design-pattern/singleton-pattern">1.1.Singleton Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> <a href="/en/design-pattern/factory-method-pattern">1.2.Factory Method Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> <a href="/en/design-pattern/abstract-factory-pattern">1.3.Abstract Factory Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">1.4.Builder Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">1.5.Prototype Pattern</a></li>
-</ul>
-<p><strong>2. Strctural Pattern:</strong></p>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.1.Adapter Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.2.Decorator Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.3.Proxy Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.4.Facade Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.5.Bridge Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.6.Composite Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">2.7.Flyweight Pattern</a></li>
-</ul>
-<p><strong>3. Behavioral Pattern:</strong></p>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.1.Strategy Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.2.Template Method Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.3.Observer Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.4.Iterator Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.5.Chain of Responsibility Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.6.Command Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.7.Memento Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.8.State Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.9.Visitor Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.10.Mediator Pattern</a></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <a href="#">3.11.Interpreter Pattern</a></li>
-</ul>
-
-      </div>
-      
-        <div class="prev-or-next">
-
-          <div class="post-foot-prev">
-            
-              <a href="/en/design-pattern/singleton-pattern/" target="_self">
-                <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
-              </a>
-            
-          </div>
-
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-09-11
-            </span>
-            
-                  <span class="post-categories">
-                    <i class="iconfont icon-bookmark" title="Categories"></i>
-                    
-                    <span class="span--category">&nbsp;/
-                      <a href="/en/categories/23-Design-Patterns/" title="23 Design Patterns">
-                        23 Design Patterns
-                      </a>
-                    </span>
-                    
-                    <span class="span--category">&nbsp;/
-                      <a href="/en/categories/23-Design-Patterns/0-Overview/" title="0. Overview">
-                        0. Overview
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-                  <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/en/tags/Overview/" title="Overview">
-                        #Overview
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/en/tags/Design-Pattern/" title="Design_Pattern">
-                        #Design_Pattern
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-          </div>
-
-          <div class="post-foot-next" >
-            
-          </div>
-
-        </div>
-      
-    </div>
-    
-
-    
+<div class="container tag-details">
+  <div class="content-title">
+    <h2>
+      <span>集合框架</span>
+    </h2>
   </div>
-
+  
+    <div class="post-list">     
+      <div class="post-item" title="Java 集合框架概览">
+        <span class="time-m-d">2024-12-11</span>
+        <a href="/zh-CN/collection-framework/java-collection-framework-overview/">
+          <span>Java 集合框架概览</span>
+        </a>
+      </div>
+    </div>
+  
+  <nav class="post-navigation">
+    
+    <span class="page-num">1 / 1</span>
+    
+  </nav>
+</div>
 
         
 <div class="footer">
@@ -433,7 +264,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -529,7 +360,7 @@
             });
             str += "</ul>";
             if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
             }
             $resultContent.innerHTML = str;
           });
@@ -537,9 +368,9 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
           }
         }
       });
@@ -576,24 +407,6 @@
 
         
   
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Design%20Pattern%20Overview + '&url=' + https%3A%2F%2Fsissilab.github.io%2Fen%2Fdesign-pattern%2Fdesign-pattern-overview%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://sissilab.github.io/en/design-pattern/design-pattern-overview/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
   
 <script src="/js/shares.js"></script>
 
@@ -611,11 +424,11 @@
 
   <div class="switchlang-content hidden">
     
-        <a class="lang-item" href="/en/design-pattern/design-pattern-overview/" title="en">
+        <a class="lang-item" href="/en/tags/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/index.html" title="en">
           English
         </a>
     
-        <a class="lang-item" href="/zh-CN/design-pattern/design-pattern-overview/" title="zh-CN">
+        <a class="lang-item" href="/zh-CN/tags/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/index.html" title="zh-CN">
           简体中文
         </a>
     
